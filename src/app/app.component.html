@@ -4,10 +4,22 @@
         <img class="homeicon" src="https://wossthemes.com/artday/wp-content/uploads/2016/07/new_logo.png" height="30px" width="30px">
     </button>
     <div class="spacer">
-        <a mat-button disableRipple>HOME</a>
+        <button mat-button [matMenuTriggerFor]="menu">HOME</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
         <a mat-button disableRipple>ABOUT</a>
-        <a mat-button disableRipple>SHOP</a>
-        <a mat-button disableRipple>PAGES</a>
+        <button mat-button [matMenuTriggerFor]="menu">SHOP</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menu">PAGES</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
         <a mat-button disableRipple>JOURNAL</a>
         <a mat-button disableRipple>CONTACT</a>
     </div>
