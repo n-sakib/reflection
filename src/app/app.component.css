@@ -4,18 +4,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Montserrat';
   }
 
   .navbar {
     justify-content: space-between;
     font-size: 12px;
     font-family: 'Montserrat';
-    padding: 0px 50px;
+    padding: 0px 40px;
   }
-  .spacer{
-      padding-right: 2rem;
-      font-size: 12px;
-      font-family: 'Montserrat';
-      padding: 0px 11px;
-  }
-  
+ 

@@ -8,7 +8,8 @@ import { MaterialModule } from './material/material.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {FormsModule} from '@angular/forms'; 
- 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +21,8 @@ import {FormsModule} from '@angular/forms';
     MaterialModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
