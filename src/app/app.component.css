@@ -126,3 +126,7 @@
     /* Background styles */
     background-color: #fef5ef;
 }
+
+.hero button:hover {
+    background-color: #dca47f;
+}
