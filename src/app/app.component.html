@@ -31,36 +31,70 @@
                         <a href="#" mat-button disableRipple>CONTACT</a>
                     </div>
                 </span>
+                <div fxShow="true" fxHide.gt-sm="true">
+                    <a href="#" (click)="sidenav.toggle()">Show Side Menu</a>
+                </div>
             </mat-toolbar>
+            <mat-sidenav-container fxFlexFill class="example-container">
+                <mat-sidenav #sidenav fxLayout="column">
+                    <div fxLayout="column">
+                        <a (click)="sidenav.toggle()" href="#" mat-button>Close</a>
+                        <a href="#" mat-button>Menu Item 1</a>
+                        <a href="#" mat-button>Menu Item 2</a>
+                        <a href="#" mat-button>Menu Item 3</a>
+                        <a href="#" mat-button>Menu Item 4</a>
+                        <a href="#" mat-button>Menu Item 5</a>
+                        <a href="#" mat-button>Menu Item 6</a>
+                    </div>
+                </mat-sidenav>
+                <mat-sidenav-content fxFlexFill>
+                    <section class="hero">
+                        <div class="hero-inner">
+                            <h1>Website Tagline</h1>
+                            <h2>Look at this website and bask in its amazing glory!</h2>
+                            <button mat-flat-button color="primary">Warn</button>
+                        </div>
+                    </section>
+                    <main>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec nibh molestie, efficitur
+                            leo sed,
+                            viverra nunc. Donec vehicula accumsan erat facilisis ullamcorper. Donec commodo quis dui nec
+                            placerat. Donec
+                            mi orci, scelerisque eget nisl ac, hendrerit condimentum odio. Nam dictum odio eget quam
+                            tempus, a mattis
+                            odio ornare. Nullam auctor libero ut libero suscipit, ut accumsan nunc condimentum. Donec
+                            ullamcorper
+                            maximus sapien quis egestas.</p>
+
+                        <p>Mauris viverra scelerisque lobortis. Orci varius natoque penatibus et magnis dis parturient
+                            montes, nascetur
+                            ridiculus mus. Fusce ultrices enim sit amet elit tincidunt maximus. Suspendisse vitae
+                            pellentesque lectus.
+                            Duis commodo leo suscipit augue mollis, non venenatis dolor ullamcorper. Duis tincidunt
+                            scelerisque lacus,
+                            vel vehicula leo consectetur vel. Duis posuere nisl non odio consequat ultrices. Lorem ipsum
+                            dolor sit amet,
+                            consectetur adipiscing elit.</p>
+
+                        <p>Etiam a leo nec mi blandit euismod. Etiam fringilla odio vitae risus ornare, id bibendum
+                            velit consequat.
+                            Fusce posuere risus sollicitudin condimentum ultrices. Fusce gravida, purus eget laoreet
+                            mattis, velit
+                            sapien ultrices diam, id dapibus erat leo id quam. Maecenas quis risus convallis, placerat
+                            elit non, iaculis
+                            tortor. Nullam porttitor magna risus, quis bibendum metus tincidunt in. Etiam vel ligula ac
+                            risus mattis
+                            tincidunt vel sit amet ante. Morbi et viverra ligula. Ut ac dignissim nisi, condimentum
+                            imperdiet mauris.
+                            Pellentesque ut ipsum vel diam tristique faucibus eu et lectus. Maecenas posuere neque non
+                            lacus bibendum,
+                            sit amet pharetra justo semper. Sed mi risus, tempor sit amet ligula eget, varius pretium
+                            est. Sed a odio in
+                            orci accumsan pretium suscipit ut quam.</p>
+                    </main>
+                </mat-sidenav-content>
+            </mat-sidenav-container>
         </div>
     </div>
-    <section class="hero">
-        <div class="hero-inner">
-            <h1>Website Tagline</h1>
-            <h2>Look at this website and bask in its amazing glory!</h2>
-            <button mat-flat-button color="primary">Warn</button>
-        </div>
-    </section>
-    <main>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec nibh molestie, efficitur leo sed,
-            viverra nunc. Donec vehicula accumsan erat facilisis ullamcorper. Donec commodo quis dui nec placerat. Donec
-            mi orci, scelerisque eget nisl ac, hendrerit condimentum odio. Nam dictum odio eget quam tempus, a mattis
-            odio ornare. Nullam auctor libero ut libero suscipit, ut accumsan nunc condimentum. Donec ullamcorper
-            maximus sapien quis egestas.</p>
 
-        <p>Mauris viverra scelerisque lobortis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
-            ridiculus mus. Fusce ultrices enim sit amet elit tincidunt maximus. Suspendisse vitae pellentesque lectus.
-            Duis commodo leo suscipit augue mollis, non venenatis dolor ullamcorper. Duis tincidunt scelerisque lacus,
-            vel vehicula leo consectetur vel. Duis posuere nisl non odio consequat ultrices. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit.</p>
-
-        <p>Etiam a leo nec mi blandit euismod. Etiam fringilla odio vitae risus ornare, id bibendum velit consequat.
-            Fusce posuere risus sollicitudin condimentum ultrices. Fusce gravida, purus eget laoreet mattis, velit
-            sapien ultrices diam, id dapibus erat leo id quam. Maecenas quis risus convallis, placerat elit non, iaculis
-            tortor. Nullam porttitor magna risus, quis bibendum metus tincidunt in. Etiam vel ligula ac risus mattis
-            tincidunt vel sit amet ante. Morbi et viverra ligula. Ut ac dignissim nisi, condimentum imperdiet mauris.
-            Pellentesque ut ipsum vel diam tristique faucibus eu et lectus. Maecenas posuere neque non lacus bibendum,
-            sit amet pharetra justo semper. Sed mi risus, tempor sit amet ligula eget, varius pretium est. Sed a odio in
-            orci accumsan pretium suscipit ut quam.</p>
-    </main>
 </body>
