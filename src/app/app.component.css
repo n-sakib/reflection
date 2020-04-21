@@ -12,18 +12,6 @@
     background: white;
     font-size: 12px;
 }
-
-.bg-image{
-    position: absolute;
-    background: url("/assets/Cover.jpeg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 650px;
-    z-index: -1;
-    
-}
 .mat-raised-button{
     display: inline-block;
     background: #fef5ef;
@@ -130,8 +118,21 @@
     
     /* Background styles */
     background-color: #fef5ef;
+    color: black;
 }
 
 .hero button:hover {
     background-color: #dca47f;
+    color: black;
+}
+
+@media(min-width: 1080px) {
+    .hero {
+        /* Sizing */
+        width: 100vw;
+        height: 96vh;
+  }
+  .navbar {
+    height: 6vh;
+}
 }
