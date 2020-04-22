@@ -129,9 +129,9 @@
     .hero {
         /* Sizing */
         width: 100vw;
-        height: 96vh;
+        height: 90vh;
   }
   .navbar {
-    height: 6vh;
+    height: 10vh;
 }
 }
