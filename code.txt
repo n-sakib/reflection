@@ -125,3 +125,14 @@
         <button (click)="sidenav.toggle()">Toggle</button>
     </mat-sidenav-content>
 </mat-sidenav-container>
+
+<section id="footer">
+        <div class="get-in-touch">
+            <h1>GET IN TOUCH</h1>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Email</mat-label>
+                </mat-form-field>
+              </form>
+        </div>
+    </section>

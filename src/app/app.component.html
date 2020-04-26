@@ -3,8 +3,7 @@
         <div class="homepage">
             <mat-toolbar color="#584b53" class="navbar">
                 <button mat-icon-button disableRipple>
-                    <img class="homeicon" src="https://wossthemes.com/artday/wp-content/uploads/2016/07/new_logo.png"
-                        height="30px" width="30px">
+                    <img class="homeicon" src="..\assets\icon.png" height="30px" width="30px">
                 </button>
 
                 <span class="spacer" style="font-family:Montserrat">
@@ -31,20 +30,40 @@
                         <a href="#" mat-button disableRipple>CONTACT</a>
                     </div>
                 </span>
+                <span style="font-family:Montserrat">
+                    <div class="create">
+                        <button mat-flat-button color="primary" disableRipple>CREATE YOUR POTRAIT</button>
+                    </div>
+                </span>
+
                 <div fxShow="true" fxHide.gt-sm="true">
-                    <a href="#" (click)="sidenav.toggle()">Show Side Menu</a>
+                    <a href="#" (click)="sidenav.toggle()">
+                        <img src='https://material.io/resources/icons/?icon=menu&style=baseline'>
+                    </a>
                 </div>
             </mat-toolbar>
             <mat-sidenav-container fxFlexFill class="example-container">
-                <mat-sidenav #sidenav fxLayout="column">
+                <mat-sidenav #sidenav fxLayout="row wrap">
                     <div fxLayout="column">
-                        <a (click)="sidenav.toggle()" href="#" mat-button>Close</a>
-                        <a href="#" mat-button>Menu Item 1</a>
-                        <a href="#" mat-button>Menu Item 2</a>
-                        <a href="#" mat-button>Menu Item 3</a>
-                        <a href="#" mat-button>Menu Item 4</a>
-                        <a href="#" mat-button>Menu Item 5</a>
-                        <a href="#" mat-button>Menu Item 6</a>
+                        <a (click)="sidenav.toggle()" href="#" mat-button></a>
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item disableRipple>Item 1</button>
+                            <button mat-menu-item disableRipple>Item 2</button>
+                        </mat-menu>
+                        <a mat-button disableRipple>About</a>
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Shop</a>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item disableRipple>Item 1</button>
+                            <button mat-menu-item disableRipple>Item 2</button>
+                        </mat-menu>
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item disableRipple>Item 1</button>
+                            <button mat-menu-item disableRipple>Item 2</button>
+                        </mat-menu>
+                        <a mat-button disableRipple>Journal</a>
+                        <a mat-button disableRipple>Contact</a>
                     </div>
                 </mat-sidenav>
                 <mat-sidenav-content fxFlexFill>
@@ -55,46 +74,61 @@
                             <button mat-flat-button color="primary">Warn</button>
                         </div>
                     </section>
-                    <main>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec nibh molestie, efficitur
-                            leo sed,
-                            viverra nunc. Donec vehicula accumsan erat facilisis ullamcorper. Donec commodo quis dui nec
-                            placerat. Donec
-                            mi orci, scelerisque eget nisl ac, hendrerit condimentum odio. Nam dictum odio eget quam
-                            tempus, a mattis
-                            odio ornare. Nullam auctor libero ut libero suscipit, ut accumsan nunc condimentum. Donec
-                            ullamcorper
-                            maximus sapien quis egestas.</p>
-
-                        <p>Mauris viverra scelerisque lobortis. Orci varius natoque penatibus et magnis dis parturient
-                            montes, nascetur
-                            ridiculus mus. Fusce ultrices enim sit amet elit tincidunt maximus. Suspendisse vitae
-                            pellentesque lectus.
-                            Duis commodo leo suscipit augue mollis, non venenatis dolor ullamcorper. Duis tincidunt
-                            scelerisque lacus,
-                            vel vehicula leo consectetur vel. Duis posuere nisl non odio consequat ultrices. Lorem ipsum
-                            dolor sit amet,
-                            consectetur adipiscing elit.</p>
-
-                        <p>Etiam a leo nec mi blandit euismod. Etiam fringilla odio vitae risus ornare, id bibendum
-                            velit consequat.
-                            Fusce posuere risus sollicitudin condimentum ultrices. Fusce gravida, purus eget laoreet
-                            mattis, velit
-                            sapien ultrices diam, id dapibus erat leo id quam. Maecenas quis risus convallis, placerat
-                            elit non, iaculis
-                            tortor. Nullam porttitor magna risus, quis bibendum metus tincidunt in. Etiam vel ligula ac
-                            risus mattis
-                            tincidunt vel sit amet ante. Morbi et viverra ligula. Ut ac dignissim nisi, condimentum
-                            imperdiet mauris.
-                            Pellentesque ut ipsum vel diam tristique faucibus eu et lectus. Maecenas posuere neque non
-                            lacus bibendum,
-                            sit amet pharetra justo semper. Sed mi risus, tempor sit amet ligula eget, varius pretium
-                            est. Sed a odio in
-                            orci accumsan pretium suscipit ut quam.</p>
-                    </main>
                 </mat-sidenav-content>
             </mat-sidenav-container>
+            <section class="text-center my-5">
+                <h2 class="h1-responsive font-weight-bold my-5"></h2>
+                <mdb-carousel [isControls]="false" [animation]="'slide'" class="testimonial-carousel">
+                    <mdb-slide>
+                        <div class="testimonial" fxShow="true" fxLayout="row">
+                            <button mat-button>LEFT</button>
+                            <div class="avatar mx-auto mb-4">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                                    class="rounded-circle img-fluid" alt="First sample avatar image">
+                            </div>
+                            <p>
+                                <mdb-icon fas icon="quote-left"></mdb-icon> This is a good site!
+                            </p>
+                            <h4 class="font-weight-bold">Anna Deynah</h4>
+                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
+                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
+                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
+                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
+                            <mdb-icon fas icon="star-half" class="blue-text"> </mdb-icon>
+                            <button mat-button>RIGHT</button>
+                        </div>
+                    </mdb-slide>
+                </mdb-carousel>
+            </section>
+            <!-- <ngb-carousel *ngIf="images">
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img [src]="images[0]" alt="Random first slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img [src]="images[1]" alt="Random second slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img [src]="images[2]" alt="Random third slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Third slide label</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel> -->
         </div>
     </div>
-
 </body>
