@@ -90,7 +90,7 @@
 .gallery{
     /* Sizing */
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     
     /* Flexbox stuff */
     display: flex;
@@ -98,21 +98,14 @@
     align-items: center;
 }
 .gallery-inner{
-    display: flex;
-    flex-direction: row;
-    background-color: crimson;
-    height: 50vh;
-    width: 18vw;  
-    justify-content: center;
-    align-self: auto; 
-    flex-wrap: wrap;
+    /* padding: 10px 10px 10px 10px; */
+    box-sizing: border-box;
+    border-color: #CFCFCF;
+    margin-bottom: 20px
+    
 }
-.gallery h2{
+.gallery h1{
     text-align: center;
-    font-size: 24px;
-    padding: 0.5em;
-}
-.gallery h3{
-    text-align: center;
-    font-size: 18px;
+    font-size: 30px;
+    padding-bottom: 2em;
 }

@@ -10,6 +10,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './home/home.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { NgImageSliderComponent } from 'ng-image-slider';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,11 @@ import { HomeComponent } from './home/home.component';
     MatProgressSpinnerModule,
     MatToolbarModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgImageSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

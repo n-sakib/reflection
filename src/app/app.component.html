@@ -56,29 +56,23 @@
                         </div>
                     </section>
                     <section class="gallery">
-                        <div class="demo">
-                            <h2>PICTURE GALLERY</h2>
-                            <div fxShow="true"  fxLayout="row"fxLayoutGap="20px">
-                                <button mat-button>LEFT</button>
-                                <div class="demo">
-                                  <div class="gallery-inner"></div>
-                                  <h3>NAME</h3>
-                               </div>
-                               <div class="demo">
-                                 <div class="gallery-inner"></div>
-                                 <h3>NAME</h3>
-                               </div>
-                               <div class="demo">
-                                 <div class="gallery-inner"></div>
-                                 <h3>NAME</h3>
-                               </div>
-                               <div class="demo">
-                                  <div class="gallery-inner"></div>
-                                  <h3>NAME</h3>
-                               </div>
-                               <button mat-button>RIGHT</button>
-                            </div>
+                         <div class="gallery-inner" [ngStyle]="{'width':'100%'}">
+                            <h1>PICTURE GALLERY</h1>
+                            <ng-image-slider *ngIf="showSlider" #nav
+                                    [images]="imageObject"
+                                    [imageSize]="{width: '300px', height: '300px', space: 20}"
+                                    [infinite]="sliderInfinite"
+                                    [imagePopup]="sliderImagePopup"
+                                    [showArrow]="sliderArrowShow"
+                                    [autoSlide]="sliderAutoSlide ? 1 : 0"
+                                    [animationSpeed]="sliderAnimationSpeed"
+                                    [manageImageRatio]="false"
+                                    (imageClick)="imageOnClick($event)"
+                                    (arrowClick)="arrowOnClick($event)"
+                                    (lightboxArrowClick)="lightboxArrowClick($event)">
+                                </ng-image-slider>
                         </div>
+                        
                     </section>
                     <main>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec nibh molestie, efficitur
