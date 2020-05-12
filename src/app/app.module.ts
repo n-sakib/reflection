@@ -9,14 +9,22 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HomeComponent } from './home/home.component';
+import HomeComponent from './home/home.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { NgImageSliderComponent } from 'ng-image-slider';
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { Injectable } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    AdminpanelComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +35,10 @@ import { NgImageSliderComponent } from 'ng-image-slider';
     MatToolbarModule,
     FormsModule,
     FlexLayoutModule,
-    NgImageSliderModule
+    NgImageSliderModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    ReactiveFormsModule,
+    AngularFireDatabaseModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

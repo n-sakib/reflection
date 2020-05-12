@@ -8,6 +8,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule} from '@angular/material/dialog';
+
 
 const material = [
   MatButtonModule,
@@ -18,7 +20,8 @@ const material = [
   MatToolbarModule,
   MatSidenavModule,
   MatMenuModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDialogModule,
 ];
 
 @NgModule({

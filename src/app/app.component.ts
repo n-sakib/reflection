@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
+import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 
 export class AppComponent {
   @ViewChild('nav', {static: false}) ds: NgImageSliderComponent;
-  title = 'angularDemo';
+  title = 'Reflection';
   showSlider = true;
   sliderWidth: Number = 940;
   sliderImageWidth: Number = 250;
@@ -22,7 +23,7 @@ export class AppComponent {
   sliderSlideImage: Number = 1;
   sliderAnimationSpeed: any = 1;
   imageObject: Array<object> = [];
-  constructor() {
+  constructor(private dialog:MatDialog) {
     this.setImageObject();
   }
 

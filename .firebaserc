@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "gallery-reflection": {
+      "hosting": {
+        "material-demo": [
+          "gallery-reflection"
+        ]
+      }
+    }
+  }
+}
