@@ -16,9 +16,11 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -37,8 +39,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     FlexLayoutModule,
     NgImageSliderModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    ReactiveFormsModule,
-    AngularFireDatabaseModule 
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

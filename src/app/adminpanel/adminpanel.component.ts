@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { from } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -11,58 +9,39 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
   styleUrls: ['./adminpanel.component.css']
 })
 export class AdminpanelComponent implements OnInit {
-
+  srcResult;
   imgSrc: string ='./assets/featured.jpeg';
   selectedImage :any = null;
-  isSubmitted: boolean;
-  formTemplete = new FormGroup({
-    caption : new FormControl('',Validators.required),
-    imageUrl : new FormControl('',Validators.required)
-  })
+  isSubmitted: boolean = false;
   constructor(private storage: AngularFireStorage) { }
 
-  ngOnInit(){
-    this.resetForm();
-  }
-  showPreview(event: any){
-    if(event.target.files && event.target.files[0]){
-      const reader = new FileReader();
-      reader.onload = (e:any) => this.imgSrc= e.target.resut;
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedImage = event.target.files[0];
-    }
-    else{
-      this.imgSrc = './assets/featured.jpeg';
-      this.selectedImage = null;
-    }
-  }
-  onSubmit(formValue){
-    console.log("click hoise")
-    this.isSubmitted = true;
-    if(this.formTemplete.valid){
-      var filePath = `${formValue}/${this.selectedImage.name}_${new Date().getTime()}`;
-      const fileRef =  this.storage.ref(filePath);
-      this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(finalize(()=>{
-        fileRef.getDownloadURL().subscribe((url)=>{
-          formValue['imageUrl']=url;
-          this.resetForm();
-        })
-      })
-      ).subscribe();
-    }
-  }
-  get formControls(){
-    return this.formTemplete['controls'];
-  }
+  ngOnInit(){}
 
-  resetForm(){
-    this.formTemplete.reset();
-    this.formTemplete.setValue({
-      caption: '',
-      imageUrl:''
-    });
-    this.imgSrc = './assets/featured.jpeg';
-    this.selectedImage=null;
-    this.isSubmitted= false;
+  // showPreview(event: any){
+  //   if(event.target.files && event.target.files[0]){
+  //     const reader = new FileReader();
+  //     reader.onload = (e:any) => this.imgSrc= e.target.resut;
+  //     reader.readAsDataURL(event.target.files[0]);
+  //     this.selectedImage = event.target.files[0];
+  //   }
+  //   else{
+  //     this.imgSrc = './assets/featured.jpeg';
+  //     this.selectedImage = null;
+  //   }
+  // }
+  
+  toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+  async onFileSelected() {
+   const file = (<HTMLInputElement>document.getElementById('file')).files[0];
+   this.toBase64(file).then((res) => {
+      this.srcResult = res;
+      this.isSubmitted = true;
+   })
   }
 }
