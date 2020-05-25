@@ -10,6 +10,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 })
 export class AdminpanelComponent implements OnInit {
   srcResult;
+  frame: string;
   imgSrc: string ='./assets/featured.jpeg';
   selectedImage :any = null;
   isSubmitted: boolean = false;
@@ -41,6 +42,11 @@ export class AdminpanelComponent implements OnInit {
    const file = (<HTMLInputElement>document.getElementById('file')).files[0];
    this.toBase64(file).then((res) => {
       this.srcResult = res;
+      const filePath = `${new Date().getTime()}`;
+      const fileRef =  this.storage.ref(filePath);
+      fileRef.putString(this.srcResult, 'data_url').then(function(snapshot) {
+        console.log(snapshot)
+      })
       this.isSubmitted = true;
    })
   }
