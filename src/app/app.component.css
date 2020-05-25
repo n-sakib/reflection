@@ -153,3 +153,29 @@
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
+  .footer h2{
+      /* Text styles */
+    font-size: 5em;
+    
+    /* Margins */
+    margin-top: 0;
+    margin-bottom: 0.5em
+
+  }
+  .footer{
+      /* Sizing */
+    width: 100vw;
+    height: 90vh;
+    
+    /* Flexbox stuff */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Text styles */
+    text-align: center;
+    color: white;
+  }
+  .mat-sidenav {
+    min-width: 200px;
+  }

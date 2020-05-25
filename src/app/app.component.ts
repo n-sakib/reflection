@@ -8,5 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angularDemo';
-  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  imageObject = [{
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/5.jpg',
+}, {
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/9.jpg',
+}, {
+    image: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
+    thumbImage: 'https://sanjayv.github.io/ng-image-slider/contents/assets/img/slider/4.jpg',
+}];
 }

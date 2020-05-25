@@ -38,7 +38,7 @@
 
                 <div fxShow="true" fxHide.gt-sm="true">
                     <a href="#" (click)="sidenav.toggle()">
-                        <img src='https://material.io/resources/icons/?icon=menu&style=baseline'>
+                        <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
                     </a>
                 </div>
             </mat-toolbar>
@@ -76,59 +76,37 @@
                     </section>
                 </mat-sidenav-content>
             </mat-sidenav-container>
-            <section class="text-center my-5">
-                <h2 class="h1-responsive font-weight-bold my-5"></h2>
-                <mdb-carousel [isControls]="false" [animation]="'slide'" class="testimonial-carousel">
-                    <mdb-slide>
-                        <div class="testimonial" fxShow="true" fxLayout="row">
-                            <button mat-button>LEFT</button>
-                            <div class="avatar mx-auto mb-4">
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
-                                    class="rounded-circle img-fluid" alt="First sample avatar image">
-                            </div>
-                            <p>
-                                <mdb-icon fas icon="quote-left"></mdb-icon> This is a good site!
-                            </p>
-                            <h4 class="font-weight-bold">Anna Deynah</h4>
-                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
-                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
-                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
-                            <mdb-icon fas icon="star" class="blue-text"> </mdb-icon>
-                            <mdb-icon fas icon="star-half" class="blue-text"> </mdb-icon>
-                            <button mat-button>RIGHT</button>
-                        </div>
-                    </mdb-slide>
-                </mdb-carousel>
+            <section id="testimonials">
+                <div class="demo" fxLayout="row wrap">
+                    <h2>TESTIMONIALS</h2>
+                    <div [ngStyle]="{'width':'40%'}">
+                        <button mat-button>LEFT</button>
+                        <ng-image-slider #nav [images]="imageObject" [infinite]="true" [autoSlide]="1"
+                            [imageSize]="{width: '100%', height: 250}" slideImage="1" [showArrow]="false" #nav>
+                        </ng-image-slider>
+                        <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="menu">favorite</mat-icon>
+                        <mat-icon aria-hidden="false" aria-label="menu">share</mat-icon>
+                        <button mat-button>RIGHT</button>
+                    </div>
+                </div>
             </section>
-            <!-- <ngb-carousel *ngIf="images">
-                <ng-template ngbSlide>
-                    <div class="picsum-img-wrapper">
-                        <img [src]="images[0]" alt="Random first slide">
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </div>
-                </ng-template>
-                <ng-template ngbSlide>
-                    <div class="picsum-img-wrapper">
-                        <img [src]="images[1]" alt="Random second slide">
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </ng-template>
-                <ng-template ngbSlide>
-                    <div class="picsum-img-wrapper">
-                        <img [src]="images[2]" alt="Random third slide">
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </div>
-                </ng-template>
-            </ngb-carousel> -->
+            <section id="getintouch">
+                <mat-card class="example-card" style="text-align: center;">
+                    <mat-card-header>
+                        <mat-card-title>Get in-touch</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <input matInput placeholder="email">
+                        </mat-form-field>
+                    </mat-card-content>
+                    <button mat-flat-button color="primary" disableRipple>Send</button><br/>
+                </mat-card>
+            </section>
+            <section id="footer">
+
+            </section>
         </div>
     </div>
 </body>

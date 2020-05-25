@@ -9,6 +9,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const material = [
   MatButtonModule,
@@ -20,7 +23,10 @@ const material = [
   MatSidenavModule,
   MatMenuModule,
   MatGridListModule,
-  MatCardModule
+  MatCardModule,
+  NgImageSliderModule,
+  FlexLayoutModule,
+  MatDialogModule,
 ];
 
 @NgModule({
@@ -28,3 +34,4 @@ const material = [
   exports: [material]
 })
 export class MaterialModule { }
+
