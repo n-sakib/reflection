@@ -1,0 +1,9 @@
+<section id="image-uploader">
+    <div class="image-uploader-inner">
+        <h1>WELCOME TO IMAGE UPLOADER</h1>
+        <h3>Start by choosing Image Frame</h3>
+        <img *ngIf="isSubmitted" [src]="srcResult" height="250px" width="350px">
+        <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    </div>
+</section>

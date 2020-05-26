@@ -1,15 +1,14 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
+export default class HomeComponent {
 
-export class AppComponent {
   @ViewChild('nav', {static: false}) ds: NgImageSliderComponent;
   title = 'Reflection';
   showSlider = true;
@@ -68,6 +67,8 @@ export class AppComponent {
   }
   imageOnClick(index) {
     console.log('index', index);
+
+
   }
 
   arrowOnClick(event) {

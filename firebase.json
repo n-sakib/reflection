@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "material-demo",
+      "public": "dist/material-demo",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
