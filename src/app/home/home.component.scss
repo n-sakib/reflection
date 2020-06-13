@@ -1,0 +1,22 @@
+.gallery{
+    /* Sizing */
+    width: 100vw;
+    height: 100vh;
+    
+    /* Flexbox stuff */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gallery-inner{
+    /* padding: 10px 10px 10px 10px; */
+    box-sizing: border-box;
+    border-color: #CFCFCF;
+    margin-bottom: 20px
+    
+}
+.gallery h1{
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 2em;
+}

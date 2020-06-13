@@ -1,5 +1,11 @@
 {
-  "projects": {
-    "default": "gallery-reflection"
+  "targets": {
+    "gallery-reflection": {
+      "hosting": {
+        "material-demo": [
+          "gallery-reflection"
+        ]
+      }
+    }
   }
 }
