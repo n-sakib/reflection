@@ -79,7 +79,7 @@
             <section id="testimonials">
                 <div class="testimonials" fxLayout="row wrap">
                
-                    <div [ngStyle]="{'width':'30%'}">
+                    <div [ngStyle]="{'width':'95%'}">
                         <h2>TESTIMONIALS</h2>
                         <ng-image-slider #nav [images]="imageObject" [infinite]="true" [autoSlide]="1"
                             [imageSize]="{width: '100%', height: 300}" slideImage="1" [showArrow]="true" #nav>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </section>
-            <section id="getintouch">
+            <section id="getintouch" [ngStyle]="{'width':'95%'}">
                 <mat-card class="example-card" style="text-align: center;">
                     <mat-card-header>
                         <mat-card-title>Get in-touch</mat-card-title>
@@ -103,9 +103,15 @@
                     <button mat-flat-button color="primary" disableRipple>Send</button><br />
                 </mat-card>
             </section>
-            <section id="footer">
-                
-            </section>
+            <footer class="social-footer">
+                <div class="social-footer-icons">
+                    <mat-icon aria-hidden="false" aria-label="facebook">facebook</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="twitter">facebook</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="instagram">facebook</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="pinterest">facebook</mat-icon>
+                </div>
+              </footer>
+              
         </div>
     </div>
 </body>
