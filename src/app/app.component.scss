@@ -1,5 +1,4 @@
 .body{
-    margin: 0px;
     font-family: 'Montserrat';
     background: white;
     font-size: 12px;
@@ -12,6 +11,10 @@
 }
 .navbar {
     height: 10vh;
+    .nav-bar-button {
+        color: white;
+        border-radius: 0;
+    }
 }
 
 .hero {
@@ -45,7 +48,7 @@
 .hero h1 {
     /* Text styles */
     font-size: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .hero h2 {
@@ -115,3 +118,14 @@
     flex-direction: row;
     justify-content: flex-end;
 }
+.promo{
+    height: 30px!important;
+    color: white!important;
+    font-size: 13px;
+    align-items: center!important;
+}
+.title-center {
+    flex: 1 1 auto !important;
+  text-align: center !important;
+    
+  }

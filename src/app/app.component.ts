@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
-import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +10,7 @@ import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 })
 
 export class AppComponent {
-  @ViewChild('nav', {static: false}) ds: NgImageSliderComponent;
+  @ViewChild('nav', { static: false }) ds: NgImageSliderComponent;
   title = 'Reflection';
   showSlider = true;
   sliderWidth: Number = 940;
@@ -23,7 +23,8 @@ export class AppComponent {
   sliderSlideImage: Number = 1;
   sliderAnimationSpeed: any = 1;
   imageObject: Array<object> = [];
-  constructor(private dialog:MatDialog) {
+  constructor(private dialog: MatDialog, public router: Router) {
+    console.log(this.router.url)
     this.setImageObject();
   }
 
@@ -31,11 +32,11 @@ export class AppComponent {
     this.setImageObject();
     this.showSlider = false;
     setTimeout(() => {
-        this.showSlider = true;
-   }, 10);
+      this.showSlider = true;
+    }, 10);
   }
-  setImageObject(){
-    this.imageObject=[{
+  setImageObject() {
+    this.imageObject = [{
       image: 'assets/Cover.jpeg',
       thumbImage: 'assets/Cover.jpeg',
       title: 'NAME 1',
@@ -71,18 +72,18 @@ export class AppComponent {
   }
 
   arrowOnClick(event) {
-      console.log('arrow click event', event);
+    console.log('arrow click event', event);
   }
 
   lightboxArrowClick(event) {
-      console.log('popup arrow click', event);
+    console.log('popup arrow click', event);
   }
 
   prevImageClick() {
-      this.ds.prev();
+    this.ds.prev();
   }
 
   nextImageClick() {
-      this.ds.next();
+    this.ds.next();
   }
 }

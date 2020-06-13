@@ -5,8 +5,8 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'adminpanel', component: AdminpanelComponent }
+  { path: '', component: HomeComponent },
+  { path: 'admin', component: AdminpanelComponent }
 ];
 
 @NgModule({

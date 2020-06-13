@@ -1,38 +1,27 @@
 <body>
     <div>
         <div class="homepage">
+            <mat-toolbar color="primary" class="promo">
+                <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
+
             <mat-toolbar color="#584b53" class="navbar">
                 <button mat-icon-button disableRipple>
                     <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
                 </button>
 
                 <span class="spacer" style="font-family:Montserrat">
-
                     <div fxShow="true" fxHide.lt-md="true">
                         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
                         <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>Item 1</button>
-                            <button mat-menu-item>Item 2</button>
-                        </mat-menu>
-                        <a href="#" mat-button disableRipple>ABOUT</a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>SHOP</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>Item 1</button>
-                            <button mat-menu-item>Item 2</button>
-                        </mat-menu>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>PAGES</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>Item 1</button>
-                            <button mat-menu-item>Item 2</button>
-                        </mat-menu>
-                        <a href="#" mat-button disableRipple>JOURNAL</a>
+                        <a href="#" mat-button disableRipple>GALLERY</a>
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>BUY A PAINTING</a>
+                        <a href="#" mat-button disableRipple>REVIEWS & TESTIMONIALS</a>
                         <a href="#" mat-button disableRipple>CONTACT</a>
                     </div>
                 </span>
 
                 <div class="create" style="font-family:Montserrat">
-                    <button mat-flat-button color="primary" disableRipple>CREATE YOUR POTRAIT</button>
+                    <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
                 </div>
 
 
@@ -47,16 +36,8 @@
                     <div fxLayout="column">
                         <a (click)="sidenav.toggle()" href="#" mat-button></a>
                         <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item disableRipple>Item 1</button>
-                            <button mat-menu-item disableRipple>Item 2</button>
-                        </mat-menu>
                         <a mat-button disableRipple>About</a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Shop</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item disableRipple>Item 1</button>
-                            <button mat-menu-item disableRipple>Item 2</button>
-                        </mat-menu>
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Gallery</a>
                         <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item disableRipple>Item 1</button>
@@ -67,7 +48,7 @@
                     </div>
                 </mat-sidenav>
                 <mat-sidenav-content fxFlexFill>
-                    <section class="hero">
+                    <section class="hero" *ngIf="router.url === '/'">
                         <div class="hero-inner">
                             <h1>GALLERY REFLECTION</h1>
                             <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
@@ -76,33 +57,8 @@
                     </section>
                 </mat-sidenav-content>
             </mat-sidenav-container>
-            <section id="testimonials">
-                <div class="testimonials" fxLayout="row wrap">
-               
-                    <div [ngStyle]="{'width':'95%'}">
-                        <h2>TESTIMONIALS</h2>
-                        <ng-image-slider #nav [images]="imageObject" [infinite]="true" [autoSlide]="1"
-                            [imageSize]="{width: '100%', height: 300}" slideImage="1" [showArrow]="true" #nav>
-                        </ng-image-slider>
-                        <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
-                        <mat-icon aria-hidden="false" aria-label="menu">favorite</mat-icon>
-                        <mat-icon aria-hidden="false" aria-label="menu">share</mat-icon>
-                    </div>
-                </div>
-            </section>
-            <section id="getintouch" [ngStyle]="{'width':'95%'}">
-                <mat-card class="example-card" style="text-align: center;">
-                    <mat-card-header>
-                        <mat-card-title>Get in-touch</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <mat-form-field>
-                            <input matInput placeholder="email">
-                        </mat-form-field>
-                    </mat-card-content>
-                    <button mat-flat-button color="primary" disableRipple>Send</button><br />
-                </mat-card>
-            </section>
+            <router-outlet></router-outlet>
+          
             <footer class="social-footer">
                 <div class="social-footer-icons">
                     <mat-icon aria-hidden="false" aria-label="facebook">facebook</mat-icon>
@@ -110,8 +66,7 @@
                     <mat-icon aria-hidden="false" aria-label="instagram">facebook</mat-icon>
                     <mat-icon aria-hidden="false" aria-label="pinterest">facebook</mat-icon>
                 </div>
-              </footer>
-              
+            </footer>
         </div>
     </div>
 </body>
