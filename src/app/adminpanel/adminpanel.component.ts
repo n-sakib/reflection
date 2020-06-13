@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { FormGroup, FormControl , Validators} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 @Component({
   selector: 'app-adminpanel',
@@ -14,6 +20,8 @@ export class AdminpanelComponent implements OnInit {
   imgSrc: string ='./assets/featured.jpeg';
   selectedImage :any = null;
   isSubmitted: boolean = false;
+  titleFormControl = new FormControl('', [Validators.required]);
+  descriptionFormControl = new FormControl('', [Validators.required]);
   constructor(private storage: AngularFireStorage) { }
 
   ngOnInit(){}
@@ -50,4 +58,15 @@ export class AdminpanelComponent implements OnInit {
       this.isSubmitted = true;
    })
   }
+  chooseFrame(){
+    
+  }
+  imageform: FormGroup = new FormGroup({
+    title: this.titleFormControl,
+    description: this.descriptionFormControl,
+  });
+  getRequiredErrorMessage(field) {
+    return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
+  }
+  
 }
