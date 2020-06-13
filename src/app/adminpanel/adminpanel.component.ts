@@ -68,5 +68,7 @@ export class AdminpanelComponent implements OnInit {
   getRequiredErrorMessage(field) {
     return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
   }
+
+  
   
 }

@@ -1,6 +1,17 @@
 <section id="image-uploader">
     <div class="frame-choice">
         <h1>Welcome to image Upload Center</h1>
+        <ol>
+            <p>
+              <button mat-raised-button (click)="openDialog()">Start</button>
+            </p>
+            <p *ngIf="animal">
+              You chose: <i>{{animal}}</i>
+            </p>
+          </ol>
+    </div>
+    <!-- <div class="frame-choice">
+        <h1>Welcome to image Upload Center</h1>
         <h3>Start by choosing Image Frame</h3>
         <mat-grid-list cols="2">
             <mat-grid-tile>
@@ -48,5 +59,5 @@
                 </mat-form-field>
                 <button type="button" mat-raised-button >save</button>
         </div>
-    </div>
+    </div> -->
 </section>
