@@ -6,6 +6,8 @@ import { FormGroup, FormControl , Validators} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ImageComponentComponent } from '../image-component/image-component.component';
 
 
 
@@ -22,7 +24,8 @@ export class AdminpanelComponent implements OnInit {
   isSubmitted: boolean = false;
   titleFormControl = new FormControl('', [Validators.required]);
   descriptionFormControl = new FormControl('', [Validators.required]);
-  constructor(private storage: AngularFireStorage) { }
+  constructor(private storage: AngularFireStorage,
+    public dialog: MatDialog) { }
 
   ngOnInit(){}
 
@@ -68,7 +71,10 @@ export class AdminpanelComponent implements OnInit {
   getRequiredErrorMessage(field) {
     return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ImageComponentComponent, {
+      width: '85%',height: '85%',
+    });
+  }
 
-  
-  
 }

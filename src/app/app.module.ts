@@ -21,13 +21,22 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { ImageComponentComponent } from './image-component/image-component.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PaidPictureComponent } from './paid-picture/paid-picture.component';
+import { DigitalPictureComponent } from './digital-picture/digital-picture.component';
+import { PotraitPictureComponent } from './potrait-picture/potrait-picture.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AdminpanelComponent
+    AdminpanelComponent,
+    ImageComponentComponent,
+    PaidPictureComponent,
+    DigitalPictureComponent,
+    PotraitPictureComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,9 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent]
+
 })
 export class AppModule { }
 

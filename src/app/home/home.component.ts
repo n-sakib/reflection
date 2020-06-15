@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
-import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 })
 export default class HomeComponent {
 
-  @ViewChild('nav', {static: false}) ds: NgImageSliderComponent;
+  @ViewChild('nav', { static: false }) ds: NgImageSliderComponent;
   title = 'Reflection';
   showSlider = true;
   sliderWidth: Number = 940;
@@ -22,7 +23,7 @@ export default class HomeComponent {
   sliderSlideImage: Number = 1;
   sliderAnimationSpeed: any = 1;
   imageObject: Array<object> = [];
-  constructor(private dialog:MatDialog) {
+  constructor(private dialog: MatDialog) {
     this.setImageObject();
   }
 
@@ -30,11 +31,11 @@ export default class HomeComponent {
     this.setImageObject();
     this.showSlider = false;
     setTimeout(() => {
-        this.showSlider = true;
-   }, 10);
+      this.showSlider = true;
+    }, 10);
   }
-  setImageObject(){
-    this.imageObject=[{
+  setImageObject() {
+    this.imageObject = [{
       image: 'assets/Cover.jpeg',
       thumbImage: 'assets/Cover.jpeg',
       title: 'NAME 1',
@@ -72,18 +73,24 @@ export default class HomeComponent {
   }
 
   arrowOnClick(event) {
-      console.log('arrow click event', event);
+    console.log('arrow click event', event);
   }
 
   lightboxArrowClick(event) {
-      console.log('popup arrow click', event);
+    console.log('popup arrow click', event);
   }
 
   prevImageClick() {
-      this.ds.prev();
+    this.ds.prev();
   }
 
   nextImageClick() {
-      this.ds.next();
+    this.ds.next();
+  }
+
+  imageOnClick1(): void {
+    const dialogRef = this.dialog.open(PaidPictureComponent, {
+      width: '100%', height: '90%',
+    });
   }
 }

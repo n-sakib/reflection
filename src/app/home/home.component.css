@@ -7,16 +7,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 .gallery-inner{
     /* padding: 10px 10px 10px 10px; */
     box-sizing: border-box;
     border-color: #CFCFCF;
-    margin-bottom: 20px
-    
+    margin-bottom: 20px;
+    width: 100%;
 }
-.gallery h1{
+.picture-gallery h1{
     text-align: center;
     font-size: 30px;
-    padding-bottom: 2em;
+    padding: 20px;
+}
+.picture-gallery{
+     /* padding: 10px 10px 10px 10px; */
+     box-sizing: border-box;
+     border-color: #CFCFCF;
+     margin-bottom: 20px;
+     width: 100%;
+     cursor: pointer;
+}
+.pet-potrait h1{
+    text-align: center;
+    font-size: 30px;
+    padding: 20px;
+    cursor: none;
+}
+.pet-potrait{
+     /* padding: 10px 10px 10px 10px; */
+     box-sizing: border-box;
+     border-color: #CFCFCF;
+     margin-bottom: 20px;
+     width: 100%;
+     cursor: pointer;
 }
