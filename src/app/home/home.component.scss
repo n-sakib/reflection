@@ -43,3 +43,20 @@
      width: 100%;
      cursor: pointer;
 }
+    
+.gallery h2{
+    text-align: center;
+    padding-bottom: 2em;
+}
+#inner {
+    display: table;
+    margin: 0 auto;
+    color: white;
+    padding: 40px;
+  }
+
+#outer {
+    width:100%;
+    height: 400px;
+    background-color: #c2a476;
+}

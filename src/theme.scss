@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import '~@angular/material/theming';
 @include mat-core();
 
 $my-app-primary: mat-palette($mat-blue-grey);
@@ -6,3 +7,8 @@ $my-app-accent:  mat-palette($mat-pink, 500, 900, A100);
 $my-app-warn:    mat-palette($mat-deep-orange);
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 @include angular-material-theme($my-app-theme);
+
+
+
+$custom-typography: mat-typography-config($font-family: '"Lato", sans-serif;');
+@include mat-core($custom-typography);

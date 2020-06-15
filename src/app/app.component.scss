@@ -1,0 +1,131 @@
+.body{
+    font-family: 'Montserrat';
+    background: white;
+    font-size: 12px;
+}
+
+.top-comtainer{
+    display: grid;
+    grid-gap: 20px;
+
+}
+.navbar {
+    height: 10vh;
+    .nav-bar-button {
+        color: white;
+        border-radius: 0;
+    }
+}
+
+.hero {
+    /* Sizing */
+    width: 100vw;
+    height: 90vh;
+    
+    /* Flexbox stuff */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Text styles */
+    text-align: center;
+    color: white;
+    
+    /* Background styles */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('/assets/Cover.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    .hero-button {
+        padding: 10px 45px;
+        color: white;
+        border-radius: 0;
+    }
+    
+}
+
+.hero h1 {
+    /* Text styles */
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+.hero h2 {
+    /* Text styles */
+    font-size: 26px;
+    
+    /* Margins */
+    margin-top: 0;
+    margin-bottom: 100px;
+}
+
+@media(min-width: 1080px) {
+    .hero {
+        /* Sizing */
+        width: 100vw;
+        height: 96vh;
+  }
+  .navbar {
+    height: 6vh;
+    }
+}
+
+.footer h2{
+    /* Text styles */
+  font-size: 5em;
+  
+  /* Margins */
+  margin-top: 0;
+  margin-bottom: 0.5em
+
+}
+.footer{
+    /* Sizing */
+  width: 100vw;
+  height: 90vh;
+  
+  /* Flexbox stuff */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Text styles */
+  text-align: center;
+  color: white;
+}
+.mat-sidenav {
+  min-width: 200px;
+}
+.spacer{
+   margin-left: 70px;
+}
+.create{
+ margin-left: auto;
+ margin-right: 50px;
+}
+.testimonials{
+    width: 100%;
+}
+.testimonials h2{
+    text-align: center;
+    width: 100%;
+}
+.social-footer-icons{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.promo{
+    height: 30px!important;
+    color: white!important;
+    font-size: 13px;
+    align-items: center!important;
+}
+.title-center {
+    flex: 1 1 auto !important;
+  text-align: center !important;
+    
+  }

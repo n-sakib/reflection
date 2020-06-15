@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+@import'~@angular/material/theming';
+
+$custom-typography: mat-typography-config($font-family: '"Lato", sans-serif;');
+@include mat-core($custom-typography);
+
+$rf-primary: (
+    50 : #f8f4ef,
+    100 : #ede4d6,
+    200 : #e1d2bb,
+    300 : #d4bf9f,
+    400 : #cbb28b,
+    500 : #c2a476,
+    600 : #bc9c6e,
+    700 : #b49263,
+    800 : #ac8959,
+    900 : #9f7846,
+    A100 : #fffcf7,
+    A200 : #ffe5c4,
+    A400 : #ffcd91,
+    A700 : #ffc278,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$rf-secondary: (
+    50: #ffffff,
+    100: #fff7f4,
+    200: #fecdbd,
+    300: #fc9977,
+    400: #fc8259,
+    500: #fb6c3b,
+    600: #fa551d,
+    700: #f44205,
+    800: #d63a04,
+    900: #b83204,
+    A100: #ffffff,
+    A200: #fff7f4,
+    A400: #fc8259,
+    A700: #f44205,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: $black-87-opacity,
+        A700: white,
+    )
+);
+
+$rf-tartiary: (
+    50: #ffffff,
+    100: #fff7f4,
+    200: #fecdbd,
+    300: #fc9977,
+    400: #fc8259,
+    500: #fb6c3b,
+    600: #fa551d,
+    700: #f44205,
+    800: #d63a04,
+    900: #b83204,
+    A100: #ffffff,
+    A200: #fff7f4,
+    A400: #fc8259,
+    A700: #f44205,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: $black-87-opacity,
+        400: $black-87-opacity,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: $black-87-opacity,
+        A700: white,
+    )
+);
+
+// mandatory stuff for theming
+$rf-palette-primary: mat-palette($rf-primary);
+$rf-palette-secondary:  mat-palette($rf-secondary);
+
+// include the custom theme components into a theme object
+$rf-theme: mat-light-theme($rf-palette-primary, $rf-palette-secondary);
+
+// include the custom theme object into the angular material theme
+@include angular-material-theme($rf-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Lato, "Helvetica Neue", sans-serif; }
