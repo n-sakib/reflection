@@ -1,0 +1,35 @@
+.frame-choice{
+    /* padding: 10px 10px 10px 10px; */
+    box-sizing: border-box;
+    border-color: #CFCFCF;
+    text-align: center;
+    align-items: center;
+}
+.frame-choice h1{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 10px;
+}
+.frame-1{
+    width: 300px;
+    height: 250px;
+    border: 3px solid #ccc;
+    background: #eee;
+    margin: auto;
+    padding: 10px 10px;
+}
+.frame-2{
+    width: 300px;
+    height: 250px;
+    border: 3px solid #ccc;
+    background: #eee;
+    margin: auto;
+    padding: 10px 10px;
+}
+.hero-button {
+    margin-top: 5px;
+    padding: 10px 25px;
+    color: white;
+    border-radius: 10;
+}
+

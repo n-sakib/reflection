@@ -26,6 +26,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaidPictureComponent } from './paid-picture/paid-picture.component';
 import { DigitalPictureComponent } from './digital-picture/digital-picture.component';
 import { PotraitPictureComponent } from './potrait-picture/potrait-picture.component';
+import { ViewComponent } from './view/view.component';
+import { ImageViewComponent } from './image-view/image-view.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { FieldFormComponent } from './field-form/field-form.component';
 
 
 @NgModule({
@@ -36,7 +40,11 @@ import { PotraitPictureComponent } from './potrait-picture/potrait-picture.compo
     ImageComponentComponent,
     PaidPictureComponent,
     DigitalPictureComponent,
-    PotraitPictureComponent
+    PotraitPictureComponent,
+    ViewComponent,
+    ImageViewComponent,
+    ImageUploadComponent,
+    FieldFormComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +63,7 @@ import { PotraitPictureComponent } from './potrait-picture/potrait-picture.compo
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent]
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, ImageViewComponent, ImageUploadComponent, FieldFormComponent]
 
 })
 export class AppModule { }

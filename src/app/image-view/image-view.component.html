@@ -1,17 +1,16 @@
 <div class="frame-choice">
-    <h1>Welcome to image Upload Center</h1>
-    <h3>Start by choosing Image Frame</h3>
+    <h1> Choose Image Frame</h1>
     <mat-grid-list cols="2">
         <mat-grid-tile>
             <div class="demo">
                 <div class="frame-1"></div>
-                <button (click)="chooseView()">Vertical View</button>
+                <button class="hero-button" mat-flat-button color="primary" (click)="uploadImage()">Frame 1</button>
             </div>
         </mat-grid-tile>
         <mat-grid-tile>
             <div class="demo">
                 <div class="frame-2"></div>
-                <button (click)="chooseView()"> Horizontal View</button>
+                <button class="hero-button" mat-flat-button color="primary" (click)="uploadImage()">Frame 2</button>
             </div>
         </mat-grid-tile>
     </mat-grid-list>

@@ -23,13 +23,7 @@
             </mat-grid-tile>
         </mat-grid-list>
     </div> 
-    <div class="image-uploader-inner">
-        <h1>Choose Digital Image and Potrait Image</h1>
-        <h3>Supported Formats: jpg,PNG</h3>
-        <img *ngIf="isSubmitted" [src]="srcResult" >
-        <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-    </div>
+    
     <div class="image-info">
         <h1>Write Image Information</h1>
         <h3>Fill out the Form</h3>

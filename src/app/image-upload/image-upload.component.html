@@ -1,0 +1,8 @@
+<div class="image-uploader-inner">
+    <h1>Choose Digital Image and Potrait Image</h1>
+    <h3>Supported Formats: jpg,PNG</h3>
+    <img *ngIf="isSubmitted" [src]="srcResult" >
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    <button type="button" mat-raised-button (click)="fieldform()">Next</button>
+</div>

@@ -42,25 +42,7 @@ export class AdminpanelComponent implements OnInit {
   //   }
   // }
   
-  toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
 
-  async onFileSelected() {
-   const file = (<HTMLInputElement>document.getElementById('file')).files[0];
-   this.toBase64(file).then((res) => {
-      this.srcResult = res;
-      const filePath = `${new Date().getTime()}`;
-      const fileRef =  this.storage.ref(filePath);
-      fileRef.putString(this.srcResult, 'data_url').then(function(snapshot) {
-        console.log(snapshot)
-      })
-      this.isSubmitted = true;
-   })
-  }
   chooseFrame(){
     
   }

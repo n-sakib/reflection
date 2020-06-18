@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ImageViewComponent } from '../image-view/image-view.component';
 
 @Component({
   selector: 'app-image-component',
@@ -7,11 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageComponentComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-  chooseFrame(){
-
+  chooseView(): void {
+    const dialogRef = this.dialog.open(ImageViewComponent, {
+      width: '85%',height: '85%',
+    });
   }
 }
