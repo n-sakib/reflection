@@ -1,4 +1,4 @@
-<section class="gallery">
+<div class="gallery">
     <div class="gallery-inner" [ngStyle]="{'width':'100%'}">
         <h2>PICTURE GALLERY</h2>
         <ng-image-slider id="imageslider" *ngIf="showSlider" #nav [images]="imageObject"
@@ -15,7 +15,7 @@
             (lightboxArrowClick)="lightboxArrowClick($event)">
         </ng-image-slider>
     </div>
-</section>
+</div>
 <section id="testimonial">
     <mat-grid-list cols="2">
         <mat-grid-tile>

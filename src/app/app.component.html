@@ -1,71 +1,81 @@
 <body>
-        <div class="homepage">
-            <mat-toolbar color="primary" class="promo">
-                <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
+    <div class="homepage">
+        <mat-toolbar color="primary" class="promo">
+            <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
 
-            <mat-toolbar color="#584b53" class="navbar">
-                <button mat-icon-button disableRipple>
-                    <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
-                </button>
+        <mat-toolbar color="#584b53" class="navbar">
+            <button mat-icon-button disableRipple>
+                <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
+            </button>
 
-                <span class="spacer" style="font-family:Montserrat">
-                    <div fxShow="true" fxHide.lt-md="true">
-                        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
-                        <a href="#" mat-button disableRipple>GALLERY</a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>BUY A PAINTING</a>
-                        <a href="#" mat-button disableRipple>REVIEWS & TESTIMONIALS</a>
-                        <a href="#" mat-button disableRipple>CONTACT</a>
+            <span class="spacer" style="font-family:Montserrat">
+                <div fxShow="true" fxHide.lt-md="true">
+                    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
+                    <a href="#" mat-button disableRipple>GALLERY</a>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>BUY A PAINTING</a>
+                    <a href="#" mat-button disableRipple>REVIEWS & TESTIMONIALS</a>
+                    <a href="#" mat-button disableRipple>CONTACT</a>
+                </div>
+            </span>
+
+            <div class="create" style="font-family:Montserrat">
+                <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
+            </div>
+
+            <div class="create" style="font-family:Montserrat">
+                <button mat-flat-button color="primary" disableRipple>CREATE YOUR POTRAIT</button>
+            </div>
+
+
+            <div fxShow="true" fxHide.gt-sm="true">
+                <a href="#" (click)="sidenav.toggle()">
+                    <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+                </a>
+            </div>
+        </mat-toolbar>
+        <mat-sidenav-container fxFlexFill class="example-container">
+            <mat-sidenav #sidenav fxLayout="row wrap">
+                <div fxLayout="column">
+                    <a (click)="sidenav.toggle()" href="#" mat-button></a>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item disableRipple>Item 1</button>
+                        <button mat-menu-item disableRipple>Item 2</button>
+                    </mat-menu>
+                    <a mat-button disableRipple>About</a>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Shop</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item disableRipple>Item 1</button>
+                        <button mat-menu-item disableRipple>Item 2</button>
+                    </mat-menu>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item disableRipple>Item 1</button>
+                        <button mat-menu-item disableRipple>Item 2</button>
+                    </mat-menu>
+                    <a mat-button disableRipple>Journal</a>
+                    <a mat-button disableRipple>Contact</a>
+                </div>
+            </mat-sidenav>
+            <mat-sidenav-content fxFlexFill>
+                <section class="hero">
+                    <div class="hero-inner">
+                        <h1>GALLERY REFLECTION</h1>
+                        <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
+                        <button mat-flat-button color="primary" class="hero-button">SHOW THE COLLECTION</button>
                     </div>
-                </span>
-
-                <div class="create" style="font-family:Montserrat">
-                    <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
-                </div>
-
-
-                <div fxShow="true" fxHide.gt-sm="true">
-                    <a href="#" (click)="sidenav.toggle()">
-                        <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
-                    </a>
-                </div>
-            </mat-toolbar>
-            <mat-sidenav-container fxFlexFill class="example-container">
-                <mat-sidenav #sidenav fxLayout="row wrap">
-                    <div fxLayout="column">
-                        <a (click)="sidenav.toggle()" href="#" mat-button></a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
-                        <a mat-button disableRipple>About</a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Gallery</a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item disableRipple>Item 1</button>
-                            <button mat-menu-item disableRipple>Item 2</button>
-                        </mat-menu>
-                        <a mat-button disableRipple>Journal</a>
-                        <a mat-button disableRipple>Contact</a>
-                    </div>
-                </mat-sidenav>
-                <mat-sidenav-content fxFlexFill>
-                    <section class="hero" *ngIf="router.url === '/'">
-                        <div class="hero-inner">
-                            <h1>GALLERY REFLECTION</h1>
-                            <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
-                            <button mat-flat-button color="primary" class="hero-button">SHOW THE COLLECTION</button>
-                        </div>
-                    </section>
-                </mat-sidenav-content>
-            </mat-sidenav-container>
-            <router-outlet></router-outlet>
-          
-            <footer class="social-footer">
-                <div class="social-footer-icons">
-                    <mat-icon aria-hidden="false" aria-label="facebook">facebook</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="twitter">facebook</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="instagram">facebook</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="pinterest">facebook</mat-icon>
-                </div>
-            </footer>
-        </div>
-
+                </section>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+        <router-outlet></router-outlet>>
+        <footer class="social-footer">
+            <div class="social-footer-icons">
+                <mat-icon fontSet="fab" fontIcon="fa-facebook-f"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-twitter"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-instagram"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-pinterest"></mat-icon>
+            </div>
+        </footer>
+    </div>
 </body>
