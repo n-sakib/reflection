@@ -1,112 +1,113 @@
 <body>
-    <div>
-        <div class="homepage">
-            <mat-toolbar color="#584b53" class="navbar">
-                <button mat-icon-button disableRipple>
-                    <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
-                </button>
+    <div class="homepage">
+        <mat-toolbar color="#584b53" class="navbar">
+            <button mat-icon-button disableRipple>
+                <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
+            </button>
 
-                <span class="spacer" style="font-family:Montserrat">
+            <span class="spacer" style="font-family:Montserrat">
 
-                    <div fxShow="true" fxHide.lt-md="true">
-                        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>Item 1</button>
-                            <button mat-menu-item>Item 2</button>
-                        </mat-menu>
-                        <a href="#" mat-button disableRipple>ABOUT</a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>SHOP</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>Item 1</button>
-                            <button mat-menu-item>Item 2</button>
-                        </mat-menu>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>PAGES</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>Item 1</button>
-                            <button mat-menu-item>Item 2</button>
-                        </mat-menu>
-                        <a href="#" mat-button disableRipple>JOURNAL</a>
-                        <a href="#" mat-button disableRipple>CONTACT</a>
+                <div fxShow="true" fxHide.lt-md="true">
+                    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Item 1</button>
+                        <button mat-menu-item>Item 2</button>
+                    </mat-menu>
+                    <a href="#" mat-button disableRipple>ABOUT</a>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>SHOP</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Item 1</button>
+                        <button mat-menu-item>Item 2</button>
+                    </mat-menu>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>PAGES</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>Item 1</button>
+                        <button mat-menu-item>Item 2</button>
+                    </mat-menu>
+                    <a href="#" mat-button disableRipple>JOURNAL</a>
+                    <a href="#" mat-button disableRipple>CONTACT</a>
+                </div>
+            </span>
+
+            <div class="create" style="font-family:Montserrat">
+                <button mat-flat-button color="primary" disableRipple>CREATE YOUR POTRAIT</button>
+            </div>
+
+
+            <div fxShow="true" fxHide.gt-sm="true">
+                <a href="#" (click)="sidenav.toggle()">
+                    <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+                </a>
+            </div>
+        </mat-toolbar>
+        <mat-sidenav-container fxFlexFill class="example-container">
+            <mat-sidenav #sidenav fxLayout="row wrap">
+                <div fxLayout="column">
+                    <a (click)="sidenav.toggle()" href="#" mat-button></a>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item disableRipple>Item 1</button>
+                        <button mat-menu-item disableRipple>Item 2</button>
+                    </mat-menu>
+                    <a mat-button disableRipple>About</a>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Shop</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item disableRipple>Item 1</button>
+                        <button mat-menu-item disableRipple>Item 2</button>
+                    </mat-menu>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item disableRipple>Item 1</button>
+                        <button mat-menu-item disableRipple>Item 2</button>
+                    </mat-menu>
+                    <a mat-button disableRipple>Journal</a>
+                    <a mat-button disableRipple>Contact</a>
+                </div>
+            </mat-sidenav>
+            <mat-sidenav-content fxFlexFill>
+                <section class="hero">
+                    <div class="hero-inner">
+                        <h1>GALLERY REFLECTION</h1>
+                        <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
+                        <button mat-flat-button color="primary" class="hero-button">SHOW THE COLLECTION</button>
                     </div>
-                </span>
+                </section>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+        <section id="testimonials">
+            <div class="testimonials" fxLayout="row wrap">
+                <h2>TESTIMONIALS</h2>
+                <div class="right">
 
-                <div class="create" style="font-family:Montserrat">
-                    <button mat-flat-button color="primary" disableRipple>CREATE YOUR POTRAIT</button>
+                    <ng-image-slider #nav [images]="imageObject" [infinite]="true" [autoSlide]="1"
+                        [imageSize]="{width: '100%', height: 300}" slideImage="1" [showArrow]="true" #nav>
+                    </ng-image-slider>
+                    &nbsp;
                 </div>
-
-
-                <div fxShow="true" fxHide.gt-sm="true">
-                    <a href="#" (click)="sidenav.toggle()">
-                        <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
-                    </a>
+                <div class="left">
+                    <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon><br>
+                    <mat-icon aria-hidden="false" aria-label="menu">favorite</mat-icon><br>
+                    <mat-icon aria-hidden="false" aria-label="menu">share</mat-icon>
                 </div>
-            </mat-toolbar>
-            <mat-sidenav-container fxFlexFill class="example-container">
-                <mat-sidenav #sidenav fxLayout="row wrap">
-                    <div fxLayout="column">
-                        <a (click)="sidenav.toggle()" href="#" mat-button></a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item disableRipple>Item 1</button>
-                            <button mat-menu-item disableRipple>Item 2</button>
-                        </mat-menu>
-                        <a mat-button disableRipple>About</a>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Shop</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item disableRipple>Item 1</button>
-                            <button mat-menu-item disableRipple>Item 2</button>
-                        </mat-menu>
-                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item disableRipple>Item 1</button>
-                            <button mat-menu-item disableRipple>Item 2</button>
-                        </mat-menu>
-                        <a mat-button disableRipple>Journal</a>
-                        <a mat-button disableRipple>Contact</a>
-                    </div>
-                </mat-sidenav>
-                <mat-sidenav-content fxFlexFill>
-                    <section class="hero">
-                        <div class="hero-inner">
-                            <h1>GALLERY REFLECTION</h1>
-                            <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
-                            <button mat-flat-button color="primary" class="hero-button">SHOW THE COLLECTION</button>
-                        </div>
-                    </section>
-                </mat-sidenav-content>
-            </mat-sidenav-container>
-            <section id="testimonials">
-                <div class="testimonials" fxLayout="row wrap">
-               
-                    <div [ngStyle]="{'width':'95%'}">
-                        <h2>TESTIMONIALS</h2>
-                        <ng-image-slider #nav [images]="imageObject" [infinite]="true" [autoSlide]="1"
-                            [imageSize]="{width: '100%', height: 300}" slideImage="1" [showArrow]="true" #nav>
-                        </ng-image-slider>
-                        <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
-                        <mat-icon aria-hidden="false" aria-label="menu">favorite</mat-icon>
-                        <mat-icon aria-hidden="false" aria-label="menu">share</mat-icon>
-                    </div>
-                </div>
-            </section>
-            <section id="getintouch" [ngStyle]="{'width':'95%'}">
-                <mat-card class="example-card" style="text-align: center;">
-                    <h2>Get in-touch</h2>
-                        <mat-form-field>
-                            <input matInput placeholder="email">
-                        </mat-form-field>
-                    <button mat-flat-button color="primary" disableRipple>Send</button><br />
-                </mat-card>
-            </section>
-            <footer class="social-footer">
-                <div class="social-footer-icons">
-                    <mat-icon fontSet="fab" fontIcon="fa-facebook-f"></mat-icon>
-                    <mat-icon fontSet="fab" fontIcon="fa-twitter"></mat-icon>
-                    <mat-icon fontSet="fab" fontIcon="fa-instagram"></mat-icon>
-                    <mat-icon fontSet="fab" fontIcon="fa-pinterest"></mat-icon>
-                </div>
-              </footer>
-        </div>
+            </div>
+        </section>
+        <section id="getintouch" [ngStyle]="{'width':'95%','height':'40%'}">
+            <mat-card class="example-card" style="text-align: center;">
+                <h2>Get in-touch</h2>
+                <mat-form-field>
+                    <input matInput placeholder="email">
+                </mat-form-field>
+                <button mat-flat-button color="primary" disableRipple>Send</button><br />
+            </mat-card>
+        </section>
+        <footer class="social-footer">
+            <div class="social-footer-icons">
+                <mat-icon fontSet="fab" fontIcon="fa-facebook-f"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-twitter"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-instagram"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-pinterest"></mat-icon>
+            </div>
+        </footer>
     </div>
 </body>
