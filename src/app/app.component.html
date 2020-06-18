@@ -35,16 +35,8 @@
                 <div fxLayout="column">
                     <a (click)="sidenav.toggle()" href="#" mat-button></a>
                     <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item disableRipple>Item 1</button>
-                        <button mat-menu-item disableRipple>Item 2</button>
-                    </mat-menu>
                     <a mat-button disableRipple>About</a>
-                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Shop</a>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item disableRipple>Item 1</button>
-                        <button mat-menu-item disableRipple>Item 2</button>
-                    </mat-menu>
+                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Gallery</a>
                     <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item disableRipple>Item 1</button>
@@ -55,7 +47,7 @@
                 </div>
             </mat-sidenav>
             <mat-sidenav-content fxFlexFill>
-                <section class="hero">
+                <section class="hero" *ngIf="router.url === '/'">
                     <div class="hero-inner">
                         <h1>GALLERY REFLECTION</h1>
                         <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
@@ -64,7 +56,8 @@
                 </section>
             </mat-sidenav-content>
         </mat-sidenav-container>
-        <router-outlet></router-outlet>>
+        <router-outlet></router-outlet>
+
         <footer class="social-footer">
             <div class="social-footer-icons">
                 <mat-icon fontSet="fab" fontIcon="fa-facebook-f" color="primary"></mat-icon>
