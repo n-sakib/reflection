@@ -1,32 +1,27 @@
 <body>
-    <div class="homepage">
-        <mat-toolbar color="#584b53" class="navbar">
-            <button mat-icon-button disableRipple>
-                <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
-            </button>
+    <div>
+        <div class="homepage">
+            <mat-toolbar color="primary" class="promo">
+                <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
 
-            <span class="spacer" style="font-family:Montserrat">
+            <mat-toolbar color="#584b53" class="navbar">
+                <button mat-icon-button disableRipple>
+                    <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
+                </button>
 
-                <div fxShow="true" fxHide.lt-md="true">
-                    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Item 1</button>
-                        <button mat-menu-item>Item 2</button>
-                    </mat-menu>
-                    <a href="#" mat-button disableRipple>ABOUT</a>
-                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>SHOP</a>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Item 1</button>
-                        <button mat-menu-item>Item 2</button>
-                    </mat-menu>
-                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>PAGES</a>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item>Item 1</button>
-                        <button mat-menu-item>Item 2</button>
-                    </mat-menu>
-                    <a href="#" mat-button disableRipple>JOURNAL</a>
-                    <a href="#" mat-button disableRipple>CONTACT</a>
+                <span class="spacer" style="font-family:Montserrat">
+                    <div fxShow="true" fxHide.lt-md="true">
+                        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
+                        <a href="#" mat-button disableRipple>GALLERY</a>
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>BUY A PAINTING</a>
+                        <a href="#" mat-button disableRipple>REVIEWS & TESTIMONIALS</a>
+                        <a href="#" mat-button disableRipple>CONTACT</a>
+                    </div>
+                </span>
+
+                <div class="create" style="font-family:Montserrat">
+                    <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
                 </div>
             </span>
 
