@@ -26,9 +26,10 @@ export class FieldFormComponent implements OnInit {
   getRequiredErrorMessage(field) {
     return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
   }
-  publishImage(): void {
-    const dialogRef = this.dialog.open(PublishImageComponent, {
-      width: '85%',height: '85%',
+  publishImage() {
+    const dialogRef = this.dialog.open(PublishImageComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 }
