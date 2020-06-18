@@ -3,11 +3,8 @@
     background: white;
     font-size: 12px;
 }
-
 .homepage{
-    display: grid;
-    grid-gap: 20px;
-
+    padding: 0em;
 }
 .navbar {
     height: 10vh;
@@ -20,7 +17,7 @@
 .hero {
     /* Sizing */
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     
     /* Flexbox stuff */
     display: flex;
@@ -32,7 +29,7 @@
     color: white;
     
     /* Background styles */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('/assets/Cover.jpeg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('/assets/featured.jpeg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -47,13 +44,13 @@
 
 .hero h1 {
     /* Text styles */
-    font-size: 50px;
+    font-size: 3.5em;
     margin-bottom: 40px;
 }
 
 .hero h2 {
     /* Text styles */
-    font-size: 26px;
+    font-size: 2em;
     
     /* Margins */
     margin-top: 0;
@@ -73,7 +70,7 @@
 
 .footer h2{
     /* Text styles */
-  font-size: 5em;
+  font-size: 2em;
   
   /* Margins */
   margin-top: 0;
@@ -81,17 +78,6 @@
 
 }
 .footer{
-    /* Sizing */
-  width: 100vw;
-  height: 90vh;
-  
-  /* Flexbox stuff */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  /* Text styles */
-  text-align: center;
   color: white;
 }
 .mat-sidenav {
@@ -112,11 +98,7 @@
     width: 100%;
 }
 .social-footer-icons{
-    width: 100vw;
-    height: 90vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    float: right;
 }
 .left {
     float: left;

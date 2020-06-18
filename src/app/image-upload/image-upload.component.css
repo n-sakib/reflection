@@ -1,0 +1,15 @@
+.image-uploader-inner{
+    align-items: center;
+    text-align: center;
+}
+.image-uploader-inner h1{
+    font-size: 2.5em;
+    font-family: 'Montserrat';
+}
+.image-uploader-inner h2{
+    font-size: 1.5em;
+    font-family: 'Montserrat';
+}
+.upload-button{
+    padding: .5em .5em;
+}

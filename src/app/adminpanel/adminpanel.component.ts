@@ -22,8 +22,6 @@ export class AdminpanelComponent implements OnInit {
   imgSrc: string ='./assets/featured.jpeg';
   selectedImage :any = null;
   isSubmitted: boolean = false;
-  titleFormControl = new FormControl('', [Validators.required]);
-  descriptionFormControl = new FormControl('', [Validators.required]);
   constructor(private storage: AngularFireStorage,
     public dialog: MatDialog) { }
 
@@ -43,16 +41,6 @@ export class AdminpanelComponent implements OnInit {
   // }
   
 
-  chooseFrame(){
-    
-  }
-  imageform: FormGroup = new FormGroup({
-    title: this.titleFormControl,
-    description: this.descriptionFormControl,
-  });
-  getRequiredErrorMessage(field) {
-    return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
-  }
   openDialog(): void {
     const dialogRef = this.dialog.open(ImageComponentComponent, {
       width: '85%',height: '85%',

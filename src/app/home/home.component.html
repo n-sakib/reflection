@@ -1,41 +1,24 @@
 <div class="gallery">
-    <div class="gallery-inner" [ngStyle]="{'width':'100%'}">
+    <div class="gallery-inner">
         <h2>PICTURE GALLERY</h2>
         <ng-image-slider id="imageslider" *ngIf="showSlider" #nav [images]="imageObject"
-            [imageSize]="{width: '300px', height: '300px', space: 20}" [infinite]="sliderInfinite"
+            [imageSize]="{width: '300px', height: '300px', space: 10}" [infinite]="sliderInfinite"
             [imagePopup]="sliderImagePopup" [showArrow]="sliderArrowShow" [autoSlide]="sliderAutoSlide ? 1 : 0"
             [animationSpeed]="sliderAnimationSpeed" [manageImageRatio]="false" (imageClick)="imageOnClick($event)"
             (arrowClick)="arrowOnClick($event)" (lightboxArrowClick)="lightboxArrowClick($event)">
         </ng-image-slider>
-        <h1>Pet Potrait</h1>
+    </div>
+    <div class="petpotrait">
+        <h2>PET POTRAIT</h2>
         <ng-image-slider id="imageslider" *ngIf="showSlider" #nav [images]="imageObject"
-            [imageSize]="{width: '300px', height: '300px', space: 20}" [infinite]="sliderInfinite" [imagePopup]="false"
+            [imageSize]="{width: '300px', height: '300px', space: 10}" [infinite]="sliderInfinite" [imagePopup]="false"
             [showArrow]="sliderArrowShow" [autoSlide]="sliderAutoSlide ? 1 : 0" [animationSpeed]="sliderAnimationSpeed"
             [manageImageRatio]="false" (imageClick)="imageOnClick1()" (arrowClick)="arrowOnClick($event)"
             (lightboxArrowClick)="lightboxArrowClick($event)">
         </ng-image-slider>
     </div>
 </div>
-<section id="testimonial">
-    <mat-grid-list cols="2">
-        <mat-grid-tile>
-            <div class="testimonials">
-                <h2>TESTIMONIALS</h2>
-                <ng-image-slider id="testslider" *ngIf="showSlider" #nav [images]="imageObject" [infinite]="true"
-                    [autoSlide]="2" [imageSize]="{width: 300, height: 300, space:10}" slideImage="1" [showArrow]="true"
-                    [animationSpeed]="sliderAnimationSpeed" [manageImageRatio]="false" #nav>
-                </ng-image-slider>
-            </div>
-        </mat-grid-tile>
-        <mat-grid-tile> 
-            <div class="util">
-                <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="menu">favorite</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="menu">share</mat-icon>
-            </div>
-        </mat-grid-tile>
-    </mat-grid-list>
-</section>
+
 
 <div id="outer">
     <div id="inner">
@@ -45,7 +28,7 @@
             <input matInput placeholder="Email Address">
         </mat-form-field>
         <br />
-        <button mat-flat-button color="secondary" class="hero-button">SUBSCRIBE</button>
+        <button mat-flat-button color="primary" class="hero-button">SUBSCRIBE</button>
 
     </div>
 </div>

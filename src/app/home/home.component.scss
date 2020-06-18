@@ -1,71 +1,56 @@
 .gallery{
     /* Sizing */
-    width: 100vw;
-    height: 100vh;
-    
-    /* Flexbox stuff */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    border-color: #CFCFCF;
 }
 .gallery-inner{
     /* padding: 10px 10px 10px 10px; */
     text-align: center;
     box-sizing: border-box;
     border-color: #CFCFCF;
-    margin-bottom: 20px;
-    width: 100%;
-}
-.picture-gallery h1{
-    text-align: center;
-    font-size: 30px;
-    padding: 20px;
-}
-.picture-gallery{
-     /* padding: 10px 10px 10px 10px; */
-     box-sizing: border-box;
-     border-color: #CFCFCF;
-     margin-bottom: 20px;
-     width: 100%;
-     cursor: pointer;
-}
-.pet-potrait h1{
-    text-align: center;
-    font-size: 30px;
-    padding: 20px;
-    cursor: none;
-}
-.pet-potrait{
-     /* padding: 10px 10px 10px 10px; */
-     box-sizing: border-box;
-     border-color: #CFCFCF;
-     margin-bottom: 20px;
-     width: 100%;
-     cursor: pointer;
-}
-    
-.gallery h2{
-    text-align: center;
     padding-bottom: 2em;
+}
+.petpotrait{
+    text-align: center;
+    box-sizing: border-box;
+    border-color: #CFCFCF;
+    padding-bottom: 2em;
+} 
+.gallery-inner h2{
+    text-align: center;
+    padding: 2em;
+    font-family: 'Montserrat';
+    font-size: 2em;
+}
+.petpotrait h2{
+    text-align: center;
+    padding: 2em;
+    font-family: 'Montserrat';
+    font-size: 2em;
 }
 #inner {
     display: table;
     margin: 0 auto;
     color: white;
     padding: 40px;
-  }
-
+}
+#inner h2{
+    font-family: 'Montserrat';
+    font-size: 2em;
+    align-items: center;
+}
+#inner h3{
+    font-family: 'Montserrat';
+    font-size: 1.5em;
+}
 #outer {
     width:100%;
-    height: 400px;
+    height: 300px;
     background-color: #c2a476;
 }
-.testimonials{
-    text-align: center;
-    box-sizing: border-box;
-    border-color: #CFCFCF;
-    width: 40%;
-    padding: 20px;
-    align-items: center;
+.hero-button {
+    padding: 10px 5px;
+    color: white;
+    border-radius: 0;
 }
