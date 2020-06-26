@@ -48,7 +48,7 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
     ImageUploadComponent,
     FieldFormComponent,
     PublishImageComponent,
-    TestimonialComponent
+    TestimonialComponent,
   ],
   imports: [
     BrowserModule,

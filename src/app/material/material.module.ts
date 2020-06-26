@@ -13,6 +13,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const material = [
   MatButtonModule,
@@ -29,6 +30,8 @@ const material = [
   FlexLayoutModule,
   MatDialogModule,
   MatStepperModule,
+  FormsModule,
+  ReactiveFormsModule,
 ];
 
 @NgModule({
