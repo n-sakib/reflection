@@ -32,6 +32,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { FieldFormComponent } from './field-form/field-form.component';
 import { PublishImageComponent } from './publish-image/publish-image.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxGalleryModule
   ],
   providers: [],
   bootstrap: [AppComponent],

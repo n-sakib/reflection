@@ -48,6 +48,9 @@
     align-items: center;
     height: 85vh;
     width: 100%;
+    h1 {
+        line-height: 50px;
+    }
 }
 
 .hero h1 {
@@ -65,35 +68,30 @@
     margin-bottom: 100px;
 }
 
-@media(min-width: 1080px) {
-    .hero {
-        /* Sizing */
-        width: 100vw;
-        height: 96vh;
-  }
-  .navbar {
+.navbar {
     background-color: rgba(0, 0, 0, 0);
     height: 6vh;
     }
+
+.hero {
+    /* Sizing */
+    width: 100vw;
+    height: 96vh;
+  }
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0);
+    height: 6vh;
 }
 
-.footer h2{
-    /* Text styles */
-  font-size: 2em;
-  
-  /* Margins */
-  margin-top: 0;
-  margin-bottom: 0.5em
-
-}
 .footer{
-  color: white;
+  font-size: 15px;
 }
 .mat-sidenav {
   min-width: 200px;
 }
 .spacer{
-    width: 100vw;
+   width: 100vw;
    margin-left: auto;
    color: white;
    font-weight: bold!important;
@@ -145,4 +143,20 @@
 }
 .fa-pinterest{
     color:#C91517;
+}
+
+.side-nav {
+    color: white;
+    height: 30px;
+    padding: 25px;
+}
+
+.footer {
+    mat-icon{
+        padding-top: 10px;
+    } 
+}
+
+body {
+    background: whitesmoke;
 }
