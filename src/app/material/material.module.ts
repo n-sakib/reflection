@@ -14,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 const material = [
   MatButtonModule,
@@ -32,6 +33,7 @@ const material = [
   MatStepperModule,
   FormsModule,
   ReactiveFormsModule,
+  MatSelectModule,
 ];
 
 @NgModule({
