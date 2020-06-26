@@ -1,5 +1,110 @@
 .imageType{
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+        align-content: center;
+       align-items: center;
+       justify-content: center;
+       margin: 1em;
+       border: white;
+       width: 40%;
+       padding: 2em;
 }
+ .imageType h2{
+       align-content: center;
+       align-items: center;
+       font-family: 'Montserrat';
+        font-size: 2em;
+        justify-content: center;
+        padding: 2em;
+    }
+    .type{
+        align-content: center;
+        align-items: center;
+        font-family: 'Montserrat';
+        font-size: 1.5em;
+        justify-content: center;
+        padding: 1em;
+        display: flex;
+     }
+     .typeSelection{
+       align-items: center;
+       text-align: center;
+     }
+     .backNextImage{
+       align-items: center;
+       text-align: center;
+       padding: .5em;
+     }
+     .view-choice{
+       /* padding: 10px 10px 10px 10px; */
+       box-sizing: border-box;
+       border-color: #CFCFCF;
+       text-align: center;
+       align-items: center;
+    }
+    .view-choice h1{
+       text-align: center;
+       font-family: 'Montserrat';
+        font-size: 2em;
+       padding-top: .5em;
+    }
+    .view-choice h3{
+       text-align: center;
+       font-family: 'Montserrat';
+       font-size: 1.5em;
+       padding-top: .5em;
+    }
+    .frame{
+       width: 300px;
+       height: 250px;
+       border: 3px solid #ccc;
+       background: #eee;
+       margin: auto;
+       padding: 10px 10px;
+    }
+    .view-button{
+       margin: .5em;
+    }
+    .frame-uploader-inner{
+       align-items: center;
+       text-align: center;
+    }
+    .frame-uploader-inner h1{
+       text-align: center;
+       font-family: 'Montserrat';
+        font-size: 2em;
+       padding-top: .5em;
+    }
+    .frame-uploader-inner h3{
+       text-align: center;
+       font-family: 'Montserrat';
+       font-size: 1.5em;
+       padding-top: .5em;
+    }
+    .image-uploader-inner{
+       align-items: center;
+       text-align: center;
+    }
+    .image-uploader-inner h1{
+       text-align: center;
+       font-family: 'Montserrat';
+        font-size: 2em;
+       padding-top: .5em;
+    }
+    .image-uploader-inner h3{
+       text-align: center;
+       font-family: 'Montserrat';
+       font-size: 1.5em;
+       padding-top: .5em;
+    }
+    .publish-image{
+       align-items: center;
+       text-align: center;
+    }.publish-image h2{
+       align-content: center;
+       align-items: center;
+       font-family: 'Montserrat';
+        font-size: 2em;
+        justify-content: center;
+        padding: 2em;
+    }
+    
+    
