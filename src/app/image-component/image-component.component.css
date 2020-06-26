@@ -1,3 +1,8 @@
+.image-upload-center{
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+}
 .imageType{
         align-content: center;
        align-items: center;
@@ -29,7 +34,14 @@
        align-items: center;
        text-align: center;
        padding: .5em;
+       color: white;
      }
+     .backNextImage-button{
+      align-items: center;
+      text-align: center;
+      padding: .25em 1.5em;
+      color: white;
+    }
      .view-choice{
        /* padding: 10px 10px 10px 10px; */
        box-sizing: border-box;
@@ -85,6 +97,7 @@
 }
     .view-button{
        margin: .15em;
+       color: white;
     }
     .frame-uploader-inner{
        align-items: center;
@@ -121,12 +134,21 @@
     .publish-image{
        align-items: center;
        text-align: center;
-    }.publish-image h2{
+    }
+    .publish-image h2{
        align-content: center;
        align-items: center;
        font-family: 'Montserrat';
         font-size: 2em;
         justify-content: center;
-        padding: 1.5em;
+        padding: 1.5em 2em;
+    }
+    .upload-button{
+      align-content: center;
+      align-items: center;
+      font-family: 'Montserrat';
+       font-size: 1em;
+       justify-content: center;
+       color: white;
     }
     

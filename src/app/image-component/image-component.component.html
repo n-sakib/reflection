@@ -1,4 +1,4 @@
-<div class="demo">
+<div class="image-upload-center">
   <mat-horizontal-stepper>
       <!-- #docregion label -->
         <mat-step label="Step 1">
@@ -15,8 +15,8 @@
             <p>You selected: {{selected}}</p>
           </div>
           <div class="backNextImage">
-              <button mat-flat-button color="primary" matStepperPrevious>Back</button>&nbsp;
-              <button mat-flat-button color="primary" matStepperNext>Next</button>
+              <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+              <button mat-flat-button color="primary" class="backNextImage-button"  matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step label="Step 2">
@@ -32,7 +32,7 @@
                           <div class="vl2">
                           </div>
                       </div>
-                          <button  mat-flat-button color="primary" class="view-button" (click)="chooseView()">Vertical View</button>
+                          <button  mat-flat-button color="primary"  class="view-button" (click)="chooseView()">Vertical View</button>
                       </div>
                   </mat-grid-tile>
                   <mat-grid-tile>
@@ -49,8 +49,8 @@
               </mat-grid-list>
           </div>
           <div class="backNextImage">
-              <button mat-flat-button color="primary" matStepperPrevious>Back</button>&nbsp;
-              <button mat-flat-button color="primary" matStepperNext>Next</button>
+              <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+              <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
           </div>
         </mat-step>
       <!-- #enddocregion label -->
@@ -64,8 +64,8 @@
               &nbsp;&nbsp;
           </div>
           <div class="backNextImage">
-            <button mat-flat-button color="primary" matStepperPrevious>Back</button>&nbsp;
-            <button mat-flat-button color="primary" matStepperNext>Next</button>
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step label="Step 4">
@@ -78,8 +78,8 @@
               &nbsp;&nbsp;
           </div>
           <div class="backNextImage">
-              <button mat-flat-button color="primary" matStepperPrevious>Back</button>&nbsp;
-              <button mat-flat-button color="primary" matStepperNext>Next</button>
+              <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+              <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
             </div>
         </mat-step>
         <mat-step label="Step 5">
@@ -107,11 +107,11 @@
           <div class="publish-image">
               <h2>Now Publish Your Image here!</h2>
               <div class="publish-button">
-                  <button mat-flat-button color="primary">Publish</button>
+                  <button mat-flat-button color="primary" class="backNextImage-button">Publish</button>
               </div>
           </div>
           <div class="backNextImage">
-            <button mat-flat-button color="primary"n matStepperPrevious>Back</button>&nbsp;
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
           </div>
         </mat-step>
       </mat-horizontal-stepper>
