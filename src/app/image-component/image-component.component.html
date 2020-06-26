@@ -1,19 +1,105 @@
-<button mat-flat-button color="primary">back</button>
-<div class="view-choice"> 
-    <h1>Welcome to image Upload Center</h1>
-    <h3>Start by choosing Image Frame</h3>
-    <mat-grid-list cols="2">
+<mat-horizontal-stepper>
+  <mat-step label="Step 1">
+    <div class="imageType">
+      <mat-form-field>
+        <h2>Choose Image Type</h2>
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option>None</mat-option>
+          <mat-option value="Digital Photo">Digital Photo</mat-option>
+          <mat-option value="Pet Potrait Photo">Pet Potrait Photo</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p>You selected: {{selected}}</p>
+    </div>
+    <div class="backNextButton">
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 2" state="chat">
+    <div class="view-choice">
+      <h1>Welcome to image Upload Center</h1>
+      <h3>Start by choosing Image Frame</h3>
+      <mat-grid-list cols="2">
         <mat-grid-tile>
-            <div class="view">
-                <div class="frame-1"></div>
-                <button  mat-flat-button color="primary" class="view-button" (click)="chooseView()">Vertical View</button>
-            </div>
+          <div class="view">
+            <div class="frame-1"></div>
+            <button mat-flat-button color="primary" class="view-button" (click)="chooseView()">Vertical View</button>
+          </div>
         </mat-grid-tile>
         <mat-grid-tile>
-            <div class="view">
-                <div class="frame-2"></div>
-                <button mat-flat-button color="primary" class="view-button" (click)="chooseView()"> Horizontal View</button>
-            </div>
+          <div class="view">
+            <div class="frame-2"></div>
+            <button mat-flat-button color="primary" class="view-button" (click)="chooseView()"> Horizontal View</button>
+          </div>
         </mat-grid-tile>
-    </mat-grid-list>
-</div>
+      </mat-grid-list>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 3" state="chat">
+    <div class="image-uploader-inner">
+      <h1>Choose Digital Image and Potrait Image</h1>
+      <h3>Supported Formats: jpg,PNG</h3>
+      <img *ngIf="isSubmitted" [src]="srcResult">
+      <button class="upload-button" mat-flat-button color="primary" (click)="fileInput.click()">Choose File</button>
+      <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+      &nbsp;&nbsp;
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 2" state="chat">
+    <div class="image-uploader-inner">
+      <h1>Choose Digital Image and Potrait Image</h1>
+      <h3>Supported Formats: jpg,PNG</h3>
+      <img *ngIf="isSubmitted" [src]="srcResult">
+      <button class="upload-button" mat-flat-button color="primary" (click)="fileInput.click()">Choose File</button>
+      <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+      &nbsp;&nbsp;
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 2" state="chat">
+    <!-- <div class="image-info">
+      <h1>Write Image Information</h1>
+      <h3>Fill out the Form</h3>
+      <div class="form">
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Title" required>
+          <mat-error *ngIf="titleFormControl.invalid">{{getRequiredErrorMessage('tile')}}</mat-error>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Description" required>
+          <mat-error *ngIf="descriptionFormControl.invalid">{{getRequiredErrorMessage('description')}}</mat-error>
+        </mat-form-field><br>
+        <button type="button" mat-raised-button (click)="publishImage()">Save</button>
+      </div>
+    </div> -->
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 2" state="chat">
+    <div class="publish-image">
+      <h2>Now Publish Your Image here!</h2>
+      <div class="publish-button">
+        <button mat-flat-button color="primary">Publish</button>
+      </div>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

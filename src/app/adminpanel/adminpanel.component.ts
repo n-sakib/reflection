@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ImageComponentComponent } from '../image-component/image-component.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 

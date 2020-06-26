@@ -12,6 +12,8 @@ import {MatCardModule} from '@angular/material/card';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
 
 const material = [
   MatButtonModule,
@@ -27,6 +29,8 @@ const material = [
   NgImageSliderModule,
   FlexLayoutModule,
   MatDialogModule,
+  MatStepperModule,
+  MatSelectModule,
 ];
 
 @NgModule({

@@ -1,34 +1,5 @@
-.view-choice{
-    /* padding: 10px 10px 10px 10px; */
-    text-align: center;
+.imageType{
+    justify-content: center;
     align-items: center;
-}
-.frame-choice h1{
     text-align: center;
-    font-size: 2em;
-    padding-top: .5em;
-}
-.frame-choice h3{
-    text-align: center;
-    font-size: 1.5em;
-    padding: .5em;
-}
-.frame-1{
-    width: 25em;
-    height: 20em;
-    border: 1em solid #ccc;
-    background: #eee;
-    
-}
-.frame-2{
-    width: 25em;
-    height: 20em;
-    border: 1em solid #ccc;
-    background: #eee;
-   
-}
-.view-button{
-    padding: .5em .5em;
-    border-radius: 1;
-    align-items: center;
 }
