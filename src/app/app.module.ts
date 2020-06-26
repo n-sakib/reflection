@@ -21,12 +21,34 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { ImageComponentComponent } from './image-component/image-component.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PaidPictureComponent } from './paid-picture/paid-picture.component';
+import { DigitalPictureComponent } from './digital-picture/digital-picture.component';
+import { PotraitPictureComponent } from './potrait-picture/potrait-picture.component';
+import { ViewComponent } from './view/view.component';
+import { ImageViewComponent } from './image-view/image-view.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { FieldFormComponent } from './field-form/field-form.component';
+import { PublishImageComponent } from './publish-image/publish-image.component';
+import { TestimonialComponent } from './testimonial/testimonial.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AdminpanelComponent
+    AdminpanelComponent,
+    ImageComponentComponent,
+    PaidPictureComponent,
+    DigitalPictureComponent,
+    PotraitPictureComponent,
+    ViewComponent,
+    ImageViewComponent,
+    ImageUploadComponent,
+    FieldFormComponent,
+    PublishImageComponent,
+    TestimonialComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +66,9 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, ImageViewComponent, ImageUploadComponent, FieldFormComponent, PublishImageComponent, TestimonialComponent]
+
 })
 export class AppModule { }
 

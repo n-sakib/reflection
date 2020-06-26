@@ -1,0 +1,16 @@
+<button mat-flat-button color="primary">back</button>
+<div class="image-info">
+    <h1>Write Image Information</h1>
+    <h3>Fill out the Form</h3>
+    <div class="form">
+            <mat-form-field appearance="fill">
+                <input matInput placeholder="Title" required>
+                <mat-error *ngIf="titleFormControl.invalid">{{getRequiredErrorMessage('tile')}}</mat-error>                
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+                <input matInput placeholder="Description" required >
+                <mat-error *ngIf="descriptionFormControl.invalid">{{getRequiredErrorMessage('description')}}</mat-error>                
+            </mat-form-field><br>
+            <button type="button" mat-raised-button (click)="publishImage()">Save</button>
+    </div>
+</div>

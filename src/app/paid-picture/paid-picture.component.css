@@ -1,0 +1,30 @@
+.Image{
+    width: 100vw;
+    height: 100vh;
+    
+    /* Flexbox stuff */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.DigitalImage h1{
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+    cursor: none;
+} 
+.PotraitImage h1{
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+    cursor: none;
+}
+.DigitalImage{
+   padding: 5px;
+   cursor: pointer;
+} 
+.PotraitImage{
+    padding: 5px;
+    cursor: pointer;
+}

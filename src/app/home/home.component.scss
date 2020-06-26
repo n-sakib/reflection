@@ -1,32 +1,69 @@
 .gallery{
     /* Sizing */
-    width: 100vw;
-    height: 100vh;
-    
-    /* Flexbox stuff */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    border-color: #CFCFCF;
 }
 .gallery-inner{
     /* padding: 10px 10px 10px 10px; */
+    text-align: center;
     box-sizing: border-box;
     border-color: #CFCFCF;
-    
-}
-.gallery h2{
-    text-align: center;
     padding-bottom: 2em;
+}
+.petpotrait{
+    text-align: center;
+    box-sizing: border-box;
+    border-color: #CFCFCF;
+    padding-bottom: 2em;
+} 
+.gallery-inner h2{
+    text-align: center;
+    padding: 2em;
+    font-family: 'Montserrat';
+    font-size: 2em;
+}
+.petpotrait h2{
+    text-align: center;
+    padding: 2em;
+    font-family: 'Montserrat';
+    font-size: 2em;
 }
 #inner {
     display: table;
     margin: 0 auto;
     color: white;
     padding: 40px;
-  }
-
+}
+#inner h2{
+    font-family: 'Montserrat';
+    font-size: 2em;
+    align-items: center;
+}
+#inner h3{
+    font-family: 'Montserrat';
+    font-size: 1.5em;
+}
 #outer {
     width:100%;
-    height: 400px;
+    height: 250px;
     background-color: #B47A15;
+}
+.hero-button {
+    padding: 10px 5px;
+    color: white;
+    border-radius: 0;
+}
+
+.fa-facebook-f{
+    color: #3B5998;
+}
+.fa-twitter{
+    color:#00B6F1;
+}
+.fa-instagram{
+    color:#2C6A93;
+}
+.fa-pinterest{
+    color:#C91517;
 }

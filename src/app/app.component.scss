@@ -3,11 +3,8 @@
     background: white;
     font-size: 12px;
 }
-
 .homepage{
-    display: grid;
-    grid-gap: 20px;
-
+    padding: 0em;
 }
 .navbar {
     height: 10vh;
@@ -20,7 +17,7 @@
 .hero {
     /* Sizing */
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     
     /* Flexbox stuff */
     justify-content: center;
@@ -55,13 +52,13 @@
 
 .hero h1 {
     /* Text styles */
-    font-size: 50px;
+    font-size: 3.5em;
     margin-bottom: 40px;
 }
 
 .hero h2 {
     /* Text styles */
-    font-size: 26px;
+    font-size: 2em;
     
     /* Margins */
     margin-top: 0;
@@ -82,7 +79,7 @@
 
 .footer h2{
     /* Text styles */
-  font-size: 5em;
+  font-size: 2em;
   
   /* Margins */
   margin-top: 0;
@@ -90,17 +87,6 @@
 
 }
 .footer{
-    /* Sizing */
-  width: 100vw;
-  height: 90vh;
-  
-  /* Flexbox stuff */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  /* Text styles */
-  text-align: center;
   color: white;
 }
 .mat-sidenav {
@@ -126,11 +112,7 @@
     width: 100%;
 }
 .social-footer-icons{
-    width: 100vw;
-    height: 90vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    float: right;
 }
 .left {
     float: left;
@@ -151,4 +133,16 @@
     flex: 1 1 auto !important;
   text-align: center !important;
     
-  }
+}
+.fa-facebook-f{
+    color: #3B5998;
+}
+.fa-twitter{
+    color:#00B6F1;
+}
+.fa-instagram{
+    color:#2C6A93;
+}
+.fa-pinterest{
+    color:#C91517;
+}

@@ -1,0 +1,19 @@
+<button mat-flat-button color="primary">back</button>
+<div class="view-choice"> 
+    <h1>Welcome to image Upload Center</h1>
+    <h3>Start by choosing Image Frame</h3>
+    <mat-grid-list cols="2">
+        <mat-grid-tile>
+            <div class="view">
+                <div class="frame-1"></div>
+                <button  mat-flat-button color="primary" class="view-button" (click)="chooseView()">Vertical View</button>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="view">
+                <div class="frame-2"></div>
+                <button mat-flat-button color="primary" class="view-button" (click)="chooseView()"> Horizontal View</button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
