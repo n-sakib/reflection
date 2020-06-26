@@ -46,11 +46,27 @@
 }
 #outer {
     width:100%;
-    height: 400px;
+    height: 250px;
     background-color: #B47A15;
 }
 .hero-button {
     padding: 10px 5px;
     color: white;
     border-radius: 0;
+}
+
+.fa-facebook-f{
+    color: #3B5998;
+}
+.fa-twitter{
+    color:#00B6F1;
+}
+.fa-instagram{
+    color:#2C6A93;
+}
+.fa-pinterest{
+    color:#C91517;
+}
+.social{
+    flex: 1 1 auto;
 }
