@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ImageComponentComponent } from '../image-component/image-component.component';
+import { TestimonialComponent } from '../testimonial/testimonial.component';
 
 
 
@@ -43,6 +44,12 @@ export class AdminpanelComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ImageComponentComponent, {
+      width: '85%',height: '85%',
+    });
+  }
+
+  openTestimonial(): void {
+    const dialogRef = this.dialog.open(TestimonialComponent, {
       width: '85%',height: '85%',
     });
   }

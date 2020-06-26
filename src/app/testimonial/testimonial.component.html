@@ -1,0 +1,27 @@
+<section id="testimonial-uploader">
+    <div class="testi">
+        <mat-horizontal-stepper>
+            <mat-step label="Step 1" state="phone">
+                <p>Put down your phones.</p>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step label="Step 2" state="chat">
+                <p>Socialize with each other.</p>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </mat-step>
+            <mat-step [completed]="completed" [state]="state" label="Step 3">
+                <ng-template matStepLabel>Done</ng-template>
+                You are now done.
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="done()">Confirm</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</section>

@@ -31,6 +31,7 @@ import { ImageViewComponent } from './image-view/image-view.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { FieldFormComponent } from './field-form/field-form.component';
 import { PublishImageComponent } from './publish-image/publish-image.component';
+import { TestimonialComponent } from './testimonial/testimonial.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { PublishImageComponent } from './publish-image/publish-image.component';
     ImageViewComponent,
     ImageUploadComponent,
     FieldFormComponent,
-    PublishImageComponent
+    PublishImageComponent,
+    TestimonialComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ import { PublishImageComponent } from './publish-image/publish-image.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, ImageViewComponent, ImageUploadComponent, FieldFormComponent, PublishImageComponent]
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, ImageViewComponent, ImageUploadComponent, FieldFormComponent, PublishImageComponent, TestimonialComponent]
 
 })
 export class AppModule { }
