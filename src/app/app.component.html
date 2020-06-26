@@ -3,34 +3,9 @@
         <mat-toolbar color="primary" class="promo">
             <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
 
-        <mat-toolbar color="#584b53" class="navbar">
-            <button mat-icon-button disableRipple>
-                <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
-            </button>
 
-            <span class="spacer" style="font-family:Montserrat">
-                <div fxShow="true" fxHide.lt-md="true">
-                    <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
-                    <a href="#" mat-button disableRipple>GALLERY</a>
-                    <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>BUY A PAINTING</a>
-                    <a href="#" mat-button disableRipple>REVIEWS & TESTIMONIALS</a>
-                    <a href="#" mat-button disableRipple>CONTACT</a>
-                </div>
-            </span>
-
-            <div class="create" style="font-family:Montserrat">
-                <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
-            </div>
-
-
-            <div fxShow="true" fxHide.gt-sm="true">
-                <a href="#" (click)="sidenav.toggle()">
-                    <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
-                </a>
-            </div>
-        </mat-toolbar>
         <mat-sidenav-container fxFlexFill class="example-container">
+
             <mat-sidenav #sidenav fxLayout="row wrap">
                 <div fxLayout="column">
                     <a (click)="sidenav.toggle()" href="#" mat-button></a>
@@ -48,6 +23,34 @@
             </mat-sidenav>
             <mat-sidenav-content fxFlexFill>
                 <section class="hero" *ngIf="router.url === '/'">
+                    <mat-toolbar class="navbar">
+                        <button mat-icon-button disableRipple>
+                            <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
+                        </button>
+
+                        <span class="spacer" style="font-family:Montserrat">
+                            <div fxShow="true" fxHide.lt-md="true">
+                                <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+                                <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
+                                <a href="#" mat-button disableRipple>GALLERY</a>
+                                <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>BUY A PAINTING</a>
+                                <a href="#" mat-button disableRipple>REVIEWS & TESTIMONIALS</a>
+                                <a href="#" mat-button disableRipple>CONTACT</a>
+                            </div>
+                        </span>
+
+                        <div class="create" style="font-family:Montserrat">
+                            <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
+                        </div>
+
+
+                        <div fxShow="true" fxHide.gt-sm="true">
+                            <a href="#" (click)="sidenav.toggle()">
+                                <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+                            </a>
+                        </div>
+                    </mat-toolbar>
+
                     <div class="hero-inner">
                         <h1>GALLERY REFLECTION</h1>
                         <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
