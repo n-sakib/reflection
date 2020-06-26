@@ -4,7 +4,7 @@
     font-size: 12px;
 }
 
-.top-comtainer{
+.homepage{
     display: grid;
     grid-gap: 20px;
 
@@ -131,6 +131,15 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+.left {
+    float: left;
+     margin-right: 8px;
+     padding-top: 110px;
+}
+.right {
+    margin-left: 308px;
+    width: 50%;
 }
 .promo{
     height: 30px!important;

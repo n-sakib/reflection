@@ -1,8 +1,7 @@
 <body>
-    <div>
-        <div class="homepage">
-            <mat-toolbar color="primary" class="promo">
-                <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
+    <div class="homepage">
+        <mat-toolbar color="primary" class="promo">
+            <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
 
 
             <mat-sidenav-container fxFlexFill class="example-container">
@@ -61,15 +60,13 @@
                 </mat-sidenav-content>
             </mat-sidenav-container>
             <router-outlet></router-outlet>
-
-            <footer class="social-footer">
-                <div class="social-footer-icons">
-                    <mat-icon aria-hidden="false" aria-label="facebook">facebook</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="twitter">facebook</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="instagram">facebook</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="pinterest">facebook</mat-icon>
-                </div>
-            </footer>
-        </div>
+        <footer class="social-footer">
+            <div class="social-footer-icons">
+                <mat-icon fontSet="fab" fontIcon="fa-facebook-f"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-twitter"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-instagram"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-pinterest"></mat-icon>
+            </div>
+        </footer>
     </div>
 </body>
