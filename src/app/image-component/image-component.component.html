@@ -7,9 +7,7 @@
               <h2>Choose Image Type</h2>
               <mat-label class="type">Select an option</mat-label>
               <mat-select [(value)]="selected">
-                <mat-option>None</mat-option>
-                <mat-option value="Digital Photo">Digital Photo</mat-option>
-                <mat-option value="Pet Potrait Photo">Pet Potrait Photo</mat-option>
+                <mat-option *ngFor="let imageType of imageTypes | async " [value]="imageType.payload.val()">{{imageType.payload.val()}}</mat-option>
               </mat-select>
             </mat-form-field>
             <p>You selected: {{selected}}</p>

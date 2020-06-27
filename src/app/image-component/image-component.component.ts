@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { FormGroup, FormControl , Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-image-component',
@@ -23,9 +24,12 @@ export class ImageComponentComponent implements OnInit {
   selected='';
   labelPosition: 'before' | 'after' = 'after';
   disabled = false;
+  imageTypes: Observable<any[]>;
 
   constructor(private storage: AngularFireStorage,
-    public dialog: MatDialog, private database: AngularFirestore) { }
+    public dialog: MatDialog, private database: AngularFireDatabase) { 
+      this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
+    }
     imageform: FormGroup = new FormGroup({
       title: this.titleFormControl,
       description: this.descriptionFormControl,
@@ -41,12 +45,6 @@ export class ImageComponentComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
   ngOnInit(): void {
-   this.getimageTypes();
-  }
-  getimageTypes(){
-    var imageType;
-    var imageTypeDoc = this.database.collection('admin').doc('galleryTypes');
-    imageTypeDoc.get().subscribe(imageTypes=>console.log(imageTypes.data()));
     
   }
   getRequiredErrorMessage(field) {

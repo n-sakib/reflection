@@ -23,6 +23,8 @@ export class AdminpanelComponent implements OnInit {
   imgSrc: string ='./assets/featured.jpeg';
   selectedImage :any = null;
   isSubmitted: boolean = false;
+  showFiller = true;
+
   constructor(private storage: AngularFireStorage,
     public dialog: MatDialog) { }
 

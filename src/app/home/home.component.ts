@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgImageSliderComponent } from 'ng-image-slider';
+import { MatDialog } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
-import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
-  SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+
 
 @Component({
   selector: 'app-home',
@@ -194,4 +195,6 @@ export default class HomeComponent implements OnInit{
   onResize(event) {
     this.breakpoint = (event.target.innerWidth < 900) ? 1: 2;
   }
+
+  
 }
