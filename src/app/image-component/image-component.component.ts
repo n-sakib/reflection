@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormGroup, FormControl , Validators} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialog} from '@angular/material/dialog';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-image-component',
@@ -28,7 +25,7 @@ export class ImageComponentComponent implements OnInit {
   disabled = false;
 
   constructor(private storage: AngularFireStorage,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog, private database: AngularFirestore) { }
     imageform: FormGroup = new FormGroup({
       title: this.titleFormControl,
       description: this.descriptionFormControl,
@@ -44,8 +41,14 @@ export class ImageComponentComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
   ngOnInit(): void {
+   this.getimageTypes();
   }
-  
+  getimageTypes(){
+    var imageType;
+    var imageTypeDoc = this.database.collection('admin').doc('galleryTypes');
+    imageTypeDoc.get().subscribe(imageTypes=>console.log(imageTypes.data()));
+    
+  }
   getRequiredErrorMessage(field) {
     return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
   }
@@ -74,5 +77,25 @@ export class ImageComponentComponent implements OnInit {
       this.isSubmitted = true;
    })
   }
- 
+  // writeNewImage(uid, username, picture, title, body) {
+  //   // A post entry.
+  //   var postData = {
+  //     author: username,
+  //     uid: uid,
+  //     body: body,
+  //     title: title,
+  //     starCount: 0,
+  //     authorPic: picture
+  //   };
+  
+  //   // Get a key for a new Post.
+  //   var newPostKey = firebase.database().ref().child('posts').push().key;
+  
+  //   // Write the new post's data simultaneously in the posts list and the user's post list.
+  //   var updates = {};
+  //   updates['/posts/' + newPostKey] = postData;
+  //   updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  
+  //   return firebase.database().ref().update(updates);
+  // }
 }

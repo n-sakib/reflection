@@ -16,7 +16,7 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -74,7 +74,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatFormFieldModule,
     MatInputModule,
     NgxGalleryModule,
-    SwiperModule
+    SwiperModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [
     {
