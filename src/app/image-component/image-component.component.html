@@ -1,15 +1,13 @@
 <div class="image-upload-center">
   <mat-horizontal-stepper>
       <!-- #docregion label -->
-        <mat-step label="Step 1">
+        <mat-step label="1">
           <div class="typeSelection">
             <mat-form-field class="imageType">
               <h2>Choose Image Type</h2>
               <mat-label class="type">Select an option</mat-label>
               <mat-select [(value)]="selected">
-                <mat-option>None</mat-option>
-                <mat-option value="Digital Photo">Digital Photo</mat-option>
-                <mat-option value="Pet Potrait Photo">Pet Potrait Photo</mat-option>
+                <mat-option *ngFor="let imageType of imageTypes | async " [value]="imageType.payload.val()">{{imageType.payload.val()}}</mat-option>
               </mat-select>
             </mat-form-field>
             <p>You selected: {{selected}}</p>
@@ -19,7 +17,7 @@
               <button mat-flat-button color="primary" class="backNextImage-button"  matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step label="Step 2">
+        <mat-step label="2">
           <div class="view-choice"> 
               <h1>Welcome to image Upload Center</h1>
               <h3>Start by choosing Image Frame</h3>
@@ -54,7 +52,7 @@
           </div>
         </mat-step>
       <!-- #enddocregion label -->
-        <mat-step label="Step 3" state="chat">
+        <mat-step label="3" state="chat">
           <div class="frame-uploader-inner">
               <h1>Choose Frame image</h1>
               <h3>Supported Formats: jpg,PNG</h3>
@@ -68,7 +66,7 @@
             <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
           </div>
         </mat-step>
-        <mat-step label="Step 4">
+        <mat-step label="4">
           <div class="image-uploader-inner">
               <h1>Choose Image </h1>
               <h3>Supported Formats: jpg,PNG</h3>
@@ -82,7 +80,7 @@
               <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
             </div>
         </mat-step>
-        <mat-step label="Step 5">
+        <mat-step label="5">
           <div class="image-info">
               <h1>Write Image Information</h1>
               <h3>Fill out the Form</h3>
@@ -105,12 +103,12 @@
                       <button type="button" mat-raised-button (click)="publishImage()">Save</button>
               </div> -->
           </div>
-          <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
+          <div class="backNextImage">
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+          </div>
         </mat-step>
-        <mat-step label="Step 6">
+        <mat-step label="6">
           <div class="publish-image">
               <h2>Now Publish Your Image here!</h2>
               <div class="publish-button">

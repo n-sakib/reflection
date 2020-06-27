@@ -1,70 +1,53 @@
 <section id="testimonial-uploader">
-    <div class="testi">
-        <mat-horizontal-stepper linear #stepper>
-            <mat-step>
+  <div class="testi">
+    <mat-horizontal-stepper linear #stepper>
+      <mat-step>
+        <div class="testi-uploader-inner">
+          <h1>Choose Testimonial Image</h1>
+          <h3>Supported Formats: jpg,PNG</h3>
+          <img *ngIf="isSubmitted" [src]="srcResult">
+          <button class="upload-button" mat-flat-button color="primary" (click)="fileInput.click()">Choose File</button>
+          <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+          &nbsp;&nbsp;
+        </div>
+        <div class="backNextImage">
+          <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+          <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+        </div>
 
-                <ng-template matStepLabel>Fill out your name</ng-template>
-                <div>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
+      </mat-step>
 
-            </mat-step>
-
-            <mat-step>
+      <mat-step>
 
 
-                <ng-template matStepLabel>Fill out your address</ng-template>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-
-            </mat-step>
-            <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
-                <p>You are now done.</p>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="done()">Confirm</button>
-                </div>
-            </mat-step>
-        </mat-horizontal-stepper>
-        <!-- <mat-horizontal-stepper linear #stepper>
-            <mat-step [stepControl]="firstFormGroup">
-              <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Fill out your name</ng-template>
-                <mat-form-field>
-                  <mat-label>Name</mat-label>
-                  <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-                </mat-form-field>
-                <div>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step>
-            <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
-              <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Fill out your address</ng-template>
-                <mat-form-field>
-                  <mat-label>Address</mat-label>
-                  <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                         required>
-                </mat-form-field>
-                <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel>Done</ng-template>
-              <p>You are now done.</p>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button >Confirm</button>
-              </div>
-            </mat-step>
-          </mat-horizontal-stepper> -->
-
-    </div>
+        <div class="testi-info">
+          <h1>Write Testimonial Information</h1>
+          <h3>Fill out the Form</h3>
+          <div class="example-container">
+            <mat-form-field appearance="fill">
+              <mat-label>Enter your email</mat-label>
+              <input matInput placeholder="pat@example.com" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="backNextImage">
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <div class="publish-testimonial">
+          <h2>Now Publish Your Testimonial here!</h2>
+          <div class="publish-button">
+            <button mat-flat-button color="primary" class="backNextImage-button">Publish</button>
+          </div>
+        </div>
+        <div class="backNextImage">
+          <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+    
+  </div>
 </section>

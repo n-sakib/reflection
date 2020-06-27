@@ -1,10 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgImageSliderComponent } from 'ng-image-slider';
+import { MatDialog } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
-import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
-  SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { database } from 'firebase';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
+
+
 
 @Component({
   selector: 'app-home',
@@ -13,7 +18,7 @@ import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
 })
 
 
-export default class HomeComponent implements OnInit{
+export default class HomeComponent implements OnInit {
 
   @ViewChild('nav', { static: false }) ds: NgImageSliderComponent;
   title = 'Reflection';
@@ -32,6 +37,10 @@ export default class HomeComponent implements OnInit{
   singleGalleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   breakpoint;
+  digitalURL: '';
+  frameURL: '';
+  potraitURL: '';
+
   public config: SwiperConfigInterface = {
     a11y: true,
     direction: 'horizontal',
@@ -51,29 +60,33 @@ export default class HomeComponent implements OnInit{
     'Sixth slide'
   ];
 
-  constructor(private dialog: MatDialog) {
+
+  constructor(private storage: AngularFireStorage,
+    public dialog: MatDialog, private database: AngularFireDatabase) {
     this.setImageObject();
+
+    
   }
 
 
-  
+
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.galleryOptions = [
       {
-        width: '600px',
-        height: '400px',
+        width: '700px',
+        height: '500px',
         thumbnailsColumns: 4,
         arrowPrevIcon: 'fa fa-chevron-left',
         arrowNextIcon: 'fa fa-chevron-right',
         imageAnimation: NgxGalleryAnimation.Slide,
-        imageActions: [{icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view'}],
+        imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
         preview: false,
         imageDescription: true
       },
-{ "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
-{ "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
+      { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
+      { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
     ];
 
     this.singleGalleryOptions = [
@@ -104,21 +117,21 @@ export default class HomeComponent implements OnInit{
 
     this.galleryImages = [
       {
-          small: 'assets/Cover.jpeg',
-          medium: 'assets/Cover.jpeg',
-          big: 'assets/Cover.jpeg'
+        small: 'assets/Cover.jpeg',
+        medium: 'assets/Cover.jpeg',
+        big: 'assets/Cover.jpeg'
       },
       {
-          small: 'assets/Cover.jpeg',
-          medium: 'assets/Cover.jpeg',
-          big: 'assets/Cover.jpeg'
+        small: 'assets/Cover.jpeg',
+        medium: 'assets/Cover.jpeg',
+        big: 'assets/Cover.jpeg'
       },
       {
-          small: 'assets/Cover.jpeg',
-          medium: 'assets/Cover.jpeg',
-          big: 'assets/Cover.jpeg'
+        small: 'assets/Cover.jpeg',
+        medium: 'assets/Cover.jpeg',
+        big: 'assets/Cover.jpeg'
       }
-  ];
+    ];
   }
   onChangeHandler() {
     this.setImageObject();
@@ -128,36 +141,7 @@ export default class HomeComponent implements OnInit{
     }, 10);
   }
   setImageObject() {
-    this.imageObject = [{
-      image: 'assets/Cover.jpeg',
-      thumbImage: 'assets/Cover.jpeg',
-      title: 'NAME 1',
-    },
-    {
-      image: 'assets/Cover.jpeg',
-      thumbImage: 'assets/Cover.jpeg',
-      title: 'NAME 2',
-    },
-    {
-      image: 'assets/Cover.jpeg',
-      thumbImage: 'assets/Cover.jpeg',
-      title: 'NAME 3',
-    },
-    {
-      image: 'assets/Cover.jpeg',
-      thumbImage: 'assets/Cover.jpeg',
-      title: 'NAME 4',
-    },
-    {
-      image: 'assets/Cover.jpeg',
-      thumbImage: 'assets/Cover.jpeg',
-      title: 'NAME 5',
-    },
-    {
-      image: 'assets/Cover.jpeg',
-      thumbImage: 'assets/Cover.jpeg',
-      title: 'NAME 6',
-    }];
+   
   }
   imageOnClick(index) {
     console.log('index', index);
@@ -192,6 +176,8 @@ export default class HomeComponent implements OnInit{
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth < 900) ? 1: 2;
+    this.breakpoint = (event.target.innerWidth < 900) ? 1 : 2;
   }
+  
+
 }

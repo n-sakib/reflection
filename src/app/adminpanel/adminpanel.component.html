@@ -1,26 +1,42 @@
-<section id="image-uploader">
-    <div class="frame-choice">
-        <h1>Add Gallery</h1>
-        <p>
-            <button mat-flat-button color="primary" class="frameButton" >Start</button>
-        </p>
+<mat-drawer-container class="example-container" autosize opened="true">
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <p>Auto-resizing sidenav</p>
+      <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        Toggle extra text
+      </button>
+    </mat-drawer>
+    <section id="image-uploader">
+        <div class="frame-choice">
+            <h1>Add Gallery</h1>
+            <p>
+                <button mat-flat-button color="primary" class="frameButton" >Start</button>
+            </p>
+        </div>
+    </section>
+    
+    <section id="image-uploader">
+        <div class="frame-choice">
+            <h1>Upload Images</h1>
+            <p>
+                <button mat-flat-button color="primary" class="frameButton" (click)="openDialog()">Start</button>
+            </p>
+        </div>
+    </section>
+    
+    <section id="image-uploader">
+        <div class="frame-choice">
+            <h1>Upload Testimonials</h1>
+            <p>
+                <button mat-flat-button color="primary" class="frameButton" (click)="openTestimonial()">Start</button>
+            </p>
+        </div>
+    </section>
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        Toggle sidenav
+      </button>
     </div>
-</section>
+  
+  </mat-drawer-container>
 
-<section id="image-uploader">
-    <div class="frame-choice">
-        <h1>Upload Images</h1>
-        <p>
-            <button mat-flat-button color="primary" class="frameButton" (click)="openDialog()">Start</button>
-        </p>
-    </div>
-</section>
-
-<section id="image-uploader">
-    <div class="frame-choice">
-        <h1>Upload Testimonials</h1>
-        <p>
-            <button mat-flat-button color="primary" class="frameButton" (click)="openTestimonial()">Start</button>
-        </p>
-    </div>
-</section>
