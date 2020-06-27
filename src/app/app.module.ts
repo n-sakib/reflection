@@ -33,7 +33,15 @@ import { FieldFormComponent } from './field-form/field-form.component';
 import { PublishImageComponent } from './publish-image/publish-image.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
+ 
 
 @NgModule({
   declarations: [
@@ -65,9 +73,15 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    SwiperModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, ImageViewComponent, ImageUploadComponent, FieldFormComponent, PublishImageComponent, TestimonialComponent]
 

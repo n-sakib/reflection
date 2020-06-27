@@ -1,11 +1,14 @@
 <div class="gallery">
     <div class="gallery-inner">
         <h2>REFLECTION IN ACTION(VIDEO)</h2>
-        <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive at our process.</h3>
+        <mat-card class="example-card">
+        <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive at our
+            process.</h3>
         <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640" height="360"
             frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640" height="360"
+        <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640" height="360"
             frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </mat-card>
     </div>
 
     <!-- <div class="gallery-inner">
@@ -15,18 +18,22 @@
         <div class="gallery-inner">
             <h2>PICTURE GALLERIES</h2>
             <div class="padded">
-                <mat-grid-list [cols]="breakpoint" rowHeight="2:1.5" gutterSize="40" class="inner" (window:resize)="onResize($event)">
+                <mat-card class="example-card">
+                <mat-grid-list [cols]="breakpoint" rowHeight="2:1.5" gutterSize="40" class="inner"
+                    (window:resize)="onResize($event)">
                     <mat-grid-tile>
                         <div class="gallery petpotrait">
                             <h3>POTRAIT PAINTING FROM PHOTO</h3>
-                            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery">
+                            </ngx-gallery>
                         </div>
                     </mat-grid-tile>
                     <mat-grid-tile>
                         <div class="gallery">
                             <h3>PET POTRAIT PAINTING FROM PHOTO</h3>
                             <div class="gallery petpotrait">
-                                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery">
+                                </ngx-gallery>
                             </div>
                         </div>
                     </mat-grid-tile>
@@ -34,7 +41,8 @@
                         <div class="gallery">
                             <div class="gallery petpotrait">
                                 <h3>REPLICA PAINTING</h3>
-                                <ngx-gallery [options]="singleGalleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                                <ngx-gallery [options]="singleGalleryOptions" [images]="galleryImages"
+                                    class="ngx-gallery"></ngx-gallery>
                             </div>
                         </div>
                     </mat-grid-tile>
@@ -42,11 +50,13 @@
                         <div class="gallery">
                             <div class="gallery petpotrait">
                                 <h3>PHOTOGRAPH TO PAINTING</h3>
-                                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery">
+                                </ngx-gallery>
                             </div>
                         </div>
                     </mat-grid-tile>
                 </mat-grid-list>
+            </mat-card>
             </div>
         </div>
     </div>
@@ -56,19 +66,49 @@
 
 <div class="gallery">
     <div class="gallery-inner">
-        <h2>REFLECTION IN ACTION(VIDEO)</h2>
-        <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive at our process.</h3>
-        <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640" height="360"
-            frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640" height="360"
-            frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <h2>TESTIMONIALS</h2>
+        <div class="swiper-container">
+            <swiper [swiper]="config">
+                <div *ngFor="let slide of slides" class="swiper-slide">
+                    
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>Shiba Inu</mat-card-title>
+                            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                        </mat-card-header>
+                        <div fxLayout="row" fxLayoutAlign="center center" >
+                        <img src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                            alt="Photo of a Shiba Inu" class="testimonial-image">
+                            <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="600" height="280"
+                            frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        </div>
+                        <mat-card-content>
+                            <p>
+                                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
+                                Japan.
+                                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+                                originally
+                                bred for hunting.
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button>LIKE</button>
+                            <button mat-button>SHARE</button>
+                        </mat-card-actions>
+                    </mat-card>
+                   
+                </div>
+            </swiper>
+        </div>
     </div>
 </div>
 
 <div id="outer">
     <div id="inner">
         <h2 class="contact">GET IN TOUCH</h2>
-        <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take it from there!</h3>
+        <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take it
+            from there!</h3>
         <mat-form-field class="contact-field" color="tartiary">
             <input matInput placeholder="Email Address" color="tartiary">
         </mat-form-field>

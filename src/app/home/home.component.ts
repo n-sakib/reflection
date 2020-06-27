@@ -3,6 +3,8 @@ import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { SwiperComponent, SwiperDirective, SwiperConfigInterface,
+  SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-home',
@@ -30,9 +32,31 @@ export default class HomeComponent implements OnInit{
   singleGalleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   breakpoint;
+  public config: SwiperConfigInterface = {
+    a11y: true,
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: true,
+    pagination: false
+  };
+  public slides = [
+    'First slide',
+    'Second slide',
+    'Third slide',
+    'Fourth slide',
+    'Fifth slide',
+    'Sixth slide'
+  ];
+
   constructor(private dialog: MatDialog) {
     this.setImageObject();
   }
+
+
+  
 
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;

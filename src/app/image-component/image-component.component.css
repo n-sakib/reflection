@@ -13,14 +13,14 @@
  .imageType h2{
        align-content: center;
        align-items: center;
-       font-family: 'Montserrat';
+       
       justify-content: center;
       padding: .5em;    
     }
     .type{
         align-content: center;
         align-items: center;
-        font-family: 'Montserrat';
+        
       justify-content: center !important;
       padding: .5em;  
      }
@@ -51,13 +51,13 @@
     }
     .view-choice h1{
        text-align: center;
-       font-family: 'Montserrat';
+       
         font-size: 2em;
        padding-top: .5em;
     }
     .view-choice h3{
        text-align: center;
-       font-family: 'Montserrat';
+       
        font-size: 1.5em;
        padding-top: .5em;
     }
@@ -105,13 +105,13 @@
     }
     .frame-uploader-inner h1{
        text-align: center;
-       font-family: 'Montserrat';
+       
         font-size: 2em;
        padding-top: .15em;
     }
     .frame-uploader-inner h3{
        text-align: center;
-       font-family: 'Montserrat';
+       
        font-size: 1.5em;
        padding-top: .05em;
     }
@@ -121,13 +121,13 @@
     }
     .image-uploader-inner h1{
        text-align: center;
-       font-family: 'Montserrat';
+       
         font-size: 2em;
        padding-top: .05em;
     }
     .image-uploader-inner h3{
        text-align: center;
-       font-family: 'Montserrat';
+       
        font-size: 1.5em;
        padding-top: .05em;
     }
@@ -138,7 +138,7 @@
     .publish-image h2{
        align-content: center;
        align-items: center;
-       font-family: 'Montserrat';
+       
         font-size: 2em;
         justify-content: center;
         padding: 1.5em 2em;
@@ -146,7 +146,7 @@
     .upload-button{
       align-content: center;
       align-items: center;
-      font-family: 'Montserrat';
+      
        font-size: 1em;
        justify-content: center;
        color: white;
