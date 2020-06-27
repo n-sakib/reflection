@@ -36,6 +36,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -76,7 +79,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgxGalleryModule,
     SwiperModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MatRadioModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [
     {
