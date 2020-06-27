@@ -24,7 +24,6 @@ export class AppComponent {
   sliderAnimationSpeed: any = 1;
   imageObject: Array<object> = [];
   constructor(private dialog: MatDialog, public router: Router) {
-    console.log(this.router.url)
     this.setImageObject();
   }
 

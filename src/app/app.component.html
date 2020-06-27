@@ -2,10 +2,7 @@
     <div class="homepage">
         <mat-toolbar color="primary" class="promo">
             <span class="title-center">Use code "PROMO" to get 20% OFF!</span></mat-toolbar>
-
-
         <mat-sidenav-container fxFlexFill class="example-container">
-
             <mat-sidenav #sidenav fxLayout="row wrap">
                 <div fxLayout="column">
                     <a (click)="sidenav.toggle()" href="#" mat-button></a>
@@ -24,6 +21,11 @@
             <mat-sidenav-content fxFlexFill>
                 <section class="hero" *ngIf="router.url === '/'">
                     <mat-toolbar class="navbar">
+                        <div fxShow="true" fxHide.gt-sm="true">
+                            <a href="#" (click)="sidenav.toggle()">
+                                <mat-icon aria-hidden="false" aria-label="menu" class="side-nav">menu</mat-icon>
+                            </a>
+                        </div>
                         <button mat-icon-button disableRipple>
                             <img class="homeicon" src="..\assets\icon.png" height="50px" width="75px">
                         </button>
@@ -42,36 +44,33 @@
                         <div class="create" style="font-family:Montserrat">
                             <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
                         </div>
-
-
-                        <div fxShow="true" fxHide.gt-sm="true">
-                            <a href="#" (click)="sidenav.toggle()">
-                                <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
-                            </a>
-                        </div>
+                        
                     </mat-toolbar>
-
                     <div class="hero-inner">
                         <h1>GALLERY REFLECTION</h1>
                         <h2>A SELECTION OF CREATIVE COMMISSIONED WORK FROM REFLECTION</h2>
-                        <button mat-flat-button color="primary" class="hero-button">SHOW THE COLLECTION</button>
+                        <button mat-flat-button color="primary" class="hero-button">GET A QUOTE FOR YOUR PAINTING</button>
                     </div>
                 </section>
             </mat-sidenav-content>
         </mat-sidenav-container>
         <router-outlet></router-outlet>
-        <div class="socialfooter">
-            <mat-toolbar color="primary">
-                <div fxFlex id="copyright">
-                    <span class="pull-right copyright">&copy; 2020 Reflection</span>
-                  </div>
+        <footer >
+            <mat-toolbar  fxFlex class="footer">
+                <div >
+                    <span>&copy; 2020 Reflection</span> 
+                </div>
                 <div fxFlex fxLayoutAlign="flex-end">
+                    <div class="footer-text">
+                        <a href="#" mat-button disableRipple>Legal</a>
+                        <a href="#" mat-button disableRipple>Sitemap</a>
+                    </div>
                     <mat-icon fontSet="fab" fontIcon="fa-facebook-f"></mat-icon>
                     <mat-icon fontSet="fab" fontIcon="fa-twitter"></mat-icon>
                     <mat-icon fontSet="fab" fontIcon="fa-instagram"></mat-icon>
                     <mat-icon fontSet="fab" fontIcon="fa-pinterest"></mat-icon>
-                 </div>
+                </div>
             </mat-toolbar>
-        </div>
+        </footer>
     </div>
 </body>

@@ -1,5 +1,5 @@
 {
-  "name": "angular-demo",
+  "name": "reflection-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,10 +23,14 @@
     "@angular/platform-browser": "~9.1.4",
     "@angular/platform-browser-dynamic": "~9.1.4",
     "@angular/router": "~9.1.4",
+    "@kolkov/ngx-gallery": "^1.2.3",
     "@material/dialog": "^6.0.0",
     "@material/icon-button": "^6.0.0",
     "firebase": "^7.14.2",
+    "font-awesome": "^4.7.0",
+    "hammerjs": "^2.0.8",
     "ng-image-slider": "^2.4.1",
+    "ngx-swiper-wrapper": "^9.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -37,7 +41,7 @@
     "@angular/cli": "~9.1.4",
     "@angular/compiler-cli": "~9.1.4",
     "@angular/language-service": "~9.1.4",
-    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@fortawesome/fontawesome-free": "^5.13.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
