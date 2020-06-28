@@ -105,3 +105,48 @@ h2 {
 .testimonial-image, .testimonial-video{
     width: 350px;
 }
+.slide{
+    padding: .5em;
+}
+@media only screen and (max-width: 600px) {
+    image-testi {
+        width: 100px;
+    }
+    video-testi{
+        width: 150px;
+    }
+    .swiper-container{
+       width: 300px; 
+    }
+  }
+.swiper-slide{
+    align-items: center;
+    justify-content: center;
+}
+.slider{
+    padding: none;
+}
+.testi-header{
+    padding: .3em;
+    align-items: center;
+    justify-content: center;
+    
+}
+.swiper-button-prev{
+    padding: .5em;
+}
+.image-testi{
+    height: 2em;
+    width: 3em;
+}
+.video-testi{
+    height: 280px;
+    width: 440px;
+    padding-left: .5em;
+}
+.likeButton{
+    align-items: center;
+      text-align: center;
+      padding: .25em 1em;
+      color: white;
+}
