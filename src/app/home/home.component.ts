@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgImageSliderComponent } from 'ng-image-slider';
-import { MatDialog } from '@angular/material/dialog';
+import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 // import { SwiperConfigInterface } from 'ngx-swiper-wrapper';

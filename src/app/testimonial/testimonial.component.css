@@ -1,0 +1,53 @@
+.testi-uploader-inner{
+    align-items: center;
+    text-align: center;
+ }
+ .testi-uploader-inner h1{
+    text-align: center;
+    
+     font-size: 2em;
+    padding-top: .05em;
+ }
+ .testi-uploader-inner h3{
+    text-align: center;
+    
+    font-size: 1.5em;
+    padding-top: .05em;
+ }
+ .publish-testimonial{
+    align-items: center;
+    text-align: center;
+ }
+ .testi-info{
+   align-items: center;
+   text-align: center;
+ }
+
+ .publish-testimonial h2{
+    align-content: center;
+    align-items: center;
+    
+     font-size: 2em;
+     justify-content: center;
+     padding: 1.5em 2em;
+ }
+ .upload-button{
+   align-content: center;
+   align-items: center;
+   
+    font-size: 1em;
+    justify-content: center;
+    color: white;
+ }
+ .backNextImage{
+    align-items: center;
+    text-align: center;
+    padding: .5em;
+    color: white;
+  }
+  .backNextImage-button{
+   align-items: center;
+   text-align: center;
+   padding: .25em 1.5em;
+   color: white;
+ }
