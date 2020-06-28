@@ -1,123 +1,141 @@
 <div class="image-upload-center">
-  <mat-horizontal-stepper>
-      <!-- #docregion label -->
-        <mat-step label="1">
-          <div class="typeSelection">
-            <mat-form-field class="imageType">
-              <h2>Choose Image Type</h2>
-              <mat-label class="type">Select an option</mat-label>
-              <mat-select [(value)]="selected">
-                <mat-option *ngFor="let imageType of imageTypes | async " [value]="imageType.payload.val()">{{imageType.payload.val()}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <p>You selected: {{selected}}</p>
-          </div>
-          <div class="backNextImage">
-              <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-              <button mat-flat-button color="primary" class="backNextImage-button"  matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step label="2">
-          <div class="view-choice"> 
-              <h1>Welcome to image Upload Center</h1>
-              <h3>Start by choosing Image Frame</h3>
-              <mat-grid-list cols="2">
-                  <mat-grid-tile>
-                      <div class="view">
-                        <div class="frame">
-                          <div class="vl1">
-                          </div>
-                          <div class="vl2">
-                          </div>
-                      </div>
-                          <button  mat-flat-button color="primary"  class="view-button" (click)="chooseView()">Vertical View</button>
-                      </div>
-                  </mat-grid-tile>
-                  <mat-grid-tile>
-                      <div class="view">
-                          <div class="frame">
-                            <div class="ho1">
-                            </div>
-                            <div class="ho2">
-                            </div>
-                          </div>
-                          <button mat-flat-button color="primary" class="view-button" (click)="chooseView()"> Horizontal View</button>
-                      </div>
-                  </mat-grid-tile>
-              </mat-grid-list>
-          </div>
-          <div class="backNextImage">
-              <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-              <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-      <!-- #enddocregion label -->
-        <mat-step label="3" state="chat">
-          <div class="frame-uploader-inner">
-              <h1>Choose Frame image</h1>
-              <h3>Supported Formats: jpg,PNG</h3>
-              <img *ngIf="isSubmitted" [src]="srcResult" >
-              <button class="upload-button" mat-flat-button color="primary"(click)="fileInput.click()">Choose File</button>
-              <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-              &nbsp;&nbsp;
-          </div>
-          <div class="backNextImage">
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
-          </div>
-        </mat-step>
-        <mat-step label="4">
-          <div class="image-uploader-inner">
-              <h1>Choose Image </h1>
-              <h3>Supported Formats: jpg,PNG</h3>
-              <img *ngIf="isSubmitted" [src]="srcResult" >
-              <button class="upload-button" mat-flat-button color="primary"(click)="fileInput.click()">Choose File</button>
-              <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-              &nbsp;&nbsp;
-          </div>
-          <div class="backNextImage">
-              <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-              <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+  <mat-horizontal-stepper #stepper>
+    <!-- #docregion label -->
+    <mat-step label="Photo Type">
+      <div class="typeSelection">
+        <h1>Choose Type</h1>
+        <mat-form-field class="imageType">
+
+          <mat-label class="type">Select an option</mat-label>
+          <mat-select [(value)]="selectedType">
+            <mat-option *ngFor="let imageType of imageTypes | async" [value]="imageType.payload.val()">
+              {{imageType.payload.val()}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="backNextImage">
+        <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 1)">Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Photo Orientation">
+      <div class="view-choice">
+        <h1>Choose Orientation</h1>
+        <mat-radio-group [(ngModel)]="selectedOrientation">
+          <mat-grid-list cols="2" rowHeight="2:1.4">
+            <mat-grid-tile>
+              <div class="view">
+                <div class="frame">
+                  <div class="vl1">
+                  </div>
+                  <div class="vl2">
+                  </div>
+                </div>
+                <mat-radio-button color="primary" (click)="chooseView('vertical')" value="vertical">Vertical
+                </mat-radio-button>
+              </div>
+              <!-- </div> -->
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div class="view">
+                <div class="frame">
+                  <div class="ho1">
+                  </div>
+                  <div class="ho2">
+                  </div>
+                </div>
+                <mat-radio-button color="primary" (click)="chooseView('horizontal')" value="horizontal">Horizontal
+                </mat-radio-button>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-radio-group>
+      </div>
+      <div class="backNextImage">
+        <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+        <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 2)">Next</button>
+      </div>
+    </mat-step>
+    <!-- #enddocregion label -->
+    <mat-step label="Upload Frame" state="chat">
+      <div class="frame-uploader-inner">
+        <h1>Choose Frame image</h1>
+        <p>Supported Formats: JPG, PNG</p>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <div class="frameBox" *ngIf="isFrameSubmitted" [style.border-image]="getSanitizedFrame()"></div>
+        </div>
+        <button class="upload-button" mat-flat-button color="primary" (click)="frameInput.click()">Choose Frame</button>
+        <div *ngIf="isFrameSubmitting">
+          <mat-progress-bar mode="indeterminate" class="progress-bar"></mat-progress-bar>
+        </div>
+        <input hidden (change)="onFrameSelected()" #frameInput type="file" id="frameFile">
+        &nbsp;&nbsp;
+      </div>
+      <div class="backNextImage">
+        <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+        <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 3)">Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Upload Image">
+      <div class="image-uploader-inner">
+        <h1>Choose Image </h1>
+        <p>Supported Formats: JPG,PNG</p>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox" width="400" height="400">
+        </div>
+        <div *ngIf="isImageSubmitting">
+          <mat-progress-bar mode="indeterminate" class="progress-bar"></mat-progress-bar>
+        </div>
+        <button class="upload-button" mat-flat-button color="primary" (click)="imageInput.click()">Choose Image</button>
+        <input hidden (change)="onImageSelected()" #imageInput type="file" id="imageFile">
+        &nbsp;&nbsp;
+      </div>
+      <div class="backNextImage">
+        <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+        <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Add image Info">
+      <div class="image-info">
+        <h1>Write Image Information</h1>
+        <div fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Image Title" [formControl]="title" required (keyup)="addTitle($event)">
+          <mat-error *ngIf="title.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Image Description" [formControl]="description" required
+            (keyup)="addDescription($event)">
+          <mat-error *ngIf="description.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Publish">
+      <div class="publish-image">
+        <div class="final-image">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div class="frameBox" *ngIf="isFrameSubmitted" [style.border-image]="getSanitizedFrame()">
+              <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox">
             </div>
-        </mat-step>
-        <mat-step label="5">
-          <div class="image-info">
-              <h1>Write Image Information</h1>
-              <h3>Fill out the Form</h3>
-              <div class="example-container">
-                <mat-form-field appearance="fill">
-                  <mat-label>Enter your email</mat-label>
-                  <input matInput placeholder="pat@example.com" [formControl]="email" required>
-                  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
-              </div>
-              <!-- <div class="form">
-                      <mat-form-field appearance="fill">
-                          <input matInput placeholder="Title" required>
-                          <mat-error *ngIf="titleFormControl.invalid">{{getRequiredErrorMessage('tile')}}</mat-error>                
-                      </mat-form-field><br>
-                      <mat-form-field appearance="fill">
-                          <input matInput placeholder="Description" required >
-                          <mat-error *ngIf="descriptionFormControl.invalid">{{getRequiredErrorMessage('description')}}</mat-error>                
-                      </mat-form-field><br>
-                      <button type="button" mat-raised-button (click)="publishImage()">Save</button>
-              </div> -->
           </div>
-          <div class="backNextImage">
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <p>Title: {{selectedTitle}}</p>
+            <p>Description: {{selectedDescription}}</p>
           </div>
-        </mat-step>
-        <mat-step label="6">
-          <div class="publish-image">
-              <h2>Now Publish Your Image here!</h2>
-              <div class="publish-button">
-                  <button mat-flat-button color="primary" class="backNextImage-button">Publish</button>
-              </div>
-          </div>
-          <div class="backNextImage">
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          </div>
-        </mat-step>
-      </mat-horizontal-stepper>
+        </div>
+        <div class="publish-button">
+          <button mat-flat-button color="primary" class="backNextImage-button" (click) = "publish()">Publish</button>
+        </div>
+      </div>
+      <div class="backNextImage">
+        <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>

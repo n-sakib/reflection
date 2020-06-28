@@ -9,6 +9,7 @@
        justify-content: center;
        border: white; 
        padding: .35em; 
+       width: 300px;
 }
  .imageType h2{
        align-content: center;
@@ -144,11 +145,42 @@
         padding: 1.5em 2em;
     }
     .upload-button{
+      margin-top: 10px;
       align-content: center;
       align-items: center;
       
        font-size: 1em;
        justify-content: center;
        color: white;
+    }
+
+    h1 {
+       padding: 30px;
+       color: #b47a15;
+    }
+    mat-radio-button{
+       padding-top: 10px;
+    }
+
+    .frameBox {
+       width: 480px;
+       height: 320px;
+       border: 20px solid transparent;
+    }
+
+    .progress-bar {
+      margin: 20px;
+    }
+
+    img {
+      display: block;
+      min-width: 480px;
+      min-height: 320px;
+      max-width: 480px;
+      max-height: 320px;
+    }
+
+    .publish-button {
+      padding-top: 10px;
     }
     

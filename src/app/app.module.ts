@@ -31,6 +31,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -69,7 +72,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     SwiperModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-
+    MatRadioModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   providers: [
     {
