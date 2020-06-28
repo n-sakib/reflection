@@ -7,7 +7,8 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { database } from 'firebase';
 import { Observable } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/storage';
+
+
 
 
 
@@ -61,10 +62,10 @@ export default class HomeComponent implements OnInit {
   ];
 
 
-  constructor(private storage: AngularFireStorage,
-    public dialog: MatDialog, private database: AngularFireDatabase) {
+  constructor(
+    public dialog: MatDialog, private database: AngularFireDatabase,
+    ) {
     this.setImageObject();
-
     
   }
 

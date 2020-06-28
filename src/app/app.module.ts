@@ -32,6 +32,8 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
+
+
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
@@ -66,7 +68,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgxGalleryModule,
     SwiperModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+
   ],
   providers: [
     {
