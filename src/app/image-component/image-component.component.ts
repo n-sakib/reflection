@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { NgxStarsModule } from 'ngx-stars';
 
 @Component({
   selector: 'app-image-component',
