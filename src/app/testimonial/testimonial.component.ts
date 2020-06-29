@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { StarRatingComponent } from 'ng-starrating';
 
 
 @Component({
@@ -50,6 +51,9 @@ export class TestimonialComponent implements OnInit {
   selectedRating;
   isImageSubmitted: boolean = false;
 
+  rating:number = 3;
+  starCount:number = 5;
+
 
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder) {
 
@@ -58,7 +62,7 @@ export class TestimonialComponent implements OnInit {
   name = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
-  rating = new FormControl('');
+  // rating = new FormControl('');
   rating3: number;
   public form: FormGroup;
 
@@ -186,7 +190,7 @@ export class TestimonialComponent implements OnInit {
       userAddress: this.selectedAddress,
       imageURL: this.selectedImageURL,
       description: this.selectedDescription,
-      userRating: this.selectedRating,
+      //userRating: this.selectedRating,
     };
 
     console.log(postData)
@@ -196,7 +200,7 @@ export class TestimonialComponent implements OnInit {
         this.selectedAddress = '',
         this.selectedImageURL = '',
         this.selectedDescription = '',
-        this.selectedRating = '',
+        //this.selectedRating = '',
         this.snackBar.open('Successfully uploaded testimonial.', 'OK', {
           duration: 2000,
         });
