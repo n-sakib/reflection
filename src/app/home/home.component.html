@@ -17,10 +17,11 @@
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
                 <div class="padded">
-                    <mat-card class="example-card">
-                        <mat-grid-list [cols]="breakpoint" rowHeight="2:1.5" gutterSize="40" class="inner"
+ 
+                        <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner"
                             (window:resize)="onResize($event)">
                             <mat-grid-tile *ngFor = "let gallery of galleryImgs">
+                                <mat-card class="example-card">
                                 <div class="gallery petpotrait">
                                     <h3>{{gallery.type}}</h3>
                                     <!-- <div *ngFor="let image of images" ></div> -->
@@ -28,9 +29,9 @@
                                         class="ngx-gallery">
                                     </ngx-gallery>
                                 </div>
+                                </mat-card>
                             </mat-grid-tile>
                         </mat-grid-list>
-                    </mat-card>
                 </div>
             </div>
         </div>

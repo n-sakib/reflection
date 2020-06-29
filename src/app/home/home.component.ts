@@ -42,7 +42,6 @@ export default class HomeComponent implements OnInit {
   imageObject: Array<object> = [];
   galleryOptions: NgxGalleryOptions[];
   singleGalleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
   breakpoint;
   galleryTypes = [];
   images = [];
@@ -203,11 +202,10 @@ export default class HomeComponent implements OnInit {
       complete: () => { console.log("done") }
     })
 
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+    this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     this.galleryOptions = [
       {
         width: '600px',
-        height: '400px',
         thumbnailsColumns: 4,
         arrowPrevIcon: 'fa fa-chevron-left',
         arrowNextIcon: 'fa fa-chevron-right',
@@ -216,8 +214,12 @@ export default class HomeComponent implements OnInit {
         preview: false,
         imageDescription: true
       },
-      { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
-      { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
+      { "breakpoint": 1080, "width": "400px", "height":"280px", "thumbnailsColumns": 4 },
+      { "breakpoint": 1280, "width": "500px" },
+      { "breakpoint": 920, "width": "640px", "height":"480px", "thumbnailsColumns": 4 },
+      { "breakpoint": 720, "width": "500px", "height":"400px", "thumbnailsColumns": 4 },
+      { "breakpoint": 640, "width": "400px", "height":"370px", "thumbnailsColumns": 4 },
+      { "breakpoint": 520, "width": "350px", "height":"350px", "thumbnailsColumns": 4 },
     ];
 
     this.singleGalleryOptions = [
@@ -252,24 +254,6 @@ export default class HomeComponent implements OnInit {
       {
         breakpoint: 400,
         preview: false
-      }
-    ];
-
-    this.galleryImages = [
-      {
-        small: 'assets/Cover.jpeg',
-        medium: 'assets/Cover.jpeg',
-        big: 'assets/Cover.jpeg'
-      },
-      {
-        small: 'assets/Cover.jpeg',
-        medium: 'assets/Cover.jpeg',
-        big: 'assets/Cover.jpeg'
-      },
-      {
-        small: 'assets/Cover.jpeg',
-        medium: 'assets/Cover.jpeg',
-        big: 'assets/Cover.jpeg'
       }
     ];
   }
@@ -327,7 +311,7 @@ export default class HomeComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth < 900) ? 1 : 2;
+    this.breakpoint = (event.target.innerWidth <920) ? 1 : 2;
   }
 
   public toggleType(): void {
