@@ -44,6 +44,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
+
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
