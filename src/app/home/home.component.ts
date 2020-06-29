@@ -268,7 +268,6 @@ export default class HomeComponent implements OnInit {
     ];
   }
 
-
   onChangeHandler() {
     this.setImageObject();
     this.showSlider = false;
@@ -373,6 +372,7 @@ export default class HomeComponent implements OnInit {
   public onSwiperEvent(event: string): void {
     console.log('Swiper event: ', event);
   }
+<<<<<<< HEAD
   // showImage() {
     // var storageRef = this.firebase.storage().ref();
     // var spaceRef = storageRef.child('admin/images/');
@@ -409,4 +409,6 @@ export default class HomeComponent implements OnInit {
   //   });
   // }
   
+=======
+>>>>>>> 468bea1b3ffb8938cb05bee8e4fce2a0a56560dc
 }

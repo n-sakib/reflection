@@ -6,16 +6,13 @@
                 <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive
                     at our
                     process.</h3>
-                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
-                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
-                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                <div class="wrapper">
+                        <iframe
+                            src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
+                            height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
             </mat-card>
         </div>
-
-        <!-- <div class="gallery-inner">
-        <button mat-flat-button color="primary" class="hero-button">Painting commision Guide</button>
-    </div> -->
         <div class="gallery">
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
@@ -55,7 +52,7 @@
                                 <div class="gallery">
                                     <div class="gallery petpotrait">
                                         <h3>PHOTOGRAPH TO PAINTING</h3>
-                                        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"
+                                        <ngx-gallery [options]="singleGalleryOptions" [images]="galleryImages"
                                             class="ngx-gallery">
                                         </ngx-gallery>
                                     </div>
@@ -66,15 +63,12 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
     <div class="gallery">
         <div class="gallery-inner">
             <h2>TESTIMONIALS</h2>
             <div class="swiper-container">
-                <swiper [swiper]="config" >
+                <swiper [swiper]="config">
                     <div *ngFor="let slide of slides" class="swiper-slide">
                         <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
                             <mat-card class="slide">
@@ -84,12 +78,11 @@
                                     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
                                 </mat-card-header>
                                 <div class="slider" fxLayout="row" fxLayoutAlign="center center">
-                                        <img  [src]="slide" class="image-testi"
-                                            alt="Photo of a Shiba Inu" class="testimonial-image">
+                                    <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
+                                        class="testimonial-image">
                                     <iframe class="video-testi"
                                         src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0"
-                                         frameborder="0" allow="autoplay; fullscreen"
-                                        allowfullscreen></iframe>
+                                        frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                                 </div>
                                 <mat-card-content>
                                     <p>
@@ -110,15 +103,10 @@
                         </div>
                     </div>
                 </swiper>
-                <div
-                    *ngIf="type == 'directive' && show"
-                    class="swiper-container"
-                    [disabled]="disabled"
-                    [swiper]="config"
-                    (indexChange)="onIndexChange($event)"
+                <div *ngIf="type == 'directive' && show" class="swiper-container" [disabled]="disabled"
+                    [swiper]="config" (indexChange)="onIndexChange($event)"
                     (swiperTransitionStart)="onSwiperEvent('transitionStart')"
-                    (swiperTransitionEnd)="onSwiperEvent('transitionEnd')"
-                >
+                    (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
 
                     <div class="swiper-scrollbar" [hidden]="config.scrollbar === false"></div>
                     <div class="swiper-pagination" [hidden]="config.pagination === true"></div>
@@ -132,14 +120,15 @@
 </div>
 
 
-<div id="outer">
-    <div id="inner">
-        <h2 class="contact">GET IN TOUCH</h2>
-        <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take it
-            from there!</h3>
-        <mat-form-field class="contact-field" color="tartiary">
-            <input matInput placeholder="Email Address" color="tartiary">
-        </mat-form-field>
-        <button mat-flat-button color="secondary">CONTACT US</button>
+    <div id="outer">
+        <div id="inner">
+            <h2 class="contact">GET IN TOUCH</h2>
+            <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take
+                it
+                from there!</h3>
+            <mat-form-field class="contact-field" color="tartiary">
+                <input matInput placeholder="Email Address" color="tartiary">
+            </mat-form-field>
+            <button mat-flat-button color="secondary">CONTACT US</button>
+        </div>
     </div>
-</div>

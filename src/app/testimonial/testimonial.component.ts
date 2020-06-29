@@ -5,9 +5,8 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { RatingModule } from 'ng-starrating';
 import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
@@ -52,9 +51,7 @@ export class TestimonialComponent implements OnInit {
   selectedRating;
   isImageSubmitted: boolean = false;
 
-  rating:number = 3;
-  starCount:number = 5;
-
+  
 
   // @Input('rating') private rating: number = 3;
   // @Input('starCount') private starCount: number = 5;
@@ -113,6 +110,7 @@ export class TestimonialComponent implements OnInit {
   }
   completed: boolean = false;
   state: string;
+  
   getRequiredErrorMessage(field) {
     return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
   }
@@ -131,10 +129,6 @@ export class TestimonialComponent implements OnInit {
   
 
   onRate($event:{newValue:number, starRating:StarRatingComponent}) {
-      alert(` 
-        New Value: ${$event.newValue}, 
-        Checked Color: ${$event.starRating.checkedcolor}, 
-        Unchecked Color: ${$event.starRating.uncheckedcolor}`);
         var value = $event.newValue;
         this.selectedRating = value;
   }
