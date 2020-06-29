@@ -61,32 +61,32 @@
       <mat-step>
         <ng-template matStepLabel>Rating</ng-template>
         <div class="cont">
+          <h1>Please Give Rating</h1>
           <div class="stars">
-            
-            
-          </div>
-        </div>
-        <div class="backNextImage">
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
-        </div>
-      </mat-step>
+            <star-rating value="5" totalstars={{totalstar}} checkedcolor="red" uncheckedcolor="black" size="24px"
+              readonly="false" (rate)="onRate($event)"></star-rating>
+         </div>
+  </div>
+  <div class="backNextImage">
+    <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+    <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+  </div>
+  </mat-step>
 
-      <mat-step>
-        <ng-template matStepLabel>Publish Testimonial</ng-template>
-        <div class="publish-testimonial">
-          <h2>Now Publish Your Testimonial here!</h2>
-          <div class="publish-button">
-            <button mat-flat-button color="primary" class="backNextImage-button" (click)="publish()">Publish</button>
-          </div>
-        </div>
-        <div class="backNextImage">
-          <button mat-flat-button color="primary"
-            class="backNex                                              tImage-button"
-            matStepperPrevious>Back</button>&nbsp;
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
+  <mat-step>
+    <ng-template matStepLabel>Publish Testimonial</ng-template>
+    <div class="publish-testimonial">
+      <h2>Now Publish Your Testimonial here!</h2>
+      <div class="publish-button">
+        <button mat-flat-button color="primary" class="backNextImage-button" (click)="publish()">Publish</button>
+      </div>
+    </div>
+    <div class="backNextImage">
+      <button mat-flat-button color="primary" class="backNex                                              tImage-button"
+        matStepperPrevious>Back</button>&nbsp;
+    </div>
+  </mat-step>
+  </mat-horizontal-stepper>
 
   </div>
 </section>

@@ -51,3 +51,16 @@
    padding: .25em 1.5em;
    color: white;
  }
+ .stars{
+   align-items: center;
+   text-align: center;
+ }
+ .cont{
+   align-items: center;
+   text-align: center;
+ }
+ .cont h1{
+   align-items: center;
+   text-align: center;
+   font-size: 2em;
+ }

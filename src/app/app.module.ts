@@ -34,6 +34,7 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { RatingModule } from 'ng-starrating';
 
 
 
@@ -76,7 +77,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatRadioModule,
     MatSnackBarModule,
     MatProgressBarModule,
-   
+    RatingModule ,
   ],
   providers: [
     {
