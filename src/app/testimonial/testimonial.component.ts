@@ -5,9 +5,11 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { StarRatingComponent } from 'ng-starrating';
+
+
+
 
 
 @Component({
@@ -34,6 +36,8 @@ export class TestimonialComponent implements OnInit {
   selectedName: string = '';
   selectedDescription: string = '';
   selectedAddress: string = '';
+
+
   
 
   // srcResult;
@@ -51,9 +55,7 @@ export class TestimonialComponent implements OnInit {
   selectedRating;
   isImageSubmitted: boolean = false;
 
-  rating:number = 3;
-  starCount:number = 5;
-
+  
 
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder) {
 
@@ -63,7 +65,7 @@ export class TestimonialComponent implements OnInit {
   description = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
   // rating = new FormControl('');
-  rating3: number;
+  
   public form: FormGroup;
 
 
@@ -101,9 +103,11 @@ export class TestimonialComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+    
   }
   completed: boolean = false;
   state: string;
+  
   getRequiredErrorMessage(field) {
     return this.imageform.get(field).hasError('required') ? 'You must enter a value' : '';
   }
@@ -118,7 +122,6 @@ export class TestimonialComponent implements OnInit {
     reader.onerror = error => reject(error);
   });
   
-
   next(stepper, step) {
     switch (step) {
       case 1:
