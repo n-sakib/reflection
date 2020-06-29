@@ -39,6 +39,7 @@ import { RatingModule } from 'ng-starrating';
 
 
 
+
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'

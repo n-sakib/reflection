@@ -3,7 +3,9 @@ import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
-// import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import {
   SwiperComponent,
@@ -12,6 +14,7 @@ import {
   SwiperScrollbarInterface,
   SwiperPaginationInterface
 } from 'ngx-swiper-wrapper';
+import { types } from 'util';
 
 
 @Component({
@@ -40,7 +43,11 @@ export default class HomeComponent implements OnInit {
   singleGalleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   breakpoint;
+  galleryTypes=[];
+  images=[];
   public show: boolean = true;
+
+
 
   public slides = [
     ['assets/Cover.jpeg'],
@@ -48,10 +55,10 @@ export default class HomeComponent implements OnInit {
     'assets/featured(1).jpeg',
   ];
   public slideVideo = [
-   'https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0',
-   'https://www.youtube.com/watch?v=L6ZJaKqALgM',
+    'https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0',
+    'https://www.youtube.com/watch?v=L6ZJaKqALgM',
   ];
-  
+
   public config_thumbs = {
     a11y: true,
     direction: 'horizontal',
@@ -70,7 +77,7 @@ export default class HomeComponent implements OnInit {
       nextEl: '.carousel__arrow--prev',
       prevEl: '.carousel__arrow--next'
     },
-    autoplay:{
+    autoplay: {
       delay: 2000,
     },
     pagination: true,
@@ -107,6 +114,11 @@ export default class HomeComponent implements OnInit {
     }
   };
 
+  imgSrc: string = '';
+  selectedImage: any = null;
+  userProfileImg :'';
+  imageTypes: Observable<any[]>;
+
   public type: string = 'component';
 
   public disabled: boolean = false;
@@ -117,7 +129,7 @@ export default class HomeComponent implements OnInit {
     keyboard: true,
     mousewheel: true,
     scrollbar: false,
-    autoplay:{
+    autoplay: {
       delay: 2000,
     },
     pagination: true,
@@ -139,199 +151,262 @@ export default class HomeComponent implements OnInit {
   //   'Fifth slide',
   //   'Sixth slide'
   // ];
- 
 
 
 
-    private scrollbar: SwiperScrollbarInterface = {
+
+  private scrollbar: SwiperScrollbarInterface = {
     el: '.swiper-scrollbar',
     hide: false,
     draggable: true
-};
+  };
 
-    private pagination: SwiperPaginationInterface = {
+  private pagination: SwiperPaginationInterface = {
     el: '.swiper-pagination',
     clickable: true,
     hideOnClick: false
-};
+  };
 
-@ViewChild(SwiperComponent) componentRef ?: SwiperComponent;
-@ViewChild(SwiperDirective, { static: true }) directiveRef ?: SwiperDirective;
-
-
-constructor(private dialog: MatDialog) {
-  this.setImageObject();
-}
+  @ViewChild(SwiperComponent) componentRef?: SwiperComponent;
+  @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
 
 
+  constructor(private dialog: MatDialog, private database: AngularFireDatabase) {
+    // this.setImageObject();
+  }
 
 
-ngOnInit() {
-  this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
-  this.galleryOptions = [
-    {
-      width: '600px',
-      height: '400px',
-      thumbnailsColumns: 4,
-      arrowPrevIcon: 'fa fa-chevron-left',
-      arrowNextIcon: 'fa fa-chevron-right',
-      imageAnimation: NgxGalleryAnimation.Slide,
-      imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
-      preview: false,
-      imageDescription: true
-    },
-    { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
-    { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
-  ];
-
-  this.singleGalleryOptions = [
-    {
-      width: '600px',
-      height: '400px',
-      thumbnailsColumns: 4,
-      arrowPrevIcon: 'fa fa-chevron-left',
-      arrowNextIcon: 'fa fa-chevron-right',
-      imageAnimation: NgxGalleryAnimation.Slide
-    },
-    // max-width 800
-    {
-      breakpoint: 800,
-      width: '100%',
-      height: '600px',
-      imagePercent: 80,
-      thumbnailsPercent: 20,
-      thumbnailsMargin: 20,
-      thumbnailMargin: 20
-    },
-    // max-width 400
-    {
-      breakpoint: 400,
-      preview: false
-    }
-  ];
-
-  this.galleryImages = [
-    {
-      small: 'assets/Cover.jpeg',
-      medium: 'assets/Cover.jpeg',
-      big: 'assets/Cover.jpeg'
-    },
-    {
-      small: 'assets/Cover.jpeg',
-      medium: 'assets/Cover.jpeg',
-      big: 'assets/Cover.jpeg'
-    },
-    {
-      small: 'assets/Cover.jpeg',
-      medium: 'assets/Cover.jpeg',
-      big: 'assets/Cover.jpeg'
-    }
-  ];
-}
-onChangeHandler() {
-  this.setImageObject();
-  this.showSlider = false;
-  setTimeout(() => {
-    this.showSlider = true;
-  }, 10);
-}
-setImageObject() {
-
-}
-imageOnClick(index) {
-  console.log('index', index);
 
 
-}
+  ngOnInit() {
 
-arrowOnClick(event) {
-  console.log('arrow click event', event);
-}
+    this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
+    this.imageTypes.subscribe(galleryTypes => {galleryTypes.forEach(gallery => {
+      this.galleryTypes.push(gallery.payload.val());
+    });});
+      let ref = this.database.list('images/').snapshotChanges();
+      ref.subscribe(images => {images.forEach(image => {
+        var val:any= image.payload.val();
+        if (this.galleryTypes.indexOf(val.galleryName)>-1){
+          console.log(this.galleryTypes.indexOf(val.galleryName));
+        }
+        this.images.push(image.payload.val());
 
-lightboxArrowClick(event) {
-  console.log('popup arrow click', event);
-}
+      });});
 
-prevImageClick() {
-  this.ds.prev();
-}
 
-nextImageClick() {
-  this.ds.next();
-}
+    
 
-imageOnClick1(): void {
-  const dialogRef = this.dialog.open(PaidPictureComponent, {
-    width: '100%', height: '90%',
-  });
-}
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+    this.galleryOptions = [
+      {
+        width: '600px',
+        height: '400px',
+        thumbnailsColumns: 4,
+        arrowPrevIcon: 'fa fa-chevron-left',
+        arrowNextIcon: 'fa fa-chevron-right',
+        imageAnimation: NgxGalleryAnimation.Slide,
+        imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
+        preview: false,
+        imageDescription: true
+      },
+      { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
+      { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
+    ];
 
-deleteImage(event, index): void {
-  console.log("here")
-}
+    this.singleGalleryOptions = [
+      {
+        width: '600px',
+        height: '400px',
+        thumbnailsColumns: 4,
+        arrowPrevIcon: 'fa fa-chevron-left',
+        arrowNextIcon: 'fa fa-chevron-right',
+        imageAnimation: NgxGalleryAnimation.Slide
+      },
+      // max-width 800
+      {
+        breakpoint: 800,
+        width: '100%',
+        height: '600px',
+        imagePercent: 80,
+        thumbnailsPercent: 20,
+        thumbnailsMargin: 20,
+        thumbnailMargin: 20
+      },
+      {
+        breakpoint: 1280,
+        width: '100%',
+        height: '375px',
+        imagePercent: 80,
+        thumbnailsPercent: 30,
+        thumbnailsMargin: 10,
+        thumbnailMargin: 10,
+      },
+      // max-width 400
+      {
+        breakpoint: 400,
+        preview: false
+      }
+    ];
 
-onResize(event) {
-  this.breakpoint = (event.target.innerWidth < 900) ? 1 : 2;
-}
+    this.galleryImages = [
+      {
+        small: 'assets/Cover.jpeg',
+        medium: 'assets/Cover.jpeg',
+        big: 'assets/Cover.jpeg'
+      },
+      {
+        small: 'assets/Cover.jpeg',
+        medium: 'assets/Cover.jpeg',
+        big: 'assets/Cover.jpeg'
+      },
+      {
+        small: 'assets/Cover.jpeg',
+        medium: 'assets/Cover.jpeg',
+        big: 'assets/Cover.jpeg'
+      }
+    ];
+  }
+
+
+  onChangeHandler() {
+    this.setImageObject();
+    this.showSlider = false;
+    setTimeout(() => {
+      this.showSlider = true;
+    }, 10);
+  }
+  setImageObject() {
+
+  }
+  imageOnClick(index) {
+    console.log('index', index);
+  }
+
+  arrowOnClick(event) {
+    console.log('arrow click event', event);
+  }
+
+  lightboxArrowClick(event) {
+    console.log('popup arrow click', event);
+  }
+
+  prevImageClick() {
+    this.ds.prev();
+  }
+
+  nextImageClick() {
+    this.ds.next();
+  }
+
+  imageOnClick1(): void {
+    const dialogRef = this.dialog.open(PaidPictureComponent, {
+      width: '100%', height: '90%',
+    });
+  }
+
+  deleteImage(event, index): void {
+    console.log("here")
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth < 900) ? 1 : 2;
+  }
 
   public toggleType(): void {
-  this.type = (this.type === 'component') ? 'directive' : 'component';
-}
+    this.type = (this.type === 'component') ? 'directive' : 'component';
+  }
 
-public toggleDisabled(): void {
-  this.disabled = !this.disabled;
-}
+  public toggleDisabled(): void {
+    this.disabled = !this.disabled;
+  }
 
-public toggleDirection(): void {
-  this.config.direction = (this.config.direction === 'horizontal') ? 'vertical' : 'horizontal';
-}
+  public toggleDirection(): void {
+    this.config.direction = (this.config.direction === 'horizontal') ? 'vertical' : 'horizontal';
+  }
 
-public toggleSlidesPerView(): void {
-  if(this.config.slidesPerView !== 1) {
-  this.config.slidesPerView = 1;
-} else {
-  this.config.slidesPerView = 2;
-}
-}
+  public toggleSlidesPerView(): void {
+    if (this.config.slidesPerView !== 1) {
+      this.config.slidesPerView = 1;
+    } else {
+      this.config.slidesPerView = 2;
+    }
+  }
 
-public toggleOverlayControls(): void {
-  if(this.config.navigation) {
-  this.config.scrollbar = false;
-  this.config.navigation = false;
+  public toggleOverlayControls(): void {
+    if (this.config.navigation) {
+      this.config.scrollbar = false;
+      this.config.navigation = false;
 
-  this.config.pagination = this.pagination;
-} else if (this.config.pagination) {
-  this.config.navigation = false;
-  this.config.pagination = false;
+      this.config.pagination = this.pagination;
+    } else if (this.config.pagination) {
+      this.config.navigation = false;
+      this.config.pagination = false;
 
-  this.config.scrollbar = this.scrollbar;
-} else {
-  this.config.scrollbar = false;
-  this.config.pagination = false;
+      this.config.scrollbar = this.scrollbar;
+    } else {
+      this.config.scrollbar = false;
+      this.config.pagination = false;
 
-  this.config.navigation = true;
-}
+      this.config.navigation = true;
+    }
 
-if (this.type === 'directive' && this.directiveRef) {
-  this.directiveRef.setIndex(0);
-} else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
-  this.componentRef.directiveRef.setIndex(0);
-}
-}
+    if (this.type === 'directive' && this.directiveRef) {
+      this.directiveRef.setIndex(0);
+    } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
+      this.componentRef.directiveRef.setIndex(0);
+    }
+  }
 
-public toggleKeyboardControl(): void {
-  this.config.keyboard = !this.config.keyboard;
-}
+  public toggleKeyboardControl(): void {
+    this.config.keyboard = !this.config.keyboard;
+  }
 
-public toggleMouseWheelControl(): void {
-  this.config.mousewheel = !this.config.mousewheel;
-}
+  public toggleMouseWheelControl(): void {
+    this.config.mousewheel = !this.config.mousewheel;
+  }
 
-public onIndexChange(index: number): void {
-  console.log('Swiper index: ', index);
-}
+  public onIndexChange(index: number): void {
+    console.log('Swiper index: ', index);
+  }
 
-public onSwiperEvent(event: string): void {
-  console.log('Swiper event: ', event);
-}
+  public onSwiperEvent(event: string): void {
+    console.log('Swiper event: ', event);
+  }
+  // showImage() {
+    // var storageRef = this.firebase.storage().ref();
+    // var spaceRef = storageRef.child('admin/images/');
+    // storageRef.child('admin/images/').getDownloadURL().then(function(url) {
+    //     var test = url;
+    //     alert(url);
+    //     document.querySelector('img').src = test;
+
+    // }).catch(function(error) {
+
+    // });
+    // var storage=firebase.storage();
+    // var storageRef = storage.ref();
+
+    
+    // var i=0;
+    // storageRef.child('images').listAll().then(function(result){
+    //   result.items.forEach(function(imageRef){
+    //     // console.log("Image Ref" + imageRef.toString());
+    //     i++;
+    //     this.displayImage(i,imageRef);
+    //   })
+    // })
+  
+  // displayImage(images){
+  //   images.getDownloadURL().then(function(url){
+
+  //   })
+  // }
+  // showPreview(event: any){
+  //   const userStorageRef = firebase.storage().ref().child('images/');
+  //   userStorageRef.getDownloadURL().then(url => {
+  //     this.userProfileImg = url
+  //   });
+  // }
+  
 }
