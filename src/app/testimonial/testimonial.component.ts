@@ -52,6 +52,9 @@ export class TestimonialComponent implements OnInit {
   selectedRating;
   isImageSubmitted: boolean = false;
 
+  rating:number = 3;
+  starCount:number = 5;
+
 
   // @Input('rating') private rating: number = 3;
   // @Input('starCount') private starCount: number = 5;
@@ -208,7 +211,7 @@ export class TestimonialComponent implements OnInit {
       userAddress: this.selectedAddress,
       imageURL: this.selectedImageURL,
       description: this.selectedDescription,
-      userRating: this.selectedRating,
+      //userRating: this.selectedRating,
     };
 
     console.log(postData)
@@ -218,7 +221,7 @@ export class TestimonialComponent implements OnInit {
         this.selectedAddress = '',
         this.selectedImageURL = '',
         this.selectedDescription = '',
-        this.selectedRating = '',
+        //this.selectedRating = '',
         this.snackBar.open('Successfully uploaded testimonial.', 'OK', {
           duration: 2000,
         });
