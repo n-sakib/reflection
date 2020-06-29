@@ -82,7 +82,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MatRadioModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    RatingModule,
+    RatingModule ,
   ],
   providers: [
     {
