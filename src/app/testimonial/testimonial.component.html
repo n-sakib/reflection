@@ -59,13 +59,13 @@
       </mat-step>
 
       <mat-step>
-        <ng-template matStepLabel>Rating</ng-template>  
+        <ng-template matStepLabel>Rating</ng-template>
         <div class="cont">
           <div class="stars">
-            <ngx-star-rating [(ngModel)]="rating3" [id]="'rating3'" (keyup)="addRating()" ></ngx-star-rating >
+            
+            
           </div>
-          <div>Rating: {{ rating3 }}</div>
-        </div>        
+        </div>
         <div class="backNextImage">
           <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
           <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
@@ -81,7 +81,9 @@
           </div>
         </div>
         <div class="backNextImage">
-          <button mat-flat-button color="primary" class="backNex                                              tImage-button" matStepperPrevious>Back</button>&nbsp;
+          <button mat-flat-button color="primary"
+            class="backNex                                              tImage-button"
+            matStepperPrevious>Back</button>&nbsp;
         </div>
       </mat-step>
     </mat-horizontal-stepper>

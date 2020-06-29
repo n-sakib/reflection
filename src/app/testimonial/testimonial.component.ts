@@ -7,8 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { NgxStarsModule } from 'ngx-stars';
-import { StarRatingComponent } from 'ng-starrating';
+
 
 @Component({
   selector: 'app-testimonial',
@@ -34,6 +33,7 @@ export class TestimonialComponent implements OnInit {
   selectedName: string = '';
   selectedDescription: string = '';
   selectedAddress: string = '';
+  
 
   // srcResult;
   imgSrc: string = './assets/featured.jpeg';
@@ -91,15 +91,10 @@ export class TestimonialComponent implements OnInit {
     this.selectedAddress = value;
   }
 
-  addRating() {
-
-    this.rating3 = 0;
-    this.form = this.fb.group({
-      rating1: ['', Validators.required],
-      rating2: [4]
-    });
-    this.selectedRating = this.rating3;
-  }
+  // addRating($event){
+  //   var value = $event.target.value;
+  //   this.selectedAddress = value;
+  // }
 
   ngOnInit(): void {
   }
@@ -118,6 +113,7 @@ export class TestimonialComponent implements OnInit {
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });
+  
 
   next(stepper, step) {
     switch (step) {
