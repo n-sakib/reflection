@@ -6,11 +6,10 @@
                 <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive
                     at our
                     process.</h3>
-                <div class="wrapper">
-                        <iframe
-                            src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
-                            height="480" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                </div>
+                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
+                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
+                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </mat-card>
         </div>
         <div class="gallery">
@@ -36,6 +35,7 @@
             </div>
         </div>
     </div>
+
     <div class="gallery">
         <div class="gallery-inner">
             <h2>TESTIMONIALS</h2>
@@ -50,11 +50,18 @@
                                     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
                                 </mat-card-header>
                                 <div class="slider" fxLayout="row" fxLayoutAlign="center center">
-                                    <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
-                                        class="testimonial-image">
-                                    <iframe class="video-testi"
-                                        src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0"
-                                        frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                                    <mat-grid-list [cols]="breakpoint" rowHeight="2:1"
+                                        (window:resize)="onResize($event)" class="grid-layout-custom">
+                                        <mat-grid-tile>
+                                                <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
+                                                class="testimonial-image">                                         
+                                        </mat-grid-tile>
+                                        <mat-grid-tile>
+                                                <iframe class="video-testi"
+                                                src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0"
+                                                frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
                                 </div>
                                 <mat-card-content>
                                     <p>

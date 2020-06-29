@@ -204,6 +204,17 @@ export default class HomeComponent implements OnInit {
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     this.galleryOptions = [
+      // {
+      //   width: '600px',
+      //   height: '400px',
+      //   thumbnailsColumns: 4,
+      //   arrowPrevIcon: 'fa fa-chevron-left',
+      //   arrowNextIcon: 'fa fa-chevron-right',
+      //   imageAnimation: NgxGalleryAnimation.Slide,
+      //   imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
+      //   preview: false,
+      //   imageDescription: true
+      // },
       {
         width: '600px',
         thumbnailsColumns: 4,
@@ -224,31 +235,40 @@ export default class HomeComponent implements OnInit {
 
     this.singleGalleryOptions = [
       {
-        width: '600px',
-        height: '400px',
-        thumbnailsColumns: 4,
-        arrowPrevIcon: 'fa fa-chevron-left',
-        arrowNextIcon: 'fa fa-chevron-right',
-        imageAnimation: NgxGalleryAnimation.Slide
+        breakpoint: 400,
+        width: '80%',
+        height: '150px',
+        imagePercent: 65,
+        thumbnailsPercent: 18,
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
       },
-      // max-width 800
       {
-        breakpoint: 800,
+        breakpoint: 600,
         width: '100%',
-        height: '600px',
-        imagePercent: 80,
+        height: '200px',
+        imagePercent: 85,
         thumbnailsPercent: 20,
-        thumbnailsMargin: 20,
-        thumbnailMargin: 20
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
+      },
+      {
+        breakpoint: 960,
+        width: '100%',
+        height: '250px',
+        imagePercent: 75,
+        thumbnailsPercent: 25,
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
       },
       {
         breakpoint: 1280,
         width: '100%',
-        height: '375px',
-        imagePercent: 80,
-        thumbnailsPercent: 30,
-        thumbnailsMargin: 10,
-        thumbnailMargin: 10,
+        height: '250px',
+        imagePercent: 75,
+        thumbnailsPercent: 25,
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
       },
       // max-width 400
       {
