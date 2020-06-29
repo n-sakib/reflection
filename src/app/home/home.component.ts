@@ -5,7 +5,7 @@ import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import {
   SwiperComponent,
@@ -15,6 +15,7 @@ import {
   SwiperPaginationInterface
 } from 'ngx-swiper-wrapper';
 import { types } from 'util';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -43,10 +44,10 @@ export default class HomeComponent implements OnInit {
   singleGalleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   breakpoint;
-  galleryTypes=[];
-  images=[];
+  galleryTypes = [];
+  images = [];
   public show: boolean = true;
-
+  galleryImgs = [];
 
 
   public slides = [
@@ -116,7 +117,7 @@ export default class HomeComponent implements OnInit {
 
   imgSrc: string = '';
   selectedImage: any = null;
-  userProfileImg :'';
+  userProfileImg: '';
   imageTypes: Observable<any[]>;
 
   public type: string = 'component';
@@ -179,23 +180,28 @@ export default class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
-    this.imageTypes.subscribe(galleryTypes => {galleryTypes.forEach(gallery => {
-      this.galleryTypes.push(gallery.payload.val());
-    });});
-      let ref = this.database.list('images/').snapshotChanges();
-      ref.subscribe(images => {images.forEach(image => {
-        var val:any= image.payload.val();
-        if (this.galleryTypes.indexOf(val.galleryName)>-1){
-          console.log(this.galleryTypes.indexOf(val.galleryName));
-        }
-        this.images.push(image.payload.val());
-
-      });});
-
-
-    
+    this.database.list('images/').snapshotChanges()
+    .subscribe({
+      next: images => {
+        
+        images.forEach(imageType => {
+          var imageObject:any = {};
+          imageObject.images = [];
+          imageObject.type = imageType.key;
+          var val = imageType.payload.val();
+          Object.keys(val).forEach((image:any) => {
+            imageObject.images.push({
+            small: val[image].imageURL,
+            medium: val[image].imageURL,
+            big: val[image].imageURL})
+          }); 
+          this.galleryImgs.push(imageObject)
+        });
+        console.log(this.galleryImgs);
+      },
+      error: err => console.error('something wrong occurred: ' + err),
+      complete: () => { console.log("done") }
+    })
 
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.galleryOptions = [
@@ -266,6 +272,18 @@ export default class HomeComponent implements OnInit {
         big: 'assets/Cover.jpeg'
       }
     ];
+  }
+
+  compareAndCreate = () => {
+    console.log("here")
+    console.log(this.galleryTypes)
+    if (this.images != []) {
+      this.images.forEach(image => {
+        if (this.galleryTypes.indexOf(image.galleryName) > -1) {
+
+        }
+      });
+    }
   }
 
   onChangeHandler() {
@@ -372,43 +390,4 @@ export default class HomeComponent implements OnInit {
   public onSwiperEvent(event: string): void {
     console.log('Swiper event: ', event);
   }
-<<<<<<< HEAD
-  // showImage() {
-    // var storageRef = this.firebase.storage().ref();
-    // var spaceRef = storageRef.child('admin/images/');
-    // storageRef.child('admin/images/').getDownloadURL().then(function(url) {
-    //     var test = url;
-    //     alert(url);
-    //     document.querySelector('img').src = test;
-
-    // }).catch(function(error) {
-
-    // });
-    // var storage=firebase.storage();
-    // var storageRef = storage.ref();
-
-    
-    // var i=0;
-    // storageRef.child('images').listAll().then(function(result){
-    //   result.items.forEach(function(imageRef){
-    //     // console.log("Image Ref" + imageRef.toString());
-    //     i++;
-    //     this.displayImage(i,imageRef);
-    //   })
-    // })
-  
-  // displayImage(images){
-  //   images.getDownloadURL().then(function(url){
-
-  //   })
-  // }
-  // showPreview(event: any){
-  //   const userStorageRef = firebase.storage().ref().child('images/');
-  //   userStorageRef.getDownloadURL().then(url => {
-  //     this.userProfileImg = url
-  //   });
-  // }
-  
-=======
->>>>>>> 468bea1b3ffb8938cb05bee8e4fce2a0a56560dc
 }

@@ -104,7 +104,7 @@ export class ImageComponentComponent {
 
     console.log(postData)
     // Get a key for a new Post.
-   this.database.list(`images/`).push(postData).then(()=> {
+   this.database.list(`images/${this.selectedType}`).push(postData).then(()=> {
     this.selectedType = '',
     this.selectedOrientation = '',
     this.selectedFrameURL = '',
