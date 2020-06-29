@@ -182,6 +182,16 @@ export default class HomeComponent implements OnInit {
       },
       { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
       { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 },
+      // ADDED THIS CODE
+      {
+        breakpoint: 1280,
+        width: '100%',
+        height: '375px',
+        imagePercent: 85,
+        thumbnailsPercent: 30,
+        thumbnailsMargin: 10,
+        thumbnailMargin: 10,
+      },
     ];
 
     this.singleGalleryOptions = [
@@ -207,6 +217,16 @@ export default class HomeComponent implements OnInit {
       {
         breakpoint: 400,
         preview: false
+      },
+      // ADDED THIS CODE
+      {
+        breakpoint: 1280,
+        width: '100%',
+        height: '375px',
+        imagePercent: 85,
+        thumbnailsPercent: 30,
+        thumbnailsMargin: 10,
+        thumbnailMargin: 10,
       },
     ];
 

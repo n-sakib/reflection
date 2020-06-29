@@ -4,7 +4,6 @@
  }
  .testi-uploader-inner h1{
     text-align: center;
-    
      font-size: 2em;
     padding-top: .05em;
  }
@@ -51,37 +50,16 @@
    padding: .25em 1.5em;
    color: white;
  }
- .rating{
-   justify-content: center;
+ .stars{
    align-items: center;
+   text-align: center;
  }
- .rating-wrapper {
-   justify-content: center;
+ .cont{
    align-items: center;
-   }
-.rating-input {
-   position: absolute;
-   left: 0;
-   top: -50px;
-   justify-content: center;
+   text-align: center;
+ }
+ .cont h1{
    align-items: center;
-   }
-
-.rating-wrapper:hover .rating-star:hover,
-.rating-wrapper:hover .rating-star:hover ~ .rating-star,
-.rating-input:checked ~ .rating-star {
-        background-position: 0 0;
-        justify-content: center;
-   align-items: center;
-   }
-.rating-star,
-.rating-wrapper:hover .rating-star {
-   float: right;
-   justify-content: center;
-   align-items: center;
-   display: block;
-   width: 16px;
-   height: 16px;
-   background: url('http://css-stars.com/wp-content/uploads/2013/12/stars.png') 0 -16px;
-   }
-   
+   text-align: center;
+   font-size: 2em;
+ }

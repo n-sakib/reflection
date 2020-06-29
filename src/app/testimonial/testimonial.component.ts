@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
@@ -7,10 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, from } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-
-
-
-
+import { StarRatingComponent } from 'ng-starrating';
 
 @Component({
   selector: 'app-testimonial',
@@ -36,9 +33,8 @@ export class TestimonialComponent implements OnInit {
   selectedName: string = '';
   selectedDescription: string = '';
   selectedAddress: string = '';
+  totalstar = 10;
 
-
-  
 
   // srcResult;
   imgSrc: string = './assets/featured.jpeg';
@@ -57,17 +53,23 @@ export class TestimonialComponent implements OnInit {
 
   
 
-  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder) {
+  // @Input('rating') private rating: number = 3;
+  // @Input('starCount') private starCount: number = 5;
+  // @Input('color') private color: string = 'accent';
+  // @Output() private ratingUpdated = new EventEmitter();
 
-  }
+  // private snackBarDuration: number = 2000;
+  // private ratingArr = [];
+
+
+  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder) {}
 
   name = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
-  // rating = new FormControl('');
   
   public form: FormGroup;
-
+  
 
 
   getErrorMessage() {
@@ -97,12 +99,13 @@ export class TestimonialComponent implements OnInit {
     this.selectedAddress = value;
   }
 
-  // addRating($event){
-  //   var value = $event.target.value;
-  //   this.selectedAddress = value;
-  // }
+  
 
   ngOnInit(): void {
+    // console.log("a "+this.starCount)
+    // for (let index = 0; index < this.starCount; index++) {
+    //   this.ratingArr.push(index);
+    // }
     
   }
   completed: boolean = false;
@@ -122,6 +125,15 @@ export class TestimonialComponent implements OnInit {
     reader.onerror = error => reject(error);
   });
   
+  
+  
+
+  onRate($event:{newValue:number, starRating:StarRatingComponent}) {
+        var value = $event.newValue;
+        this.selectedRating = value;
+  }
+  
+
   next(stepper, step) {
     switch (step) {
       case 1:

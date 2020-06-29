@@ -15,6 +15,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const material = [
   MatButtonModule,
@@ -34,6 +35,7 @@ const material = [
   FormsModule,
   ReactiveFormsModule,
   MatSelectModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

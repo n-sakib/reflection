@@ -60,32 +60,11 @@
 
       <mat-step>
         <ng-template matStepLabel>Rating</ng-template>
-
-        <div class="rating">
-          <div class="rating-wrapper">
-            <!-- <input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1"/>
-            <label for="rating-input-1-5" class="rating-star"></label>
-            <input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1"/>
-            <label for="rating-input-1-4" class="rating-star"></label>
-            <input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1"/>
-            <label for="rating-input-1-3" class="rating-star"></label>
-            <input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1"/>
-            <label for="rating-input-1-2" class="rating-star"></label>
-            <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1"/>
-            <label for="rating-input-1-1" class="rating-star"></label> -->
-
-            <div class="rating-box">
-              <h1>Rating System</h1>
-                <div class="ratings">
-                   <span class="fa fa-star-o"></span>
-                   <span class="fa fa-star-o"></span>
-                   <span class="fa fa-star-o"></span>
-                   <span class="fa fa-star-o"></span>
-                   <span class="fa fa-star-o"></span>
-                </div>
-                <input type="text" id="rating-value">
-           </div>
-
+        <div class="cont">
+          <h1>Please Give Rating</h1>
+          <div class="stars">
+            <star-rating value="5" totalstars={{totalstar}} checkedcolor="red" uncheckedcolor="black" size="24px"
+              readonly="false" (rate)="onRate($event)"></star-rating>
           </div>
         </div>
         <div class="backNextImage">
@@ -104,7 +83,7 @@
         </div>
         <div class="backNextImage">
           <button mat-flat-button color="primary"
-            class="backNex                                              tImage-button"
+            class="backNextImage-button"
             matStepperPrevious>Back</button>&nbsp;
         </div>
       </mat-step>
