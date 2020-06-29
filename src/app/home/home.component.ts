@@ -169,22 +169,53 @@ export default class HomeComponent implements OnInit {
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
     this.galleryOptions = [
+      // {
+      //   width: '600px',
+      //   height: '400px',
+      //   thumbnailsColumns: 4,
+      //   arrowPrevIcon: 'fa fa-chevron-left',
+      //   arrowNextIcon: 'fa fa-chevron-right',
+      //   imageAnimation: NgxGalleryAnimation.Slide,
+      //   imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
+      //   preview: false,
+      //   imageDescription: true
+      // },
       {
-        width: '600px',
-        height: '400px',
-        thumbnailsColumns: 4,
-        arrowPrevIcon: 'fa fa-chevron-left',
-        arrowNextIcon: 'fa fa-chevron-right',
-        imageAnimation: NgxGalleryAnimation.Slide,
-        imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
-        preview: false,
-        imageDescription: true
+        breakpoint: 400,
+        preview: false
       },
-      { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
-      { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 },
-      // ADDED THIS CODE
+      {
+        breakpoint: 600,
+        width: '100%',
+        height: '375px',
+        imagePercent: 85,
+        thumbnailsPercent: 30,
+        thumbnailsMargin: 10,
+        thumbnailMargin: 10,
+      },
+      {
+        breakpoint: 960,
+        width: '100%',
+        height: '375px',
+        imagePercent: 85,
+        thumbnailsPercent: 30,
+        thumbnailsMargin: 10,
+        thumbnailMargin: 10,
+      },
       {
         breakpoint: 1280,
+        width: '100%',
+        height: '375px',
+        imagePercent: 85,
+        thumbnailsPercent: 30,
+        thumbnailsMargin: 10,
+        thumbnailMargin: 10,
+      },
+      // { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
+      // { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 },
+      // ADDED THIS CODE
+      {
+        breakpoint: 1920,
         width: '100%',
         height: '375px',
         imagePercent: 85,
@@ -205,7 +236,7 @@ export default class HomeComponent implements OnInit {
       },
       // max-width 800
       {
-        breakpoint: 800,
+        breakpoint: 600,
         width: '100%',
         height: '600px',
         imagePercent: 80,
@@ -248,6 +279,7 @@ export default class HomeComponent implements OnInit {
       }
     ];
   }
+
   onChangeHandler() {
     this.setImageObject();
     this.showSlider = false;
