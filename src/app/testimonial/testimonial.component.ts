@@ -33,7 +33,7 @@ export class TestimonialComponent implements OnInit {
   selectedName: string = '';
   selectedDescription: string = '';
   selectedAddress: string = '';
-  totalstar = 10;
+  totalstar = 5;
 
 
   // srcResult;

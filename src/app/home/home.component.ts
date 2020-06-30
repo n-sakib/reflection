@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
@@ -45,6 +45,7 @@ export default class HomeComponent implements OnInit {
   breakpoint;
   galleryTypes = [];
   images = [];
+ 
   public show: boolean = true;
   galleryImgs = [];
 
@@ -169,7 +170,7 @@ export default class HomeComponent implements OnInit {
 
   @ViewChild(SwiperComponent) componentRef?: SwiperComponent;
   @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
-
+  
 
   constructor(private dialog: MatDialog, private database: AngularFireDatabase) {
     // this.setImageObject();
@@ -195,6 +196,7 @@ export default class HomeComponent implements OnInit {
             big: val[image].imageURL})
           }); 
           this.galleryImgs.push(imageObject)
+         
         });
         console.log(this.galleryImgs);
       },
@@ -320,10 +322,12 @@ export default class HomeComponent implements OnInit {
     this.ds.next();
   }
 
-  imageOnClick1(): void {
+  imageOnClick1(event,index):void {
+    console.log(index)  
     const dialogRef = this.dialog.open(PaidPictureComponent, {
-      width: '100%', height: '90%',
-    });
+      
+      width: '100%', height: '70%',
+    });dialogRef.componentInstance.galleryImgs=this.galleryImgs
   }
 
   deleteImage(event, index): void {
