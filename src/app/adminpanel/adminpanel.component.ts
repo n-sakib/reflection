@@ -48,12 +48,19 @@ export class AdminpanelComponent implements OnInit {
     const dialogRef = this.dialog.open(ImageComponentComponent, {
       width: '85%',height: '85%',
     });
+    dialogRef.afterClosed().subscribe(data=>{
+      console.log("Closed",data);
+  })
+   
   }
 
   openTestimonial(): void {
     const dialogRef = this.dialog.open(TestimonialComponent, {
       width: '85%',height: '85%',
     });
+    dialogRef.afterClosed().subscribe(data=>{
+      console.log("Closed",data);
+  })
   }
 
 }
