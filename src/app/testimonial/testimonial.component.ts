@@ -50,7 +50,7 @@ export class TestimonialComponent implements OnInit {
   isImageSubmitting: boolean = false;
   selectedRating;
   isImageSubmitted: boolean = false;
-
+  mobile;
   
 
   // @Input('rating') private rating: number = 3;
@@ -102,10 +102,8 @@ export class TestimonialComponent implements OnInit {
   
 
   ngOnInit(): void {
-    // console.log("a "+this.starCount)
-    // for (let index = 0; index < this.starCount; index++) {
-    //   this.ratingArr.push(index);
-    // }
+   
+   
     
   }
   completed: boolean = false;
@@ -228,4 +226,5 @@ export class TestimonialComponent implements OnInit {
 
     // return firebase.database().ref().update(updates);
   }
+  
 }
