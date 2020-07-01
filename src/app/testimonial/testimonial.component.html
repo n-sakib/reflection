@@ -1,91 +1,97 @@
 <section id="testimonial-uploader">
   <div class="testi">
-    <mat-horizontal-stepper linear #stepper  (selectionChange)="doSomething($event)">
-      <mat-step>
-        <ng-template matStepLabel>Details and Testimonial</ng-template>
-        <div class="testi-info">
-          <h1>Write Testimonial Information</h1>
-          <h3>Fill out the Form</h3>
-          <div class="example-container">
-            <mat-form-field appearance="fill">
-              <mat-label>Enter your name</mat-label>
-              <input matInput placeholder="Elton John" [formControl]="name" required (keyup)="addName($event)">
-              <!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
-            </mat-form-field><br>
-            <mat-form-field appearance="fill">
-              <mat-label>Enter your address</mat-label>
-              <input matInput placeholder="Nuremberg Germany" [formControl]="address" required
-                (keyup)="addAddress($event)">
-              <!-- <mat-error *ngIf="address.invalid">{{getErrorMessage()}}</mat-error> -->
-            </mat-form-field><br>
-            <mat-form-field appearance="fill">
-              <mat-label>Enter your email</mat-label>
-              <input matInput placeholder="pat@example.com" [formControl]="email" required>
-              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field><br>
-            <mat-form-field appearance="fill">
-              <mat-label>Description</mat-label>
-              <input matInput placeholder="Image Description" [formControl]="description" required
-                (keyup)="addDescription($event)">
-              <mat-error *ngIf="description.invalid">{{getErrorMessage()}}</mat-error>
-            </mat-form-field>
+    <button mat-flat-button color="primary" [mat-dialog-close]="true">Close</button>
+      <mat-horizontal-stepper linear #stepper>
+        <mat-step >
+          <div>
+            <ng-template matStepLabel>Details and Testimonial</ng-template>
+          </div>
+          <div class="testi-info">
+            <h1>Write Testimonial Information</h1>
+            <h3>Fill out the Form</h3>
+            <div class="example-container">
+              <mat-form-field appearance="fill">
+                <mat-label>Enter your name</mat-label>
+                <input matInput placeholder="Elton John" [formControl]="name" required (keyup)="addName($event)">
+                <!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field><br>
+              <mat-form-field appearance="fill">
+                <mat-label>Enter your address</mat-label>
+                <input matInput placeholder="Nuremberg Germany" [formControl]="address" required
+                  (keyup)="addAddress($event)">
+                <!-- <mat-error *ngIf="address.invalid">{{getErrorMessage()}}</mat-error> -->
+              </mat-form-field><br>
+              <mat-form-field appearance="fill">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field><br>
+              <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="Image Description" [formControl]="description" required
+                  (keyup)="addDescription($event)">
+                <mat-error *ngIf="description.invalid">{{getErrorMessage()}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="backNextImage">
+              <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 1)">Next</button>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Testimonial Image</ng-template>
+          <div class="testi-uploader-inner">
+            <h1>Choose Testimonial Image</h1>
+            <h3>Supported Formats: jpg,PNG</h3>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox" width="400" height="400">
+            </div>
+            <div *ngIf="isImageSubmitting">
+              <mat-progress-bar mode="indeterminate" class="progress-bar"></mat-progress-bar>
+            </div>
+            <button class="upload-button" mat-flat-button color="primary" (click)="imageInput.click()">Choose
+              Image</button>
+            <input hidden (change)="onImageSelected()" #imageInput type="file" id="imageFile">
+            &nbsp;&nbsp;
           </div>
           <div class="backNextImage">
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+            <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 2)">Next</button>
           </div>
-        </div>
-      </mat-step>
+        </mat-step>
 
-      <mat-step>
-        <ng-template matStepLabel>Testimonial Image</ng-template>
-        <div class="testi-uploader-inner">
-          <h1>Choose Testimonial Image</h1>
-          <h3>Supported Formats: jpg,PNG</h3>
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox" width="400" height="400">
+        <mat-step>
+          <ng-template matStepLabel>Rating</ng-template>
+          <div class="cont">
+            <h1>Please Give Rating</h1>
+            <div class="stars" >
+              <star-rating value="0" totalstars={{totalstar}} checkedcolor="GoldenRod " uncheckedcolor="black" size="24px"
+                readonly="false" (rate)="onRate($event)"></star-rating>
+              
+            </div>
           </div>
-          <div *ngIf="isImageSubmitting">
-            <mat-progress-bar mode="indeterminate" class="progress-bar"></mat-progress-bar>
+          <div class="backNextImage">
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
+            <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 3)">Next</button>
           </div>
-          <button class="upload-button" mat-flat-button color="primary" (click)="imageInput.click()">Choose
-            Image</button>
-          <input hidden (change)="onImageSelected()" #imageInput type="file" id="imageFile">
-          &nbsp;&nbsp;
-        </div>
-        <div class="backNextImage">
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
-        </div>
-      </mat-step>
+        </mat-step>
 
-      <mat-step>
-        <ng-template matStepLabel>Rating</ng-template>
-        <div class="cont">
-          <h1>Please Give Rating</h1>
-          <div class="stars">
-            <star-rating value="5" totalstars={{totalstar}} checkedcolor="red" uncheckedcolor="black" size="24px"
-              readonly="false" (rate)="onRate($event)"></star-rating>
+        <mat-step>
+          <ng-template matStepLabel>Publish Testimonial</ng-template>
+          <div class="publish-testimonial">
+            <h2>Now Publish Your Testimonial here!</h2>
+            <div class="publish-button">
+              <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 4)">Publish</button>
+            </div>
           </div>
-        </div>
-        <div class="backNextImage">
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
-        </div>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>Publish Testimonial</ng-template>
-        <div class="publish-testimonial">
-          <h2>Now Publish Your Testimonial here!</h2>
-          <div class="publish-button">
-            <button mat-flat-button color="primary" class="backNextImage-button" (click)="publish()">Publish</button>
+          <div class="backNextImage">
+            <button mat-flat-button color="primary"
+              class="backNextImage-button"
+              matStepperPrevious>Back</button>&nbsp;
           </div>
-        </div>
-        <div class="backNextImage">
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
+        </mat-step>
+      </mat-horizontal-stepper>
 
   </div>
 </section>

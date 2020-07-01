@@ -105,6 +105,7 @@ h2 {
 .testimonial-image, .testimonial-video{
     width: 350px;
 }
+<<<<<<< HEAD
 
 @media only screen and (max-width: 825px) {
     // .testimonial-image {
@@ -114,6 +115,19 @@ h2 {
     //     width: 150px;
     // }
     .swiper-container{
+=======
+.slide{
+    padding: .5em;
+}
+@media only screen and (max-width: 600px) {
+    image-testi {
+        width: 100px;
+    }
+    video-testi{
+        width: 150px;
+    }
+    swiper-container{
+>>>>>>> 8eda813c939ebdaa3f241e84877964465e8aafad
        width: 300px; 
     }
     

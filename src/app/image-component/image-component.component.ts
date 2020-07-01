@@ -32,6 +32,7 @@ export class ImageComponentComponent {
   isFrameSubmitting: boolean = false;
   isImageSubmitting: boolean = false;
   selectedTitle: string = '';
+  isPublished: boolean = true;
   selectedDescription: string = '';
 
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, private _sanitizer: DomSanitizer) {
@@ -49,12 +50,12 @@ export class ImageComponentComponent {
     this.selectedOrientation = view;
   }
 
-  addTitle($event){
+  addTitle($event) {
     var value = $event.target.value;
     this.selectedTitle = value;
   }
 
-  addDescription($event){
+  addDescription($event) {
     var value = $event.target.value;
     this.selectedDescription = value;
   }
@@ -104,17 +105,17 @@ export class ImageComponentComponent {
 
     console.log(postData)
     // Get a key for a new Post.
-   this.database.list(`images/`).push(postData).then(()=> {
-    this.selectedType = '',
-    this.selectedOrientation = '',
-    this.selectedFrameURL = '',
-    this.selectedImageURL = '',
-    this.selectedTitle = '',
-    this.selectedDescription = '',
-    this.snackBar.open('Successfully uploaded image.', 'OK', {
-      duration: 2000,
-    });
-   })
+    this.database.list(`images/${this.selectedType}`).push(postData).then(() => {
+      this.selectedType = '',
+        this.selectedOrientation = '',
+        this.selectedFrameURL = '',
+        this.selectedImageURL = '',
+        this.selectedTitle = '',
+        this.selectedDescription = '',
+        this.snackBar.open('Successfully uploaded image.', 'OK', {
+          duration: 2000,
+        });
+    })
 
     // // Write the new post's data simultaneously in the posts list and the user's post list.
     // var updates = {};
@@ -154,7 +155,7 @@ export class ImageComponentComponent {
         }
         break;
       case 4:
-        if (this.selectedFrameURL === '') {
+        if (this.selectedImageURL === '') {
           this.snackBar.open('Upload your image.', 'OK', {
             duration: 2000,
           });
@@ -163,23 +164,21 @@ export class ImageComponentComponent {
         }
         break;
       case 5:
-        if (this.selectedImageURL === '') {
-          this.snackBar.open('Enter Details.', 'OK', {
+        if (this.selectedTitle === '' || this.selectedDescription === '') {
+          this.snackBar.open('Enter Image Information.', 'OK', {
             duration: 2000,
           });
         } else {
           stepper.next();
         }
         break;
-        case 6:
-          if (this.selectedTitle === '' || this.selectedDescription === '' ) {
-            this.snackBar.open('Enter Image Information.', 'OK', {
-              duration: 2000,
-            });
-          } else {
-            stepper.next();
-          }
-          break;
+      case 6:
+        if (this.isPublished === true) {
+          this.snackBar.open('You have Successfully Published Your Image', 'OK', {
+            duration: 2000,
+          });
+        }
+        break;
       default:
       // code block
     }

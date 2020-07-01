@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import {
   SwiperComponent,
@@ -15,6 +15,7 @@ import {
   SwiperPaginationInterface
 } from 'ngx-swiper-wrapper';
 import { types } from 'util';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -41,12 +42,12 @@ export default class HomeComponent implements OnInit {
   imageObject: Array<object> = [];
   galleryOptions: NgxGalleryOptions[];
   singleGalleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
   breakpoint;
-  galleryTypes=[];
-  images=[];
+  galleryTypes = [];
+  images = [];
+ 
   public show: boolean = true;
-
+  galleryImgs = [];
 
 
   public slides = [
@@ -116,7 +117,7 @@ export default class HomeComponent implements OnInit {
 
   imgSrc: string = '';
   selectedImage: any = null;
-  userProfileImg :'';
+  userProfileImg: '';
   imageTypes: Observable<any[]>;
 
   public type: string = 'component';
@@ -159,7 +160,7 @@ export default class HomeComponent implements OnInit {
 
   @ViewChild(SwiperComponent) componentRef?: SwiperComponent;
   @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
-
+  
 
   constructor(private dialog: MatDialog, private database: AngularFireDatabase) {
     // this.setImageObject();
@@ -169,29 +170,45 @@ export default class HomeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.database.list('images/').snapshotChanges()
+    .subscribe({
+      next: images => {
+        
+        images.forEach(imageType => {
+          var imageObject:any = {};
+          imageObject.images = [];
+          imageObject.type = imageType.key;
+          var val = imageType.payload.val();
+          Object.keys(val).forEach((image:any) => {
+            imageObject.images.push({
+            small: val[image].imageURL,
+            medium: val[image].imageURL,
+            big: val[image].imageURL})
+          }); 
+          this.galleryImgs.push(imageObject)
+         
+        });
+        console.log(this.galleryImgs);
+      },
+      error: err => console.error('something wrong occurred: ' + err),
+      complete: () => { console.log("done") }
+    })
 
-    this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
-    this.imageTypes.subscribe(galleryTypes => {galleryTypes.forEach(gallery => {
-      this.galleryTypes.push(gallery.payload.val());
-    });});
-      let ref = this.database.list('images/').snapshotChanges();
-      ref.subscribe(images => {images.forEach(image => {
-        var val:any= image.payload.val();
-        if (this.galleryTypes.indexOf(val.galleryName)>-1){
-          console.log(this.galleryTypes.indexOf(val.galleryName));
-        }
-        this.images.push(image.payload.val());
-
-      });});
-
-
-    
-
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 2;
+    this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     this.galleryOptions = [
+      // {
+      //   width: '600px',
+      //   height: '400px',
+      //   thumbnailsColumns: 4,
+      //   arrowPrevIcon: 'fa fa-chevron-left',
+      //   arrowNextIcon: 'fa fa-chevron-right',
+      //   imageAnimation: NgxGalleryAnimation.Slide,
+      //   imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
+      //   preview: false,
+      //   imageDescription: true
+      // },
       {
         width: '600px',
-        height: '400px',
         thumbnailsColumns: 4,
         arrowPrevIcon: 'fa fa-chevron-left',
         arrowNextIcon: 'fa fa-chevron-right',
@@ -200,37 +217,50 @@ export default class HomeComponent implements OnInit {
         preview: false,
         imageDescription: true
       },
-      { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
-      { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
+      { "breakpoint": 1080, "width": "400px", "height":"280px", "thumbnailsColumns": 4 },
+      { "breakpoint": 1280, "width": "500px" },
+      { "breakpoint": 920, "width": "640px", "height":"480px", "thumbnailsColumns": 4 },
+      { "breakpoint": 720, "width": "500px", "height":"400px", "thumbnailsColumns": 4 },
+      { "breakpoint": 640, "width": "400px", "height":"370px", "thumbnailsColumns": 4 },
+      { "breakpoint": 520, "width": "350px", "height":"350px", "thumbnailsColumns": 4 },
     ];
 
     this.singleGalleryOptions = [
       {
-        width: '600px',
-        height: '400px',
-        thumbnailsColumns: 4,
-        arrowPrevIcon: 'fa fa-chevron-left',
-        arrowNextIcon: 'fa fa-chevron-right',
-        imageAnimation: NgxGalleryAnimation.Slide
+        breakpoint: 400,
+        width: '80%',
+        height: '150px',
+        imagePercent: 65,
+        thumbnailsPercent: 18,
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
       },
-      // max-width 800
       {
-        breakpoint: 800,
+        breakpoint: 600,
         width: '100%',
-        height: '600px',
-        imagePercent: 80,
+        height: '200px',
+        imagePercent: 85,
         thumbnailsPercent: 20,
-        thumbnailsMargin: 20,
-        thumbnailMargin: 20
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
+      },
+      {
+        breakpoint: 960,
+        width: '100%',
+        height: '250px',
+        imagePercent: 75,
+        thumbnailsPercent: 25,
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
       },
       {
         breakpoint: 1280,
         width: '100%',
-        height: '375px',
-        imagePercent: 80,
-        thumbnailsPercent: 30,
-        thumbnailsMargin: 10,
-        thumbnailMargin: 10,
+        height: '250px',
+        imagePercent: 75,
+        thumbnailsPercent: 25,
+        thumbnailsMargin: 5,
+        thumbnailMargin: 5,
       },
       // max-width 400
       {
@@ -238,24 +268,18 @@ export default class HomeComponent implements OnInit {
         preview: false
       }
     ];
+  }
 
-    this.galleryImages = [
-      {
-        small: 'assets/Cover.jpeg',
-        medium: 'assets/Cover.jpeg',
-        big: 'assets/Cover.jpeg'
-      },
-      {
-        small: 'assets/Cover.jpeg',
-        medium: 'assets/Cover.jpeg',
-        big: 'assets/Cover.jpeg'
-      },
-      {
-        small: 'assets/Cover.jpeg',
-        medium: 'assets/Cover.jpeg',
-        big: 'assets/Cover.jpeg'
-      }
-    ];
+  compareAndCreate = () => {
+    console.log("here")
+    console.log(this.galleryTypes)
+    if (this.images != []) {
+      this.images.forEach(image => {
+        if (this.galleryTypes.indexOf(image.galleryName) > -1) {
+
+        }
+      });
+    }
   }
 
   onChangeHandler() {
@@ -288,10 +312,12 @@ export default class HomeComponent implements OnInit {
     this.ds.next();
   }
 
-  imageOnClick1(): void {
+  imageOnClick1(event,index):void {
+    console.log(index)  
     const dialogRef = this.dialog.open(PaidPictureComponent, {
-      width: '100%', height: '90%',
-    });
+      
+      width: '100%', height: '70%',
+    });dialogRef.componentInstance.galleryImgs=this.galleryImgs
   }
 
   deleteImage(event, index): void {
@@ -299,7 +325,7 @@ export default class HomeComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth < 900) ? 1 : 2;
+    this.breakpoint = (event.target.innerWidth <920) ? 1 : 2;
   }
   public toggleType(): void {
     this.type = (this.type === 'component') ? 'directive' : 'component';
@@ -361,7 +387,10 @@ export default class HomeComponent implements OnInit {
   public onSwiperEvent(event: string): void {
     console.log('Swiper event: ', event);
   }
+<<<<<<< HEAD
   onResizeTesti(event) {
     this.breakpoint = (event.target.innerWidth <= 825) ? 1 : 2;
   }
+=======
+>>>>>>> 8eda813c939ebdaa3f241e84877964465e8aafad
 }

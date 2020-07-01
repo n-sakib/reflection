@@ -183,4 +183,10 @@
     .publish-button {
       padding-top: 10px;
     }
+    ::ng-deep .mat-horizontal-stepper-header{
+      pointer-events: none !important;
+    }
+    .closeButton{
+       float: left;
+    }
     

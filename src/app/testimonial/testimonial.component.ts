@@ -38,13 +38,13 @@ export class TestimonialComponent implements OnInit {
   selectedName: string = '';
   selectedDescription: string = '';
   selectedAddress: string = '';
-  totalstar = 10;
+  totalstar = 5;
 
 
   // srcResult;
   imgSrc: string = './assets/featured.jpeg';
   // selectedImage: any = null;
-  isPublished: boolean = false;
+  isPublished: boolean = true;
   checked = false;
   indeterminate = false;
   selectedType = '';
@@ -55,7 +55,7 @@ export class TestimonialComponent implements OnInit {
   isImageSubmitting: boolean = false;
   selectedRating;
   isImageSubmitted: boolean = false;
-
+  
   
 
   // @Input('rating') private rating: number = 3;
@@ -107,23 +107,8 @@ export class TestimonialComponent implements OnInit {
   
 
   ngOnInit(): void {
-    // console.log("a "+this.starCount)
-    // for (let index = 0; index < this.starCount; index++) {
-    //   this.ratingArr.push(index);
-    // }
-
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
-      name : ['', Validators.required],
-      description :['', Validators.required],
-      address : ['', Validators.required],
-      email : ['', Validators.required],
-  
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ''
-    });
-
+   
+   
     
   }
   completed: boolean = false;
@@ -173,7 +158,7 @@ export class TestimonialComponent implements OnInit {
         }
         break;
       case 3:
-        if (this.selectedRating === '') {
+        if (this.selectedRating === 0) {
           this.snackBar.open('Please rate the service.', 'OK', {
             duration: 2000,
           });
@@ -182,7 +167,7 @@ export class TestimonialComponent implements OnInit {
         }
         break;
       case 4:
-        if (this.isPublished === false) {
+        if (this.isPublished === true) {
           this.snackBar.open('Please publish your testimonial', 'OK', {
             duration: 2000,
           });
@@ -246,4 +231,6 @@ export class TestimonialComponent implements OnInit {
 
     // return firebase.database().ref().update(updates);
   }
+  
+  
 }
