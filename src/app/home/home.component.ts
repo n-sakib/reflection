@@ -182,7 +182,6 @@ export default class HomeComponent implements OnInit {
     this.database.list('images/').snapshotChanges()
     .subscribe({
       next: images => {
-        
         images.forEach(imageType => {
           var imageObject:any = {};
           imageObject.images = [];
@@ -203,18 +202,8 @@ export default class HomeComponent implements OnInit {
     })
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
+
     this.galleryOptions = [
-      // {
-      //   width: '600px',
-      //   height: '400px',
-      //   thumbnailsColumns: 4,
-      //   arrowPrevIcon: 'fa fa-chevron-left',
-      //   arrowNextIcon: 'fa fa-chevron-right',
-      //   imageAnimation: NgxGalleryAnimation.Slide,
-      //   imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
-      //   preview: false,
-      //   imageDescription: true
-      // },
       {
         width: '600px',
         thumbnailsColumns: 4,
@@ -278,18 +267,6 @@ export default class HomeComponent implements OnInit {
     ];
   }
 
-  compareAndCreate = () => {
-    console.log("here")
-    console.log(this.galleryTypes)
-    if (this.images != []) {
-      this.images.forEach(image => {
-        if (this.galleryTypes.indexOf(image.galleryName) > -1) {
-
-        }
-      });
-    }
-  }
-
   onChangeHandler() {
     this.setImageObject();
     this.showSlider = false;
@@ -320,7 +297,9 @@ export default class HomeComponent implements OnInit {
     this.ds.next();
   }
 
-  imageOnClick1(): void {
+  imageOnClick1(event, index): void {
+    console.log(event)
+    console.log(index)
     const dialogRef = this.dialog.open(PaidPictureComponent, {
       width: '100%', height: '90%',
     });
@@ -394,4 +373,5 @@ export default class HomeComponent implements OnInit {
   public onSwiperEvent(event: string): void {
     console.log('Swiper event: ', event);
   }
+  
 }
