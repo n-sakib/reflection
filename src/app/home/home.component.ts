@@ -129,18 +129,8 @@ export default class HomeComponent implements OnInit {
     keyboard: true,
     mousewheel: true,
     scrollbar: false,
-    autoplay: {
-      delay: 2000,
-    },
-    pagination: true,
-    speed: 1000,
-    navigation: {
-      nextEl: '.btn-Left',
-      prevEl: '.btn-Right',
-    },
-    effect: 'slide',
-    grabCursor: true,
-    loop: true,
+    navigation: true,
+    pagination: false
   }
 
   // public slides = [
@@ -311,7 +301,6 @@ export default class HomeComponent implements OnInit {
   onResize(event) {
     this.breakpoint = (event.target.innerWidth < 900) ? 1 : 2;
   }
-
   public toggleType(): void {
     this.type = (this.type === 'component') ? 'directive' : 'component';
   }
@@ -372,43 +361,7 @@ export default class HomeComponent implements OnInit {
   public onSwiperEvent(event: string): void {
     console.log('Swiper event: ', event);
   }
-<<<<<<< HEAD
-  // showImage() {
-    // var storageRef = this.firebase.storage().ref();
-    // var spaceRef = storageRef.child('admin/images/');
-    // storageRef.child('admin/images/').getDownloadURL().then(function(url) {
-    //     var test = url;
-    //     alert(url);
-    //     document.querySelector('img').src = test;
-
-    // }).catch(function(error) {
-
-    // });
-    // var storage=firebase.storage();
-    // var storageRef = storage.ref();
-
-    
-    // var i=0;
-    // storageRef.child('images').listAll().then(function(result){
-    //   result.items.forEach(function(imageRef){
-    //     // console.log("Image Ref" + imageRef.toString());
-    //     i++;
-    //     this.displayImage(i,imageRef);
-    //   })
-    // })
-  
-  // displayImage(images){
-  //   images.getDownloadURL().then(function(url){
-
-  //   })
-  // }
-  // showPreview(event: any){
-  //   const userStorageRef = firebase.storage().ref().child('images/');
-  //   userStorageRef.getDownloadURL().then(url => {
-  //     this.userProfileImg = url
-  //   });
-  // }
-  
-=======
->>>>>>> 468bea1b3ffb8938cb05bee8e4fce2a0a56560dc
+  onResizeTesti(event) {
+    this.breakpoint = (event.target.innerWidth <= 825) ? 1 : 2;
+  }
 }

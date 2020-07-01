@@ -1,6 +1,6 @@
 <section id="testimonial-uploader">
   <div class="testi">
-    <mat-horizontal-stepper linear #stepper>
+    <mat-horizontal-stepper linear #stepper  (selectionChange)="doSomething($event)">
       <mat-step>
         <ng-template matStepLabel>Details and Testimonial</ng-template>
         <div class="testi-info">
@@ -82,13 +82,7 @@
           </div>
         </div>
         <div class="backNextImage">
-<<<<<<< HEAD
           <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-=======
-          <button mat-flat-button color="primary"
-            class="backNextImage-button"
-            matStepperPrevious>Back</button>&nbsp;
->>>>>>> 468bea1b3ffb8938cb05bee8e4fce2a0a56560dc
         </div>
       </mat-step>
     </mat-horizontal-stepper>

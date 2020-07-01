@@ -15,6 +15,11 @@ import { StarRatingComponent } from 'ng-starrating';
   styleUrls: ['./testimonial.component.css']
 })
 export class TestimonialComponent implements OnInit {
+
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  isOptional = false;
+
   srcResult;
   frame: string;
   testiSrc: string = './assets/featured.jpeg';
@@ -62,7 +67,7 @@ export class TestimonialComponent implements OnInit {
   // private ratingArr = [];
 
 
-  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder) {}
 
   name = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
@@ -106,6 +111,19 @@ export class TestimonialComponent implements OnInit {
     // for (let index = 0; index < this.starCount; index++) {
     //   this.ratingArr.push(index);
     // }
+
+    this.firstFormGroup = this.formBuilder.group({
+      firstCtrl: ['', Validators.required],
+      name : ['', Validators.required],
+      description :['', Validators.required],
+      address : ['', Validators.required],
+      email : ['', Validators.required],
+  
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ''
+    });
+
     
   }
   completed: boolean = false;
