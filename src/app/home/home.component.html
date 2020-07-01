@@ -40,26 +40,27 @@
         <div class="gallery-inner">
             <h2>TESTIMONIALS</h2>
             <div class="swiper-container">
-                <swiper [swiper]="config">
+                <swiper class="swiper" [swiper]="config" [config]="config" [disabled]="disabled" (indexChange)="onIndexChange($event)"
+                    (swiperTransitionStart)="onSwiperEvent('transitionStart')"
+                    (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
                     <div *ngFor="let slide of slides" class="swiper-slide">
-                        <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+                        <div class="slide-container">
                             <mat-card class="slide">
                                 <mat-card-header class="testi-header">
                                     <div mat-card-avatar class="example-header-image"></div>
                                     <mat-card-title>Shiba Inu</mat-card-title>
                                     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
                                 </mat-card-header>
-                                <div class="slider" fxLayout="row" fxLayoutAlign="center center">
-                                    <mat-grid-list [cols]="breakpoint" rowHeight="2:1"
-                                        (window:resize)="onResize($event)" class="grid-layout-custom">
-                                        <mat-grid-tile>
-                                                <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
-                                                class="testimonial-image">                                         
+                                <div class="slider">
+                                    <mat-grid-list cols="2"rowHeight="1:.5" [cols]="breakpoint" (window:resize)="onResizeTesti($event)">
+                                        <mat-grid-tile class="demo">
+                                            <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
+                                                class="testimonial-image">
                                         </mat-grid-tile>
-                                        <mat-grid-tile>
-                                                <iframe class="video-testi"
-                                                src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0"
-                                                frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                                        <mat-grid-tile class="demo">
+                                        <iframe class="video-testi"
+                                            src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0"
+                                            frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                                         </mat-grid-tile>
                                     </mat-grid-list>
                                 </div>
@@ -95,8 +96,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</div> -->
+    </div> -->
 
 
     <div id="outer">

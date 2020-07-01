@@ -133,7 +133,7 @@ export default class HomeComponent implements OnInit {
     autoplay: {
       delay: 2000,
     },
-    pagination: true,
+    pagination: false,
     speed: 1000,
     navigation: {
       nextEl: '.btn-Left',
@@ -203,6 +203,7 @@ export default class HomeComponent implements OnInit {
       error: err => console.error('something wrong occurred: ' + err),
       complete: () => { console.log("done") }
     })
+  
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     this.galleryOptions = [
@@ -279,6 +280,8 @@ export default class HomeComponent implements OnInit {
       }
     ];
   }
+  
+
 
   compareAndCreate = () => {
     console.log("here")
