@@ -16,21 +16,19 @@
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
                 <div class="padded">
- 
-                        <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner"
-                            (window:resize)="onResize($event)">
-                            <mat-grid-tile *ngFor = "let gallery of galleryImgs">
-                                <mat-card class="example-card">
+                    <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner" (window:resize)="onResize($event)">
+                        <mat-grid-tile *ngFor="let gallery of galleryImgs">
+                            <mat-card class="example-card">
                                 <div class="gallery petpotrait">
                                     <h3>{{gallery.type}}</h3>
                                     <!-- <div *ngFor="let image of images" ></div> -->
-                                    <ngx-gallery  [options]="galleryOptions" [images]="gallery.images"
+                                    <ngx-gallery [options]="galleryOptions" [images]="gallery.images"
                                         class="ngx-gallery">
                                     </ngx-gallery>
                                 </div>
-                                </mat-card>
-                            </mat-grid-tile>
-                        </mat-grid-list>
+                            </mat-card>
+                        </mat-grid-tile>
+                    </mat-grid-list>
                 </div>
             </div>
         </div>
@@ -53,11 +51,11 @@
                                     <mat-grid-list [cols]="breakpoint" rowHeight="2:1"
                                         (window:resize)="onResize($event)" class="grid-layout-custom">
                                         <mat-grid-tile>
-                                                <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
-                                                class="testimonial-image">                                         
+                                            <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
+                                                class="testimonial-image">
                                         </mat-grid-tile>
                                         <mat-grid-tile>
-                                                <iframe class="video-testi"
+                                            <iframe class="video-testi"
                                                 src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0"
                                                 frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                                         </mat-grid-tile>
@@ -99,15 +97,15 @@
 </div>
 
 
-    <div id="outer">
-        <div id="inner">
-            <h2 class="contact">GET IN TOUCH</h2>
-            <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take
-                it
-                from there!</h3>
-            <mat-form-field class="contact-field" color="tartiary">
-                <input matInput placeholder="Email Address" color="tartiary">
-            </mat-form-field>
-            <button mat-flat-button color="secondary">CONTACT US</button>
-        </div>
+<div id="outer">
+    <div id="inner">
+        <h2 class="contact">GET IN TOUCH</h2>
+        <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take
+            it
+            from there!</h3>
+        <mat-form-field class="contact-field" color="tartiary">
+            <input matInput placeholder="Email Address" color="tartiary">
+        </mat-form-field>
+        <button mat-flat-button color="secondary">CONTACT US</button>
     </div>
+</div>
