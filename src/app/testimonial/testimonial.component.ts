@@ -62,7 +62,7 @@ export class TestimonialComponent implements OnInit {
   // private ratingArr = [];
 
 
-  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder) {}
+  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder,public dialogRef: MatDialog) {}
 
   name = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
@@ -136,7 +136,7 @@ export class TestimonialComponent implements OnInit {
   next(stepper, step) {
     switch (step) {
       case 1:
-        if (this.selectedName === '' && this.selectedAddress === '' && this.selectedDescription === '') {
+        if (this.selectedName === '' && this.selectedAddress === '' || this.selectedDescription === '') {
           this.snackBar.open('Please enter your details.', 'OK', {
             duration: 2000,
           });
@@ -154,7 +154,8 @@ export class TestimonialComponent implements OnInit {
         }
         break;
       case 3:
-        if (this.selectedRating === '') {
+        console.log(this.selectedRating)
+        if (typeof this.selectedRating === 'undefined') {
           this.snackBar.open('Please rate the service.', 'OK', {
             duration: 2000,
           });
@@ -214,11 +215,12 @@ export class TestimonialComponent implements OnInit {
         this.selectedAddress = '',
         this.selectedImageURL = '',
         this.selectedDescription = '',
-        this.selectedRating = '',
+        this.selectedRating = 0,
         this.snackBar.open('Successfully uploaded testimonial.', 'OK', {
           duration: 2000,
         });
-    })
+        this.dialogRef.closeAll();
+    }) 
 
     // // Write the new post's data simultaneously in the posts list and the user's post list.
     // var updates = {};

@@ -116,3 +116,7 @@ $rf-theme: mat-light-theme($rf-palette-primary, $rf-palette-secondary);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Lato, "Helvetica Neue", sans-serif; }
+
+button{
+    border-radius: 0!important;
+}

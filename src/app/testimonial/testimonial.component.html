@@ -1,32 +1,35 @@
 <section id="testimonial-uploader">
+  <div fxLayout="row" fxLayoutAlign="end center" >
+
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+      <mat-icon class="close-icon" color="primary">close</mat-icon>
+    </button><br>
+  </div>
   <div class="testi">
-    <button mat-flat-button color="primary" [mat-dialog-close]="true">Close</button>
-      <mat-horizontal-stepper linear #stepper>
+   
+      <mat-horizontal-stepper  linear #stepper>
         <mat-step >
-          <div>
-            <ng-template matStepLabel>Details and Testimonial</ng-template>
-          </div>
           <div class="testi-info">
             <h1>Write Testimonial Information</h1>
             <h3>Fill out the Form</h3>
             <div class="example-container">
-              <mat-form-field appearance="fill">
+              <mat-form-field class="field-form" appearance="fill">
                 <mat-label>Enter your name</mat-label>
                 <input matInput placeholder="Elton John" [formControl]="name" required (keyup)="addName($event)">
-                <!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
+                <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field><br>
-              <mat-form-field appearance="fill">
+              <mat-form-field class="field-form" appearance="fill">
                 <mat-label>Enter your address</mat-label>
                 <input matInput placeholder="Nuremberg Germany" [formControl]="address" required
                   (keyup)="addAddress($event)">
-                <!-- <mat-error *ngIf="address.invalid">{{getErrorMessage()}}</mat-error> -->
+                <mat-error *ngIf="address.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field><br>
-              <mat-form-field appearance="fill">
+              <mat-form-field class="field-form" appearance="fill">
                 <mat-label>Enter your email</mat-label>
                 <input matInput placeholder="pat@example.com" [formControl]="email" required>
                 <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field><br>
-              <mat-form-field appearance="fill">
+              <mat-form-field class="field-form" appearance="fill">
                 <mat-label>Description</mat-label>
                 <input matInput placeholder="Image Description" [formControl]="description" required
                   (keyup)="addDescription($event)">
@@ -40,7 +43,6 @@
         </mat-step>
 
         <mat-step>
-          <ng-template matStepLabel>Testimonial Image</ng-template>
           <div class="testi-uploader-inner">
             <h1>Choose Testimonial Image</h1>
             <h3>Supported Formats: jpg,PNG</h3>
@@ -62,7 +64,6 @@
         </mat-step>
 
         <mat-step>
-          <ng-template matStepLabel>Rating</ng-template>
           <div class="cont">
             <h1>Please Give Rating</h1>
             <div class="stars" >
@@ -73,12 +74,11 @@
           </div>
           <div class="backNextImage">
             <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 3)">Next</button>
           </div>
         </mat-step>
 
         <mat-step>
-          <ng-template matStepLabel>Publish Testimonial</ng-template>
           <div class="publish-testimonial">
             <h2>Now Publish Your Testimonial here!</h2>
             <div class="publish-button">

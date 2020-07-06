@@ -1,11 +1,17 @@
 <section id="image-upload-center">
-  <div class="imageLoad">
-    <button mat-flat-button color="primary"  [mat-dialog-close]="true">Close</button>
+  
+    <div fxLayout="row" fxLayoutAlign="end center" >
+
+      <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon" color="primary">close</mat-icon>
+      </button><br>
+    </div>
+    <div class="imageLoad">
       <mat-horizontal-stepper  linear #stepper>
         <!-- #docregion label -->
-        <mat-step label="Photo Type">
+        <mat-step >
           <div class="typeSelection">
-            <h1>Choose Type</h1>
+            <h1>Choose Photo Type</h1>
             <mat-form-field class="imageType">
     
               <mat-label class="type">Select an option</mat-label>
@@ -19,7 +25,7 @@
             <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 1)">Next</button>
           </div>
         </mat-step>
-        <mat-step label="Photo Orientation">
+        <mat-step >
           <div class="view-choice">
             <h1>Choose Orientation</h1>
             <mat-radio-group [(ngModel)]="selectedOrientation">
@@ -58,7 +64,7 @@
           </div>
         </mat-step>
         <!-- #enddocregion label -->
-        <mat-step label="Upload Frame" state="chat">
+        <mat-step >
           <div class="frame-uploader-inner">
             <h1>Choose Frame image</h1>
             <p>Supported Formats: JPG, PNG</p>
@@ -77,7 +83,7 @@
             <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 3)">Next</button>
           </div>
         </mat-step>
-        <mat-step label="Upload Image">
+        <mat-step>
           <div class="image-uploader-inner">
             <h1>Choose Image </h1>
             <p>Supported Formats: JPG,PNG</p>
@@ -93,10 +99,10 @@
           </div>
           <div class="backNextImage">
             <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+            <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 4)">Next</button>
           </div>
         </mat-step>
-        <mat-step label="Add image Info">
+        <mat-step>
           <div class="image-info">
             <h1>Write Image Information</h1>
             <div fxLayout="column" fxLayoutAlign="center center">
@@ -115,10 +121,10 @@
           </div>
           <div class="backNextImage">
             <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
+            <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 5)">Next</button>
           </div>
         </mat-step>
-        <mat-step label="Publish">
+        <mat-step >
           <div class="publish-image">
             <div class="final-image">
               <div fxLayout="row" fxLayoutAlign="center center">

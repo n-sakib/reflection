@@ -35,7 +35,7 @@ export class ImageComponentComponent {
   isPublished: boolean = true;
   selectedDescription: string = '';
 
-  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, private _sanitizer: DomSanitizer) {
+  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, private _sanitizer: DomSanitizer, public dialogRef: MatDialog) {
     this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
   }
 
@@ -115,6 +115,7 @@ export class ImageComponentComponent {
         this.snackBar.open('Successfully uploaded image.', 'OK', {
           duration: 2000,
         });
+        this.dialogRef.closeAll();
     })
 
     // // Write the new post's data simultaneously in the posts list and the user's post list.
@@ -155,7 +156,7 @@ export class ImageComponentComponent {
         }
         break;
       case 4:
-        if (this.selectedFrameURL === '') {
+        if (this.selectedImageURL === '') {
           this.snackBar.open('Upload your image.', 'OK', {
             duration: 2000,
           });
@@ -164,23 +165,14 @@ export class ImageComponentComponent {
         }
         break;
       case 5:
-        if (this.selectedImageURL === '') {
-          this.snackBar.open('Enter Details.', 'OK', {
+        if (this.selectedTitle === '' || this.selectedDescription === '' ) {
+          this.snackBar.open('Enter Image Information.', 'OK', {
             duration: 2000,
           });
         } else {
           stepper.next();
         }
         break;
-        case 6:
-          if (this.selectedTitle === '' || this.selectedDescription === '' ) {
-            this.snackBar.open('Enter Image Information.', 'OK', {
-              duration: 2000,
-            });
-          } else {
-            stepper.next();
-          }
-          break;
       default:
       // code block
     }

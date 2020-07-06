@@ -21,7 +21,12 @@
    align-items: center;
    text-align: center;
  }
+ @media only screen and (min-width: 850px) {
+  .field-form{
+    width: 300px;
+  }
 
+ }
  .publish-testimonial h2{
     align-content: center;
     align-items: center;
@@ -33,7 +38,7 @@
  .upload-button{
    align-content: center;
    align-items: center;
-   
+   margin-top: 10px;
     font-size: 1em;
     justify-content: center;
     color: white;
@@ -63,11 +68,39 @@
    text-align: center;
    font-size: 2em;
  }
- @media (max-width:800px){
-   .demo{
-    display: none !important;
-   }
+ @media screen and  (max-width: 850px){
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    width: 200px;
+  }
  }
  ::ng-deep .mat-horizontal-stepper-header{
   pointer-events: none !important;
+ }
+
+.close-button-wrapper {
+  display: flex;
+  align-items: end;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+::ng-deep .mat-horizontal-stepper-header-container {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 300px;
+  float: none;
+  justify-content: center !important;
+  text-align: center !important;
+  margin: auto;
+  
+}
+::ng-deep .mat-stepper-horizontal-line{
+    display: none;
+    padding: 0em;
 }
