@@ -51,7 +51,7 @@ export default class HomeComponent implements OnInit {
 
 
   public slides = [
-    ['assets/Cover.jpeg'],
+    'assets/Cover.jpeg',
     'assets/featured.jpeg',
     'assets/featured(1).jpeg',
   ];
@@ -123,6 +123,26 @@ export default class HomeComponent implements OnInit {
   public type: string = 'component';
 
   public disabled: boolean = false;
+  // public config: SwiperConfigInterface = {
+  //   a11y: true,
+  //   direction: 'horizontal',
+  //   slidesPerView: 1,
+  //   keyboard: true,
+  //   mousewheel: true,
+  //   scrollbar: false,
+  //   autoplay: {
+  //     delay: 2000,
+  //   },
+  //   pagination: false,
+  //   speed: 1000,
+  //   navigation: {
+  //     nextEl: '.btn-Left',
+  //     prevEl: '.btn-Right',
+  //   },
+  //   effect: 'slide',
+  //   grabCursor: true,
+  //   loop: true,
+  // }
   public config: SwiperConfigInterface = {
     a11y: true,
     direction: 'horizontal',
@@ -130,19 +150,12 @@ export default class HomeComponent implements OnInit {
     keyboard: true,
     mousewheel: true,
     scrollbar: false,
-    autoplay: {
-      delay: 2000,
-    },
+    navigation: true,
     pagination: false,
-    speed: 1000,
-    navigation: {
-      nextEl: '.btn-Left',
-      prevEl: '.btn-Right',
-    },
-    effect: 'slide',
-    grabCursor: true,
-    loop: true,
-  }
+    autoplay: {
+         delay: 2000,
+        },
+  };
 
   // public slides = [
   //   'First slide',
@@ -203,7 +216,8 @@ export default class HomeComponent implements OnInit {
       error: err => console.error('something wrong occurred: ' + err),
       complete: () => { console.log("done") }
     })
-  
+    
+    
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     this.galleryOptions = [
@@ -400,5 +414,8 @@ export default class HomeComponent implements OnInit {
 
   public onSwiperEvent(event: string): void {
     console.log('Swiper event: ', event);
+  }
+  onResizeTesti(event) {
+    this.breakpoint = (event.target.innerWidth <= 825) ? 1 : 2;
   }
 }

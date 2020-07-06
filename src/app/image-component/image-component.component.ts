@@ -155,7 +155,7 @@ export class ImageComponentComponent {
         }
         break;
       case 4:
-        if (this.selectedImageURL === '') {
+        if (this.selectedFrameURL === '') {
           this.snackBar.open('Upload your image.', 'OK', {
             duration: 2000,
           });
@@ -164,21 +164,23 @@ export class ImageComponentComponent {
         }
         break;
       case 5:
-        if (this.selectedTitle === '' || this.selectedDescription === '') {
-          this.snackBar.open('Enter Image Information.', 'OK', {
+        if (this.selectedImageURL === '') {
+          this.snackBar.open('Enter Details.', 'OK', {
             duration: 2000,
           });
         } else {
           stepper.next();
         }
         break;
-      case 6:
-        if (this.isPublished === true) {
-          this.snackBar.open('You have Successfully Published Your Image', 'OK', {
-            duration: 2000,
-          });
-        }
-        break;
+        case 6:
+          if (this.selectedTitle === '' || this.selectedDescription === '' ) {
+            this.snackBar.open('Enter Image Information.', 'OK', {
+              duration: 2000,
+            });
+          } else {
+            stepper.next();
+          }
+          break;
       default:
       // code block
     }

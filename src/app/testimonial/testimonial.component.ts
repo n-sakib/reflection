@@ -127,6 +127,7 @@ export class TestimonialComponent implements OnInit {
   
 
   onRate($event:{newValue:number, starRating:StarRatingComponent}) {
+        
         var value = $event.newValue;
         this.selectedRating = value;
   }
@@ -153,7 +154,7 @@ export class TestimonialComponent implements OnInit {
         }
         break;
       case 3:
-        if (this.selectedRating === 0) {
+        if (this.selectedRating === '') {
           this.snackBar.open('Please rate the service.', 'OK', {
             duration: 2000,
           });
@@ -162,7 +163,7 @@ export class TestimonialComponent implements OnInit {
         }
         break;
       case 4:
-        if (this.isPublished === true) {
+        if (this.isPublished === false) {
           this.snackBar.open('Please publish your testimonial', 'OK', {
             duration: 2000,
           });
@@ -203,7 +204,7 @@ export class TestimonialComponent implements OnInit {
       userAddress: this.selectedAddress,
       imageURL: this.selectedImageURL,
       description: this.selectedDescription,
-      //userRating: this.selectedRating,
+      userRating: this.selectedRating,
     };
 
     console.log(postData)
@@ -213,7 +214,7 @@ export class TestimonialComponent implements OnInit {
         this.selectedAddress = '',
         this.selectedImageURL = '',
         this.selectedDescription = '',
-        //this.selectedRating = '',
+        this.selectedRating = '',
         this.snackBar.open('Successfully uploaded testimonial.', 'OK', {
           duration: 2000,
         });

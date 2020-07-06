@@ -1,7 +1,7 @@
 <div class="gallery">
     <div class="gallery-inner">
         <h2>REFLECTION IN ACTION(VIDEO)</h2>
-        <div class="padded">
+        <!-- <div class="padded">
             <mat-card class="example-card">
                 <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive
                     at our
@@ -11,37 +11,36 @@
                 <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
                     height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </mat-card>
-        </div>
+        </div> -->
         <div class="gallery">
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
                 <div class="padded">
- 
-                        <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner"
-                            (window:resize)="onResize($event)">
-                            <mat-grid-tile *ngFor = "let gallery of galleryImgs">
-                                <mat-card class="example-card">
+
+                    <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner" (window:resize)="onResize($event)">
+                        <mat-grid-tile *ngFor="let gallery of galleryImgs">
+                            <mat-card class="example-card">
                                 <div class="gallery petpotrait">
                                     <h3>{{gallery.type}}</h3>
                                     <!-- <div *ngFor="let image of images" ></div> -->
-                                    <ngx-gallery  [options]="galleryOptions" [images]="gallery.images"
+                                    <ngx-gallery [options]="galleryOptions" [images]="gallery.images"
                                         class="ngx-gallery">
                                     </ngx-gallery>
                                 </div>
-                                </mat-card>
-                            </mat-grid-tile>
-                        </mat-grid-list>
+                            </mat-card>
+                        </mat-grid-tile>
+                    </mat-grid-list>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- <div class="gallery">
+    <div class="gallery">
         <div class="gallery-inner">
             <h2>TESTIMONIALS</h2>
             <div class="swiper-container">
-                <swiper class="swiper" [swiper]="config" [config]="config" [disabled]="disabled" (indexChange)="onIndexChange($event)"
-                    (swiperTransitionStart)="onSwiperEvent('transitionStart')"
+                <swiper class="swiper" [swiper]="config" [config]="config" [disabled]="disabled"
+                    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')"
                     (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
                     <div *ngFor="let slide of slides" class="swiper-slide">
                         <div class="slide-container">
@@ -51,21 +50,10 @@
                                     <mat-card-title>Shiba Inu</mat-card-title>
                                     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
                                 </mat-card-header>
-                                <div class="slider">
-                                    <mat-grid-list cols="2"rowHeight="1:.5" [cols]="breakpoint" (window:resize)="onResizeTesti($event)">
-                                        <mat-grid-tile class="demo">
-                                            <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
-                                                class="testimonial-image">
-                                        </mat-grid-tile>
-                                        <mat-grid-tile class="demo">
-                                        <iframe class="video-testi"
-                                            src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0"
-                                            frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                                        </mat-grid-tile>
-                                    </mat-grid-list>
-                                </div>
-                                <mat-card-content>
-                                    <p>
+                                <mat-card-content class="slider">
+                                    <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
+                                        class="testimonial-image">
+                                <p>
                                         The Shiba Inu is the smallest of the six original and distinct spitz breeds of
                                         dog from
                                         Japan.
@@ -96,7 +84,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
 
     <div id="outer">

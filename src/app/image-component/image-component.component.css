@@ -11,6 +11,12 @@
        padding: .35em; 
        width: 300px;
 }
+.image-info h1{
+   align-content: center;
+       align-items: center;
+       justify-content: center;
+       text-align: center;
+}
  .imageType h2{
        align-content: center;
        align-items: center;

@@ -7,7 +7,7 @@
           <div class="typeSelection">
             <h1>Choose Type</h1>
             <mat-form-field class="imageType">
-
+    
               <mat-label class="type">Select an option</mat-label>
               <mat-select [(value)]="selectedType">
                 <mat-option *ngFor="let imageType of imageTypes | async" [value]="imageType.payload.val()">
@@ -93,7 +93,7 @@
           </div>
           <div class="backNextImage">
             <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-            <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 4)">Next</button>
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step label="Add image Info">
@@ -115,7 +115,7 @@
           </div>
           <div class="backNextImage">
             <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-            <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 5)">Next</button>
+            <button mat-flat-button color="primary" class="backNextImage-button" matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step label="Publish">
@@ -132,7 +132,7 @@
               </div>
             </div>
             <div class="publish-button">
-              <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 6)">Publish</button>
+              <button mat-flat-button color="primary" class="backNextImage-button" (click) = "publish()">Publish</button>
             </div>
           </div>
           <div class="backNextImage">
