@@ -103,4 +103,5 @@
 ::ng-deep .mat-stepper-horizontal-line{
     display: none;
     padding: 0em;
+    width: 0%;
 }
