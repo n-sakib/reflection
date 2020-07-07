@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { Observable, combineLatest } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
@@ -45,7 +46,7 @@ export default class HomeComponent implements OnInit {
   breakpoint;
   galleryTypes = [];
   images = [];
- 
+  email = new FormControl('', [Validators.required, Validators.email]);
   public show: boolean = true;
   galleryImgs = [];
 
@@ -417,5 +418,12 @@ export default class HomeComponent implements OnInit {
   }
   onResizeTesti(event) {
     this.breakpoint = (event.target.innerWidth <= 825) ? 1 : 2;
+  }
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 }

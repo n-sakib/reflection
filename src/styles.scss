@@ -107,9 +107,10 @@ $rf-tartiary: (
 // mandatory stuff for theming
 $rf-palette-primary: mat-palette($rf-primary);
 $rf-palette-secondary:  mat-palette($rf-secondary);
+$rf-palette-tartiary:  mat-palette($rf-tartiary);
 
 // include the custom theme components into a theme object
-$rf-theme: mat-light-theme($rf-palette-primary, $rf-palette-secondary);
+$rf-theme: mat-light-theme($rf-palette-primary, $rf-palette-secondary, $rf-palette-tartiary );
 
 // include the custom theme object into the angular material theme
 @include angular-material-theme($rf-theme);

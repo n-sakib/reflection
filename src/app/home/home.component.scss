@@ -166,6 +166,7 @@ h2 {
     padding: none;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
 }
 .testi-header{
     padding: 0em;
@@ -201,6 +202,24 @@ h2 {
 }
 .contact-field{
     width: 40%;
-    // background-color: white;
 }
+.contactButton{
+    margin-top: 1em;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: white !important;
+   }
+  
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: white !important;
+  } 
+  
+  ::ng-deep .mat-form-field-empty .mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: white !important;;
+  }
+ 
 
