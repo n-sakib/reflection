@@ -34,9 +34,18 @@ export class ImageComponentComponent {
   selectedTitle: string = '';
   isPublished: boolean = true;
   selectedDescription: string = '';
+  breakpoint: number;
+  
 
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, private _sanitizer: DomSanitizer, public dialogRef: MatDialog) {
     this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
+  }
+  ngOnInit() {
+    this.breakpoint = (window.innerWidth <= 900) ? 1 : 2;
+  }
+  
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 900) ? 1 : 2;
   }
 
   title = new FormControl('', [Validators.required]);

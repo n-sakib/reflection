@@ -29,7 +29,7 @@
           <div class="view-choice">
             <h1>Choose Orientation</h1>
             <mat-radio-group [(ngModel)]="selectedOrientation">
-              <mat-grid-list cols="2" rowHeight="2:1.4">
+              <mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)">
                 <mat-grid-tile>
                   <div class="view">
                     <div class="frame">
