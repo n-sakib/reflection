@@ -12,7 +12,6 @@
                     height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </mat-card>
         </div> -->
-        <div class="gallery">
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
                 <div class="padded">
@@ -33,51 +32,43 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 
-    <div class="gallery">
+    
         <div class="gallery-inner">
             <h2>TESTIMONIALS</h2>
             <div class="swiper-container">
                 <swiper class="swiper" [swiper]="config" [config]="config" [disabled]="disabled"
                     (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')"
                     (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
-                    <div class="slide-container" *ngFor="let slide of slides" class="swiper-slide">
-                            <mat-card class="slide">
-                                <mat-card-header class="testi-header">
-                                    <div mat-card-avatar class="example-header-image"></div>
-                                    <mat-card-title>Shiba Inu</mat-card-title>
-                                    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                                </mat-card-header>
-                                <mat-card-content class="slider">
-                                    <img [src]="slide" class="image-testi" alt="Photo of a Shiba Inu"
-                                        class="testimonial-image">
+                    <div class="slide-container" *ngFor="let testimonial of testimonials" class="swiper-slide">
+                        <mat-card class="slide">
+                            <mat-card-header class="testi-header">
+                                <mat-card-title>{{testimonial.userName}}</mat-card-title>
+                                <mat-card-subtitle>{{testimonial.userRating}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content class="slider">
+                                <img [src]="testimonial.imageURL" alt="" class="testimonial-image">
                                 <p>
-                                        The Shiba Inu is the smallest of the six original and distinct spitz breeds of
-                                        dog from
-                                        Japan.
-                                        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu
-                                        was
-                                        originally
-                                        bred for hunting.
-                                    </p>
-                                </mat-card-content>
-                                <mat-card-actions>
-                                    <button class="likeButton" mat-flat-button color="white">
-                                        <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">thumb_up_alt</mat-icon>
-                                    </button>&nbsp;
-                                    <button class="likeButton" mat-flat-button color="white">
-                                        <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">share</mat-icon>
-                                    </button>
-                                </mat-card-actions>
-                            </mat-card>
-                       
+                                    {{testimonial.description}}
+                                </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button class="likeButton" mat-flat-button color="white">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">
+                                        thumb_up_alt</mat-icon>
+                                </button>&nbsp;
+                                <button class="likeButton" mat-flat-button color="white">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">share
+                                    </mat-icon>
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
                     </div>
                 </swiper>
-                
             </div>
         </div>
-    </div>
+    
 
 
     <div id="outer">
@@ -87,7 +78,7 @@
                 it
                 from there!</h3>
             <mat-form-field class="contact-field" color="tartiary">
-                <input matInput type="text" [formControl]="email">
+                <input matInput type="text" style="color:white" [formControl]="email">
                 <mat-placeholder style="color:white">Enter your email here</mat-placeholder>
                 <mat-error style="color:white" *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>

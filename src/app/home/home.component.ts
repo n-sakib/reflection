@@ -49,7 +49,7 @@ export default class HomeComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   public show: boolean = true;
   galleryImgs = [];
-
+  testimonials = [];
 
   public slides = [
     'assets/Cover.jpeg',
@@ -218,7 +218,21 @@ export default class HomeComponent implements OnInit {
       complete: () => { console.log("done") }
     })
     
-    
+    this.database.list('testimonials/').snapshotChanges()
+    .subscribe({
+      next: testimonials => {
+        
+        testimonials.forEach( testimonials=> {
+          var testiObject:any = {};
+          
+          var val = testimonials.payload.val();
+          this.testimonials.push(val);
+          console.log(val);
+        });
+        
+        }
+      })
+   
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     this.galleryOptions = [
@@ -345,7 +359,8 @@ export default class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(PaidPictureComponent, {
       
       width: '100%', height: '70%',
-    });dialogRef.componentInstance.galleryImgs=this.galleryImgs
+    });
+    // dialogRef.componentInstance.galleryImgs=this.galleryImgs
   }
 
   deleteImage(event, index): void {
