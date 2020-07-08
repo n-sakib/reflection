@@ -1,30 +1,39 @@
-.Image{
-    width: 100vw;
-    height: 100vh;
-    
-    /* Flexbox stuff */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.DigitalImage h1{
+
+.digitalImage h1{
     text-align: center;
     padding: 5px;
-    font-size: 30px;
+   
     cursor: none;
 } 
-.PotraitImage h1{
+.potraitImage h1{
     text-align: center;
     padding: 5px;
-    font-size: 30px;
+    
     cursor: none;
 }
-.DigitalImage{
+.digitalImage{
    padding: 5px;
    cursor: pointer;
 } 
-.PotraitImage{
+.potraitImage{
     padding: 5px;
     cursor: pointer;
+}
+.description h1{
+    justify-self: start;
+    margin-top: 0px;
+}
+.description{
+    
+    align-items: center;
+   
+}
+.one{
+    background-color: red;
+}
+.two{
+    background-color: gold;
+}
+.three{
+    background-color: palevioletred;
 }

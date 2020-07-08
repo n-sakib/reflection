@@ -37,6 +37,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { Component, Input } from '@angular/core';
 import {RatingModule} from 'ng-starrating';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ShowTestimonialsComponent } from './show-testimonials/show-testimonials.component';
 
 
 
@@ -61,6 +62,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     DigitalPictureComponent,
     PotraitPictureComponent,
     TestimonialComponent,
+    ShowTestimonialsComponent,
 
   ],
   imports: [
@@ -94,7 +96,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent]
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent]
 
 })
 export class AppModule { }

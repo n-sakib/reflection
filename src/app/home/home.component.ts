@@ -7,6 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { SwiperComponent, SwiperDirective, SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
+import { ShowTestimonialsComponent } from '../show-testimonials/show-testimonials.component';
 
 
 @Component({
@@ -35,11 +36,12 @@ export default class HomeComponent implements OnInit {
   singleGalleryOptions: NgxGalleryOptions[];
   breakpoint;
   galleryTypes = [];
+  testimonials = [];
   images = [];
   email = new FormControl('', [Validators.required, Validators.email]);
   public show: boolean = true;
   galleryImgs = [];
-  testimonials = [];
+
 
   public slides = [
     'assets/Cover.jpeg',
@@ -149,50 +151,6 @@ export default class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
-    this.database.list('images/').snapshotChanges()
-    .subscribe({
-      next: images => {
-        
-        images.forEach(imageType => {
-          var imageObject:any = {};
-          imageObject.images = [];
-          imageObject.type = imageType.key;
-          var val = imageType.payload.val();
-          Object.keys(val).forEach((image:any) => {
-            imageObject.images.push({
-            small: val[image].imageURL,
-            medium: val[image].imageURL,
-            big: val[image].imageURL})
-          }); 
-          this.galleryImgs.push(imageObject)
-         
-        });
-        console.log(this.galleryImgs);
-      },
-      error: err => console.error('something wrong occurred: ' + err),
-      complete: () => { console.log("done") }
-    })
-    
-    this.database.list('testimonials/').snapshotChanges()
-    .subscribe({
-      next: testimonials => {
-        
-        testimonials.forEach( testimonials=> {
-          var testiObject:any = {};
-          
-          var val = testimonials.payload.val();
-          this.testimonials.push(val);
-          console.log(val);
-        });
-        
-        }
-      })
-   
-
-    this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
-=======
->>>>>>> 5766e857f50bed772040063f9d30bbe008db3830
     this.galleryOptions = [
       {
         width: '600px',
@@ -262,7 +220,20 @@ export default class HomeComponent implements OnInit {
         complete: () => { console.log("done") }
       })
 
-
+      this.database.list('testimonials/').snapshotChanges()
+    .subscribe({
+      next: testimonials => {
+        
+        testimonials.forEach( testimonials=> {
+          var testiObject:any = {};
+          
+          var val = testimonials.payload.val();
+          this.testimonials.push(val);
+          console.log(val);
+        });
+        
+        }
+      })
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
 
@@ -352,6 +323,9 @@ export default class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(PaidPictureComponent, {
       width: '100%', height: '70%',
     }); 
+  //   dialogRef.afterClosed().subscribe(data=>{
+  //     console.log("Closed",data);
+  // })
     dialogRef.componentInstance.imageInfo = imageInfo;
   }
 
@@ -363,22 +337,6 @@ export default class HomeComponent implements OnInit {
     this.ds.next();
   }
 
-<<<<<<< HEAD
-  imageOnClick1(event,index):void {
-    console.log(index)  
-    const dialogRef = this.dialog.open(PaidPictureComponent, {
-      
-      width: '100%', height: '70%',
-    });
-    // dialogRef.componentInstance.galleryImgs=this.galleryImgs
-  }
-
-  deleteImage(event, index): void {
-    console.log("here")
-  }
-
-=======
->>>>>>> 5766e857f50bed772040063f9d30bbe008db3830
   onResize(event) {
     this.breakpoint = (event.target.innerWidth < 920) ? 1 : 2;
   }
@@ -435,6 +393,13 @@ export default class HomeComponent implements OnInit {
   public toggleMouseWheelControl(): void {
     this.config.mousewheel = !this.config.mousewheel;
   }
+  public onIndexChange(index: number): void {
+    console.log('Swiper index: ', index);
+}
+
+public onSwiperEvent(event: string): void {
+    console.log('Swiper event: ', event);
+}
 
   onResizeTesti(event) {
     this.breakpoint = (event.target.innerWidth <= 825) ? 1 : 2;
@@ -446,4 +411,19 @@ export default class HomeComponent implements OnInit {
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+  showtTestimonial(imageURL) {
+    let testiInfo = {
+      imageURL: "",
+    };
+    this.testimonials.forEach(testimonial => {
+      
+        testiInfo.imageURL = imageURL;
+      
+    });
+    const dialogRef = this.dialog.open( ShowTestimonialsComponent, {
+      width: '80%', height: '50%',
+    });
+    dialogRef.componentInstance.testiInfo = testiInfo;
+  }
+
 }

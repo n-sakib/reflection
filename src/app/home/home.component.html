@@ -1,17 +1,6 @@
 <div class="gallery">
     <div class="gallery-inner">
         <h2>REFLECTION IN ACTION(VIDEO)</h2>
-        <!-- <div class="padded">
-            <mat-card class="example-card">
-                <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive
-                    at our
-                    process.</h3>
-                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
-                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
-                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </mat-card>
-        </div> -->
         <div class="gallery">
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
@@ -32,6 +21,7 @@
                 </div>
             </div>
         </div>
+    </div>
     
 
     
@@ -48,7 +38,7 @@
                                 <mat-card-subtitle>{{testimonial.userRating}}</mat-card-subtitle>
                             </mat-card-header>
                             <mat-card-content class="slider">
-                                <img [src]="testimonial.imageURL" alt="" class="testimonial-image">
+                                <img [src]="testimonial.imageURL" alt="" (click)="showtTestimonial(testimonial.imageURL)" class="testimonial-image">
                                 <p>
                                     {{testimonial.description}}
                                 </p>
