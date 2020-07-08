@@ -1,17 +1,6 @@
 <div class="gallery">
     <div class="gallery-inner">
         <h2>REFLECTION IN ACTION(VIDEO)</h2>
-        <!-- <div class="padded">
-            <mat-card class="example-card">
-                <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive
-                    at our
-                    process.</h3>
-                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
-                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-                <iframe src="https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0" width="640"
-                    height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </mat-card>
-        </div> -->
         <div class="gallery">
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
@@ -22,8 +11,7 @@
                             <mat-card class="example-card">
                                 <div class="gallery petpotrait">
                                     <h3>{{gallery.type}}</h3>
-                                    <!-- <div *ngFor="let image of images" ></div> -->
-                                    <ngx-gallery [options]="galleryOptions" [images]="gallery.images"
+                                    <ngx-gallery [options]="gallery.galleryOptions" [images]="gallery.images"
                                         class="ngx-gallery">
                                     </ngx-gallery>
                                 </div>
@@ -39,9 +27,7 @@
         <div class="gallery-inner">
             <h2>TESTIMONIALS</h2>
             <div class="swiper-container">
-                <swiper class="swiper" [swiper]="config" [config]="config" [disabled]="disabled"
-                    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')"
-                    (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+                <swiper class="swiper" [swiper]="config" [config]="config" [disabled]="disabled">
                     <div class="slide-container" *ngFor="let slide of slides" class="swiper-slide">
                             <mat-card class="slide">
                                 <mat-card-header class="testi-header">

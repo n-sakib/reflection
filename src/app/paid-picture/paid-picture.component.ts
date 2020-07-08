@@ -19,7 +19,7 @@ export class PaidPictureComponent implements OnInit {
   singleGalleryOptions: NgxGalleryOptions[];
 
   
-  @Input() galleryImgs;
+  @Input() imageInfo;
  
  
 
@@ -27,7 +27,7 @@ export class PaidPictureComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
-    console.log(this.galleryImgs)
+    console.log(this.imageInfo)
   
   }
   getUserProfileImage(galleryImg) {
