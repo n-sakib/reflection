@@ -3,8 +3,8 @@
     (window:resize)="onResize($event)">
     <div  >
         
-        <img *ngFor="let galleryImg of galleryImgs" [src]="galleryImg.imageURL"/>
-        <p *ngFor="let galleryImg of galleryImgs">{{galleryImg.title}}</p>
+        <img [src]="imageInfo.imageURL.big"/>
+        <p>{{imageInfo.description}}</p>
         
         </div> -->
         

@@ -1,22 +1,12 @@
-import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgImageSliderComponent } from 'ng-image-slider';
+import { MatDialog } from '@angular/material/dialog';
 import { PaidPictureComponent } from '../paid-picture/paid-picture.component';
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { Observable, combineLatest } from 'rxjs';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import {
-  SwiperComponent,
-  SwiperDirective,
-  SwiperConfigInterface,
-  SwiperScrollbarInterface,
-  SwiperPaginationInterface
-} from 'ngx-swiper-wrapper';
-import { types } from 'util';
-import { finalize } from 'rxjs/operators';
+import { NgxGalleryOptions, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { SwiperComponent, SwiperDirective, SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 
 
 @Component({
@@ -41,7 +31,7 @@ export default class HomeComponent implements OnInit {
   sliderSlideImage: Number = 1;
   sliderAnimationSpeed: any = 1;
   imageObject: Array<object> = [];
-  galleryOptions: NgxGalleryOptions[];
+  galleryOptions: any;
   singleGalleryOptions: NgxGalleryOptions[];
   breakpoint;
   galleryTypes = [];
@@ -124,26 +114,6 @@ export default class HomeComponent implements OnInit {
   public type: string = 'component';
 
   public disabled: boolean = false;
-  // public config: SwiperConfigInterface = {
-  //   a11y: true,
-  //   direction: 'horizontal',
-  //   slidesPerView: 1,
-  //   keyboard: true,
-  //   mousewheel: true,
-  //   scrollbar: false,
-  //   autoplay: {
-  //     delay: 2000,
-  //   },
-  //   pagination: false,
-  //   speed: 1000,
-  //   navigation: {
-  //     nextEl: '.btn-Left',
-  //     prevEl: '.btn-Right',
-  //   },
-  //   effect: 'slide',
-  //   grabCursor: true,
-  //   loop: true,
-  // }
   public config: SwiperConfigInterface = {
     a11y: true,
     direction: 'horizontal',
@@ -154,21 +124,9 @@ export default class HomeComponent implements OnInit {
     navigation: true,
     pagination: false,
     autoplay: {
-         delay: 2000,
-        },
+      delay: 2000,
+    },
   };
-
-  // public slides = [
-  //   'First slide',
-  //   'Second slide',
-  //   'Third slide',
-  //   'Fourth slide',
-  //   'Fifth slide',
-  //   'Sixth slide'
-  // ];
-
-
-
 
   private scrollbar: SwiperScrollbarInterface = {
     el: '.swiper-scrollbar',
@@ -184,16 +142,14 @@ export default class HomeComponent implements OnInit {
 
   @ViewChild(SwiperComponent) componentRef?: SwiperComponent;
   @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
-  
+
 
   constructor(private dialog: MatDialog, private database: AngularFireDatabase) {
     // this.setImageObject();
   }
 
-
-
-
   ngOnInit() {
+<<<<<<< HEAD
     this.database.list('images/').snapshotChanges()
     .subscribe({
       next: images => {
@@ -235,35 +191,81 @@ export default class HomeComponent implements OnInit {
    
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
+=======
+>>>>>>> 5766e857f50bed772040063f9d30bbe008db3830
     this.galleryOptions = [
-      // {
-      //   width: '600px',
-      //   height: '400px',
-      //   thumbnailsColumns: 4,
-      //   arrowPrevIcon: 'fa fa-chevron-left',
-      //   arrowNextIcon: 'fa fa-chevron-right',
-      //   imageAnimation: NgxGalleryAnimation.Slide,
-      //   imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
-      //   preview: false,
-      //   imageDescription: true
-      // },
       {
         width: '600px',
         thumbnailsColumns: 4,
         arrowPrevIcon: 'fa fa-chevron-left',
         arrowNextIcon: 'fa fa-chevron-right',
         imageAnimation: NgxGalleryAnimation.Slide,
-        imageActions: [{ icon: 'fa fa-window-restore', onClick: this.imageOnClick1.bind(this), titleText: 'view' }],
+        imageActions: [{ icon: 'fa fa-window-restore', titleText: 'view' }],
         preview: false,
         imageDescription: true
       },
-      { "breakpoint": 1080, "width": "400px", "height":"280px", "thumbnailsColumns": 4 },
+      { "breakpoint": 1080, "width": "400px", "height": "280px", "thumbnailsColumns": 4 },
       { "breakpoint": 1280, "width": "500px" },
-      { "breakpoint": 920, "width": "640px", "height":"480px", "thumbnailsColumns": 4 },
-      { "breakpoint": 720, "width": "500px", "height":"400px", "thumbnailsColumns": 4 },
-      { "breakpoint": 640, "width": "400px", "height":"370px", "thumbnailsColumns": 4 },
-      { "breakpoint": 520, "width": "350px", "height":"350px", "thumbnailsColumns": 4 },
+      { "breakpoint": 920, "width": "640px", "height": "480px", "thumbnailsColumns": 4 },
+      { "breakpoint": 720, "width": "500px", "height": "400px", "thumbnailsColumns": 4 },
+      { "breakpoint": 640, "width": "400px", "height": "370px", "thumbnailsColumns": 4 },
+      { "breakpoint": 520, "width": "350px", "height": "350px", "thumbnailsColumns": 4 },
     ];
+
+    this.database.list('images/').snapshotChanges()
+      .subscribe({
+        next: images => {
+
+          images.forEach(imageType => {
+            var imageObject: any = {
+              images: [],
+              frameURL: [],
+              description: []
+            };
+            imageObject.type = imageType.key;
+            var val = imageType.payload.val();
+            Object.keys(val).forEach((image: any) => {
+              imageObject.images.push({
+                small: val[image].imageURL,
+                medium: val[image].imageURL,
+                big: val[image].imageURL
+              })
+              let frameURL = val[image].frameURL;
+              let description = val[image].description;
+
+              imageObject.frameURL.push(frameURL);
+              imageObject.description.push(description);
+            });
+            
+            imageObject.galleryOptions = [
+              {
+                width: '600px',
+                thumbnailsColumns: 4,
+                arrowPrevIcon: 'fa fa-chevron-left',
+                arrowNextIcon: 'fa fa-chevron-right',
+                imageAnimation: NgxGalleryAnimation.Slide,
+                imageActions: [{ icon: 'fa fa-window-restore', titleText: 'view', onClick: this.imageOnClick.bind(this, imageType.key) }],
+                preview: false,
+                imageDescription: true
+              },
+              { "breakpoint": 1080, "width": "400px", "height": "280px", "thumbnailsColumns": 4 },
+              { "breakpoint": 1280, "width": "500px" },
+              { "breakpoint": 920, "width": "640px", "height": "480px", "thumbnailsColumns": 4 },
+              { "breakpoint": 720, "width": "500px", "height": "400px", "thumbnailsColumns": 4 },
+              { "breakpoint": 640, "width": "400px", "height": "370px", "thumbnailsColumns": 4 },
+              { "breakpoint": 520, "width": "350px", "height": "350px", "thumbnailsColumns": 4 },
+            ];
+            this.galleryImgs.push(imageObject)
+          });
+        },
+        error: err => console.error('something wrong occurred: ' + err),
+        complete: () => { console.log("done") }
+      })
+
+
+
+    this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
+
 
     this.singleGalleryOptions = [
       {
@@ -309,12 +311,10 @@ export default class HomeComponent implements OnInit {
       }
     ];
   }
-  
+
 
 
   compareAndCreate = () => {
-    console.log("here")
-    console.log(this.galleryTypes)
     if (this.images != []) {
       this.images.forEach(image => {
         if (this.galleryTypes.indexOf(image.galleryName) > -1) {
@@ -334,16 +334,25 @@ export default class HomeComponent implements OnInit {
   setImageObject() {
 
   }
-  imageOnClick(index) {
-    console.log('index', index);
-  }
-
-  arrowOnClick(event) {
-    console.log('arrow click event', event);
-  }
-
-  lightboxArrowClick(event) {
-    console.log('popup arrow click', event);
+  imageOnClick(type, event, index) {
+    let imageInfo = {
+      imageURL: "",
+      frameURL: "",
+      description: "",
+      galleryName: ""
+    };
+    this.galleryImgs.forEach(gallery => {
+      if(gallery.type === type) {
+        imageInfo.imageURL = gallery.images[index];
+        imageInfo.frameURL = gallery.frameURL[index];
+        imageInfo.description = gallery.description[index];
+        imageInfo.galleryName = type
+      }
+    });
+    const dialogRef = this.dialog.open(PaidPictureComponent, {
+      width: '100%', height: '70%',
+    }); 
+    dialogRef.componentInstance.imageInfo = imageInfo;
   }
 
   prevImageClick() {
@@ -354,6 +363,7 @@ export default class HomeComponent implements OnInit {
     this.ds.next();
   }
 
+<<<<<<< HEAD
   imageOnClick1(event,index):void {
     console.log(index)  
     const dialogRef = this.dialog.open(PaidPictureComponent, {
@@ -367,8 +377,10 @@ export default class HomeComponent implements OnInit {
     console.log("here")
   }
 
+=======
+>>>>>>> 5766e857f50bed772040063f9d30bbe008db3830
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <920) ? 1 : 2;
+    this.breakpoint = (event.target.innerWidth < 920) ? 1 : 2;
   }
 
   public toggleType(): void {
@@ -424,13 +436,6 @@ export default class HomeComponent implements OnInit {
     this.config.mousewheel = !this.config.mousewheel;
   }
 
-  public onIndexChange(index: number): void {
-    console.log('Swiper index: ', index);
-  }
-
-  public onSwiperEvent(event: string): void {
-    console.log('Swiper event: ', event);
-  }
   onResizeTesti(event) {
     this.breakpoint = (event.target.innerWidth <= 825) ? 1 : 2;
   }
