@@ -13,9 +13,12 @@
     }
 }
 
+.mat-drawer-content {
+    overflow: hidden!important;
+}
 .hero {
     /* Sizing */
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     
     /* Flexbox stuff */
@@ -46,7 +49,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 85vh;
+    height: 90vh;
     width: 100%;
     h1 {
         line-height: 50px;
@@ -76,12 +79,12 @@
 .hero {
     /* Sizing */
     width: 100vw;
-    height: 96vh;
+    height: 98vh;
   }
 
 .navbar {
     background-color: rgba(0, 0, 0, 0);
-    height: 6vh;
+    height: 5vh;
 }
 
 .footer{
@@ -160,7 +163,10 @@
     padding: 0em;
 }
 .footer-text{
-    padding: 0em;
+    padding: 0!important;
+    a{
+        padding: 0!important;
+    }
 }
 body {
     background: whitesmoke;

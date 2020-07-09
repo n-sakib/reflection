@@ -4,7 +4,7 @@
       <mat-icon class="close-icon" color="primary">close</mat-icon>
     </button><br>
 </div>
-<div class="PotraitImage">
+<!-- <div class="PotraitImage">
     <h1>Potrait Image</h1>
     <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="2:1"
     (window:resize)="onResize($event)">
@@ -12,6 +12,23 @@
             <img [src]="potraitInfo.imageURL"  alt="" width="100%" height="100%">
         </mat-grid-tile>
         <mat-grid-tile class="description">
+            <div class="potraitImageDsecription">
+                <h1>Description</h1>
+                    <p>{{potraitInfo.description}}</p>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div> -->
+<div class="potraitImage">
+    
+    <mat-grid-list cols="3"  rowHeight= "fit" style="height: calc(60vh - 24px)">
+        <mat-grid-tile colspan='2' class="one">
+            <div>
+                <h1>Potrait Image</h1>
+                <img [src]="potraitInfo.imageURL"  alt="" width="100%" height="100%">
+            </div>
+        </mat-grid-tile >
+        <mat-grid-tile colspan='1' class="two">
             <div class="potraitImageDsecription">
                 <h1>Description</h1>
                     <p>{{potraitInfo.description}}</p>

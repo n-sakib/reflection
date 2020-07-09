@@ -21,6 +21,9 @@
     justify-content: center;
     padding-top: 1em;
 }
-.demo{
-    background-color: aqua;
+.one{
+    background-color: plum;
+}
+.two{
+    background-color:  aqua;;
 }

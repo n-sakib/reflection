@@ -5,7 +5,6 @@
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
                 <div class="padded">
-
                     <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner" (window:resize)="onResize($event)">
                         <mat-grid-tile *ngFor="let gallery of galleryImgs">
                             <mat-card class="example-card">
@@ -28,9 +27,7 @@
         <div class="gallery-inner">
             <h2>TESTIMONIALS</h2>
             <div class="swiper-container">
-                <swiper class="swiper" [swiper]="config" [config]="config" [disabled]="disabled"
-                    (indexChange)="onIndexChange($event)" (swiperTransitionStart)="onSwiperEvent('transitionStart')"
-                    (swiperTransitionEnd)="onSwiperEvent('transitionEnd')">
+                <swiper class="swiper" [config]="config">
                     <div class="slide-container" *ngFor="let testimonial of testimonials" class="swiper-slide">
                         <mat-card class="slide">
                             <mat-card-header class="testi-header">

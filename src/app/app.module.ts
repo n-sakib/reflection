@@ -29,27 +29,12 @@ import { PotraitPictureComponent } from './potrait-picture/potrait-picture.compo
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { SwiperModule } from 'ngx-swiper-wrapper';
-import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
-import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { Component, Input } from '@angular/core';
 import {RatingModule} from 'ng-starrating';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ShowTestimonialsComponent } from './show-testimonials/show-testimonials.component';
-
-
-
-
-
-
-
-
-const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  direction: 'horizontal',
-  slidesPerView: 'auto'
-};
  
 
 @NgModule({
@@ -89,12 +74,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     RatingModule ,
     MatGridListModule,
   ],
-  providers: [
-    {
-      provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent],
   entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent]
 

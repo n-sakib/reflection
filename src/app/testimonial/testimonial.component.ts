@@ -48,19 +48,8 @@ export class TestimonialComponent implements OnInit {
   labelPosition: 'before' | 'after' = 'after';
   disabled = false;
   isImageSubmitting: boolean = false;
-  selectedRating;
+  selectedRating:number;
   isImageSubmitted: boolean = false;
-  
-  
-
-  // @Input('rating') private rating: number = 3;
-  // @Input('starCount') private starCount: number = 5;
-  // @Input('color') private color: string = 'accent';
-  // @Output() private ratingUpdated = new EventEmitter();
-
-  // private snackBarDuration: number = 2000;
-  // private ratingArr = [];
-
 
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, public fb: FormBuilder,public dialogRef: MatDialog) {}
 
@@ -126,10 +115,8 @@ export class TestimonialComponent implements OnInit {
   
   
 
-  onRate($event:{newValue:number, starRating:StarRatingComponent}) {
-        
-        var value = $event.newValue;
-        this.selectedRating = value;
+  onRate(event) {
+        this.selectedRating = event.newValue;
   }
   
 

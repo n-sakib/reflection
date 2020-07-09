@@ -42,72 +42,6 @@ export default class HomeComponent implements OnInit {
   public show: boolean = true;
   galleryImgs = [];
 
-
-  public slides = [
-    'assets/Cover.jpeg',
-    'assets/featured.jpeg',
-    'assets/featured(1).jpeg',
-  ];
-  public slideVideo = [
-    'https://player.vimeo.com/video/20412632?color=ffffff&byline=0&portrait=0',
-    'https://www.youtube.com/watch?v=L6ZJaKqALgM',
-  ];
-
-  public config_thumbs = {
-    a11y: true,
-    direction: 'horizontal',
-    observer: true,
-    spaceBetween: 10,
-    slideToClickedSlide: true,
-    slidesPerView: 4.5,
-    slidesOffsetBefore: 5,
-    slidesOffsetAfter: 5,
-    simulateTouch: true,
-    resistanceRatio: 0.6,
-    watchSlidesVisibility: true,
-    watchSlidesProgress: true,
-    watchOverflow: true,
-    navigation: {
-      nextEl: '.carousel__arrow--prev',
-      prevEl: '.carousel__arrow--next'
-    },
-    autoplay: {
-      delay: 2000,
-    },
-    pagination: true,
-    speed: 100,
-    effect: 'slide',
-    grabCursor: true,
-    loop: true,
-    breakpoints: {
-      // when window width is <= 1024px
-      1024: {
-        slidesPerView: 5.5
-      }
-    }
-  };
-
-  public config_gallery = {
-    a11y: true,
-    effect: 'slide',
-    loop: true,
-    initialSlide: 0,
-    thumbs: {
-      swiper: this.slides
-    },
-    spaceBetween: 0,
-    simulateTouch: true,
-    preloadImages: false,
-    observer: true,
-    lazy: {
-      loadPrevNext: false,
-      loadOnTransitionStart: true,
-    },
-    zoom: {
-      maxRatio: 5
-    }
-  };
-
   imgSrc: string = '';
   selectedImage: any = null;
   userProfileImg: '';
@@ -116,31 +50,7 @@ export default class HomeComponent implements OnInit {
   public type: string = 'component';
 
   public disabled: boolean = false;
-  public config: SwiperConfigInterface = {
-    a11y: true,
-    direction: 'horizontal',
-    slidesPerView: 1,
-    keyboard: true,
-    mousewheel: true,
-    scrollbar: false,
-    navigation: true,
-    pagination: false,
-    autoplay: {
-      delay: 2000,
-    },
-  };
-
-  private scrollbar: SwiperScrollbarInterface = {
-    el: '.swiper-scrollbar',
-    hide: false,
-    draggable: true
-  };
-
-  private pagination: SwiperPaginationInterface = {
-    el: '.swiper-pagination',
-    clickable: true,
-    hideOnClick: false
-  };
+  public config: SwiperConfigInterface;
 
   @ViewChild(SwiperComponent) componentRef?: SwiperComponent;
   @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
@@ -229,7 +139,17 @@ export default class HomeComponent implements OnInit {
           
           var val = testimonials.payload.val();
           this.testimonials.push(val);
-          console.log(val);
+          this.config = {
+            a11y: true,
+            direction: 'horizontal',
+            slidesPerView: 1,
+            keyboard: true,
+            navigation: true,
+            pagination: false,
+            autoplay: {
+              delay: 2000,
+            },
+          }
         });
         
         }
@@ -283,28 +203,13 @@ export default class HomeComponent implements OnInit {
     ];
   }
 
-
-
-  compareAndCreate = () => {
-    if (this.images != []) {
-      this.images.forEach(image => {
-        if (this.galleryTypes.indexOf(image.galleryName) > -1) {
-
-        }
-      });
-    }
-  }
-
   onChangeHandler() {
-    this.setImageObject();
     this.showSlider = false;
     setTimeout(() => {
       this.showSlider = true;
     }, 10);
   }
-  setImageObject() {
 
-  }
   imageOnClick(type, event, index) {
     let imageInfo = {
       imageURL: "",
@@ -323,9 +228,6 @@ export default class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(PaidPictureComponent, {
       width: '100%', height: '70%',
     }); 
-  //   dialogRef.afterClosed().subscribe(data=>{
-  //     console.log("Closed",data);
-  // })
     dialogRef.componentInstance.imageInfo = imageInfo;
   }
 
@@ -341,76 +243,13 @@ export default class HomeComponent implements OnInit {
     this.breakpoint = (event.target.innerWidth < 920) ? 1 : 2;
   }
 
-  public toggleType(): void {
-    this.type = (this.type === 'component') ? 'directive' : 'component';
-  }
-
-  public toggleDisabled(): void {
-    this.disabled = !this.disabled;
-  }
-
-  public toggleDirection(): void {
-    this.config.direction = (this.config.direction === 'horizontal') ? 'vertical' : 'horizontal';
-  }
-
-  public toggleSlidesPerView(): void {
-    if (this.config.slidesPerView !== 1) {
-      this.config.slidesPerView = 1;
-    } else {
-      this.config.slidesPerView = 2;
-    }
-  }
-
-  public toggleOverlayControls(): void {
-    if (this.config.navigation) {
-      this.config.scrollbar = false;
-      this.config.navigation = false;
-
-      this.config.pagination = this.pagination;
-    } else if (this.config.pagination) {
-      this.config.navigation = false;
-      this.config.pagination = false;
-
-      this.config.scrollbar = this.scrollbar;
-    } else {
-      this.config.scrollbar = false;
-      this.config.pagination = false;
-
-      this.config.navigation = true;
-    }
-
-    if (this.type === 'directive' && this.directiveRef) {
-      this.directiveRef.setIndex(0);
-    } else if (this.type === 'component' && this.componentRef && this.componentRef.directiveRef) {
-      this.componentRef.directiveRef.setIndex(0);
-    }
-  }
-
-  public toggleKeyboardControl(): void {
-    this.config.keyboard = !this.config.keyboard;
-  }
-
-  public toggleMouseWheelControl(): void {
-    this.config.mousewheel = !this.config.mousewheel;
-  }
-  public onIndexChange(index: number): void {
-    console.log('Swiper index: ', index);
-}
-
-public onSwiperEvent(event: string): void {
-    console.log('Swiper event: ', event);
-}
-
-  onResizeTesti(event) {
-    this.breakpoint = (event.target.innerWidth <= 825) ? 1 : 2;
-  }
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
-
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
   showtTestimonial(imageURL) {
     let testiInfo = {
       imageURL: "",

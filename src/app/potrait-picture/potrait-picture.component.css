@@ -1,9 +1,15 @@
-.PotraitImage{
+.potraitImage{
     text-align: center;
     padding: 1rem;
 }
-.PotraitImage h1{
+.potraitImage h1{
     text-align: center;
     padding: 1rem;
     font-size: 30px;
+}
+.one{
+    background-color: plum;
+}
+.two{
+    background-color:  aqua;;
 }
