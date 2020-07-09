@@ -123,7 +123,7 @@ export class TestimonialComponent implements OnInit {
   next(stepper, step) {
     switch (step) {
       case 1:
-        if (this.selectedName === '' && this.selectedAddress === '' || this.selectedDescription === '') {
+        if (this.selectedName === '' && this.selectedAddress === '' || this.selectedDescription === '' || this.email.hasError) {
           this.snackBar.open('Please enter your details.', 'OK', {
             duration: 2000,
           });
