@@ -7,9 +7,8 @@
     padding: 1rem;
     font-size: 30px;
 }
-.one{
-    background-color: plum;
-}
-.two{
-    background-color:  aqua;;
-}
+.frameBox {
+    width: 100%;
+    height: 100%;
+    border: 20px solid transparent;
+ }

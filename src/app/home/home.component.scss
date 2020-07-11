@@ -1,12 +1,12 @@
 .gallery{
-    /* Sizing */
+
     text-align: center;
     box-sizing: border-box;
     border-color: #CFCFCF;
     width: 100%;
 }
 .gallery-inner{
-    /* padding: 10px 10px 10px 10px; */
+    
     text-align: center;
     box-sizing: border-box;
     border-color: #CFCFCF;
@@ -14,9 +14,32 @@
 }
 .gallery-inner h2{
     text-align: center;
-    padding: 1em;
     font-size: 2em;
+    padding: .5em;
 }
+.padded {
+    padding: 10px;
+}
+
+.videoFrame{
+    padding: 10px;
+    width: 640px;
+    height: 360px;
+    align-items: center;
+    justify-content: center;
+}
+@media only screen and (max-width: 550px) {
+    .videoFrame{
+        width: 300px;
+        height: 250px;
+    }
+}
+.example-card{
+    padding: 2px;
+    align-items: center;
+    justify-content: center;
+}
+
 
 #inner {
     display: table;
@@ -92,6 +115,7 @@ h2 {
     width: 350px;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 .slide{
     padding: .5em;
@@ -187,5 +211,9 @@ h2 {
 }
 .slider{
     justify-content: center;
+    margin: 0px;
+}
+.mat-h2, .mat-title, .mat-typography h2 {
+   
     margin: 0px;
 }

@@ -5,19 +5,11 @@
     </button><br>
 </div>
 <div class="digiRow">
-    
-    <mat-grid-list cols="3"  rowHeight= "fit" style="height: calc(65vh - 24px)">
-        <mat-grid-tile colspan='2' class="one">
-            <div>
-                <h1>Digital Image</h1>
-                <img [src]="digitalInfo.imageURL" alt="" width="100%" height="100%">
-            </div>
-        </mat-grid-tile >
-        <mat-grid-tile colspan='1' class="two">
-            <div class="digitalImageDsecription">
-                <h1>Description</h1>
-                <p>{{digitalInfo.description}}</p>
-            </div>
-        </mat-grid-tile>
-    </mat-grid-list>
+    <h1>Digital Image</h1>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+                <img [src]="digitalInfo.imageURL"   alt="" width="100%" height="100%">
+        </div> 
+    </div>
+            
 </div>

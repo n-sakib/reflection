@@ -18,22 +18,30 @@
 .potraitImage{
     padding: 5px;
     cursor: pointer;
+    max-width: 100%;
+    height: auto;
 }
 .description h1{
-    justify-self: start;
+    
     margin-top: 0px;
+    justify-content: center;
+    text-align: center;
+}
+.description h3{
+    
+    margin-top: 0px;
+    justify-content: center;
+    text-align: center;
 }
 .description{
-    
     align-items: center;
-   
 }
-.one{
-    background-color: red;
-}
-.two{
-    background-color: gold;
-}
-.three{
-    background-color: palevioletred;
-}
+.frameBox {
+    width: 100%;
+    height: 100%;
+    border: 20px solid transparent;
+ }
+ .responsive-image {
+    height: auto;
+    width: 100%;
+  }
