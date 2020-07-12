@@ -1,7 +1,7 @@
 <div class="gallery">
     <div class="gallery-inner">
         <h2>REFLECTION IN ACTION(VIDEO)</h2>
-        <!-- <div class="padded">
+        <div class="padded">
             <mat-card class="example-card">
                 <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive
                     at our
@@ -17,17 +17,17 @@
                                 </mat-grid-tile>
                     </mat-grid-list>
             </mat-card>
-        </div> -->
+        </div>
         <div class="gallery">
             <div class="gallery-inner">
                 <h2>PICTURE GALLERIES</h2>
                 <div class="padded">
-                    <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner" (window:resize)="onResize($event)" rowHeight="1:.5">
+                    <mat-grid-list [cols]="breakpoint" gutterSize="40" class="inner" (window:resize)="onResize($event)">
                         <mat-grid-tile *ngFor="let gallery of galleryImgs">
                             <mat-card class="example-card">
                                 <div class="gallery petpotrait">
                                     <h3>{{gallery.type}}</h3>
-                                    <ngx-gallery [options]="gallery.galleryOptions"  [images]="gallery.images"
+                                    <ngx-gallery [options]="gallery.galleryOptions" [images]="gallery.images"
                                         class="ngx-gallery">
                                     </ngx-gallery>
                                 </div>
@@ -38,41 +38,42 @@
             </div>
         </div>
     </div>
-    
 
-    
-        <div class="gallery-inner">
-            <h2>TESTIMONIALS</h2>
-            <div class="swiper-container">
-                <swiper class="swiper" [config]="config">
-                    <div class="slide-container" *ngFor="let testimonial of testimonials" class="swiper-slide">
-                        <mat-card class="slide">
-                            <mat-card-header class="testi-header">
-                                <mat-card-title>{{testimonial.userName}}</mat-card-title>
-                                <mat-card-subtitle>{{testimonial.userRating}}</mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content class="slider">
-                                <img [src]="testimonial.imageURL" alt="" (click)="showtTestimonial(testimonial.imageURL)" class="testimonial-image">
-                                <p>
-                                    {{testimonial.description}}
-                                </p>
-                            </mat-card-content>
-                            <mat-card-actions>
-                                <button class="likeButton" mat-flat-button color="white">
-                                    <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">
-                                        thumb_up_alt</mat-icon>
-                                </button>&nbsp;
-                                <button class="likeButton" mat-flat-button color="white">
-                                    <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">share
-                                    </mat-icon>
-                                </button>
-                            </mat-card-actions>
-                        </mat-card>
-                    </div>
-                </swiper>
-            </div>
+
+
+    <div class="gallery-inner">
+        <h2>TESTIMONIALS</h2>
+        <div class="swiper-container">
+            <swiper class="swiper" [config]="config">
+                <div class="slide-container" *ngFor="let testimonial of testimonials" class="swiper-slide">
+                    <mat-card class="slide">
+                        <mat-card-header class="testi-header">
+                            <mat-card-title>{{testimonial.userName}}</mat-card-title>
+                            <mat-card-subtitle>{{testimonial.userRating}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="slider">
+                            <img [src]="testimonial.imageURL" alt="" (click)="showtTestimonial(testimonial.imageURL)"
+                                class="testimonial-image">
+                            <p>
+                                {{testimonial.description}}
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button class="likeButton" mat-flat-button color="white">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">
+                                    thumb_up_alt</mat-icon>
+                            </button>&nbsp;
+                            <button class="likeButton" mat-flat-button color="white">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">share
+                                </mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </swiper>
         </div>
-    
+    </div>
+
 
 
     <div id="outer">

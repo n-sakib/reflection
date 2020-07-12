@@ -100,6 +100,7 @@ export default class HomeComponent implements OnInit {
               { "breakpoint": 720, "width": "500px", "height": "400px", "thumbnailsColumns": 4 },
               { "breakpoint": 640, "width": "400px", "height": "370px", "thumbnailsColumns": 4 },
               { "breakpoint": 520, "width": "350px", "height": "350px", "thumbnailsColumns": 4 },
+              { "breakpoint": 375, "width": "300px", "height": "300px", "thumbnailsColumns": 4 },
             ];
             this.galleryImgs.push(imageObject)
           });
@@ -132,6 +133,7 @@ export default class HomeComponent implements OnInit {
         
         }
       })
+      
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     // this.breakpoint = (window.innerWidth <= 1024) ? 1 : 2;

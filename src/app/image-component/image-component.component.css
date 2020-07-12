@@ -17,6 +17,11 @@
        justify-content: center;
        text-align: center;
 }
+@media only screen and (max-device-width: 375px) {
+  .imageType{
+   width: 200px;
+  }
+}
  .imageType h2{
        align-content: center;
        align-items: center;
@@ -67,6 +72,9 @@
        
        font-size: 1.5em;
        padding-top: .5em;
+    }
+    .selectBox{
+       width: 30%;
     }
     .frame{
        width: 300px;

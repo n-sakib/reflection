@@ -5,7 +5,7 @@
           <mat-icon class="close-icon" color="primary">close</mat-icon>
         </button><br>
       </div>
-    <mat-grid-list cols="5" rowHeight= "fit" style="height: calc(65vh - 24px)">
+    <mat-grid-list cols="5" rowHeight= "fit" style="height: calc(65vh - 24px)" [cols]="breakpoint" gutterSize="20" (window:resize)="onResize($event)">
         <mat-grid-tile colspan='2'>
             
             <div class="digitalImage">

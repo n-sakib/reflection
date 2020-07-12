@@ -14,8 +14,7 @@
 }
 .gallery-inner h2{
     text-align: center;
-    font-size: 2em;
-    padding: .5em;
+   
 }
 .padded {
     padding: 10px;
@@ -34,12 +33,6 @@
         height: 250px;
     }
 }
-.example-card{
-    padding: 2px;
-    align-items: center;
-    justify-content: center;
-}
-
 
 #inner {
     display: table;
@@ -68,9 +61,9 @@
     width:100%;
     height: 350px;
     background-color: #B47A15;
-    // button {
-    //     color: #b47a15;
-    // }
+    button {
+        color: #b47a15;
+    }
 }
 
 .fa-facebook-f{
@@ -88,9 +81,6 @@
 h2 {
     color: #b47a15;
 }
-.padded {
-    padding: 20px;
-}
 
 .contact {
     color: white !important;
@@ -102,63 +92,33 @@ h2 {
 }
 
 .swiper-container{
-    width: 850px!important;
-    height: 500px !important;
+    width: 100%;
+    height: auto !important;
     align-items: center;
     justify-content: center;
 }
 .slide-container{
-    width: 800px!important;
-    height: 400px !important;
+    width: 100%;
+    height: auto !important;
 }
 .testimonial-image{
-    width: 350px;
+    width: 100%;
+    height: auto !important;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 }
 .slide{
-    padding: .5em;
     align-items: center;
     justify-content: center;
 }
-@media only screen and (max-width: 600px) {
-    .swiper-container{
-       width: 300px !important;
-       height: 450px !important;
-    }
-    .testimonial-image{
-        width: 250px;
-        height: 200px !important;
-    }
-    .slide{
-        padding: .1em;
-        height: 480px !important;
-    }
-    .slide-container{
-        width: 300px!important;
-        height: 400px !important;
-    }
+@media screen and (min-width: 1024px) {
+  .swiper-container{
+      width: 550px !important;
   }
-  @media screen and (min-width: 601px) and (max-width: 780px) {
-    .swiper-container{
-       width: 500px !important;
-       height: 450px !important;
-    }
-    .testimonial-image{
-        width: 300px;
-        height: 200px !important;
-    }
-    .slide{
-        padding: .1em;
-        height: 480px !important;
-    }
-    .slide-container{
-        width: 500px!important;
-        height: 400px !important;
-    }
-  }
-  .testi-header{
+}
+
+.testi-header{
     align-items: center;
     justify-content: center;
     padding: 0em;
@@ -208,10 +168,6 @@ h2 {
   }
   ::ng-deep .mat-card-header-text {
     justify-content: center !important;
-}
-.slider{
-    justify-content: center;
-    margin: 0px;
 }
 .mat-h2, .mat-title, .mat-typography h2 {
    
