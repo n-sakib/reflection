@@ -26,8 +26,8 @@ export class PaidPictureComponent implements OnInit {
   constructor(private dialog: MatDialog, private database: AngularFireDatabase, private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.breakpoint = (window.innerWidth <= 1024) ? 1 : 3;
     console.log(this.imageInfo)
+    this.breakpoint = (window.innerWidth < 600) ? 1 : 3;
 
   }
 
@@ -72,8 +72,8 @@ export class PaidPictureComponent implements OnInit {
   getSanitizedFrame() {
     return this._sanitizer.bypassSecurityTrustStyle(`url(${this.imageInfo.frameURL}) 30 stretch`);
   }
-  onResizeVideo(event){
-    this.breakpoint = (event.target.innerWidth < 1025) ? 1 : 3;
+  onResize(event){
+    console.log(event.target.innerWidth)
+    this.breakpoint = (event.target.innerWidth < 600) ? 1 : 3;
   }
-
 }

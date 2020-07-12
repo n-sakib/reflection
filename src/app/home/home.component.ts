@@ -215,9 +215,9 @@ export default class HomeComponent implements OnInit {
   onResize(event) {
     this.breakpoint = (event.target.innerWidth < 920) ? 1 : 2;
   }
-  // onResizeVideo(event){
-  //   this.breakpoint = (event.target.innerWidth < 1025) ? 1 : 2;
-  // }
+  onResizeVideo(event){
+    this.breakpoint = (event.target.innerWidth < 1025) ? 1 : 2;
+  }
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -236,7 +236,7 @@ export default class HomeComponent implements OnInit {
       
     });
     const dialogRef = this.dialog.open( ShowTestimonialsComponent, {
-      width: '100%', height: '70%',
+      width: '90vw', height: '90vh', 
     });
     dialogRef.componentInstance.testiInfo = testiInfo;
   }
