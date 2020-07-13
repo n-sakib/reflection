@@ -14,12 +14,20 @@
 }
 .gallery-inner h2{
     text-align: center;
-   
+    padding: 1em;
 }
 .padded {
-    padding: 10px;
+    padding: 5px;
 }
-
+::ng-deep .mat-figure{
+    
+        display: block;
+        margin-block-start: .5em;
+        margin-block-end: .5em;
+        margin-inline-start: 5px;
+        margin-inline-end: 5px;
+    
+}
 .videoFrame{
     padding: 10px;
     width: 640px;
@@ -38,11 +46,13 @@
     display: table;
     margin: 0 auto;
     color: white;
-    padding: 40px;
+    padding: 20px;
 }
 #inner h2{
     font-size: 2em;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 #inner h3{
     font-size: 1.2em;
@@ -107,12 +117,9 @@ h2 {
     width: 100%;
     height: auto !important;
     align-items: center;
-    justify-content: center;
+    justify-content: center !important;
     cursor: pointer;
-}
-.slide{
-    align-items: center;
-    justify-content: center;
+    padding: 10px;
 }
 @media screen and (min-width: 1024px) {
   .swiper-container{
@@ -130,10 +137,9 @@ h2 {
     justify-content: center;
 }
 .slider{
-    padding: none;
-    align-items: center;
+    padding: 10px;
+    align-items: center !important;
     justify-content: center;
-    margin-right: 20px;
 }
 .testi-header{
     padding: 0em;
@@ -148,8 +154,13 @@ h2 {
       margin-bottom: .70em;
 }
 .contact-field{
-    width: 35%;
+    width: 30%;
 }
+@media screen and (min-width: 760px) {
+    .contact-field{
+        width: 90%;
+    }
+  }
 .contactButton{
     margin-top: 1em;
 }
@@ -174,4 +185,12 @@ h2 {
 .mat-h2, .mat-title, .mat-typography h2 {
    
     margin: 0px;
+}
+::ng-deep .swiper-button-next, ::ng-deep .swiper-button-prev {
+    color: #b47a15 !important; 
+    align-self: center;
+    position: relative;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
 }
