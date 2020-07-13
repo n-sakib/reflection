@@ -31,6 +31,7 @@ export class TestimonialComponent implements OnInit {
   });
   email = new FormControl('', [Validators.required, Validators.email]);
   selectedName: string = '';
+  selectedEmail;
   selectedDescription: string = '';
   selectedAddress: string = '';
   totalstar = 5;
@@ -67,6 +68,7 @@ export class TestimonialComponent implements OnInit {
     }
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
+
   }
   getErrorMessage1() {
     if (this.imageform.hasError('required')) {
@@ -86,6 +88,10 @@ export class TestimonialComponent implements OnInit {
   addAddress($event) {
     var value = $event.target.value;
     this.selectedAddress = value;
+  }
+  addEmail($event) {
+    var value = $event.target.value;
+    this.selectedEmail = value;
   }
 
   
@@ -123,7 +129,7 @@ export class TestimonialComponent implements OnInit {
   next(stepper, step) {
     switch (step) {
       case 1:
-        if (this.selectedName === '' && this.selectedAddress === '' || this.selectedDescription === '' || this.email.hasError) {
+        if (this.selectedName === '' && this.selectedAddress === '' || this.selectedDescription === '' ) {
           this.snackBar.open('Please enter your details.', 'OK', {
             duration: 2000,
           });
@@ -191,6 +197,7 @@ export class TestimonialComponent implements OnInit {
       userName: this.selectedName,
       userAddress: this.selectedAddress,
       imageURL: this.selectedImageURL,
+      email: this.selectedEmail,
       description: this.selectedDescription,
       userRating: this.selectedRating,
     };
@@ -201,6 +208,7 @@ export class TestimonialComponent implements OnInit {
       this.selectedName = '',
         this.selectedAddress = '',
         this.selectedImageURL = '',
+        this.selectedEmail = '';
         this.selectedDescription = '',
         this.selectedRating = 0,
         this.snackBar.open('Successfully uploaded testimonial.', 'OK', {
