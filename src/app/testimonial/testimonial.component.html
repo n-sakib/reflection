@@ -26,7 +26,7 @@
               </mat-form-field><br>
               <mat-form-field class="field-form" appearance="fill">
                 <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                <input matInput placeholder="pat@example.com" [formControl]="email" required (keyup)="addEmail($event)">
                 <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
               </mat-form-field><br>
               <mat-form-field class="field-form" appearance="fill">
@@ -67,7 +67,7 @@
           <div class="cont">
             <h1>Please Give Rating</h1>
             <div class="stars" >
-              <star-rating value="0" totalstars={{totalstar}} checkedcolor="GoldenRod " uncheckedcolor="black" size="24px"
+              <star-rating value="0" totalstars={{totalstar}} checkedcolor="GoldenRod" uncheckedcolor="black" size="24px"
                 readonly="false" (rate)="onRate($event)"></star-rating>
               
             </div>

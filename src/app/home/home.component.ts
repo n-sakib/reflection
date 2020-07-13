@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { SwiperComponent, SwiperDirective, SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { ShowTestimonialsComponent } from '../show-testimonials/show-testimonials.component';
+import { StarRatingComponent } from 'ng-starrating';
+
 
 
 @Component({
@@ -42,6 +44,7 @@ export default class HomeComponent implements OnInit {
   galleryImgs = [];
   selectedImage: any = null;
   imageTypes: Observable<any[]>;
+  totalstar = 5;
 
   public type: string = 'component';
 
@@ -120,14 +123,13 @@ export default class HomeComponent implements OnInit {
           this.testimonials.push(val);
           this.config = {
             a11y: true,
-            direction: 'horizontal',
-            slidesPerView: 1,
-            keyboard: true,
-            navigation: true,
-            pagination: false,
-            autoplay: {
-              delay: 2000,
-            },
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: true,
+    pagination: false
           }
         });
         
@@ -164,7 +166,7 @@ export default class HomeComponent implements OnInit {
       }
     });
     const dialogRef = this.dialog.open(PaidPictureComponent, {
-      width: '95vw', height: '85vh', 
+      width: '95vw', height: 'auto', 
     }); 
     dialogRef.componentInstance.imageInfo = imageInfo;
   }
@@ -194,11 +196,12 @@ export default class HomeComponent implements OnInit {
       
     });
     const dialogRef = this.dialog.open( ShowTestimonialsComponent, {
-      width: '90vw', height: '80vh', 
+      width: '90vw', height: 'auto', 
     });
     dialogRef.componentInstance.testiInfo = testiInfo;
   }
   // getSanitizedFrame() {
   //   return this._sanitizer.bypassSecurityTrustStyle(`url(${this.frameURL}) 30 stretch`);
   // }
+  
 }

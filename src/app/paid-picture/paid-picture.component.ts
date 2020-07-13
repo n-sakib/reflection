@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Input, ViewChild, AfterContentInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PotraitPictureComponent } from '../potrait-picture/potrait-picture.component';
 import { DigitalPictureComponent } from '../digital-picture/digital-picture.component';
-import { NONE_TYPE, SafeMethodCall } from '@angular/compiler';
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { MatGridList } from '@angular/material/grid-list/grid-list';
 
 
 
@@ -16,24 +16,14 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
   styleUrls: ['./paid-picture.component.css']
 })
 
-export class PaidPictureComponent implements OnInit {
+export class PaidPictureComponent {
   breakpoint;
-  
+  @ViewChild('grid') grid: MatGridList;
 
-  @Input() imageInfo;
+  @Input() imageInfo
 
 
-
-  constructor(private dialog: MatDialog, private database: AngularFireDatabase, private _sanitizer: DomSanitizer) { }
-
-  ngOnInit(): void {
-   
-
-    console.log(this.imageInfo)
-    this.breakpoint = (window.innerWidth < 1024) ? 1 : 3;
-
-  }
-
+  constructor(private dialog: MatDialog, private database: AngularFireDatabase, private _sanitizer: DomSanitizer, private media: MediaObserver) { }
 
   getUserProfileImage(galleryImg) {
     console.log('baaaal');
@@ -52,7 +42,7 @@ export class PaidPictureComponent implements OnInit {
 
     ;
     const dialogRef = this.dialog.open(DigitalPictureComponent, {
-      width: '95vw', height: '85vh', 
+      width: '95vw', height: 'auto',
     });
     dialogRef.componentInstance.digitalInfo = digitalInfo;
   }
@@ -68,15 +58,11 @@ export class PaidPictureComponent implements OnInit {
 
     ;
     const dialogRef = this.dialog.open(PotraitPictureComponent, {
-      width: '95vw', height: '85vh', 
+      width: '95vw', height: 'auto',
     });
     dialogRef.componentInstance.potraitInfo = potraitInfo;
   }
   getSanitizedFrame() {
     return this._sanitizer.bypassSecurityTrustStyle(`url(${this.imageInfo.frameURL}) 30 stretch`);
-  }
-  onResize(event){
-    console.log(event.target.innerWidth)
-    this.breakpoint = (event.target.innerWidth < 1024) ? 1 : 3;
   }
 }
