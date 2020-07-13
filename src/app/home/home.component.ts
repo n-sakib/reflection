@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { SwiperComponent, SwiperDirective, SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { ShowTestimonialsComponent } from '../show-testimonials/show-testimonials.component';
+import { StarRatingComponent } from 'ng-starrating';
+
 
 
 @Component({
@@ -42,6 +44,7 @@ export default class HomeComponent implements OnInit {
   galleryImgs = [];
   selectedImage: any = null;
   imageTypes: Observable<any[]>;
+  totalstar = 5;
 
   public type: string = 'component';
 

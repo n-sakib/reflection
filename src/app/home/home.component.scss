@@ -153,18 +153,14 @@ h2 {
       color: white;
       margin-bottom: .70em;
 }
-.contact-field{
-    width: 30%;
+::ng-deep .contact-field{
+    width: 35%;
+    min-width: 200px;
 }
-@media screen and (min-width: 760px) {
-    .contact-field{
-        width: 90%;
-    }
-  }
+
 .contactButton{
     margin-top: 1em;
 }
-
 ::ng-deep .mat-focused .mat-form-field-label {
     /*change color of label*/
     color: white !important;

@@ -49,7 +49,11 @@
                     <mat-card class="slide">
                         <mat-card-header class="testi-header">
                             <mat-card-title>{{testimonial.userName}}</mat-card-title>
-                            <mat-card-subtitle>{{testimonial.userRating}}</mat-card-subtitle>
+                            <mat-card-subtitle>
+                                <star-rating value="{{testimonial.userRating}}" totalstars={{totalstar}} checkedcolor="GoldenRod" uncheckedcolor="black" size="24px"
+                                readonly="true"></star-rating>
+                                
+                            </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content class="slider">
                             <img [src]="testimonial.imageURL" alt="" (click)="showtTestimonial(testimonial.imageURL)"
@@ -84,7 +88,7 @@
                 it
                 from there!</h3>
             <mat-form-field class="contact-field" color="tartiary">
-                <input matInput type="text" style="color:white" [formControl]="email">
+                <input  matInput type="text" style="color:white" [formControl]="email">
                 <mat-placeholder style="color:white">Enter your email here</mat-placeholder>
                 <mat-error style="color:white" *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
