@@ -196,7 +196,7 @@ export default class HomeComponent implements OnInit {
       
     });
     const dialogRef = this.dialog.open( ShowTestimonialsComponent, {
-      width: '90vw', height: 'auto', 
+      width: 'auto', height: 'auto', 
     });
     dialogRef.componentInstance.testiInfo = testiInfo;
   }

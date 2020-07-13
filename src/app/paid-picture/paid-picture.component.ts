@@ -42,7 +42,7 @@ export class PaidPictureComponent {
 
     ;
     const dialogRef = this.dialog.open(DigitalPictureComponent, {
-      width: '95vw', height: 'auto',
+      width: 'auto', height: 'auto',
     });
     dialogRef.componentInstance.digitalInfo = digitalInfo;
   }
@@ -58,7 +58,7 @@ export class PaidPictureComponent {
 
     ;
     const dialogRef = this.dialog.open(PotraitPictureComponent, {
-      width: '95vw', height: 'auto',
+      width: 'auto', height: 'auto',
     });
     dialogRef.componentInstance.potraitInfo = potraitInfo;
   }
