@@ -4,7 +4,7 @@
       <mat-icon class="close-icon" color="primary">close</mat-icon>
     </button><br>
 </div>
-<div class="potraitImage">
+<!-- <div class="potraitImage">
     
                 <h1>Potrait Image</h1>
                 <div fxLayout="row" fxLayoutAlign="center center">
@@ -13,4 +13,9 @@
                     </div> 
                 </div>
             
-</div>
+</div> -->
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+      <img [src]="potraitInfo.imageURL" class="responsive-image">
+  </div>
+</div>   

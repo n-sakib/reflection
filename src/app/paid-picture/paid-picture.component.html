@@ -1,42 +1,41 @@
 
-    <div fxLayout="row" fxLayoutAlign="end center" >
+<div fxLayout="row" fxLayoutAlign="end center">
 
-        <button mat-icon-button class="close-button" [mat-dialog-close]="true">
-          <mat-icon class="close-icon" color="primary">close</mat-icon>
-        </button><br>
-      </div> -->
-    <mat-grid-list cols="3">
-        <mat-grid-tile colspan='1'>
-            
-            <div class="digitalImage">
-                <h1>Digital Image</h1>
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <div class="frameBox" [style.border-image]="getSanitizedFrame()">
-                            <img [src]="imageInfo.imageURL.big"   alt="" class="responsive-image"  (click)="digitalimageOnClick(imageInfo.imageURL.big)">
-                    </div> 
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true">
+        <mat-icon class="close-icon" color="primary">close</mat-icon>
+    </button><br>
+</div>
+
+<mat-grid-list cols="5" rowHeight="fit" style="height: calc(80vh - 24px)" (window:resize)="onResize($event)">
+    <mat-grid-tile colspan='2' class="one">
+
+        <div class="digitalImage">
+            <h1>Digital Image</h1>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+                    <img [src]="imageInfo.imageURL.big" alt="" class="responsive-image"
+                        (click)="digitalimageOnClick(imageInfo.imageURL.big)">
                 </div>
             </div>
-                
-          
-        </mat-grid-tile>
-        <mat-grid-tile colspan='1'>
-            <div class="potraitImage">
-                <h1>Potrait Image</h1>
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <div class="frameBox" [style.border-image]="getSanitizedFrame()">
-                            <img [src]="imageInfo.imageURL.big"   alt="" width="100%" height="100%" (click)="potraitimageOnClick(imageInfo.imageURL.big)">
-                    </div> 
+        </div>
+
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan='2' class="two">
+        <div class="potraitImage">
+            <h1>Potrait Image</h1>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+                    <img [src]="imageInfo.imageURL.big" class="responsive-image" alt="" width="100%" height="100%"
+                        (click)="potraitimageOnClick(imageInfo.imageURL.big)">
                 </div>
             </div>
-        </mat-grid-tile>
-        <mat-grid-tile colspan='1'>
-            <div class="description">
-                <h1>Description</h1>
-                    <h3>{{imageInfo.description}}</h3>
-            </div>
-        </mat-grid-tile>
-    </mat-grid-list>
-
-   
-
-    
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan='1' class="three">
+        <div class="description">
+            <h1>Description</h1>
+            <p>{{imageInfo.description}}</p>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

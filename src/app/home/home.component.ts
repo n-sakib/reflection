@@ -100,7 +100,7 @@ export default class HomeComponent implements OnInit {
               { "breakpoint": 720, "width": "500px", "height": "400px", "thumbnailsColumns": 4 },
               { "breakpoint": 640, "width": "400px", "height": "370px", "thumbnailsColumns": 4 },
               { "breakpoint": 520, "width": "350px", "height": "350px", "thumbnailsColumns": 4 },
-              { "breakpoint": 375, "width": "300px", "height": "300px", "thumbnailsColumns": 4 },
+              { "breakpoint": 375, "width": "250px", "height": "250px", "thumbnailsColumns": 4 },
             ];
             this.galleryImgs.push(imageObject)
           });
@@ -138,49 +138,7 @@ export default class HomeComponent implements OnInit {
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     // this.breakpoint = (window.innerWidth <= 1024) ? 1 : 2;
 
-    this.singleGalleryOptions = [
-      {
-        breakpoint: 400,
-        width: '80%',
-        height: '150px',
-        imagePercent: 65,
-        thumbnailsPercent: 18,
-        thumbnailsMargin: 5,
-        thumbnailMargin: 5,
-      },
-      {
-        breakpoint: 600,
-        width: '100%',
-        height: '200px',
-        imagePercent: 85,
-        thumbnailsPercent: 20,
-        thumbnailsMargin: 5,
-        thumbnailMargin: 5,
-      },
-      {
-        breakpoint: 960,
-        width: '100%',
-        height: '250px',
-        imagePercent: 75,
-        thumbnailsPercent: 25,
-        thumbnailsMargin: 5,
-        thumbnailMargin: 5,
-      },
-      {
-        breakpoint: 1280,
-        width: '100%',
-        height: '250px',
-        imagePercent: 75,
-        thumbnailsPercent: 25,
-        thumbnailsMargin: 5,
-        thumbnailMargin: 5,
-      },
-      // max-width 400
-      {
-        breakpoint: 400,
-        preview: false
-      }
-    ];
+    
   }
 
   onChangeHandler() {
@@ -206,7 +164,7 @@ export default class HomeComponent implements OnInit {
       }
     });
     const dialogRef = this.dialog.open(PaidPictureComponent, {
-      width: '100%', height: '70%',
+      width: '95vw', height: '85vh', 
     }); 
     dialogRef.componentInstance.imageInfo = imageInfo;
   }
@@ -236,7 +194,7 @@ export default class HomeComponent implements OnInit {
       
     });
     const dialogRef = this.dialog.open( ShowTestimonialsComponent, {
-      width: '90vw', height: '90vh', 
+      width: '90vw', height: '80vh', 
     });
     dialogRef.componentInstance.testiInfo = testiInfo;
   }

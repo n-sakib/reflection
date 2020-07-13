@@ -9,15 +9,16 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 
 
 
+
 @Component({
   selector: 'app-paid-picture',
   templateUrl: './paid-picture.component.html',
   styleUrls: ['./paid-picture.component.css']
 })
+
 export class PaidPictureComponent implements OnInit {
   breakpoint;
-
-
+  
 
   @Input() imageInfo;
 
@@ -26,8 +27,10 @@ export class PaidPictureComponent implements OnInit {
   constructor(private dialog: MatDialog, private database: AngularFireDatabase, private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+   
+
     console.log(this.imageInfo)
-    this.breakpoint = (window.innerWidth < 600) ? 1 : 3;
+    this.breakpoint = (window.innerWidth < 1024) ? 1 : 3;
 
   }
 
@@ -49,7 +52,7 @@ export class PaidPictureComponent implements OnInit {
 
     ;
     const dialogRef = this.dialog.open(DigitalPictureComponent, {
-      width: '80%', height: '70%',
+      width: '95vw', height: '85vh', 
     });
     dialogRef.componentInstance.digitalInfo = digitalInfo;
   }
@@ -65,7 +68,7 @@ export class PaidPictureComponent implements OnInit {
 
     ;
     const dialogRef = this.dialog.open(PotraitPictureComponent, {
-      width: '80%', height: '70%',
+      width: '95vw', height: '85vh', 
     });
     dialogRef.componentInstance.potraitInfo = potraitInfo;
   }
@@ -74,6 +77,6 @@ export class PaidPictureComponent implements OnInit {
   }
   onResize(event){
     console.log(event.target.innerWidth)
-    this.breakpoint = (event.target.innerWidth < 600) ? 1 : 3;
+    this.breakpoint = (event.target.innerWidth < 1024) ? 1 : 3;
   }
 }

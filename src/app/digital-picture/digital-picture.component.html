@@ -4,12 +4,16 @@
         <mat-icon class="close-icon" color="primary">close</mat-icon>
     </button><br>
 </div>
-<div class="digiRow">
-    <h1>Digital Image</h1>
+<!-- <div class="digiRow">
+    <h1>Digital Image</h1> -->
+    <!-- <div class="responsive-image" fxLayout="row" fxLayoutAlign="center center">
+        <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+                <img [src]="digitalInfo.imageURL"   alt="">
+        </div> 
+    </div> -->
     <div fxLayout="row" fxLayoutAlign="center center">
         <div class="frameBox" [style.border-image]="getSanitizedFrame()">
-                <img [src]="digitalInfo.imageURL"   alt="" width="100%" height="100%">
-        </div> 
-    </div>
-            
-</div>
+            <img [src]="digitalInfo.imageURL" class="responsive-image">
+        </div>
+    </div>        
+<!-- </div> -->
