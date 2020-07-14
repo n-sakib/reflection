@@ -145,6 +145,10 @@ h2 {
     align-items: center;
     justify-content: center;
 }
+.slide{
+    height: auto;
+    width: 100%;
+}
 .slider{
     padding: 10px;
     align-items: center !important;
@@ -204,3 +208,65 @@ h2 {
  ::ng-deep .ngx-gallery-thumbnails .ngx-gallery-active{
     border: 2px #B47A15 !important;
   }
+
+.gallery-inner {
+    background-color: #F5F5F5;
+}
+
+.landing-padded {
+    padding: 0 200px 0 200px;
+}
+
+.mat-icon {
+   
+    height: inherit;
+    width: inherit;
+}
+.landing-icons {
+    margin-top: 40px!important;
+    margin:40px;
+    color: #b47a15;
+    font-size: 70px;
+    padding-bottom: 40px;
+}
+
+.vertical-swiper-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .swiper-slide {
+    color: black;
+  }
+  
+  .swiper-slide-active {
+    color: black;
+  }
+
+  .testimonial-padded {
+    margin-left:300px ;
+    margin-right:300px ;
+  }
+
+  .testimonial-vertical-image {
+    width:30%;
+    height:auto;
+  }
+
+  .leftVerticalAlign {
+    left: 0;    
+    position: absolute;
+    margin: 0;
+}
+
+.rightVerticalAlign {
+    position: absolute;
+    right: 0;
+    margin:0;
+}
+
+
+

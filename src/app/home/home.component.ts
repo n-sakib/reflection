@@ -50,6 +50,15 @@ export default class HomeComponent implements OnInit {
 
   public disabled: boolean = false;
   public config: SwiperConfigInterface;
+  public verticalConfig: SwiperConfigInterface = {
+    direction: 'vertical',
+    slidesPerView: 3,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: false,
+    navigation: true,
+    pagination: true
+  };
 
   @ViewChild(SwiperComponent) componentRef?: SwiperComponent;
   @ViewChild(SwiperDirective, { static: true }) directiveRef?: SwiperDirective;
@@ -85,7 +94,7 @@ export default class HomeComponent implements OnInit {
               imageObject.frameURL.push(frameURL);
               imageObject.description.push(description);
             });
-            
+
             imageObject.galleryOptions = [
               {
                 width: '600px',
@@ -113,35 +122,45 @@ export default class HomeComponent implements OnInit {
         complete: () => { console.log("done") }
       })
 
-      this.database.list('testimonials/').snapshotChanges()
-    .subscribe({
-      next: testimonials => {
-        
-        testimonials.forEach( testimonials=> {
-          var testiObject:any = {};
-          
-          var val = testimonials.payload.val();
-          this.testimonials.push(val);
-          this.config = {
-            a11y: true,
-    direction: 'horizontal',
-    slidesPerView: 1,
-    keyboard: true,
-    mousewheel: true,
-    scrollbar: false,
-    navigation: true,
-    pagination: false
-          }
-        });
-        
+    this.database.list('testimonials/').snapshotChanges()
+      .subscribe({
+        next: testimonials => {
+
+          testimonials.forEach(testimonials => {
+            var testiObject: any = {};
+
+            var val = testimonials.payload.val();
+            this.testimonials.push(val);
+            this.config = {
+              a11y: true,
+              direction: 'horizontal',
+              slidesPerView: 1,
+              keyboard: true,
+              mousewheel: true,
+              scrollbar: false,
+              navigation: true,
+              pagination: false
+            }
+            this.verticalConfig = {
+              a11y: true,
+              direction: 'vertical',
+              slidesPerView: 3,
+              keyboard: true,
+              mousewheel: true,
+              scrollbar: false,
+              navigation: true,
+              pagination: true
+            }
+          });
+
         }
       })
-      
+
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     // this.breakpoint = (window.innerWidth <= 1024) ? 1 : 2;
 
-    
+
   }
 
   onChangeHandler() {
@@ -159,7 +178,7 @@ export default class HomeComponent implements OnInit {
       galleryName: ""
     };
     this.galleryImgs.forEach(gallery => {
-      if(gallery.type === type) {
+      if (gallery.type === type) {
         imageInfo.imageURL = gallery.images[index];
         imageInfo.frameURL = gallery.frameURL[index];
         imageInfo.description = gallery.description[index];
@@ -167,16 +186,16 @@ export default class HomeComponent implements OnInit {
       }
     });
     const dialogRef = this.dialog.open(PaidPictureComponent, {
-      width: '95vw', height: 'auto', 
-    }); 
+      width: '95vw', height: 'auto',
+    });
     dialogRef.componentInstance.imageInfo = imageInfo;
   }
 
-  
+
   onResize(event) {
     this.breakpoint = (event.target.innerWidth < 920) ? 1 : 2;
   }
-  onResizeVideo(event){
+  onResizeVideo(event) {
     this.breakpoint = (event.target.innerWidth < 1025) ? 1 : 2;
   }
 
@@ -192,9 +211,9 @@ export default class HomeComponent implements OnInit {
       imageURL: "",
     };
     this.testimonials.forEach(testimonial => {
-      
-        testiInfo.imageURL = imageURL;
-      
+
+      testiInfo.imageURL = imageURL;
+
     });
     const dialogRef = this.dialog.open( ShowTestimonialsComponent, {
       width: 'auto', height: 'auto', 
@@ -204,5 +223,12 @@ export default class HomeComponent implements OnInit {
   // getSanitizedFrame() {
   //   return this._sanitizer.bypassSecurityTrustStyle(`url(${this.frameURL}) 30 stretch`);
   // }
-  
+  public slides = [
+    'First slide',
+    'Second slide',
+    'Third slide',
+    'Fourth slide',
+    'Fifth slide',
+    'Sixth slide'
+  ];
 }
