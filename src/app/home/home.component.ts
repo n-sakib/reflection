@@ -214,8 +214,8 @@ export default class HomeComponent implements OnInit {
       testiInfo.imageURL = imageURL;
 
     });
-    const dialogRef = this.dialog.open(ShowTestimonialsComponent, {
-      width: '90vw', height: 'auto',
+    const dialogRef = this.dialog.open( ShowTestimonialsComponent, {
+      width: 'auto', height: 'auto', 
     });
     dialogRef.componentInstance.testiInfo = testiInfo;
   }
