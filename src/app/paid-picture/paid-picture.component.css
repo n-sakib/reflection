@@ -28,19 +28,20 @@
     padding: 5px;
     max-width: 100%;
     width: auto;
+    height: auto;
+    max-height: calc(85vh - 15%);
+    min-height: 160px;
 }
 .frameBox {
     max-width: 100%;
-    max-height: calc(85vh - 88px);
+    max-height: calc(85vh - 20%);
     border: 20px solid transparent;
     min-height: 140px;
     min-width: 160px;
  }
  .responsive-image {
-  
-  object-fit: contain;
   max-width: 100%;
-  max-height: calc(85vh - 128px);
+  max-height: calc((80vh -20%)- 40px);
   width: auto;
   height: auto;
   margin: auto;
@@ -55,7 +56,7 @@
  }
   p  {
     display: block;
-   
+    height: auto;
     max-width: 330px;
     width: auto;
     min-width: 240px;
@@ -89,5 +90,6 @@
 }
 .content{
   align-items: center;
+  height: auto;
 }
 

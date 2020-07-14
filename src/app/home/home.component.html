@@ -102,99 +102,101 @@
         <h2>TESTIMONIALS</h2>
         <div class="testimonial-container testimonial-padded">
             <mat-card>
-            <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="1:1">
-                <mat-grid-tile>
-                    
-                    <div class="swiper-container rightVerticalAlign">
-                        <swiper class="swiper" [config]="config">
-                            <div class="slide-container" *ngFor="let testimonial of testimonials" class="swiper-slide">
-                                <mat-card>
-                                    <mat-card-header class="testi-header">
-                                        <mat-card-title>{{testimonial.userName}}</mat-card-title>
-                                        <mat-card-subtitle>
-                                            <star-rating value="{{testimonial.userRating}}" totalstars={{totalstar}}
-                                                checkedcolor="GoldenRod" uncheckedcolor="black" size="24px"
-                                                readonly="true">
-                                            </star-rating>
+                <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="1:1">
+                    <mat-grid-tile>
 
-                                        </mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content class="slider">
-                                        <img [src]="testimonial.imageURL" alt=""
-                                            (click)="showtTestimonial(testimonial.imageURL)" class="testimonial-image">
-                                        <p>
-                                            {{testimonial.description}}
-                                        </p>
-                                    </mat-card-content>
-                                    <mat-card-actions class="shareLike">
-                                        <button class="likeButton" mat-flat-button color="white">
-                                            <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                                color="primary">
-                                                thumb_up_alt</mat-icon>
-                                        </button>&nbsp;
-                                        <button class="likeButton" mat-flat-button color="white">
-                                            <mat-icon aria-hidden="false" aria-label="Example home icon"
-                                                color="primary">
-                                                share
-                                            </mat-icon>
-                                        </button>
-                                    </mat-card-actions>
-                                </mat-card>
-                            </div>
-                        </swiper>
-                    </div>
-                </mat-grid-tile>
-                <mat-grid-tile>
+                        <div class="swiper-container rightVerticalAlign">
+                            <swiper class="swiper" [config]="config">
+                                <div class="slide-container" *ngFor="let testimonial of testimonials">
+                                    <mat-card>
+                                        <mat-card-header class="testi-header">
+                                            <mat-card-title>{{testimonial.userName}}</mat-card-title>
+                                            <mat-card-subtitle>
+                                                <star-rating value="{{testimonial.userRating}}" totalstars={{totalstar}}
+                                                    checkedcolor="GoldenRod" uncheckedcolor="black" size="24px"
+                                                    readonly="true">
+                                                </star-rating>
+
+                                            </mat-card-subtitle>
+                                        </mat-card-header>
+                                        <mat-card-content class="slider">
+                                            <img [src]="testimonial.imageURL" alt=""
+                                                (click)="showtTestimonial(testimonial.imageURL)"
+                                                class="testimonial-image">
+                                            <p>
+                                                {{testimonial.description}}
+                                            </p>
+                                        </mat-card-content>
+                                        <mat-card-actions class="shareLike">
+                                            <button class="likeButton" mat-flat-button color="white">
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                    color="primary">
+                                                    thumb_up_alt</mat-icon>
+                                            </button>&nbsp;
+                                            <button class="likeButton" mat-flat-button color="white">
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                    color="primary">
+                                                    share
+                                                </mat-icon>
+                                            </button>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
+                            </swiper>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
                         <swiper class="vertical-swiper-container" [config]="verticalConfig" fxFlex="auto">
                             <div *ngFor="let testimonial of testimonials" class="swiper-slide">
-                              <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
-                                <img [src]="testimonial.imageURL"
-                                        (click)="showtTestimonial(testimonial.imageURL)" class="testimonial-vertical-image">
-                              </div>
+                                <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+                                    <img [src]="testimonial.imageURL" (click)="showtTestimonial(testimonial.imageURL)"
+                                        class="testimonial-vertical-image">
+                                </div>
                             </div>
-                          </swiper>
-                            <!-- <swiper [config]="verticalConfig">
+                        </swiper>
+                        <!-- <swiper [config]="verticalConfig">
                                 <div *ngFor="let testimonial of testimonials">
                                     <img [src]="testimonial.imageURL"
                                         (click)="showtTestimonial(testimonial.imageURL)" class="testimonial-vertical-image">
                                 </div>
                             </swiper> -->
-                </mat-grid-tile>
-            </mat-grid-list>
-        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-card>
         </div>
     </div>
-</div>
-<div class="gallery-inner">
-    <h2>We Accept</h2>
-    <div class="landing-padded">
-        <mat-grid-list cols="4" rowHeight="1:.3">
-            <mat-grid-tile>
-                <mat-icon fontSet="fab" fontIcon="fa-cc-visa" class="landing-icons"></mat-icon>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-icon fontSet="fab" fontIcon="fa-cc-mastercard" class="landing-icons"></mat-icon>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-icon fontSet="fab" fontIcon="fa-cc-amex" class="landing-icons"></mat-icon>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-icon fontSet="fab" fontIcon="fa-cc-discover" class="landing-icons"></mat-icon>
-            </mat-grid-tile>
-        </mat-grid-list>
+
+    <div class="gallery-inner">
+        <h2>We Accept</h2>
+        <div class="landing-padded">
+            <mat-grid-list cols="4" rowHeight="1:.3">
+                <mat-grid-tile>
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-visa" class="landing-icons"></mat-icon>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-mastercard" class="landing-icons"></mat-icon>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-amex" class="landing-icons"></mat-icon>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-discover" class="landing-icons"></mat-icon>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
     </div>
-</div>
-<div id="outer">
-    <div id="inner">
-        <h2 class="contact">GET IN TOUCH</h2>
-        <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take
-            it
-            from there!</h3>
-        <mat-form-field class="contact-field" color="tartiary">
-            <input matInput type="text" style="color:white" [formControl]="email">
-            <mat-placeholder style="color:white">Enter your email here</mat-placeholder>
-            <mat-error style="color:white" *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <button class="contactButton" mat-flat-button color="secondary">CONTACT US</button>
+    <div id="outer">
+        <div id="inner">
+            <h2 class="contact">GET IN TOUCH</h2>
+            <h3>Want a quote or have a talk or just want to hang around? Just enter your email address and we will take
+                it
+                from there!</h3>
+            <mat-form-field class="contact-field" color="tartiary">
+                <input matInput type="text" style="color:white" [formControl]="email">
+                <mat-placeholder style="color:white">Enter your email here</mat-placeholder>
+                <mat-error style="color:white" *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <button class="contactButton" mat-flat-button color="secondary">CONTACT US</button>
+        </div>
     </div>
 </div>
