@@ -201,4 +201,6 @@ h2 {
     // justify-content: center;
     // align-items: center;
 }
-
+ ::ng-deep .ngx-gallery-thumbnails .ngx-gallery-active{
+    border: 2px #B47A15 !important;
+  }

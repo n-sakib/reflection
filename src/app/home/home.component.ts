@@ -95,7 +95,8 @@ export default class HomeComponent implements OnInit {
                 imageAnimation: NgxGalleryAnimation.Slide,
                 imageActions: [{ icon: 'fa fa-window-restore', titleText: 'view', onClick: this.imageOnClick.bind(this, imageType.key) }],
                 preview: false,
-                imageDescription: true
+                imageDescription: true,
+                backdropColor: 'GoldenRod',
               },
               { "breakpoint": 1080, "width": "400px", "height": "280px", "thumbnailsColumns": 4 },
               { "breakpoint": 1280, "width": "500px" },
