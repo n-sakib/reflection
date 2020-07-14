@@ -102,28 +102,27 @@
         <h2>TESTIMONIALS</h2>
         <div class="testimonial-container testimonial-padded">
             <mat-card>
-                <mat-grid-list cols="2" [cols]="breakpoint" rowHeight="1:1">
-                    <mat-grid-tile>
-
+                <mat-grid-list cols="3"  rowHeight="1:2">
+                    <mat-grid-tile colspan='2'>
                         <div class="swiper-container rightVerticalAlign">
                             <swiper class="swiper" [config]="config">
                                 <div class="slide-container" *ngFor="let testimonial of testimonials">
-                                    <mat-card>
+                                    <mat-card   >
                                         <mat-card-header class="testi-header">
                                             <mat-card-title>{{testimonial.userName}}</mat-card-title>
                                             <mat-card-subtitle>
                                                 <star-rating value="{{testimonial.userRating}}" totalstars={{totalstar}}
-                                                    checkedcolor="GoldenRod" uncheckedcolor="black" size="24px"
+                                                    checkedcolor="GoldenRod" uncheckedcolor="black" size="20px"
                                                     readonly="true">
                                                 </star-rating>
 
                                             </mat-card-subtitle>
                                         </mat-card-header>
-                                        <mat-card-content class="slider">
+                                        <mat-card-content class="slider" fxLayout.gt-sm="row" fxLayout="row wrap" fxLayoutGap="5px">
                                             <img [src]="testimonial.imageURL" alt=""
                                                 (click)="showtTestimonial(testimonial.imageURL)"
-                                                class="testimonial-image">
-                                            <p>
+                                                class="testimonial-image" fxFlex.gt-sm="50%" fxFlex>
+                                            <p fxFlex.gt-sm="50%" fxFlex>
                                                 {{testimonial.description}}
                                             </p>
                                         </mat-card-content>
@@ -145,7 +144,7 @@
                             </swiper>
                         </div>
                     </mat-grid-tile>
-                    <mat-grid-tile>
+                    <mat-grid-tile colspan='1'>
                         <swiper class="vertical-swiper-container" [config]="verticalConfig" fxFlex="auto">
                             <div *ngFor="let testimonial of testimonials" class="swiper-slide">
                                 <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
