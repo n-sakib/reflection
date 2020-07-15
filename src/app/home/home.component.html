@@ -2,53 +2,54 @@
     <div class="gallery-inner">
         <h2>ARTISAN IMAGING AGENCY</h2>
         <div class="landing-padded">
-            <mat-grid-list cols="3" gutterSize="200">
+            <mat-grid-list cols="3" rowHeight='20rem' gutterSize="20" [cols]="breakpointAgency"
+                (window:resize)="onResizeAgency($event)">
                 <mat-grid-tile>
-                    <div fxLayout="column">
-                        <mat-card>
-                            <mat-icon fontSet="fab" fontIcon="fa-accusoft" class="landing-icons"></mat-icon>
-                            <div>
-                                <h3>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                    unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                    It has survived not only five centuries
-                                </h3>
-                            </div>
-                        </mat-card>
 
-                    </div>
+                    <mat-card class="landingcard">
+                        <mat-icon fontSet="fab" fontIcon="fa-accusoft" class="landing-icons"></mat-icon>
+                        <div>
+                            <h3>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                It has survived not only five centuries
+                            </h3>
+                        </div>
+                    </mat-card>
+
+
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <div fxLayout="column" fxLayoutAlign="space-around center">
-                        <mat-card class="example-card">
 
-                            <mat-icon fontSet="fas" fontIcon="fa-truck-moving" class="landing-icons"></mat-icon>
-                            <div>
-                                <h3>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                    unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                    It has survived not only five centuries
-                                </h3>
-                            </div>
-                        </mat-card>
-                    </div>
+                    <mat-card class="landingcard">
+
+                        <mat-icon fontSet="fas" fontIcon="fa-truck-moving" class="landing-icons"></mat-icon>
+                        <div>
+                            <h3>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                It has survived not only five centuries
+                            </h3>
+                        </div>
+                    </mat-card>
+
                 </mat-grid-tile>
                 <mat-grid-tile>
-                    <div fxLayout="column" fxLayoutAlign="space-around center">
-                        <mat-card class="example-card">
-                            <mat-icon fontSet="fas" fontIcon="fa-globe" class="landing-icons"></mat-icon>
-                            <div>
-                                <h3>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                    unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                    It has survived not only five centuries
-                                </h3>
-                            </div>
-                        </mat-card>
-                    </div>
+
+                    <mat-card class="landingcard">
+                        <mat-icon fontSet="fas" fontIcon="fa-globe" class="landing-icons"></mat-icon>
+                        <div>
+                            <h3>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                unknown printer took a galley of type and scrambled it to make a type specimen book.
+                                It has survived not only five centuries
+                            </h3>
+                        </div>
+                    </mat-card>
+
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
@@ -56,7 +57,7 @@
     <div class="gallery-inner">
         <h2>REFLECTION IN ACTION(VIDEO)</h2>
         <div class="padded">
-            <mat-card class="example-card">
+            <mat-card class="video-card">
                 <h3>At reflection we are always trying to provide you with the best artistic piece possible. Take a dive
                     at our
                     process.</h3>
@@ -98,31 +99,32 @@
     </div>
 
 
-    <div class="gallery-inner">
+    <div class="gallery-innerTestiLarge">
         <h2>TESTIMONIALS</h2>
         <div class="testimonial-container testimonial-padded">
-            <mat-card>
-                <mat-grid-list cols="3"  rowHeight="1:2">
+            <mat-card class="testimonialParent">
+                <mat-grid-list cols="3" rowHeight="1:1.5">
                     <mat-grid-tile colspan='2'>
                         <div class="swiper-container rightVerticalAlign">
                             <swiper class="swiper" [config]="config">
                                 <div class="slide-container" *ngFor="let testimonial of testimonials">
-                                    <mat-card   >
+                                    <mat-card class="testiCard">
                                         <mat-card-header class="testi-header">
                                             <mat-card-title>{{testimonial.userName}}</mat-card-title>
                                             <mat-card-subtitle>
                                                 <star-rating value="{{testimonial.userRating}}" totalstars={{totalstar}}
-                                                    checkedcolor="GoldenRod" uncheckedcolor="black" size="20px"
+                                                    checkedcolor="GoldenRod" uncheckedcolor="black" size="15px"
                                                     readonly="true">
                                                 </star-rating>
 
                                             </mat-card-subtitle>
                                         </mat-card-header>
-                                        <mat-card-content class="slider" fxLayout.gt-sm="row" fxLayout="row wrap" fxLayoutGap="5px">
+                                        <mat-card-content class="slider" fxLayout.gt-sm="row" fxLayout.gt-xs="row"
+                                            fxLayout="row wrap" fxLayoutGap="5px">
                                             <img [src]="testimonial.imageURL" alt=""
                                                 (click)="showtTestimonial(testimonial.imageURL)"
-                                                class="testimonial-image" fxFlex.gt-sm="50%" fxFlex>
-                                            <p fxFlex.gt-sm="50%" fxFlex>
+                                                class="testimonial-image" fxFlex.gt-sm="50%" fxFlex.gt-xs="50%" fxFlex>
+                                            <p fxFlex.gt-sm="50%" fxFlex.gt-xs="50%" fxFlex>
                                                 {{testimonial.description}}
                                             </p>
                                         </mat-card-content>
@@ -144,7 +146,7 @@
                             </swiper>
                         </div>
                     </mat-grid-tile>
-                    <mat-grid-tile colspan='1'>
+                    <mat-grid-tile class="verticalTesti" colspan='1'>
                         <swiper class="vertical-swiper-container" [config]="verticalConfig" fxFlex="auto">
                             <div *ngFor="let testimonial of testimonials" class="swiper-slide">
                                 <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
@@ -165,10 +167,97 @@
         </div>
     </div>
 
-    <div class="gallery-inner">
+    <!-- <div class="gallery-innertesti">
+        <h2>TESTIMONIALS</h2>
+        <div class="testimonial-container testimonial-padded">
+            <mat-card class="testimonialParent">
+                <mat-grid-list cols="3" rowHeight="1:2">
+                    <mat-grid-tile colspan='3'>
+                        <div class="swiper-container rightVerticalAlign">
+                            <swiper class="swiper" [config]="config">
+                                <div class="slide-container" *ngFor="let testimonial of testimonials">
+                                    <mat-card class="testiCard">
+                                        <mat-card-header class="testi-header">
+                                            <mat-card-title>{{testimonial.userName}}</mat-card-title>
+                                            <mat-card-subtitle>
+                                                <star-rating value="{{testimonial.userRating}}" totalstars={{totalstar}}
+                                                    checkedcolor="GoldenRod" uncheckedcolor="black" size="15px"
+                                                    readonly="true">
+                                                </star-rating>
+
+                                            </mat-card-subtitle>
+                                        </mat-card-header>
+                                        <mat-card-content class="slider" fxLayout.gt-sm="row" fxLayout.gt-xs="row"
+                                            fxLayout="row wrap" fxLayoutGap="5px">
+                                            <img [src]="testimonial.imageURL" alt=""
+                                                (click)="showtTestimonial(testimonial.imageURL)"
+                                                class="testimonial-image" fxFlex.gt-sm="50%" fxFlex.gt-xs="50%" fxFlex>
+                                            <p fxFlex.gt-sm="50%" fxFlex.gt-xs="50%" fxFlex>
+                                                {{testimonial.description}}
+                                            </p>
+                                        </mat-card-content>
+                                        <mat-card-actions class="shareLike">
+                                            <button class="likeButton" mat-flat-button color="white">
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                    color="primary">
+                                                    thumb_up_alt</mat-icon>
+                                            </button>&nbsp;
+                                            <button class="likeButton" mat-flat-button color="white">
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon"
+                                                    color="primary">
+                                                    share
+                                                </mat-icon>
+                                            </button>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
+                            </swiper>
+                        </div>
+                    </mat-grid-tile>
+
+
+                </mat-grid-list>
+            </mat-card>
+        </div>
+    </div> -->
+    <div class="gallery-innertesti">
+        <h2>TESTIMONIALS</h2>
+        <div class="swiper-container">
+            <swiper class="swiper" [config]="config">
+                <div class="slide-container" *ngFor="let testimonial of testimonials" class="swiper-slide">
+                    <mat-card class="slide">
+                        <mat-card-header class="testi-header">
+                            <mat-card-title>{{testimonial.userName}}</mat-card-title>
+                            <mat-card-subtitle>{{testimonial.userRating}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="slider">
+                            <img [src]="testimonial.imageURL" alt="" (click)="showtTestimonial(testimonial.imageURL)"
+                                class="testimonial-image">
+                            <p>
+                                {{testimonial.description}}
+                            </p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button class="likeButton" mat-flat-button color="white">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">
+                                    thumb_up_alt</mat-icon>
+                            </button>&nbsp;
+                            <button class="likeButton" mat-flat-button color="white">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon" color="primary">share
+                                </mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </swiper>
+        </div>
+    </div>   
+
+
+    <div class="gallery-innercard">
         <h2>We Accept</h2>
-        <div class="landing-padded">
-            <mat-grid-list cols="4" rowHeight="1:.3">
+        <div class="payType">
+            <mat-grid-list cols="4" rowHeight="1:.6">
                 <mat-grid-tile>
                     <mat-icon fontSet="fab" fontIcon="fa-cc-visa" class="landing-icons"></mat-icon>
                 </mat-grid-tile>

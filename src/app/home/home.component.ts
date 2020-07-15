@@ -45,6 +45,7 @@ export default class HomeComponent implements OnInit {
   selectedImage: any = null;
   imageTypes: Observable<any[]>;
   totalstar = 5;
+  breakpointAgency;
 
   public type: string = 'component';
 
@@ -159,8 +160,10 @@ export default class HomeComponent implements OnInit {
 
     this.breakpoint = (window.innerWidth <= 920) ? 1 : 2;
     // this.breakpoint = (window.innerWidth <= 1024) ? 1 : 2;
-
-
+    this.breakpointAgency = (window.innerWidth <= 480) ? 1 : 3;
+  }
+  onResizeAgency(event) {
+    this.breakpointAgency = (event.target.innerWidth <= 480) ? 1 : 3;
   }
 
   onChangeHandler() {
