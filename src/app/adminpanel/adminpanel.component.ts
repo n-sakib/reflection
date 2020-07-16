@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ImageComponentComponent } from '../image-component/image-component.component';
 import { TestimonialComponent } from '../testimonial/testimonial.component';
+import { GalleryTypeComponent } from '../gallery-type/gallery-type.component';
 
 
 
@@ -46,7 +47,7 @@ export class AdminpanelComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ImageComponentComponent, {
-      width: '100%',height: '85%',
+      width: '100%',height: '90%',
     });
     dialogRef.afterClosed().subscribe(data=>{
       console.log("Closed",data);
@@ -62,5 +63,12 @@ export class AdminpanelComponent implements OnInit {
       console.log("Closed",data);
   })
   }
-
+  openGalleryType(): void {
+    const dialogRef = this.dialog.open(GalleryTypeComponent, {
+      width: '100%',height: '85%',
+    });
+    dialogRef.afterClosed().subscribe(data=>{
+      console.log("Closed",data);
+  })
+  }
 }

@@ -9,7 +9,7 @@
 
 <div class="content" fxLayout="row" fxLayout.md="column" fxLayout.xs="column" fxLayout.sm="column" fxFlexFill>
 
-    <div fxFlex="40" class="imageType" fxFlex.md="100" fxFlex.xs="100" fxFlex.sm="100">
+    <!-- <div fxFlex="40" class="imageType" fxFlex.md="100" fxFlex.xs="100" fxFlex.sm="100">
 
 
         <h2>Digital Image</h2>
@@ -32,7 +32,49 @@
         </div>
 
 
-    </div>
+    </div> -->
+    <div ng-controller="imageType">
+        <div *ngIf=" imageInfo.galleryType === 'Dual' ">
+            <div fxFlex="40" class="imageType" fxFlex.md="100" fxFlex.xs="100" fxFlex.sm="100">
+
+
+                <h2>Digital Image</h2>
+
+                <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+                    <img [src]="imageInfo.imageURL.big" class="responsive-image"
+                        (click)="digitalimageOnClick(imageInfo.imageURL.big)">
+                </div>
+
+
+            </div>
+            <div fxFlex="40" class="imageType" fxFlex.md="100" fxFlex.xs="100" fxFlex.sm="100">
+
+
+                <h2>Potrait Image</h2>
+
+                <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+                    <img [src]="imageInfo.imageURL.big" class="responsive-image"
+                        (click)="potraitimageOnClick(imageInfo.imageURL.big)">
+                </div>
+
+
+            </div>
+        </div>
+        <div *ngIf="imageInfo.galleryType === 'Single' ">
+            <div fxFlex="80" class="imageType" fxFlex.md="100" fxFlex.xs="100" fxFlex.sm="100">
+
+
+                <h2>Potrait Image</h2>
+
+                <div class="frameBox" [style.border-image]="getSanitizedFrame()">
+                    <img [src]="imageInfo.imageURL.big" class="responsive-image"
+                        (click)="potraitimageOnClick(imageInfo.imageURL.big)">
+                </div>
+
+
+            </div>
+        </div>
+    </div>  
     <div fxFlex="20" class="description" fxFlex.md="100" fxFlex.xs="100" fxFlex.sm="100">
 
         <h2>Description</h2>

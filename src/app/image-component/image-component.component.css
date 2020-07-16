@@ -169,7 +169,7 @@
     }
 
     h1 {
-       padding: 30px;
+       /* padding: 30px; */
        color: #b47a15;
     }
     mat-radio-button{

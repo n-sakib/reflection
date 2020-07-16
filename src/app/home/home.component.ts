@@ -79,7 +79,8 @@ export default class HomeComponent implements OnInit {
             var imageObject: any = {
               images: [],
               frameURL: [],
-              description: []
+              description: [],
+              galleryType: []
             };
             imageObject.type = imageType.key;
             var val = imageType.payload.val();
@@ -91,9 +92,11 @@ export default class HomeComponent implements OnInit {
               })
               let frameURL = val[image].frameURL;
               let description = val[image].description;
+              let galleryType = val[image].galleryType;
 
               imageObject.frameURL.push(frameURL);
               imageObject.description.push(description);
+              imageObject.galleryType.push(galleryType);
             });
 
             imageObject.galleryOptions = [
@@ -178,10 +181,12 @@ export default class HomeComponent implements OnInit {
       imageURL: "",
       frameURL: "",
       description: "",
-      galleryName: ""
+      galleryName: "",
+      galleryType: "",
     };
     this.galleryImgs.forEach(gallery => {
       if (gallery.type === type) {
+        imageInfo.galleryType = gallery.galleryType[index];
         imageInfo.imageURL = gallery.images[index];
         imageInfo.frameURL = gallery.frameURL[index];
         imageInfo.description = gallery.description[index];
@@ -226,12 +231,5 @@ export default class HomeComponent implements OnInit {
   // getSanitizedFrame() {
   //   return this._sanitizer.bypassSecurityTrustStyle(`url(${this.frameURL}) 30 stretch`);
   // }
-  public slides = [
-    'First slide',
-    'Second slide',
-    'Third slide',
-    'Fourth slide',
-    'Fifth slide',
-    'Sixth slide'
-  ];
+
 }

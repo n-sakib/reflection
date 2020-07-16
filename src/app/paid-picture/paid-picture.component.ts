@@ -25,10 +25,10 @@ export class PaidPictureComponent {
 
   constructor(private dialog: MatDialog, private database: AngularFireDatabase, private _sanitizer: DomSanitizer, private media: MediaObserver) { }
 
-  getUserProfileImage(galleryImg) {
-    console.log('baaaal');
-    console.log(galleryImg);
+  ngOnInit() {
+    console.log(this.imageInfo)
   }
+    
   digitalimageOnClick(imageURL) {
     let digitalInfo = {
       imageURL: "",

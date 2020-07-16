@@ -34,8 +34,9 @@ export class ImageComponentComponent {
   selectedTitle: string = '';
   isPublished: boolean = true;
   selectedDescription: string = '';
+  selectedCategory :string = '';
   breakpoint: number;
-  
+  public lists: any[] = [{ value: 'Dual' }, { value: 'Single'}];
 
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, private _sanitizer: DomSanitizer, public dialogRef: MatDialog) {
     this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
@@ -62,6 +63,9 @@ export class ImageComponentComponent {
   addTitle($event) {
     var value = $event.target.value;
     this.selectedTitle = value;
+  }
+  toggle(event){
+    console.log(event.source.value);
   }
 
   addDescription($event) {
@@ -109,7 +113,7 @@ export class ImageComponentComponent {
       imageURL: this.selectedImageURL,
       title: this.selectedTitle,
       description: this.selectedDescription,
-      galleryType: "dual"
+      galleryType: this.selectedCategory,
     };
 
     console.log(postData)
@@ -120,6 +124,7 @@ export class ImageComponentComponent {
         this.selectedFrameURL = '',
         this.selectedImageURL = '',
         this.selectedTitle = '',
+        this.selectedCategory='',
         this.selectedDescription = '',
         this.snackBar.open('Successfully uploaded image.', 'OK', {
           duration: 2000,
@@ -156,6 +161,15 @@ export class ImageComponentComponent {
         }
         break;
       case 3:
+          if (this.selectedCategory=== '') {
+            this.snackBar.open('Select a category.', 'OK', {
+              duration: 2000,
+            });
+          } else {
+            stepper.next();
+          }
+          break;
+      case 4:
         if (this.selectedFrameURL === '') {
           this.snackBar.open('Select a frame.', 'OK', {
             duration: 2000,
@@ -164,7 +178,7 @@ export class ImageComponentComponent {
           stepper.next();
         }
         break;
-      case 4:
+      case 5:
         if (this.selectedImageURL === '') {
           this.snackBar.open('Upload your image.', 'OK', {
             duration: 2000,
@@ -173,7 +187,7 @@ export class ImageComponentComponent {
           stepper.next();
         }
         break;
-      case 5:
+      case 6:
         if (this.selectedTitle === '' || this.selectedDescription === '' ) {
           this.snackBar.open('Enter Image Information.', 'OK', {
             duration: 2000,

@@ -35,6 +35,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {RatingModule} from 'ng-starrating';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ShowTestimonialsComponent } from './show-testimonials/show-testimonials.component';
+import { GalleryTypeComponent } from './gallery-type/gallery-type.component';
  
 
 @NgModule({
@@ -48,6 +49,7 @@ import { ShowTestimonialsComponent } from './show-testimonials/show-testimonials
     PotraitPictureComponent,
     TestimonialComponent,
     ShowTestimonialsComponent,
+    GalleryTypeComponent,
 
   ],
   imports: [
@@ -76,7 +78,7 @@ import { ShowTestimonialsComponent } from './show-testimonials/show-testimonials
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent]
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent, GalleryTypeComponent]
 
 })
 export class AppModule { }

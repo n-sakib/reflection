@@ -1,0 +1,69 @@
+.galleryType {
+    align-items: center;
+    text-align: center;
+ }
+ .galleryType h1{
+    text-align: center;
+     font-size: 2em;
+    padding-top: .05em;
+ }
+ .galleryType  h3{
+    text-align: center;
+    
+    font-size: 1.5em;
+    padding-top: .05em;
+ }
+ .publish-galleryType{
+    align-items: center;
+    text-align: center;
+ }
+ 
+ @media only screen and (min-width: 850px) {
+  .field-form{
+    width: 300px;
+  }
+
+ }
+  .imageType{
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+ .backNextImage{
+    align-items: center;
+    text-align: center;
+    padding: .5em;
+    color: white;
+  }
+  .backNextImage-button{
+   align-items: center;
+   text-align: center;
+   padding: .25em 1.5em;
+   color: white;
+ }
+ 
+.close-button-wrapper {
+  display: flex;
+  align-items: end;
+}
+
+.close-icon {
+  transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+::ng-deep .mat-horizontal-stepper-header-container {
+  align-items: center;
+   justify-content: center !important;
+   text-align: center !important;
+   margin: auto; 
+   pointer-events: none !important;
+}
+::ng-deep .mat-stepper-horizontal-line{
+    display: none;
+    padding: 0em;
+    width: 0%;
+}
