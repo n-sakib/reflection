@@ -228,7 +228,13 @@
                     <mat-card class="slide">
                         <mat-card-header class="testi-header">
                             <mat-card-title>{{testimonial.userName}}</mat-card-title>
-                            <mat-card-subtitle>{{testimonial.userRating}}</mat-card-subtitle>
+                            <mat-card-subtitle>
+                                <star-rating value="{{testimonial.userRating}}" totalstars={{totalstar}}
+                                    checkedcolor="GoldenRod" uncheckedcolor="black" size="15px"
+                                    readonly="true">
+                                </star-rating>
+
+                            </mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content class="slider">
                             <img [src]="testimonial.imageURL" alt="" (click)="showtTestimonial(testimonial.imageURL)"

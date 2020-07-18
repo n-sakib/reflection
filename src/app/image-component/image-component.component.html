@@ -64,26 +64,7 @@
         </div>
       </mat-step>
       <!-- #enddocregion label -->
-      <mat-step>
-        <div class="typeSelection">
-          <h1>Choose Photo Category</h1>
-
-          <mat-form-field class="imageType">
-
-            <mat-label class="type">Select an option</mat-label>
-            <mat-select [(value)]="selectedCategory">
-
-              <mat-option *ngFor="let list of lists" [value]="list.value">
-                {{list.value}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="backNextImage">
-          <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 3)">Next</button>
-        </div>
-
-      </mat-step>
+     
       <mat-step>
         <div class="frame-uploader-inner">
           <h1>Choose Frame image</h1>
@@ -101,7 +82,7 @@
         </div>
         <div class="backNextImage">
           <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 4)">Next</button>
+          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 3)">Next</button>
         </div>
       </mat-step>
       <mat-step>
@@ -121,7 +102,7 @@
         </div>
         <div class="backNextImage">
           <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 5)">Next</button>
+          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 4)">Next</button>
         </div>
       </mat-step>
       <mat-step>
@@ -143,7 +124,7 @@
         </div>
         <div class="backNextImage">
           <button mat-flat-button color="primary" class="backNextImage-button" matStepperPrevious>Back</button>&nbsp;
-          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 6)">Next</button>
+          <button mat-flat-button color="primary" class="backNextImage-button" (click)="next(stepper, 5)">Next</button>
         </div>
       </mat-step>
       <mat-step>

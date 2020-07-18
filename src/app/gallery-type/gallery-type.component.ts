@@ -15,6 +15,8 @@ import { Observable, from } from 'rxjs';
 export class GalleryTypeComponent implements OnInit {
 
   selectedType = '';
+  selectedCategory :string = '';
+  public lists: any[] = [{ value: 'Dual' }, { value: 'Single'}];
   isPublished: boolean = true;
   typeFormControl = new FormControl('', [Validators.required]);
   typeform: FormGroup = new FormGroup({
@@ -35,7 +37,6 @@ export class GalleryTypeComponent implements OnInit {
     var value = $event.target.value;
     this.selectedType = value;
   }
-
 
   ngOnInit(): void {
   }
@@ -68,6 +69,15 @@ export class GalleryTypeComponent implements OnInit {
         }
         break;
       case 2:
+          if (this.selectedCategory=== '') {
+            this.snackBar.open('Select a category.', 'OK', {
+              duration: 2000,
+            });
+          } else {
+            stepper.next();
+          }
+          break;
+      case 3:
         if (this.isPublished === false) {
           this.snackBar.open('Please publish your testimonial', 'OK', {
             duration: 2000,
@@ -82,13 +92,15 @@ export class GalleryTypeComponent implements OnInit {
   publish() {
     // A post entry.
     var postData = {
-      galleryTypes: this.selectedType,
+      galleryName: this.selectedType,
+      galleryType: this.selectedCategory,
     };
 
     console.log(postData)
     // Get a key for a new Post.
     this.database.list(`admin/galleryTypes`).push(postData).then(() => {
       this.selectedType = '',
+      this.selectedCategory = '',
         this.snackBar.open('Successfully uploaded testimonial.', 'OK', {
           duration: 2000,
         });

@@ -161,15 +161,6 @@ export class ImageComponentComponent {
         }
         break;
       case 3:
-          if (this.selectedCategory=== '') {
-            this.snackBar.open('Select a category.', 'OK', {
-              duration: 2000,
-            });
-          } else {
-            stepper.next();
-          }
-          break;
-      case 4:
         if (this.selectedFrameURL === '') {
           this.snackBar.open('Select a frame.', 'OK', {
             duration: 2000,
@@ -178,7 +169,7 @@ export class ImageComponentComponent {
           stepper.next();
         }
         break;
-      case 5:
+      case 4:
         if (this.selectedImageURL === '') {
           this.snackBar.open('Upload your image.', 'OK', {
             duration: 2000,
@@ -187,7 +178,7 @@ export class ImageComponentComponent {
           stepper.next();
         }
         break;
-      case 6:
+      case 5:
         if (this.selectedTitle === '' || this.selectedDescription === '' ) {
           this.snackBar.open('Enter Image Information.', 'OK', {
             duration: 2000,

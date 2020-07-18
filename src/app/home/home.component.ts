@@ -153,7 +153,7 @@ export default class HomeComponent implements OnInit {
               mousewheel: true,
               scrollbar: false,
               navigation: true,
-              pagination: true
+              pagination: true,
             }
           });
 
