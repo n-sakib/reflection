@@ -1,21 +1,24 @@
 <body>
     <mat-drawer-container class="example-container" autosize opened="true">
         <mat-drawer #drawer class="example-sidenav" mode="side">
-        <p>Auto-resizing sidenav</p>
-        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-        <button (click)="showFiller = !showFiller" mat-raised-button>
-            Toggle extra text
-        </button>
+            <p>Auto-resizing sidenav</p>
+            
+            <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+            <button (click)="showFiller = !showFiller" mat-raised-button>
+                Toggle extra text
+            </button><br>
+            <button (click)="showFiller = !showFiller" mat-raised-button>Edit Testimonials</button>
         </mat-drawer>
         <section id="image-uploader">
             <div class="frame-choice">
                 <h1>Add Gallery Type</h1>
                 <p>
-                    <button mat-flat-button color="primary" class="frameButton" (click)="openGalleryType()">Start</button>
+                    <button mat-flat-button color="primary" class="frameButton"
+                        (click)="openGalleryType()">Start</button>
                 </p>
             </div>
         </section>
-        
+
         <section id="image-uploader">
             <div class="frame-choice">
                 <h1>Upload Images</h1>
@@ -24,12 +27,13 @@
                 </p>
             </div>
         </section>
-        
+
         <section id="image-uploader">
             <div class="frame-choice">
                 <h1>Upload Testimonials</h1>
                 <p>
-                    <button mat-flat-button color="primary" class="frameButton" (click)="openTestimonial()">Start</button>
+                    <button mat-flat-button color="primary" class="frameButton"
+                        (click)="openTestimonial()">Start</button>
                 </p>
             </div>
         </section>
@@ -38,6 +42,6 @@
                 Toggle sidenav
             </button>
         </div>
-    
+
     </mat-drawer-container>
 </body>
