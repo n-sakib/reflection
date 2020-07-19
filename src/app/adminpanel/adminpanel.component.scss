@@ -35,6 +35,22 @@
        justify-content: center;
        color: white;
 }
-.example-container{
-    height: 87vh;
+.adminContainer{
+    height: 89vh;
 }
+.editButton{
+    padding: 10px;
+    margin: 5px;
+}
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
