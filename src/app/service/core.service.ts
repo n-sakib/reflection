@@ -10,35 +10,41 @@ import { Observable } from 'rxjs';
 })
 export class CoreService {
    testimonials = [];
-  
-   list$: BehaviorSubject<any[]> = new BehaviorSubject(this.testimonials);
+   testimonials$: BehaviorSubject<any[]> = new BehaviorSubject(this.testimonials);
 
- 
   constructor(private database: AngularFireDatabase) { 
-   
-   }
-
-  dataCall(){
-    console.log("baal")
     this.database.list('testimonials/').snapshotChanges()
       .subscribe({
         next: testimonials => {
-  
           testimonials.forEach(testimonials => {
-            var testiObject: any = {
-            };
-             var val = testimonials.payload.val();
+            var val:any = testimonials.payload.val();
+            val.key = testimonials.key;
             this.testimonials.push(val);  
+            this.testimonials$.next(this.testimonials)
           });
-         
-          console.log(this.testimonials)
         },
-        error: err => console.error('something wrong occurred: ' + err),
-        complete: () => { console.log("done") }
+        error: err => console.error('something wrong occurred: ' + err)
       })
-  
-    }
-  
+   }
 
+   public getTestimonials(): Observable<any[]> {
+    return this.testimonials$.asObservable();
+  }
+
+   update(index, field, value) {
+
+    this.testimonials = this.testimonials.map((e, i) => {
+      if (index === i) {
+        return {
+          ...e,
+          [field]: value
+        }
+      }
+      return e;
+    });
+    console.log(this.testimonials[index])
+    this.database.list('testimonials/').set(this.testimonials[index].key, this.testimonials[index]);
+    this.testimonials$.next(this.testimonials);
+  }
 }
 

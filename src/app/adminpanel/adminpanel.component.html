@@ -2,19 +2,19 @@
     <mat-drawer-container class="adminContainer" autosize opened="true">
         <mat-drawer #drawer class="example-sidenav" mode="side">
             <p>Auto-resizing sidenav</p>
-            
+
             <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
             <div fxLayout="column">
                 <button class="editButton" (click)="showFiller = !showFiller" mat-raised-button color="primary">
                     Edit Orders
                 </button>
-                <button  class="editButton" (click)="showFiller = !showFiller" mat-raised-button color="primary">
+                <button class="editButton" (click)="showFiller = !showFiller" mat-raised-button color="primary">
                     Edit Galleries
                 </button>
                 <button class="editButton" (click)="showFiller = !showFiller" mat-raised-button color="primary">
                     Edit Testimonials
                 </button>
-            </div> 
+            </div>
         </mat-drawer>
         <section id="image-uploader">
             <div class="frame-choice">
@@ -45,50 +45,66 @@
             </div>
             <mat-form-field>
                 <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                <input matInput placeholder="Ex. Mia" #input>
             </mat-form-field>
 
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" matSort>
-           
-              
-                  <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.userName}} </td>
-                  </ng-container>
-              
-                  <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
-                  </ng-container>
 
-                  <ng-container matColumnDef="rating">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
-                    <td mat-cell *matCellDef="let row" > {{row.userRating}} </td>
-                  </ng-container>
 
-                  <ng-container matColumnDef="address">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
-                    <td mat-cell *matCellDef="let row"> {{row.userAddress}} </td>
-                  </ng-container>
+                    <ng-container matColumnDef="userName">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element ;let index = index">
+                            <editable (update)="updateField(index, 'userName')">
+                                <ng-template viewMode>
+                                    <div>{{element.userName}}</div>
+                                </ng-template>
+                                <ng-template editMode>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput [formControl]="getControl(index, 'userName')">
+                                        <mat-error *ngIf="getControl(index, 'userName').hasError('required')">
+                                            Field is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </ng-template>
+                            </editable>
+                        </td>
 
-                  <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                    <td mat-cell *matCellDef="let row"> {{row.email}} </td>
-                  </ng-container>
 
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              
-                  <tr class="mat-row" *matNoDataRow>
-                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-                  </tr>
-               
+                    </ng-container>
+
+                    <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                        <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="rating">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
+                        <td mat-cell *matCellDef="let row"> {{row.userRating}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="address">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                        <td mat-cell *matCellDef="let row"> {{row.userAddress}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+
                 </table>
-              
+
                 <mat-paginator [pageSizeOptions]="[3, 5, 10, 20]" showFirstLastButtons></mat-paginator>
             </div>
-              
+
         </section>
         <div class="example-sidenav-content">
             <button type="button" mat-button (click)="drawer.toggle()">

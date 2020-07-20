@@ -36,7 +36,11 @@ import {RatingModule} from 'ng-starrating';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ShowTestimonialsComponent } from './show-testimonials/show-testimonials.component';
 import { GalleryTypeComponent } from './gallery-type/gallery-type.component';
- 
+import { EditableComponent } from './editable/editable.component';
+import { ViewModeDirective } from './editable/view-mode.directive';
+import { EditModeDirective } from './editable/edit-mode.directive';
+import { FocusableDirective } from './focusable.directive';
+import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
 
 @NgModule({
   declarations: [
@@ -50,6 +54,11 @@ import { GalleryTypeComponent } from './gallery-type/gallery-type.component';
     TestimonialComponent,
     ShowTestimonialsComponent,
     GalleryTypeComponent,
+    EditModeDirective, 
+    FocusableDirective, 
+    EditableOnEnterDirective,
+    EditableComponent,
+    ViewModeDirective
 
   ],
   imports: [

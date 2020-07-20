@@ -36,6 +36,7 @@
     "ngx-star-rating": "0.0.1",
     "ngx-stars": "^1.4.3",
     "ngx-swiper-wrapper": "^9.0.1",
+    "ngx-take-until-destroy": "^5.4.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
