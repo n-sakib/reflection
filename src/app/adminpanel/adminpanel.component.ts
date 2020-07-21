@@ -31,8 +31,13 @@ export class AdminpanelComponent implements OnInit {
   selectedImage: any = null;
   isSubmitted: boolean = false;
   showFiller = true;
-  displayedColumns: string[] = ['userName', 'description', 'rating', 'address', 'email'];
-  dataSource = this.core.testimonials$;
+  galleries  = [];
+  images  = [];
+  displayedColumnsTesti: string[] = ['userName', 'description', 'rating', 'address', 'email'];
+  displayedColumnsGalleries: string[] = ['galleryName' , 'galleryType'];
+  // displayedColumnsImages: string[] = ['galleryName' , 'galleryType'];
+  dataSourceTesti = this.core.testimonials$;
+  dataSourceGalleries;
 
   controls: FormArray;
 
@@ -58,8 +63,39 @@ export class AdminpanelComponent implements OnInit {
       })
       this.controls = new FormArray(toGroups);  
     })
-    console.log(this.dataSource)
+    console.log(this.dataSourceTesti)
+
+    this.database.list('galleries/').snapshotChanges()
+      .subscribe({
+        next: galleries => {
+
+          galleries.forEach(gallery => {
+            var val =gallery.payload.val();
+            this.galleries.push(val);
+          });
+          this.dataSourceGalleries = new MatTableDataSource(this.galleries);
+          // console.log(this.galleries)
+        }
+      })
+    
+      // this.database.list('images/').snapshotChanges()
+      // .subscribe({
+      //   next: images => {
+
+      //     images.forEach(image => {
+      //       var val =image.payload.val();
+      //       this.images.push(val);
+      //     });
+      //     // this.dataSourceGalleries = new MatTableDataSource(this.galleries);
+      //     console.log(this.images)
+      //   }
+      // })
+
+
   }
+
+
+  
 
 
   // applyFilter(event: Event) {
@@ -81,6 +117,7 @@ export class AdminpanelComponent implements OnInit {
     })
 
   }
+
 
   openTestimonial(): void {
     const dialogRef = this.dialog.open(TestimonialComponent, {
@@ -104,14 +141,15 @@ export class AdminpanelComponent implements OnInit {
     console.log(field)
     const control = this.getControl(index, field);
     if (control.valid) {
-      console.log("dhon")
       this.core.update(index, field, control.value);
     }
 
   }
 
   getControl(index, fieldName) {
+    // console.log(fieldName)
     const a = this.controls.at(index).get(fieldName) as FormControl;
+    // console.log(fieldName)
     return this.controls.at(index).get(fieldName) as FormControl;
   }
 }

@@ -27,7 +27,10 @@
     font-size: 20px;
     padding-top: 20px;
 }
-
+.example-sidenav h3 {
+  
+  text-align: center;
+}
 .frameButton{
     align-content: center;
       align-items: center;
@@ -35,9 +38,9 @@
        justify-content: center;
        color: white;
 }
-.adminContainer{
-    height: 89vh;
-}
+// .adminContainer{
+//     height: 89vh;
+// }
 .editButton{
     padding: 10px;
     margin: 5px;
@@ -53,4 +56,8 @@ table {
   
   td, th {
     width: 25%;
+  }
+  .testimonialTable{
+    padding: 30px;
+
   }

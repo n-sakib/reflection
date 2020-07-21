@@ -98,7 +98,7 @@ export class GalleryTypeComponent implements OnInit {
 
     console.log(postData)
     // Get a key for a new Post.
-    this.database.list(`admin/galleryTypes`).push(postData).then(() => {
+    this.database.list(`galleries/`).push(postData).then(() => {
       this.selectedType = '',
       this.selectedCategory = '',
         this.snackBar.open('Successfully uploaded testimonial.', 'OK', {
