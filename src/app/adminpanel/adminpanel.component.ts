@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
@@ -19,6 +19,7 @@ import { MatSort } from '@angular/material/sort';
 import { CoreService } from '../service/core.service';
 
 
+
 @Component({
   selector: 'app-adminpanel',
   templateUrl: './adminpanel.component.html',
@@ -35,18 +36,22 @@ export class AdminpanelComponent implements OnInit {
   images  = [];
   displayedColumnsTesti: string[] = ['userName', 'description', 'rating', 'address', 'email'];
   displayedColumnsGalleries: string[] = ['galleryName' , 'galleryType'];
+  displayedColumnsImages: string[] = ['galleryName' , 'description'];
   // displayedColumnsImages: string[] = ['galleryName' , 'galleryType'];
   dataSourceTesti = this.core.testimonials$;
   dataSourceGalleries;
+  dataSourceImages;
+  
+  
 
   controls: FormArray;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
-
+  
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, public dialogRef: MatDialog, private core: CoreService) {
-
+  
+   
   }
 
   ngOnInit() {
@@ -78,18 +83,18 @@ export class AdminpanelComponent implements OnInit {
         }
       })
     
-      // this.database.list('images/').snapshotChanges()
-      // .subscribe({
-      //   next: images => {
+      this.database.list('images/').snapshotChanges()
+      .subscribe({
+        next: images => {
 
-      //     images.forEach(image => {
-      //       var val =image.payload.val();
-      //       this.images.push(val);
-      //     });
-      //     // this.dataSourceGalleries = new MatTableDataSource(this.galleries);
-      //     console.log(this.images)
-      //   }
-      // })
+          images.forEach(image => {
+            var val =image.payload.val();
+            this.images.push(val);
+          });
+           this.dataSourceImages = new MatTableDataSource(this.images);
+          console.log(this.images)
+        }
+      })
 
 
   }
@@ -106,7 +111,7 @@ export class AdminpanelComponent implements OnInit {
   //     this.dataSource.paginator.firstPage();
   //   }
   // }
-
+  
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ImageComponentComponent, {
@@ -135,6 +140,7 @@ export class AdminpanelComponent implements OnInit {
       console.log("Closed", data);
     })
   }
+
 
   updateField(index, field) {
     console.log(index)

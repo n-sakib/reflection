@@ -19,6 +19,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const material = [
   MatButtonModule,
@@ -42,6 +43,7 @@ const material = [
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
+  MatSlideToggleModule,
 ];
 
 @NgModule({

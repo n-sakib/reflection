@@ -16,8 +16,8 @@
 
             <mat-label class="type">Select an option</mat-label>
             <mat-select [(value)]="selectedType">
-              <mat-option *ngFor="let imageType of imageTypes | async" [value]="imageType.payload.val()">
-                {{imageType.payload.val()}}</mat-option>
+              <mat-option *ngFor="let gallerie of galleries" [value]="gallerie.galleryName">
+                {{gallerie.galleryName}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -120,6 +120,35 @@
                 (keyup)="addDescription($event)">
               <mat-error *ngIf="description.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Artist Name</mat-label>
+              <input matInput placeholder="Artist Name" [formControl]="artist" required
+                (keyup)="addArtist($event)">
+              <mat-error *ngIf="artist.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Medium</mat-label>
+              <input matInput placeholder="Image Medium" [formControl]="medium" required
+                (keyup)="addMedium($event)">
+              <mat-error *ngIf="medium.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Size</mat-label>
+              <input matInput placeholder="Image Size" [formControl]="size" required
+                (keyup)="addSize($event)">
+              <mat-error *ngIf="size.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Price</mat-label>
+              <input matInput placeholder="Image Price" [formControl]="price" required
+                (keyup)="addPrice($event)">
+              <mat-error *ngIf="price.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          
+              <mat-label>Framed: Off/On</mat-label>
+              <mat-slide-toggle (change)="addFrame($event)"></mat-slide-toggle>
+             
+            
           </div>
         </div>
         <div class="backNextImage">

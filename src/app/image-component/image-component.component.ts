@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-image-component',
@@ -25,6 +26,10 @@ export class ImageComponentComponent {
   selectedOrientation = '';
   selectedFrameURL = '';
   selectedImageURL = '';
+  selectedSize = '';
+  selectedPrice = '';
+  selectedFrame: boolean = false;
+  selectedArtist :string = '';
   labelPosition: 'before' | 'after' = 'after';
   disabled = false;
   imageTypes: Observable<any[]>;
@@ -35,14 +40,34 @@ export class ImageComponentComponent {
   isPublished: boolean = true;
   selectedDescription: string = '';
   selectedCategory :string = '';
+  selectedMedium :string = '';
   breakpoint: number;
   public lists: any[] = [{ value: 'Dual' }, { value: 'Single'}];
+  galleries  = [];
+
+
 
   constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase, private snackBar: MatSnackBar, private _sanitizer: DomSanitizer, public dialogRef: MatDialog) {
-    this.imageTypes = this.database.list(`admin/galleryTypes/`).snapshotChanges()
+    //this.imageTypes = this.database.list(`galleries/galleryName/`).snapshotChanges()
+    // console.log(this.imageTypes)
+
   }
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 900) ? 1 : 2;
+   
+    this.database.list('galleries/').snapshotChanges()
+      .subscribe({
+        next: galleries => {
+
+          galleries.forEach(gallery => {
+            var val =gallery.payload.val();
+            this.galleries.push(val);
+          });
+          
+          //  console.log(this.galleries)
+        }
+      })
+
   }
   
   onResize(event) {
@@ -51,6 +76,11 @@ export class ImageComponentComponent {
 
   title = new FormControl('', [Validators.required]);
   description = new FormControl('', [Validators.required]);
+  artist = new FormControl('', [Validators.required]);
+  medium = new FormControl('', [Validators.required]);
+  size = new FormControl('', [Validators.required]);
+  price = new FormControl('', [Validators.required]);
+  
 
   getErrorMessage() {
     return 'You must enter a value';
@@ -67,10 +97,33 @@ export class ImageComponentComponent {
   toggle(event){
     console.log(event.source.value);
   }
+  
 
   addDescription($event) {
     var value = $event.target.value;
     this.selectedDescription = value;
+  }
+  addMedium($event){
+    var value = $event.target.value;
+    this.selectedMedium = value;
+  }
+  addFrame (event:MatSlideToggleChange){
+    var val= event.checked;
+     console.log(val);
+     this.selectedFrame = val;
+  }
+
+  addArtist($event) {
+    var value = $event.target.value;
+    this.selectedArtist = value;
+  }
+  addSize($event){
+    var value = $event.target.value;
+    this.selectedSize = value;
+  }
+  addPrice($event){
+    var value = $event.target.value;
+    this.selectedPrice = value;
   }
 
   toBase64 = file => new Promise((resolve, reject) => {
@@ -114,6 +167,11 @@ export class ImageComponentComponent {
       title: this.selectedTitle,
       description: this.selectedDescription,
       galleryType: this.selectedCategory,
+      artist: this.selectedArtist,
+      medium: this.selectedMedium,
+      size: this.selectedSize,
+      price: this.selectedPrice,
+      frame: this.selectedFrame,
     };
 
     console.log(postData)
@@ -126,6 +184,11 @@ export class ImageComponentComponent {
         this.selectedTitle = '',
         this.selectedCategory='',
         this.selectedDescription = '',
+        this.selectedArtist = '',
+        this.selectedMedium = '',
+        this.selectedSize = '',
+        this.selectedPrice = '',
+        this.selectedFrame,
         this.snackBar.open('Successfully uploaded image.', 'OK', {
           duration: 2000,
         });

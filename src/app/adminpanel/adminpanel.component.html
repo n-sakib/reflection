@@ -45,6 +45,7 @@
                     <tr mat-row *matRowDef="let element; columns: displayedColumnsGalleries;"></tr>
                 </table>
             </div>
+           
         </section>
 
         <section id="image-uploader">
@@ -53,6 +54,24 @@
                 <p>
                     <button mat-flat-button color="primary" class="frameButton" (click)="openDialog()">Start</button>
                 </p>
+                <div class="testimonialTable">
+                    <table mat-table [dataSource]="dataSourceImages">
+                       <ng-container matColumnDef="galleryName">
+                           <th mat-header-cell *matHeaderCellDef> Gallery Name </th>
+                           <td mat-cell *matCellDef="let element ">
+                                {{element.galleryName}}
+                           </td>
+                       </ng-container>
+                       <ng-container matColumnDef="description">
+                           <th mat-header-cell *matHeaderCellDef>Description</th>
+                           <td mat-cell *matCellDef="let element ">
+                                {{element.description}}
+                           </td>
+                       </ng-container>
+                       <tr mat-header-row *matHeaderRowDef="displayedColumnsImages"></tr>
+                       <tr mat-row *matRowDef="let element; columns: displayedColumnsImages;"></tr>
+                   </table>
+               </div>
             </div>
 
         </section>
@@ -189,4 +208,6 @@
         </div>
 
     </mat-drawer-container>
+   
+ 
 </body>
