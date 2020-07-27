@@ -9,3 +9,11 @@ mat-card {
   .ml-10 {
     margin-left: 10px;
   }
+  .frameButton{
+    align-content: center;
+      align-items: center;
+       font-size: 1em;
+       justify-content: center;
+       color: white;
+      margin: 5px;
+}

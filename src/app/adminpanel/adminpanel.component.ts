@@ -41,6 +41,7 @@ export class AdminpanelComponent implements OnInit {
   dataSourceTesti = this.core.testimonials$;
   dataSourceGalleries;
   dataSourceImages;
+  galleryImgs = [];
   
   
 
@@ -88,11 +89,25 @@ export class AdminpanelComponent implements OnInit {
         next: images => {
 
           images.forEach(image => {
+            var imageObject: any = {
+              galleryName: [],
+              description: [],
+             
+            };
+            imageObject.type = image.key;
             var val =image.payload.val();
-            this.images.push(val);
+            Object.keys(val).forEach((demo: any) => {
+              let galleryName = val[demo].galleryName;
+              let description = val[demo].description;
+              imageObject.description.push(description);
+              imageObject.galleryName.push(galleryName);
+              //this.dataSourceImages = new MatTableDataSource(imageObject);
+            })
+            this.galleryImgs.push(imageObject);
+            // this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
           });
-           this.dataSourceImages = new MatTableDataSource(this.images);
-          console.log(this.images)
+          this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
+          console.log(this.galleryImgs)
         }
       })
 
