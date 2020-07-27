@@ -41,6 +41,7 @@ import { ViewModeDirective } from './editable/view-mode.directive';
 import { EditModeDirective } from './editable/edit-mode.directive';
 import { FocusableDirective } from './focusable.directive';
 import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
+import { BuypaintingsComponent } from './buypaintings/buypaintings.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
     FocusableDirective, 
     EditableOnEnterDirective,
     EditableComponent,
-    ViewModeDirective
+    ViewModeDirective,
+    BuypaintingsComponent
 
   ],
   imports: [
