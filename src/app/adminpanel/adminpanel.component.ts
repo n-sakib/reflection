@@ -104,8 +104,8 @@ export class AdminpanelComponent implements OnInit {
               };
               imageObject.type = image.key;
               let galleryName = val[demo].galleryName;
-              let title = val[demo].title;
               let artist = val[demo].artist;
+              let title = val[demo].title;
               let description = val[demo].description;
               let medium = val[demo].medium;
               let orientation = val[demo].orientation;
