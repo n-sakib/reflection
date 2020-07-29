@@ -36,9 +36,9 @@ export class AdminpanelComponent implements OnInit {
   images  = [];
   displayedColumnsTesti: string[] = ['userName', 'description', 'rating', 'address', 'email'];
   displayedColumnsGalleries: string[] = ['galleryName' , 'galleryType'];
-  displayedColumnsImages: string[] = ['galleryName' , 'description'];
-  // displayedColumnsImages: string[] = ['galleryName' , 'galleryType'];
+  //displayedColumnsImages: string[] = ['galleryName' , 'title', 'artist', 'description', 'medium', 'orientation', 'price' , 'size', 'frame'];
   dataSourceTesti = this.core.testimonials$;
+  displayedColumnsImages: string[] = ['galleryName' , 'description', 'title', 'artist', 'orientation' , 'frame', 'size', 'price', 'medium'];
   dataSourceGalleries;
   dataSourceImages;
   galleryImgs = [];
@@ -87,27 +87,49 @@ export class AdminpanelComponent implements OnInit {
       this.database.list('images/').snapshotChanges()
       .subscribe({
         next: images => {
-
           images.forEach(image => {
-            var imageObject: any = {
-              galleryName: [],
-              description: [],
-             
-            };
-            imageObject.type = image.key;
             var val =image.payload.val();
             Object.keys(val).forEach((demo: any) => {
+              var imageObject: any = {
+                galleryName: [],
+                title: [],
+                description: [],
+                artist: [],
+                medium: [],
+                orientation: [],
+                price: [],
+                size: [],
+                frame: [],
+               
+              };
+              imageObject.type = image.key;
               let galleryName = val[demo].galleryName;
+              let title = val[demo].title;
+              let artist = val[demo].artist;
               let description = val[demo].description;
+              let medium = val[demo].medium;
+              let orientation = val[demo].orientation;
+              let price = val[demo].price;
+              let size = val[demo].size;
+              let frame = val[demo].frame;
+              
               imageObject.description.push(description);
               imageObject.galleryName.push(galleryName);
+              imageObject.artist.push(artist);
+              imageObject.title.push(title);
+              imageObject.medium.push(medium);
+              imageObject.orientation.push(orientation);
+              imageObject.price.push(price);
+              imageObject.size.push(size);
+              imageObject.frame.push(frame);
               //this.dataSourceImages = new MatTableDataSource(imageObject);
+              this.galleryImgs.push(imageObject);
             })
-            this.galleryImgs.push(imageObject);
+            
             // this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
           });
-          this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
           console.log(this.galleryImgs)
+          this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
         }
       })
 

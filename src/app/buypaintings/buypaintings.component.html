@@ -5,57 +5,22 @@
 <h1 fxHide fxShow.xl></h1>
 
 <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px" ngClass.gt-xs="ml-10">
-  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
-    <mat-card-title>Card 1</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    <img mat-card-image src="./assets/Cover.jpeg" class="image">
-    <mat-card-content>Primary card content. Intended for blocks of text</mat-card-content>
+  <mat-card *ngFor="let gallery of galleryImgs" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)"
+    fxFlex.gt-md="0 1 calc(25%-10px)">
+    <!-- <mat-card-title>Card 1</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+    <img mat-card-image [src]="gallery.imageURL" class="image" (click)="buyPainting(gallery.imageURL, gallery.title, gallery.artist)">
+    <mat-card-content>
+      <p>{{gallery.medium}}</p>
+      <p>{{gallery.size}} </p>
+      <p>{{gallery.price}}</p>
+    </mat-card-content>
     <mat-card-actions>
       <button mat-flat-button color="primary" class="frameButton">Order A Replica</button>
       <button mat-flat-button color="primary" class="frameButton">Add to Cart</button>
       <button mat-flat-button color="primary" class="frameButton">Buy Now</button>
+      <button mat-flat-button color="primary" class="frameButton">Sold Out</button>
     </mat-card-actions>
   </mat-card>
-  
-  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
-    <mat-card-title>Card 2</mat-card-title>
-    <img mat-card-image src="./assets/Cover.jpeg" class="image">
-    <mat-card-content>Primary card content. Intended for blocks of text</mat-card-content>
-    <mat-card-actions>Container for buttons at the bottom of the card</mat-card-actions>
-  </mat-card>
 
-  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
-    <mat-card-title>Card 3</mat-card-title>
-    <img mat-card-image src="./assets/Cover.jpeg" class="image">
-    <mat-card-content>Primary card content. Intended for blocks of text</mat-card-content>
-    <mat-card-actions>Container for buttons at the bottom of the card</mat-card-actions>
-  </mat-card>
-
-  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
-    <mat-card-title>Card 4</mat-card-title>
-    <img mat-card-image src="./assets/Cover.jpeg" class="image">
-    <mat-card-content>Primary card content. Intended for blocks of text</mat-card-content>
-    <mat-card-actions>Container for buttons at the bottom of the card</mat-card-actions>
-  </mat-card>
-
-  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
-    <mat-card-title>Card 5</mat-card-title>
-    <img mat-card-image src="./assets/Cover.jpeg" class="image">
-    <mat-card-content>Primary card content. Intended for blocks of text</mat-card-content>
-    <mat-card-actions>Container for buttons at the bottom of the card</mat-card-actions>
-  </mat-card>
-
-  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
-    <mat-card-title>Card 6</mat-card-title>
-    <img mat-card-image src="./assets/Cover.jpeg" class="image">
-    <mat-card-content>Primary card content. Intended for blocks of text</mat-card-content>
-    <mat-card-actions>Container for buttons at the bottom of the card</mat-card-actions>
-  </mat-card>
-
-  <mat-card fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(25%-10px)">
-    <mat-card-title>Card 7</mat-card-title>
-    <img mat-card-image src="./assets/Cover.jpeg" class="image">
-    <mat-card-content>Primary card content. Intended for blocks of text</mat-card-content>
-    <mat-card-actions>Container for buttons at the bottom of the card</mat-card-actions>
-  </mat-card>
 </div>

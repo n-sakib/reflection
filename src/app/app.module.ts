@@ -42,6 +42,8 @@ import { EditModeDirective } from './editable/edit-mode.directive';
 import { FocusableDirective } from './focusable.directive';
 import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
 import { BuypaintingsComponent } from './buypaintings/buypaintings.component';
+import { ShoppingComponent } from './shopping/shopping.component';
+
 
 @NgModule({
   declarations: [
@@ -60,8 +62,9 @@ import { BuypaintingsComponent } from './buypaintings/buypaintings.component';
     EditableOnEnterDirective,
     EditableComponent,
     ViewModeDirective,
-    BuypaintingsComponent
-
+    BuypaintingsComponent,
+    ShoppingComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,7 @@ import { BuypaintingsComponent } from './buypaintings/buypaintings.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent, GalleryTypeComponent]
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent, GalleryTypeComponent, ShoppingComponent]
 
 })
 export class AppModule { }
