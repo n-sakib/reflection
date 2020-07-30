@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 
 
 
@@ -11,15 +11,16 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   templateUrl: './buypaintings.component.html',
   styleUrls: ['./buypaintings.component.css']
 })
+
 export class BuypaintingsComponent implements OnInit {
 
   galleryImgs = [];
 
-  constructor(private route: ActivatedRoute , private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase) { }
+  constructor(public router: Router, private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase) { }
 
   ngOnInit(): void {
 
-    
+
     this.database.list('images/').snapshotChanges()
       .subscribe({
         next: images => {
@@ -60,17 +61,27 @@ export class BuypaintingsComponent implements OnInit {
               imageObject.price.push(price);
               imageObject.size.push(size);
               imageObject.frame.push(frame);
-             
+
               this.galleryImgs.push(imageObject);
             })
 
-           
+
           });
           console.log(this.galleryImgs)
 
         }
       })
 
+  }
+  navigateToDetail(gallery) {
+    console.log(gallery)
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        "gallery": JSON.stringify(gallery)
+      }
+    };
+
+    this.router.navigate(["/buyDetails"], navigationExtras);
   }
 
   // buyPainting(imageURL, title, artist) {
@@ -92,6 +103,6 @@ export class BuypaintingsComponent implements OnInit {
   //   });
   //   dialogRef.componentInstance.paintingInfo = paintingInfo;
   // }
-  
+
 
 }

@@ -6,10 +6,10 @@
 
 <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px" ngClass.gt-xs="ml-10">
   <mat-card *ngFor="let gallery of galleryImgs" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)"
-    fxFlex.gt-md="0 1 calc(25%-10px)">
+    fxFlex.gt-md="0 1 calc(25%-10px)" >
     <!-- <mat-card-title>Card 1</mat-card-title>
     <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-    <img mat-card-image [src]="gallery.imageURL" class="image" [routerLink]="['/buyDetails']" >
+    <img mat-card-image [src]="gallery.imageURL" class="image" (click) ="navigateToDetail(gallery)">
     <mat-card-content>
       <p>{{gallery.medium}}</p>
       <p>{{gallery.size}} </p>
