@@ -1,0 +1,29 @@
+.details{
+    align-content: center;
+      align-items: center;
+       justify-content: center;
+       padding: 10px;
+}
+.frameButton{
+    align-content: center;
+      align-items: center;
+       font-size: 1em;
+       justify-content: center;
+       border: 2px solid #b47a15;
+      margin: 5px;
+}
+.quantity{
+    border: 2px solid #b47a15;
+}
+
+.mat-icon {
+    padding: 0;
+     height: inherit;
+     width: inherit;
+ }
+ .landing-icons {
+     object-fit: contain;
+     color: #b47a15;
+     font-size: 70px;
+     transform: scale(.5);
+ }

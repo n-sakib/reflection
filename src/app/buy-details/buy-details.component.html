@@ -1,2 +1,44 @@
-<p>buy-details works!</p>
-<!-- <img mat-card-image [src]="gallery.imageURL"> -->
+<!-- 
+<img mat-card-image [src]="gallery.imageURL"> -->
+
+
+<div class="details" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <mat-card fxFlex="30%;" fxFlex.xs="80%">
+        <img mat-card-image [src]="gallery.imageURL">
+    </mat-card>
+
+    <div fxFlex="30%;" fxFlex.xs="80%">
+        <h2>{{gallery.title}}</h2>
+        <h3>{{gallery.artist}}</h3>
+        <p>{{gallery.description}}</p>
+        <p>Medium: {{gallery.medium}}</p>
+        <p>Size: {{gallery.size}}</p>
+    </div>
+
+    <mat-card fxFlex="30%;" fxFlex.xs="80%">
+        <mat-card-title>{{gallery.price}}</mat-card-title>
+        <mat-card-content>
+                <p>
+                Quantity: <input class="quantity" min="0" type="number" matInput placeholder="0">
+                </p>
+          </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button color="primary" class="frameButton">Add to Cart</button>
+            <button mat-stroked-button color="primary" class="frameButton">Buy Now</button>
+        </mat-card-actions>
+        <mat-card-content>
+            
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-visa" class="landing-icons"></mat-icon>
+                
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-mastercard" class="landing-icons"></mat-icon>
+                
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-amex" class="landing-icons"></mat-icon>
+                
+                    <mat-icon fontSet="fab" fontIcon="fa-cc-discover" class="landing-icons"></mat-icon>
+                
+      </mat-card-content>
+    </mat-card>
+
+
+
+</div>
