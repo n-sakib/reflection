@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ShoppingComponent } from '../shopping/shopping.component';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-buypaintings',
@@ -13,10 +15,11 @@ export class BuypaintingsComponent implements OnInit {
 
   galleryImgs = [];
 
-  constructor(private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase) { }
+  constructor(private route: ActivatedRoute , private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase) { }
 
   ngOnInit(): void {
 
+    
     this.database.list('images/').snapshotChanges()
       .subscribe({
         next: images => {
@@ -57,11 +60,11 @@ export class BuypaintingsComponent implements OnInit {
               imageObject.price.push(price);
               imageObject.size.push(size);
               imageObject.frame.push(frame);
-              //this.dataSourceImages = new MatTableDataSource(imageObject);
+             
               this.galleryImgs.push(imageObject);
             })
 
-            // this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
+           
           });
           console.log(this.galleryImgs)
 
@@ -70,24 +73,25 @@ export class BuypaintingsComponent implements OnInit {
 
   }
 
-  buyPainting(imageURL, title, artist) {
+  // buyPainting(imageURL, title, artist) {
 
-    let paintingInfo = {
-      imageURL: "",
-      title: "",
-      artist: "",
-    };
-    this.galleryImgs.forEach(gallery => {
+  //   let paintingInfo = {
+  //     imageURL: "",
+  //     title: "",
+  //     artist: "",
+  //   };
+  //   this.galleryImgs.forEach(gallery => {
 
-      paintingInfo.imageURL = imageURL;
-      paintingInfo.title = title;
-      paintingInfo.artist = artist;
-    });
+  //     paintingInfo.imageURL = imageURL;
+  //     paintingInfo.title = title;
+  //     paintingInfo.artist = artist;
+  //   });
 
-    const dialogRef = this.dialog.open(ShoppingComponent, {
-      width: 'auto', height: 'auto',
-    });
-    dialogRef.componentInstance.paintingInfo = paintingInfo;
-  }
+  //   const dialogRef = this.dialog.open(ShoppingComponent, {
+  //     width: 'auto', height: 'auto',
+  //   });
+  //   dialogRef.componentInstance.paintingInfo = paintingInfo;
+  // }
+  
 
 }

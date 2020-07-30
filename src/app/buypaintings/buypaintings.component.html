@@ -9,7 +9,7 @@
     fxFlex.gt-md="0 1 calc(25%-10px)">
     <!-- <mat-card-title>Card 1</mat-card-title>
     <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-    <img mat-card-image [src]="gallery.imageURL" class="image" (click)="buyPainting(gallery.imageURL, gallery.title, gallery.artist)">
+    <img mat-card-image [src]="gallery.imageURL" class="image" [routerLink]="['/buyDetails']" >
     <mat-card-content>
       <p>{{gallery.medium}}</p>
       <p>{{gallery.size}} </p>
@@ -24,3 +24,4 @@
   </mat-card>
 
 </div>
+<!-- <div>(click)="buyPainting(gallery.imageURL, gallery.title, gallery.artist)"</div> -->

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -43,6 +44,7 @@ import { FocusableDirective } from './focusable.directive';
 import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
 import { BuypaintingsComponent } from './buypaintings/buypaintings.component';
 import { ShoppingComponent } from './shopping/shopping.component';
+import { BuyDetailsComponent } from './buy-details/buy-details.component';
 
 
 @NgModule({
@@ -64,6 +66,7 @@ import { ShoppingComponent } from './shopping/shopping.component';
     ViewModeDirective,
     BuypaintingsComponent,
     ShoppingComponent,
+    BuyDetailsComponent,
     
   ],
   imports: [
