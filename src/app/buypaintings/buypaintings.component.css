@@ -1,5 +1,5 @@
 mat-card {
-    margin-bottom: 10px;
+   margin-bottom: 10px;
   }
   
   .mr-10 {
@@ -12,8 +12,37 @@ mat-card {
   .frameButton{
     align-content: center;
       align-items: center;
-       font-size: 1em;
        justify-content: center;
-       color: white;
       margin: 5px;
+      color: #b47a15;
+      border: 2px solid #b47a15;
+}
+.sold{
+  font-weight: bold;
+  color: red;
+  margin: 5px;
+}
+.linkto{
+  align-content: center;
+    align-items: center;
+     font-size: 1em;
+     justify-content: center;
+    margin: 5px;
+    color: #b47a15;
+}
+.image{
+  object-fit: contain;
+   max-width: 100%;
+   max-height: calc(100% - 88px);
+   width: auto;
+   height: auto;
+   margin: auto;
+   display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media screen and (max-width : 480px) {
+  .demo{
+    margin: 5px;
+  }
 }

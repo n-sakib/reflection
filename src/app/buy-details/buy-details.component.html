@@ -1,44 +1,70 @@
 <!-- 
 <img mat-card-image [src]="gallery.imageURL"> -->
 
-
-<div class="details" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
-    <mat-card fxFlex="30%;" fxFlex.xs="80%">
-        <img mat-card-image [src]="gallery.imageURL">
-    </mat-card>
-
-    <div fxFlex="30%;" fxFlex.xs="80%">
-        <h2>{{gallery.title}}</h2>
-        <h3>{{gallery.artist}}</h3>
-        <p>{{gallery.description}}</p>
-        <p>Medium: {{gallery.medium}}</p>
-        <p>Size: {{gallery.size}}</p>
-    </div>
-
-    <mat-card fxFlex="30%;" fxFlex.xs="80%">
-        <mat-card-title>{{gallery.price}}</mat-card-title>
-        <mat-card-content>
-                <p>
-                Quantity: <input class="quantity" min="0" type="number" matInput placeholder="0">
+<div class="buypage">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <div fxFlex="30%;" fxFlex.xs="80%">
+            <img mat-card-image [src]="gallery.imageURL">
+            <!-- <div ng-show="gallery.frame === true">Show In Frame</div> -->
+        </div>
+        <div class="content" fxFlex="30%;" fxFlex.xs="80%">
+            <h2>{{gallery.title}}</h2>
+            <h3>{{gallery.artist}}</h3>
+            <p>{{gallery.description}}</p>
+            <p>Medium: {{gallery.medium}}</p>
+            <p>Size: {{gallery.size}}</p>
+            <button mat-stroked-button class="socialButton">
+                <mat-icon class="social-icons" fontSet="fab" fontIcon="fa-facebook-f"></mat-icon>
+            </button>
+            <button mat-stroked-button class="socialButton">
+                <mat-icon class="social-icons" fontSet="fab" fontIcon="fa-twitter"></mat-icon>
+            </button>
+            <button mat-stroked-button class="socialButton">
+                <mat-icon class="social-icons" fontSet="fab" fontIcon="fa-instagram"></mat-icon>
+            </button>
+            <button mat-stroked-button class="socialButton">
+                <mat-icon class="social-icons" fontSet="fab" fontIcon="fa-pinterest"></mat-icon>
+            </button>
+        </div>
+        <div fxFlex="30%;" fxFlex.xs="80%">
+            <mat-card class="price">$ {{gallery.price}}</mat-card>
+            <mat-card class="price">
+                <p class="quantity">
+                    Quantity: <input class="quantityIn" min="0" type="number" matInput placeholder="0">
                 </p>
-          </mat-card-content>
-        <mat-card-actions>
-            <button mat-stroked-button color="primary" class="frameButton">Add to Cart</button>
-            <button mat-stroked-button color="primary" class="frameButton">Buy Now</button>
-        </mat-card-actions>
-        <mat-card-content>
-            
-                    <mat-icon fontSet="fab" fontIcon="fa-cc-visa" class="landing-icons"></mat-icon>
-                
-                    <mat-icon fontSet="fab" fontIcon="fa-cc-mastercard" class="landing-icons"></mat-icon>
-                
-                    <mat-icon fontSet="fab" fontIcon="fa-cc-amex" class="landing-icons"></mat-icon>
-                
-                    <mat-icon fontSet="fab" fontIcon="fa-cc-discover" class="landing-icons"></mat-icon>
-                
-      </mat-card-content>
-    </mat-card>
-
-
-
+            </mat-card>
+            <mat-card class="price">
+                <button mat-flat-button color="primary" class="frameButton">Add to Cart</button>
+                <button mat-flat-button color="primary" class="frameButton">Buy Now</button><br>
+                <a href="#" color="primary" class="linkto">Order A Replica </a>
+                <p class="sold">Sold Out</p>
+            </mat-card>
+            <mat-card class="price">
+                <mat-icon fontSet="fab" fontIcon="fa-cc-visa" class="landing-icons"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-cc-mastercard" class="landing-icons"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-cc-amex" class="landing-icons"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-cc-discover" class="landing-icons"></mat-icon>
+            </mat-card>
+            <!-- <mat-card>
+                <div class="price">$ {{gallery.price}}</div>
+            <div class="price">
+                <p class="quantity">
+                    Quantity: <input class="quantityIn" min="0" type="number" matInput placeholder="0">
+                </p>
+            </div>
+            <div class="price">
+                <button mat-flat-button color="primary" class="frameButton">Add to Cart</button>
+                <button mat-flat-button color="primary" class="frameButton">Buy Now</button><br>
+                <a href="#" color="primary" class="linkto">Order A Replica </a>
+                <p class="sold">Sold Out</p>
+            </div>
+            <div class="price">
+                <mat-icon fontSet="fab" fontIcon="fa-cc-visa" class="landing-icons"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-cc-mastercard" class="landing-icons"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-cc-amex" class="landing-icons"></mat-icon>
+                <mat-icon fontSet="fab" fontIcon="fa-cc-discover" class="landing-icons"></mat-icon>
+            </div>
+            </mat-card> -->
+        </div>
+    </div>
 </div>

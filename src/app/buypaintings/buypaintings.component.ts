@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
+import {MatPaginator} from '@angular/material/paginator';
 
 
 
@@ -15,6 +16,8 @@ import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/route
 export class BuypaintingsComponent implements OnInit {
 
   galleryImgs = [];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public router: Router, private storage: AngularFireStorage, public dialog: MatDialog, private database: AngularFireDatabase) { }
 
