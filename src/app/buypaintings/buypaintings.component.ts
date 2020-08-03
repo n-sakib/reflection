@@ -42,7 +42,7 @@ export class BuypaintingsComponent implements OnInit {
                 size: [],
                 frame: [],
                 imageURL: [],
-                sold: [],
+                sold: '',
               };
               imageObject.type = image.key;
               let imageURL = val[demo].imageURL;
@@ -55,7 +55,7 @@ export class BuypaintingsComponent implements OnInit {
               let price = val[demo].price;
               let size = val[demo].size;
               let frame = val[demo].frame;
-              let sold = val[demo].frame;
+              let sold = val[demo].sold;
 
               imageObject.description.push(description);
               imageObject.galleryName.push(galleryName);
@@ -67,7 +67,7 @@ export class BuypaintingsComponent implements OnInit {
               imageObject.price.push(price);
               imageObject.size.push(size);
               imageObject.frame.push(frame);
-              imageObject.sold.push(sold);
+              imageObject.sold = sold;
 
               this.galleryImgs.push(imageObject);
             })

@@ -38,20 +38,22 @@ mat-card {
    height: auto;
    margin: auto;
    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2px;
 }
-.secondimage{
+/* .secondimage{
   object-fit: contain;
-   width: 350px;
-   height: 350px;
+   max-width: 300px;
+   max-height: 300px;
    margin: auto;
    display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 2px;
-}
+    width: auto;
+   height: auto;
+} */
 @media screen and (max-width : 480px) {
   .demo{
     margin: 5px;
@@ -70,14 +72,33 @@ mat-card {
 } 
 .demo{
   border: 2px solid #b47a15;
-  margin: 5px;
+  /* max-width: 400px; */
+
 }
+
 .buypage{
-  min-height: 90vh;
-  min-height: 90vh;
-  align-items: center;
+min-height: 90vh;
+min-height: 90vh;
+align-items: center;
 display: flex;
 justify-content: center;
 padding-left: 2%;
 padding-right: 2%;
 }
+
+ /* @media screen and (min-width : 1280px) { 
+  .outer {
+    padding-left: 10%;
+  }
+
+}
+
+@media screen and (max-width : 480px) { 
+  .outer {
+    padding: 5px;
+  }
+  .secondimage{
+    height: 300px;
+    width: 300px;
+  }
+} */
