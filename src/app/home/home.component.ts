@@ -93,10 +93,12 @@ export default class HomeComponent implements OnInit {
               let frameURL = val[image].frameURL;
               let description = val[image].description;
               let galleryType = val[image].galleryType;
+              // let imageURL = val[image].imageURL;
 
               imageObject.frameURL.push(frameURL);
               imageObject.description.push(description);
               imageObject.galleryType.push(galleryType);
+              // imageObject.imageURL.push(imageURL);
             });
 
             imageObject.galleryOptions = [

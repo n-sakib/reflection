@@ -40,9 +40,44 @@ mat-card {
    display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2px;
+}
+.secondimage{
+  object-fit: contain;
+   width: 350px;
+   height: 350px;
+   margin: auto;
+   display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2px;
 }
 @media screen and (max-width : 480px) {
   .demo{
     margin: 5px;
   }
+}
+.page ::ng-deep .ngx-pagination a:hover {
+  color:  #b47a15;
+  }
+.page ::ng-deep .ngx-pagination .current {
+    background-color: #b47a15 ;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+} 
+.demo{
+  border: 2px solid #b47a15;
+  margin: 5px;
+}
+.buypage{
+  min-height: 90vh;
+  min-height: 90vh;
+  align-items: center;
+display: flex;
+justify-content: center;
+padding-left: 2%;
+padding-right: 2%;
 }

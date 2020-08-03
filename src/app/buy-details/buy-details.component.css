@@ -33,7 +33,7 @@
      transform: scale(.5);
  }
  .buypage{
-    height: 90vh;
+    min-height: 90vh;
     align-items: center;
   display: flex;
   justify-content: center;

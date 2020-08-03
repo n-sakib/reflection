@@ -33,14 +33,17 @@ export class AdminpanelComponent implements OnInit {
   isSubmitted: boolean = false;
   showFiller = true;
   galleries  = [];
+  orders = [];
   images  = [];
   displayedColumnsTesti: string[] = ['userName', 'description', 'rating', 'address', 'email'];
   displayedColumnsGalleries: string[] = ['galleryName' , 'galleryType'];
   //displayedColumnsImages: string[] = ['galleryName' , 'title', 'artist', 'description', 'medium', 'orientation', 'price' , 'size', 'frame'];
   dataSourceTesti = this.core.testimonials$;
   displayedColumnsImages: string[] = ['galleryName' , 'description', 'title', 'artist', 'orientation' , 'frame', 'size', 'price', 'medium'];
+  displayedColumnsOrder: string[] = ['orderDate', 'imageKey', 'price', 'status', 'userName'];
   dataSourceGalleries;
   dataSourceImages;
+  dataSourceOrder;
   galleryImgs = [];
   
   
@@ -84,6 +87,19 @@ export class AdminpanelComponent implements OnInit {
         }
       })
     
+      this.database.list('orders/').snapshotChanges()
+      .subscribe({
+        next: orders => {
+
+          orders.forEach(order => {
+            var val =order.payload.val();
+            this.orders.push(val);
+          });
+          this.dataSourceOrder = new MatTableDataSource(this.orders);
+          console.log(orders)
+        }
+      })
+
       this.database.list('images/').snapshotChanges()
       .subscribe({
         next: images => {
@@ -128,7 +144,7 @@ export class AdminpanelComponent implements OnInit {
             
             // this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
           });
-          console.log(this.galleryImgs)
+          // console.log(this.galleryImgs)
           this.dataSourceImages = new MatTableDataSource(this.galleryImgs);
         }
       })

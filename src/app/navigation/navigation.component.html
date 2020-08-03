@@ -1,0 +1,49 @@
+
+<mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav  #sidenav fxLayout="row wrap">
+        <div fxLayout="column">
+            <a (click)="sidenav.toggle()" href="#" mat-button></a>
+            <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Home</a>
+            <a mat-button disableRipple>About</a>
+            <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Gallery</a>
+            <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>Pages</a>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item disableRipple>Item 1</button>
+                <button mat-menu-item disableRipple>Item 2</button>
+            </mat-menu>
+            <a href="/buypaintings" mat-button  disableRipple>BUY A PAINTING</a>
+            <a mat-button disableRipple>Journal</a>
+            <a mat-button disableRipple>Contact</a>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+       
+            <mat-toolbar class="navbar">
+                <div class="bar" fxShow="true" fxHide.gt-sm="true">
+                    <a href="#" (click)="sidenav.toggle()">
+                        <mat-icon aria-hidden="false" aria-label="menu" class="side-nav">menu</mat-icon>
+                    </a>
+                </div>
+                
+
+                <span class="spacer">
+                    <div fxShow="true" fxHide.lt-md="true">
+                       
+                        <a href="#" mat-button [matMenuTriggerFor]="menu" disableRipple>HOME</a>
+                        <a href="#" mat-button disableRipple>GALLERY</a>
+                        <a href="/buypaintings" mat-button  disableRipple>BUY A PAINTING</a>
+                        <a href="#" mat-button disableRipple>REVIEWS & TESTIMONIALS</a>
+                        <a href="#" mat-button disableRipple>CONTACT</a>
+                    </div>
+                </span>
+
+                <div class="create">
+                    <button mat-flat-button color="primary" class="nav-bar-button">MY CART (0)</button>
+                </div>
+
+            </mat-toolbar>
+           
+       
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<router-outlet></router-outlet>

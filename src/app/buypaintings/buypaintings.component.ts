@@ -16,6 +16,7 @@ import {MatPaginator} from '@angular/material/paginator';
 export class BuypaintingsComponent implements OnInit {
 
   galleryImgs = [];
+  config: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -41,6 +42,7 @@ export class BuypaintingsComponent implements OnInit {
                 size: [],
                 frame: [],
                 imageURL: [],
+                sold: [],
               };
               imageObject.type = image.key;
               let imageURL = val[demo].imageURL;
@@ -53,6 +55,7 @@ export class BuypaintingsComponent implements OnInit {
               let price = val[demo].price;
               let size = val[demo].size;
               let frame = val[demo].frame;
+              let sold = val[demo].frame;
 
               imageObject.description.push(description);
               imageObject.galleryName.push(galleryName);
@@ -64,6 +67,7 @@ export class BuypaintingsComponent implements OnInit {
               imageObject.price.push(price);
               imageObject.size.push(size);
               imageObject.frame.push(frame);
+              imageObject.sold.push(sold);
 
               this.galleryImgs.push(imageObject);
             })
@@ -74,6 +78,12 @@ export class BuypaintingsComponent implements OnInit {
 
         }
       })
+
+      this.config = {
+        itemsPerPage: 6,
+        currentPage: 1,
+        
+      };
 
   }
   navigateToDetail(gallery) {
@@ -106,6 +116,9 @@ export class BuypaintingsComponent implements OnInit {
   //   });
   //   dialogRef.componentInstance.paintingInfo = paintingInfo;
   // }
+  pageChanged(event){
+    this.config.currentPage = event;
+  }
 
 
 }

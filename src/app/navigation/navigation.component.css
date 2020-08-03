@@ -1,0 +1,53 @@
+
+.navbar {
+    height: 10vh;
+}
+.nav-bar-button {
+    color:white;
+    border-radius: 0;
+}
+.mat-drawer-content {
+    overflow: hidden!important;
+}
+
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0);
+    height: 6vh;
+    margin: 0;
+    }
+
+.hero {
+    /* Sizing */
+    width: 100vw;
+    height: 98vh;
+  }
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0);
+    height: 5vh;
+}
+.mat-sidenav {
+  min-width: 200px;
+}
+.spacer{
+   width: 100vw;
+   margin-left: auto;
+   color:#b47a15;
+   font-weight: bold!important;
+   position: absolute;
+   justify-content: center;
+   display: flex;
+}
+
+.create{
+ margin-left: auto;
+ margin-right: 50px;
+}
+
+.side-nav {
+    /* color: white; */
+    height: 30px;
+    padding: 25px;
+    color: #b47a15;
+}

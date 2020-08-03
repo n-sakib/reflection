@@ -243,8 +243,60 @@
 
                 <!-- <mat-paginator [pageSizeOptions]="[3, 5, 10, 20]" showFirstLastButtons></mat-paginator> -->
             </div>
-
         </section>
+        <section id="image-uploader">
+                <div class="frame-choice">
+                    <h1>Add Orders</h1>
+                    <p>
+                        <button mat-flat-button color="primary" class="frameButton"
+                            (click)="openTestimonial()">Start</button>
+                    </p>
+                </div>
+                <div class="testimonialTable">
+                    <table mat-table [dataSource]="dataSourceOrder" >
+                        <ng-container matColumnDef="imageKey">
+                            <th mat-header-cell *matHeaderCellDef>Key</th>
+                            <td mat-cell *matCellDef="let element ">
+                                {{element.imageKey}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="orderDate">
+                            <th mat-header-cell *matHeaderCellDef>Date</th>
+                            <td mat-cell *matCellDef="let element ">
+                                {{element.orderDate}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="price">
+                            <th mat-header-cell *matHeaderCellDef>Price</th>
+                            <td mat-cell *matCellDef="let element ">
+                                {{element.price}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef>Status</th>
+                            <td mat-cell *matCellDef="let element ">
+                                {{element.status}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="userName">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let element ">
+                                {{element.userName}}
+                            </td>
+                        </ng-container>
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsOrder"></tr>
+                        <tr mat-row *matRowDef="let element; columns: displayedColumnsOrder;"></tr>
+    
+                        <!-- <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                        </tr> -->
+    
+                    </table>
+    
+                   
+                </div>
+       </section>
         <div class="example-sidenav-content">
             <button type="button" mat-button (click)="drawer.toggle()">
                 Toggle sidenav

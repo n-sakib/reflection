@@ -45,6 +45,9 @@ import { EditableOnEnterDirective } from './editable/edit-on-enter.directive';
 import { BuypaintingsComponent } from './buypaintings/buypaintings.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { BuyDetailsComponent } from './buy-details/buy-details.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { NavigationComponent } from './navigation/navigation.component';
+import { GetQuoteComponent } from './get-quote/get-quote.component';
 
 
 @NgModule({
@@ -67,6 +70,9 @@ import { BuyDetailsComponent } from './buy-details/buy-details.component';
     BuypaintingsComponent,
     ShoppingComponent,
     BuyDetailsComponent,
+    NavigationComponent,
+    GetQuoteComponent,
+   
     
   ],
   imports: [
@@ -92,10 +98,13 @@ import { BuyDetailsComponent } from './buy-details/buy-details.component';
     MatProgressBarModule,
     RatingModule ,
     MatGridListModule,
+    NgxPaginationModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent, GalleryTypeComponent, ShoppingComponent]
+  entryComponents: [ImageComponentComponent, PaidPictureComponent, DigitalPictureComponent, PotraitPictureComponent, TestimonialComponent, ShowTestimonialsComponent, GalleryTypeComponent, ShoppingComponent, GetQuoteComponent],
+ 
 
 })
 export class AppModule { }

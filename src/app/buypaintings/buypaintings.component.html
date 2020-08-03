@@ -4,28 +4,55 @@
 <h1 fxHide fxShow.lg></h1>
 <h1 fxHide fxShow.xl></h1>
 
-<div  fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px" ngClass.gt-xs="ml-10">
-  <mat-card class="demo" *ngFor="let gallery of galleryImgs" fxFlex.sm="0 1 calc(50%-10px)" fxFlex.md="0 1 calc(33%-10px)"
-    fxFlex.gt-md="0 1 calc(33%-10px)">
-    <!-- <mat-card-title>Card 1</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+<app-navigation></app-navigation>
 
-    <img mat-card-image [src]="gallery.imageURL" class="image" (click)="navigateToDetail(gallery)">
-    <mat-card-content>
-      <p>Medium: {{gallery.medium}}</p>
-      <p>Size: {{gallery.size}} </p>
-      <p>Price: {{gallery.price}}</p>
-    </mat-card-content>
+  <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px" ngClass.gt-xs="ml-10">
+    <!-- <mat-card class="demo" *ngFor="let gallery of galleryImgs | paginate: config" fxFlex.sm="0 1 calc(50%-10px)"
+      fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(33%-10px)">
+    
+      <img mat-card-image [src]="gallery.imageURL" class="image" (click)="navigateToDetail(gallery)">
+      <mat-card-content>
+        <p>Medium: {{gallery.medium}}</p>
+        <p>Size: {{gallery.size}} </p>
+        <p>Price: {{gallery.price}}</p>
+      </mat-card-content>
 
-    <mat-card-actions fxLayout="row">
-      <button fxFlex="50" mat-stroked-button class="frameButton">Buy Now</button>
-      <button fxFlex="50" mat-stroked-button class="frameButton">Add to Cart</button>
-    </mat-card-actions>
-    <div>
-      <a href="#" color="primary" class="linkto">Order A Replica </a>
-      <p class="sold">Sold Out</p>
-    </div>
-  </mat-card>
-  <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
-</div>
+      <mat-card-actions fxLayout="row">
+        <button fxFlex="50" mat-stroked-button class="frameButton" (click)="navigateToDetail(gallery)">Buy Now</button>
+        <button fxFlex="50" mat-stroked-button class="frameButton" (click)="navigateToDetail(gallery)">Add to
+          Cart</button>
+      </mat-card-actions>
+      <div>
+        <a href="#" color="primary" class="linkto">Order A Replica </a>
+        <p class="sold">Sold Out</p>
+      </div>
+    </mat-card> -->
+    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+    <!-- <ngx-paginate [page]="page" [options]="options" (pageChange)='setPage($event)' >
+    </ngx-paginate> -->
+    <mat-card class="demo" *ngFor="let gallery of galleryImgs | paginate: config" fxFlex.sm="0 1 calc(50%-10px)"
+      fxFlex.md="0 1 calc(33%-10px)" fxFlex.gt-md="0 1 calc(33%-10px)">
+    
+      <img mat-card-image [src]="gallery.imageURL" class="secondimage" (click)="navigateToDetail(gallery)">
+      <mat-card-content>
+        <p>Medium: {{gallery.medium}}</p>
+        <p>Size: {{gallery.size}} </p>
+        <p>Price: {{gallery.price}}</p>
+      </mat-card-content>
+
+      <mat-card-actions fxLayout="row">
+        <button fxFlex="50" mat-stroked-button class="frameButton" (click)="navigateToDetail(gallery)">Buy Now</button>
+        <button fxFlex="50" mat-stroked-button class="frameButton" (click)="navigateToDetail(gallery)">Add to
+          Cart</button>
+      </mat-card-actions>
+      <div>
+        <a href="#" color="primary" class="linkto">Order A Replica </a>
+        <p  class="sold">{{gallery.sold}}</p>
+      </div>
+    </mat-card>
+
+  </div>
+
+    <pagination-controls class="page" (pageChange)="pageChanged($event)"></pagination-controls>
+
 <!-- <div>(click)="buyPainting(gallery.imageURL, gallery.title, gallery.artist)"</div> -->

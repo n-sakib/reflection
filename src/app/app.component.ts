@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { NgImageSliderModule, NgImageSliderComponent } from 'ng-image-slider';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { GetQuoteComponent } from './get-quote/get-quote.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -84,5 +85,10 @@ export class AppComponent {
 
   nextImageClick() {
     this.ds.next();
+  }
+  getQuote(){
+    const dialogRef = this.dialog.open(GetQuoteComponent, {
+      width: 'auto', height: 'auto',
+    });
   }
 }

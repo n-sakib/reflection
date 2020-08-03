@@ -63,8 +63,7 @@ export class ImageComponentComponent {
             var val =gallery.payload.val();
             this.galleries.push(val);
           });
-          
-          //  console.log(this.galleries)
+           console.log(this.galleries);
         }
       })
 
