@@ -28,9 +28,21 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/css/material-kit/material-kit.min.css",
+              "src/styles.scss",
+              "src/assets/fonts/icons.css",
+              "src/assets/fonts/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/core/jquery.min.js",
+              "src/assets/js/core/popper.min.js",
+              "src/assets/js/core/bootstrap-material-design.min.js",
+              "src/assets/js/plugins/moment.min.js",
+              "src/assets/js/plugins/bootstrap-datetimepicker.js",
+              "src/assets/js/plugins/nouislider.min.js",
+              "src/assets/js/buttons.js",
+              "src/assets/js/material-kit.min.js"
+            ]
           },
           "configurations": {
             "production": {
