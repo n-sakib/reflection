@@ -11,5 +11,5 @@ export class ArtistDashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }

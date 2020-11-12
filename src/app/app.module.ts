@@ -23,7 +23,7 @@ import { ArtReproductionComponent } from './photomaniputation/art-reproduction/a
 import { FaqComponent } from './compliance/faq/faq.component';
 import { PrivacyPolicyComponent } from './compliance/privacy-policy/privacy-policy.component';
 import { TosComponent } from './compliance/tos/tos.component';
-import { SiteMapComponent } from './compliance/site-map/site-map.component';
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -47,12 +47,12 @@ import { SiteMapComponent } from './compliance/site-map/site-map.component';
     ArtReproductionComponent,
     FaqComponent,
     PrivacyPolicyComponent,
-    TosComponent,
-    SiteMapComponent
+    TosComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

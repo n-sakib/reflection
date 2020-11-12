@@ -1,0 +1,29 @@
+.nav-item {
+    min-width: 180px;
+}
+.vertical-center {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .upload-wrapper-icon{
+        font-size: 90px;
+        color: #555555;
+    }
+}
+
+.input-group-addon.addon-inline {
+	background: #fff;
+	border-left: none;
+}
+    
+.input-group .form-control.addon-inline {
+	border-right: none;
+	padding-right: 5px;
+}
+
+.unit {
+    display: flex;
+    align-items: center;
+}
+

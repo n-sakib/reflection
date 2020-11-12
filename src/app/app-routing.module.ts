@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent }  from './home/home.component';
-import { ArtistAuthenticationComponent }  from './artist/artist-authentication/artist-authentication.component';
+import { HomeComponent } from './home/home.component';
+import { ArtistAuthenticationComponent } from './artist/artist-authentication/artist-authentication.component';
 import { ArtistDashboardComponent } from './artist/artist-dashboard/artist-dashboard.component';
 import { OverviewComponent } from './profile/overview/overview.component';
 import { AuthComponent } from './profile/auth/auth.component';
@@ -21,30 +21,40 @@ import { ArtReproductionComponent } from './photomaniputation/art-reproduction/a
 import { FaqComponent } from './compliance/faq/faq.component';
 import { PrivacyPolicyComponent } from './compliance/privacy-policy/privacy-policy.component';
 import { TosComponent } from './compliance/tos/tos.component';
-import { SiteMapComponent } from './compliance/site-map/site-map.component';
+import { PrimaryLayoutComponent } from './shared/layouts/primary-layout/primary-layout.component';
+import { SecondaryLayoutComponent } from './shared/layouts/secondary-layout/secondary-layout.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'artist/login', component: ArtistAuthenticationComponent },
-  { path: 'artist/dashboard', component: ArtistDashboardComponent },
-  { path: 'user/login', component: OverviewComponent },
-  { path: 'user/dashboard', component: AuthComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'reviews', component: ReviewsComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'order', component: OrderSequenceComponent },
-  { path: 'exhibitions', component: ExhibitionComponent },
-  { path: 'paintings', component: PaintingsListComponent },
-  { path: 'paintings/:id', component: PaintingsDetailsComponent },
-  { path: 'artists', component: ArtistsListComponent },
-  { path: 'artists/:id', component: ArtistsDetailsComponent },
-  { path: 'photo-to-art', component: PhotoToArtComponent },
-  { path: 'art-reproduction', component: ArtReproductionComponent },
-  { path: 'faq', component: FaqComponent },
-  { path: 'privacy', component: PrivacyPolicyComponent },
-  { path: 'tos', component: TosComponent },
-  { path: 'sitemap', component: SiteMapComponent }
+  {
+    path: '', component: PrimaryLayoutComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'artist/dashboard', component: ArtistDashboardComponent },
+      { path: 'user/dashboard', component: OverviewComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'reviews', component: ReviewsComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'order', component: OrderSequenceComponent },
+      { path: 'exhibitions', component: ExhibitionComponent },
+      { path: 'paintings', component: PaintingsListComponent },
+      { path: 'paintings/:id', component: PaintingsDetailsComponent },
+      { path: 'artists', component: ArtistsListComponent },
+      { path: 'artists/:id', component: ArtistsDetailsComponent },
+      { path: 'photo-to-art', component: PhotoToArtComponent },
+      { path: 'art-reproduction', component: ArtReproductionComponent },
+      { path: 'faq', component: FaqComponent },
+      { path: 'privacy', component: PrivacyPolicyComponent },
+      { path: 'tos', component: TosComponent },
+    ]
+  },
+  {
+    path: 'login', component: SecondaryLayoutComponent,
+    children: [
+      { path: 'artist', component: ArtistAuthenticationComponent },
+      { path: 'user', component: AuthComponent }
+    ]
+  }
 ];
 
 @NgModule({
