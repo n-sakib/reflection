@@ -73,7 +73,7 @@
                                             <i class="material-icons">face</i>
                                         </span>
                                     </div>
-                                    <input type="text" #name class="form-control" placeholder="Name..." (keyup)="addName($event)">
+                                    <input type="text" class="form-control" placeholder="Name..." (keyup)="addName($event)" [value]="selectedName">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -81,7 +81,7 @@
                                             <i class="material-icons">face</i>
                                         </span>
                                     </div>
-                                    <input type="date" #dob class="form-control" placeholder="DD/MM/YYYY" (keyup)="addDob($event)">
+                                    <input type="date" class="form-control" placeholder="DD/MM/YYYY" (keyup)="addDob($event)" [value]="selectedDob">
                                 </div>
                                 <div class="input-group" >
                                     <div class="input-group-prepend">
@@ -89,7 +89,7 @@
                                             <i class="material-icons">face</i>
                                         </span>
                                     </div>
-                                    <input type="text" #nationality  class="form-control" placeholder="Nationality..." (keyup)="addNationality($event)">
+                                    <input type="text" class="form-control" placeholder="Nationality..." (keyup)="addNationality($event)" [value]="selectedNationality">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -97,7 +97,7 @@
                                             <i class="material-icons">mail</i>
                                         </span>
                                     </div>
-                                    <input type="email"  #emailsignup class="form-control" placeholder="Email..." (keyup)="addEmail($event)">
+                                    <input type="email" class="form-control" placeholder="Email..." (keyup)="addEmail($event)" [value]="emailsignup">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -105,11 +105,11 @@
                                             <i class="material-icons">lock_outline</i>
                                         </span>
                                     </div>
-                                    <input type="password"  #passwordsignup class="form-control" placeholder="Password..." (keyup)="addPassword($event)">
+                                    <input type="password" class="form-control" placeholder="Password..." (keyup)="addPassword($event)" [value]="passwordsignup">
                                 </div>
                             </div>
                             <div class="footer text-center ">
-                                <a (click)="onsignup(emailsignup.value, passwordsignup.value)" class="btn btn-primary btn-link btn-wd btn-lg">Sign Up</a> 
+                                <a (click)="onSignup()" class="btn btn-primary btn-link btn-wd btn-lg">Sign Up</a> 
                                 <a (click)="haveAccount()" class="btn btn-primary btn-link btn-wd btn-lg">Already have an Account</a> 
                             </div>
                         </div> 

@@ -11,7 +11,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 })
 export class ArtistAuthenticationComponent implements OnInit {
 
-  isSignedIn= false;
+  isSignedIn = false;
   email = '';
   password = '';
   isSignUp = false;
@@ -20,85 +20,79 @@ export class ArtistAuthenticationComponent implements OnInit {
   selectedNationality = '';
   emailsignup = '';
   passwordsignup = '';
-  
+
 
   constructor(private firebaseAuth: AngularFireAuth, private authService: AuthService, private storage: AngularFireStorage, private database: AngularFireDatabase) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem('user') !== null)
-    this.isSignedIn= true
+    if (localStorage.getItem('user') !== null)
+      this.isSignedIn = true
     else
-    this.isSignedIn= false
+      this.isSignedIn = false
   }
 
-  async onsignin(email: string, password: string){
-    console.log(email)
-    console.log(password)
-     await this.authService.signin(email,password)  
-     if(this.authService.isLoggedIn)
-     this.isSignedIn= true
+  async onsignin(email: string, password: string) {
+    await this.authService.signin(email, password)
+    if (this.authService.isLoggedIn)
+      this.isSignedIn = true
   }
-  
-  createAccount(){
+
+  createAccount() {
     this.isSignUp = true
   }
 
-  haveAccount(){
+  haveAccount() {
     this.isSignUp = false
   }
 
-  async onsignup(emailsignup: string, passwordsignup: string){
+  onSignup() {
     this.isSignUp = true
-    console.log(emailsignup)
-    console.log(passwordsignup)
-     await this.authService.signup(emailsignup,passwordsignup)
-     if(this.authService.isLoggedIn)
-     this.isSignedIn= true
-     console.log('baal')
-     // A post entry.
-    var postData = {
-      name: this.selectedName,
-      nationality: this.selectedNationality,
-      dob: this.selectedDob,
-      emailsignup: this.emailsignup,
-      passwordsignup: this.passwordsignup
-    };
+    this.authService.signup(this.emailsignup, this.passwordsignup).then((res) => {
+      this.isSignedIn = true
+      var postData = {
+        name: this.selectedName,
+        nationality: this.selectedNationality,
+        dob: this.selectedDob,
+        emailsignup: this.emailsignup,
+        passwordsignup: this.passwordsignup
+      };
 
-    console.log(postData)
-    // Get a key for a new Post.
-    this.database.list(`users data/${this.authService.key}`).push(postData).then(() => {
+      // Get a key for a new Post.
+      this.database.list(`users data/`).set(`${res}/`, postData).then(() => {
         this.selectedName = ''
         this.selectedDob = ''
         this.selectedNationality = ''
-        this.emailsignup =''
+        this.emailsignup = ''
         this.passwordsignup = ''
         // this.snackBar.open('Successfully uploaded data', 'OK', {
         //   duration: 2000,
         // });
+      })
     })
   }
 
-  addName($event){
+  addName($event) {
     var value = $event.target.value;
     this.selectedName = value;
   }
 
-  addNationality($event){
+  addNationality($event) {
     var value = $event.target.value;
     this.selectedNationality = value;
   }
 
-  addDob($event){
+  addDob($event) {
     var value = $event.target.value;
     this.selectedDob = value;
   }
 
-  addEmail($event){
-    var value = $event.target.value;
+  addEmail($event) {
+    var value = $event.target.value.toString().trim();
+    console.log(value)
     this.emailsignup = value;
   }
 
-  addPassword($event){
+  addPassword($event) {
     var value = $event.target.value;
     this.passwordsignup = value;
   }
