@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +28,9 @@ import { FaqComponent } from './compliance/faq/faq.component';
 import { PrivacyPolicyComponent } from './compliance/privacy-policy/privacy-policy.component';
 import { TosComponent } from './compliance/tos/tos.component';
 import { SharedModule } from "./shared/shared.module";
+import { environment } from 'src/environments/environment';
+import { AuthService } from './services/auth.service'
+
 
 @NgModule({
   declarations: [
@@ -47,14 +54,20 @@ import { SharedModule } from "./shared/shared.module";
     ArtReproductionComponent,
     FaqComponent,
     PrivacyPolicyComponent,
-    TosComponent
+    TosComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule, 
+    AngularFireStorageModule,
+    AngularFireAuthModule 
   ],
-  providers: [],
+  providers: [ 
+   {provide: AuthService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
