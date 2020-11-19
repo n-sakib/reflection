@@ -8,6 +8,7 @@ export class AuthService {
 
 
   isLoggedIn= false
+  key = ''
   constructor(public firebaseauth: AngularFireAuth) { }
 
 
@@ -27,6 +28,7 @@ export class AuthService {
       .then(res => {
         this.isLoggedIn = true
         localStorage.setItem('user',JSON.stringify(res.user))
+        this.key = res.user.uid;
         console.log('Successfully signed up!', res);
       })  
   }

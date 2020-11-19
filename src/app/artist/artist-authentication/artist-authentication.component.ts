@@ -66,7 +66,7 @@ export class ArtistAuthenticationComponent implements OnInit {
 
     console.log(postData)
     // Get a key for a new Post.
-    this.database.list(`users data/`).push(postData).then(() => {
+    this.database.list(`users data/${this.authService.key}`).push(postData).then(() => {
         this.selectedName = ''
         this.selectedDob = ''
         this.selectedNationality = ''
