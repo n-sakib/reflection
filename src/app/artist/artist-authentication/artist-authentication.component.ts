@@ -3,6 +3,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Router } from  "@angular/router";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { auth } from 'firebase/app';
+import { BehaviorSubject, Observable, from } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-artist-authentication',
@@ -12,17 +19,21 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 export class ArtistAuthenticationComponent implements OnInit {
 
   isSignedIn = false;
-  email = '';
-  password = '';
+  emailSignin = '';
+  passwordSignin = '';
   isSignUp = false;
   selectedName = '';
   selectedDob = '';
   selectedNationality = '';
-  emailsignup = '';
-  passwordsignup = '';
+  emailSignup = '';
+  passwordSignup = '';
+  errorMessage: string = '';
+  userData;
 
-
-  constructor(private firebaseAuth: AngularFireAuth, private authService: AuthService, private storage: AngularFireStorage, private database: AngularFireDatabase) { }
+  constructor(private firebaseAuth: AngularFireAuth, private authService: AuthService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
+    
+    
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem('user') !== null)
@@ -31,10 +42,38 @@ export class ArtistAuthenticationComponent implements OnInit {
       this.isSignedIn = false
   }
 
-  async onsignin(email: string, password: string) {
-    await this.authService.signin(email, password)
-    if (this.authService.isLoggedIn)
+  onSignin() {
+    this.authService.signin(this.emailSignin, this.passwordSignin)
+    .then(res => {
       this.isSignedIn = true
+        let userObservable = this.database.list(`users data/${res}/`).valueChanges();
+        userObservable.subscribe(user =>{
+          console.log(user)
+          localStorage.setItem('user',JSON.stringify(user))
+        }) 
+      })
+      
+      // this.firebaseAuth.authState.subscribe(user => {
+      //   if (user) {
+      //     this.userData = user;
+      //     // console.log(user)
+      //     localStorage.setItem('user', JSON.stringify(this.userData));
+      //     JSON.parse(localStorage.getItem('user'));
+      //     const userRef: AngularFirestoreDocument<any> = this.store.doc(`users data/${user.res}`);
+      //     var signInData = {
+      //       name: this.selectedName,
+      //       nationality: this.selectedNationality,
+      //       dob: this.selectedDob,
+      //       emailsignup: this.emailSignup,
+      //       passwordsignup: this.passwordSignup
+      //     }
+      //     console.log(signInData); 
+      //   } else {
+      //     localStorage.setItem('user', null);
+      //     JSON.parse(localStorage.getItem('user'));
+      //   }
+      // })
+   
   }
 
   createAccount() {
@@ -47,14 +86,14 @@ export class ArtistAuthenticationComponent implements OnInit {
 
   onSignup() {
     this.isSignUp = true
-    this.authService.signup(this.emailsignup, this.passwordsignup).then((res) => {
+    this.authService.signup(this.emailSignup, this.passwordSignup).then((res) => {
       this.isSignedIn = true
       var postData = {
         name: this.selectedName,
         nationality: this.selectedNationality,
         dob: this.selectedDob,
-        emailsignup: this.emailsignup,
-        passwordsignup: this.passwordsignup
+        emailsignup: this.emailSignup,
+        passwordsignup: this.passwordSignup
       };
 
       // Get a key for a new Post.
@@ -62,8 +101,8 @@ export class ArtistAuthenticationComponent implements OnInit {
         this.selectedName = ''
         this.selectedDob = ''
         this.selectedNationality = ''
-        this.emailsignup = ''
-        this.passwordsignup = ''
+        this.emailSignup = ''
+        this.passwordSignup = ''
         // this.snackBar.open('Successfully uploaded data', 'OK', {
         //   duration: 2000,
         // });
@@ -89,12 +128,16 @@ export class ArtistAuthenticationComponent implements OnInit {
   addEmail($event) {
     var value = $event.target.value.toString().trim();
     console.log(value)
-    this.emailsignup = value;
+    this.emailSignup = value;
   }
 
   addPassword($event) {
     var value = $event.target.value;
-    this.passwordsignup = value;
+    this.passwordSignup = value;
   }
+
+  // loginViaGoogle(): Observable<auth.UserCredential> {
+  //   return from(this.firebaseAuth.signInWithPopup(new auth.GoogleAuthProvider()));
+  // }
 
 }
