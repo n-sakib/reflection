@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from  "@angular/router";
-import {auth} from 'firebase/app';
- 
+import * as firebase from 'firebase/app';
+
 // These imports load individual services into the firebase namespace.
 import { catchError, take } from 'rxjs/operators';
 import { EMPTY, Observable, of } from 'rxjs';
@@ -18,10 +18,10 @@ export class AuthService {
   isLoggedIn = false
 
 
-  constructor(public firebaseauth: AngularFireAuth, private router: Router, private route: ActivatedRoute) {}  
+  constructor(public afAuth: AngularFireAuth, private router: Router, private route: ActivatedRoute) {}  
 
   signin(emailSignin, passwordSignin) {
-    return this.firebaseauth.signInWithEmailAndPassword(emailSignin, passwordSignin)
+    return this.afAuth.signInWithEmailAndPassword(emailSignin, passwordSignin)
       .then(res => {
         this.isLoggedIn = true
         localStorage.setItem('user', JSON.stringify(res.user))
@@ -34,7 +34,7 @@ export class AuthService {
   }
   
   signup(emailSignup, passwordSignup) {
-    return this.firebaseauth.createUserWithEmailAndPassword(emailSignup, passwordSignup)
+    return this.afAuth.createUserWithEmailAndPassword(emailSignup, passwordSignup)
       .then(res => {
         this.isLoggedIn = true
         localStorage.setItem('user', JSON.stringify(res.user))
@@ -42,21 +42,46 @@ export class AuthService {
       })
   }
   
+  doFacebookLogin(){
+    console.log("here")
+    return new Promise<any>((resolve, reject) => {
+      let provider = new firebase.default.auth.FacebookAuthProvider();
+      this.afAuth.signInWithPopup(provider)
+      .then(res => {
+        resolve(res);
+      }, err => {
+        console.log(err);
+        reject(err);
+      })
+    })
+ }
 
-  // login() {
-  //   this.firebaseauth
-  //     .loginViaGoogle()
-  //     .pipe(
-  //       take(1),
-  //       catchError((error) => {
-  //         console.log("failed")
-  //         return EMPTY;
-  //       }),
-  //     )
-  //     .subscribe(
-  //       (response) =>
-  //         response &&
-  //         console.log("YESSSSS")
-  //     );
-  // }
+ doGoogleLogin(){
+  console.log("here")
+  return new Promise<any>((resolve, reject) => {
+    let provider = new firebase.default.auth.GoogleAuthProvider();
+    this.afAuth.signInWithPopup(provider)
+    .then(res => {
+      resolve(res);
+    }, err => {
+      console.log(err);
+      reject(err);
+    })
+  })
+ }
+
+//  doInstagramLogin(){
+//   console.log("here")
+//   return new Promise<any>((resolve, reject) => {
+//     let provider = new firebase.default.auth.InstagramAuthProvider();
+//     this.afAuth.signInWithPopup(provider)
+//     .then(res => {
+//       resolve(res);
+//     }, err => {
+//       console.log(err);
+//       reject(err);
+//     })
+//   })
+//  }
+
 }

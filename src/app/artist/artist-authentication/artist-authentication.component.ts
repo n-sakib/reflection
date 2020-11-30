@@ -5,7 +5,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Router } from  "@angular/router";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { auth } from 'firebase/app';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
@@ -30,7 +29,7 @@ export class ArtistAuthenticationComponent implements OnInit {
   errorMessage: string = '';
   userData;
 
-  constructor(private firebaseAuth: AngularFireAuth, private authService: AuthService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
+  constructor(private authService: AuthService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
     
     
   }
@@ -136,8 +135,22 @@ export class ArtistAuthenticationComponent implements OnInit {
     this.passwordSignup = value;
   }
 
-  // loginViaGoogle(): Observable<auth.UserCredential> {
-  //   return from(this.firebaseAuth.signInWithPopup(new auth.GoogleAuthProvider()));
+  loginViaFacebook() {
+    this.authService.doFacebookLogin().then((res) => {
+      console.log(res)
+    })
+  }
+
+  loginViaGoogle() {
+    this.authService.doGoogleLogin().then((res) => {
+      console.log(res)
+    })
+  }
+
+  // loginViaInstagram() {
+  //   this.authService.doInstagramLogin().then((res) => {
+  //     console.log(res)
+  //   })
   // }
 
 }
