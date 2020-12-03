@@ -19,7 +19,11 @@ export class ArtistDashboardComponent implements OnInit {
   frameUploadPercentage: Observable<number>;
   isImageSubmitted: boolean = false;
   selectedImageURL = '';
-  user = null;
+  user = {
+    email: '',
+    photoURL: '',
+    displayName: ''
+  };
   selectedTitle = '';
   selectedType  = '';
   selectedCategory = '';
@@ -31,13 +35,10 @@ export class ArtistDashboardComponent implements OnInit {
   constructor(private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase,private afAuth: AngularFireAuth, public auth: AuthService) { }
 
   ngOnInit(): void {
-   
-    this.afAuth.onAuthStateChanged(user => {
-        this.user = user;
-        console.log(this.user.displayName)
-        console.log(this.user.photoURL)
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+      console.log(this.user)
     });
-  
   }
 
   toBase64 = file => new Promise((resolve, reject) => {

@@ -14,6 +14,9 @@ export class PrimaryHeaderComponent implements OnInit {
   constructor(private afAuth: AngularFireAuth, public auth: AuthService) { }
 
   ngOnInit(): void {
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+    });
     this.afAuth.onAuthStateChanged(user => {
       if (user) {
         this.user = user;

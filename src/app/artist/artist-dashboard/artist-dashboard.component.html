@@ -8,12 +8,12 @@
                     <div class="col-md-6 ml-auto mr-auto">
                         <div class="profile">
                             <div class="avatar">
-                                <img alt="Circle Image"
-                                class="img-raised rounded-circle img-fluid">
+                                <img alt="Circle Image" [src]="user.photoURL"
+                                    class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">
-                                <h3 class="title"></h3>
-                                <h6>Nepali Artist</h6>
+                                <h3 class="title">{{user.displayName}}</h3>
+                                <h6>Artist <i class="fa fa-edit edit-icon"></i> </h6>
                                 <button class="btn btn-just-icon btn-link btn-dribbble" href="" data-toggle="popover"
                                     title="Country Of Residence" data-trigger="focus" data-content="Russia"><i
                                         class="material-icons">home</i></button>
@@ -24,17 +24,16 @@
                                     title="Phone Number" data-trigger="focus" data-content="+1234223423"><i
                                         class="material-icons">phone</i></button>
                                 <button class="btn btn-just-icon btn-link btn-dribbble" href="" data-toggle="popover"
-                                    title="Email" data-trigger="focus" data-content="asd@gmail.com"><i
+                                    title="Email" data-trigger="focus" [attr.data-content]="user.email"><i
                                         class="material-icons">mail</i></button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="description text-center">
-
                     <p>An artist of considerable range, Chet Faker &#x2014; the name taken by Melbourne-raised,
                         Brooklyn-based Nick Murphy &#x2014; writes, performs and records all of his own music, giving it
-                        a warm, intimate feel with a solid groove structure. </p>
+                        a warm, intimate feel with a solid groove structure.</p>
                 </div>
                 <div class="row">
                     <div class="ml-auto mr-auto">
@@ -330,29 +329,32 @@
             <div class="modal-body">
                 <div class="d-flex justify-content-center">
 
-                <ul class="nav nav-pills nav-pills-default">
-                    <li class="nav-item progress-pills"><a class="nav-link active" href="#pill1" data-toggle="tab">1</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pill2" data-toggle="tab">2</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pill3" data-toggle="tab">3</a></li>
-                  </ul>
+                    <ul class="nav nav-pills nav-pills-default">
+                        <li class="nav-item progress-pills"><a class="nav-link active" href="#pill1"
+                                data-toggle="tab">1</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#pill2" data-toggle="tab">2</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#pill3" data-toggle="tab">3</a></li>
+                    </ul>
                 </div>
-                  <div class="tab-content tab-space">
-                      <div class="tab-pane active" id="pill1">
+                <div class="tab-content tab-space">
+                    <div class="tab-pane active" id="pill1">
                         <form>
                             <div class="jumbotron vertical-center text-center">
                                 <div class="container">
                                     <i class="material-icons upload-wrapper-icon">cloud_upload</i><br>
-                                    <button *ngIf="!isImageSubmitted" type="button" class="btn btn-primary" (click)="imageInput.click()">Upload</button>
+                                    <button *ngIf="!isImageSubmitted" type="button" class="btn btn-primary"
+                                        (click)="imageInput.click()">Upload</button>
                                     <input hidden (change)="onImageSelected()" #imageInput type="file" id="imageFile">
-                                    <img *ngIf="isImageSubmitted" [src]="selectedImageURL"  class= "imageBox" width="400" height="400">
+                                    <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox" width="400"
+                                        height="400">
                                 </div>
                             </div>
                             <div class="p-2">
                                 <h5>Art Work Type</h5>
                                 <div class="form-check form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" 
-                                        [(value)]="selectedType" (keyup)="addType($event)" >
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            [(value)]="selectedType" (keyup)="addType($event)">
                                         Drawing & Painting
                                         <span class="circle">
                                             <span class="check"></span>
@@ -361,8 +363,8 @@
                                 </div>
                                 <div class="form-check form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" 
-                                        [(value)]="selectedType" (keyup)="addType($event)">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            [(value)]="selectedType" (keyup)="addType($event)">
                                         Print Making
                                         <span class="circle">
                                             <span class="check"></span>
@@ -373,14 +375,14 @@
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             <div class="p-2">
                                 <h5>Art Work Title</h5>
-                                <input type="text" class="form-control"  aria-describedby="emailHelp"
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
                                     placeholder="Enter title" (keyup)="addTitle($event)" [value]="selectedTitle">
                                 <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             </div>
                             <div class="p-2">
                                 <h5>Art Work Media</h5>
                                 <select class="form-control selectpicker" data-style="btn btn-link"
-                                    [(value)]="selectedCategory" (keyup)="addCategory($event)" >
+                                    [(value)]="selectedCategory" (keyup)="addCategory($event)">
                                     <option>Oil Paint on Canvas</option>
                                     <option>Oil Paint on Board</option>
                                     <option>Acrylic Paint on Canvas</option>
@@ -400,7 +402,7 @@
                                 </select>
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
-                            <div class="p-2" *ngif="false">
+                            <div class="p-2">
                                 <input type="text" class="form-control" aria-describedby="emailHelp"
                                     placeholder="Enter media Type">
                             </div>
@@ -409,37 +411,43 @@
                                 <h5>Size</h5>
                                 <div class="form-row">
                                     <div class="col">
-                                      <input type="number" class="form-control" placeholder="Height" [(value)]="selectedHeight" (keyup)="addHeight($event)" >
+                                        <input type="number" class="form-control" placeholder="Height"
+                                            [(value)]="selectedHeight" (keyup)="addHeight($event)">
                                     </div>
                                     <h5 for="exampleFormControlTextarea1">X</h5>
                                     <div class="col">
-                                      <input type="number" class="form-control" placeholder="Width" [(value)]="selectedWidth" (keyup)="addWidth($event)" >
+                                        <input type="number" class="form-control" placeholder="Width"
+                                            [(value)]="selectedWidth" (keyup)="addWidth($event)">
                                     </div>
-                                  </div>
+                                </div>
                             </div>
                             <div class="p-2">
                                 <div class="form-group">
                                     <h5 for="exampleFormControlTextarea1">Art Concept</h5>
-                                    <textarea class="form-control"  rows="3" [(value)]="selectedConcept" (keyup)="addConcept($event)" ></textarea>
-                                  </div>
+                                    <textarea class="form-control" rows="3" [(value)]="selectedConcept"
+                                        (keyup)="addConcept($event)"></textarea>
+                                </div>
                             </div>
                         </form>
                         <br><br>
                         Dramatically visualize customer directed convergence without revolutionary ROI.
-                      </div>
-                      <div class="tab-pane" id="pill2">
-                        Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+                    </div>
+                    <div class="tab-pane" id="pill2">
+                        Efficiently unleash cross-media information without cross-media value. Quickly maximize timely
+                        deliverables for real-time schemas.
                         <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
-                      </div>
-                      <div class="tab-pane" id="pill3">
-                          Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
-                          <br><br>Dynamically innovate resource-leveling customer service for state of the art customer service.
-                      </div>
-                  </div>
+                    </div>
+                    <div class="tab-pane" id="pill3">
+                        Completely synergize resource taxing relationships via premier niche markets. Professionally
+                        cultivate one-to-one customer service with robust ideas.
+                        <br><br>Dynamically innovate resource-leveling customer service for state of the art customer
+                        service.
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                <button type="button" class="btn btn-primary" (click)="publish()" >Next</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="publish()">Next</button>
             </div>
         </div>
     </div>
