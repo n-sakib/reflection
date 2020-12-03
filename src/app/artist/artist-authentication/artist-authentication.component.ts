@@ -8,6 +8,10 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
+import { countries } from '../../../assets/countries.js';
+import { AbstractControl } from '@angular/forms';
+
+
 
 
 @Component({
@@ -26,12 +30,17 @@ export class ArtistAuthenticationComponent implements OnInit {
   selectedNationality = '';
   emailSignup = '';
   passwordSignup = '';
+  confirmPasswordSignup  = '';
   errorMessage: string = '';
-  userData;
+  countryList = countries;
+  passwordMatch = false;
+
+
+  
+
 
   constructor(private authService: AuthService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
-    
-    
+   
   }
 
   ngOnInit(): void {
@@ -39,6 +48,15 @@ export class ArtistAuthenticationComponent implements OnInit {
       this.isSignedIn = true
     else
       this.isSignedIn = false
+
+    this.authService.getCurrentUser().subscribe((user) => {
+      console.log(user)
+      // console.log("baal")
+      
+    })
+    
+
+    
   }
 
   onSignin() {
@@ -49,30 +67,8 @@ export class ArtistAuthenticationComponent implements OnInit {
         userObservable.subscribe(user =>{
           console.log(user)
           localStorage.setItem('user',JSON.stringify(user))
-        }) 
+        })
       })
-      
-      // this.firebaseAuth.authState.subscribe(user => {
-      //   if (user) {
-      //     this.userData = user;
-      //     // console.log(user)
-      //     localStorage.setItem('user', JSON.stringify(this.userData));
-      //     JSON.parse(localStorage.getItem('user'));
-      //     const userRef: AngularFirestoreDocument<any> = this.store.doc(`users data/${user.res}`);
-      //     var signInData = {
-      //       name: this.selectedName,
-      //       nationality: this.selectedNationality,
-      //       dob: this.selectedDob,
-      //       emailsignup: this.emailSignup,
-      //       passwordsignup: this.passwordSignup
-      //     }
-      //     console.log(signInData); 
-      //   } else {
-      //     localStorage.setItem('user', null);
-      //     JSON.parse(localStorage.getItem('user'));
-      //   }
-      // })
-   
   }
 
   createAccount() {
@@ -84,30 +80,37 @@ export class ArtistAuthenticationComponent implements OnInit {
   }
 
   onSignup() {
-    this.isSignUp = true
-    this.authService.signup(this.emailSignup, this.passwordSignup).then((res) => {
-      this.isSignedIn = true
-      var postData = {
-        name: this.selectedName,
-        nationality: this.selectedNationality,
-        dob: this.selectedDob,
-        emailsignup: this.emailSignup,
-        passwordsignup: this.passwordSignup
-      };
-
-      // Get a key for a new Post.
-      this.database.list(`users data/`).set(`${res}/`, postData).then(() => {
-        this.selectedName = ''
-        this.selectedDob = ''
-        this.selectedNationality = ''
-        this.emailSignup = ''
-        this.passwordSignup = ''
-        // this.snackBar.open('Successfully uploaded data', 'OK', {
-        //   duration: 2000,
-        // });
+    if(this.passwordSignup === this.confirmPasswordSignup){
+      this.isSignUp = true
+      this.authService.signup(this.emailSignup, this.passwordSignup).then((res) => {
+        this.isSignedIn = true
+        var postData = {
+          name: this.selectedName,
+          nationality: this.selectedNationality,
+          dob: this.selectedDob,
+          emailsignup: this.emailSignup,
+          passwordsignup: this.passwordSignup
+        };
+  
+        // Get a key for a new Post.
+        this.database.list(`users data/`).set(`${res}/`, postData).then(() => {
+          this.selectedName = ''
+          this.selectedDob = ''
+          this.selectedNationality = ''
+          this.emailSignup = ''
+          this.passwordSignup = ''
+          // this.snackBar.open('Successfully uploaded data', 'OK', {
+          //   duration: 2000,
+          // });
+        })
       })
-    })
+    }
+    else{
+      console.log("password error");
+      
+    }
   }
+
 
   addName($event) {
     var value = $event.target.value;
@@ -134,23 +137,18 @@ export class ArtistAuthenticationComponent implements OnInit {
     var value = $event.target.value;
     this.passwordSignup = value;
   }
-
-  loginViaFacebook() {
-    this.authService.doFacebookLogin().then((res) => {
-      console.log(res)
-    })
+  addConfirmPassword($event) {
+    var value = $event.target.value;
+    this.confirmPasswordSignup = value;
   }
 
-  loginViaGoogle() {
-    this.authService.doGoogleLogin().then((res) => {
-      console.log(res)
-    })
+  public resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
 
-  // loginViaInstagram() {
-  //   this.authService.doInstagramLogin().then((res) => {
-  //     console.log(res)
-  //   })
-  // }
+  public onError(errorDetails: any[]) {
+    console.log(`reCAPTCHA error encountered; details:`, errorDetails);
+  }
+
 
 }

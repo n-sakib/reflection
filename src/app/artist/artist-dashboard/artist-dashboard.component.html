@@ -341,8 +341,9 @@
                         <form>
                             <div class="jumbotron vertical-center text-center">
                                 <div class="container">
-                                    <i class="material-icons upload-wrapper-icon">cloud_upload</i>
-                                    <h4>Upload</h4>
+                                    <i class="material-icons upload-wrapper-icon">cloud_upload</i><br>
+                                    <button type="button" class="btn btn-primary" (click)="imageInput.click()">Upload</button>
+                                    <input hidden (change)="onImageSelected()" #imageInput type="file" id="imageFile">
                                 </div>
                             </div>
                             <div class="p-2">

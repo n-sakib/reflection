@@ -9,13 +9,10 @@
                             <div class="card-header card-header-primary text-center">
                                 <h4 class="card-title">Artist Login</h4>
                                 <div class="social-line">
-                                    <a (click)="loginViaFacebook()" class="btn btn-just-icon btn-link">
+                                    <a (click)="authService.doFacebookLogin()" class="btn btn-just-icon btn-link">
                                         <i class="fa fa-facebook-square"></i>
                                     </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-link">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                    <a (click)="loginViaGoogle()" class="btn btn-just-icon btn-link">
+                                    <a (click)="authService.doGoogleLogin()" class="btn btn-just-icon btn-link">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
                                 </div>
@@ -28,7 +25,7 @@
                                             <i class="material-icons">mail</i>
                                         </span>
                                     </div>
-                                    <input type="email"  #email class="form-control" placeholder="Email...">
+                                    <input type="email" #email class="form-control" placeholder="Email...">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -36,14 +33,17 @@
                                             <i class="material-icons">lock_outline</i>
                                         </span>
                                     </div>
-                                    <input type="password"  #password class="form-control" placeholder="Password...">
+                                    <input type="password" #password class="form-control" placeholder="Password...">
                                 </div>
                             </div>
                             <div class="footer text-center ">
-                                <a (click)="onsignin(email.value, password.value)" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a> 
-                                <a (click)="createAccount()" class="btn btn-primary btn-link btn-wd btn-lg">Create A Account</a> 
+                                <a (click)="onSignin()"
+                                    class="btn btn-primary btn-wd btn-md">Login</a>
+                                <div class="spacer"></div>
+                                <a (click)="createAccount()" class="btn btn-primary btn-link btn-wd btn-lg">Create A
+                                    Account</a>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,38 +58,52 @@
                                         <i class="fa fa-facebook-square"></i>
                                     </a>
                                     <a href="#pablo" class="btn btn-just-icon btn-link">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-link">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
                                 </div>
                             </div>
-                            <p class="description text-center">Or Use Email</p>
-                            <div class="card-body">
+                            <p class="description text-center">Content Box</p>
+                            <div class="card-body" id="style-1" style="height: 180px;overflow: scroll;">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="material-icons">face</i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Name..." (keyup)="addName($event)" [value]="selectedName">
+                                    <input type="text" class="form-control" placeholder="Name..."
+                                        (keyup)="addName($event)" [value]="selectedName">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <i class="material-icons">face</i>
+                                            <i class="material-icons">event</i>
                                         </span>
                                     </div>
-                                    <input type="date" class="form-control" placeholder="DD/MM/YYYY" (keyup)="addDob($event)" [value]="selectedDob">
+                                    <input placeholder="Date..." onfocus="(this.type='date')"
+                                        onblur="(this.type='text')" class="form-control" (keyup)="addDob($event)"
+                                        [value]="selectedDob">
                                 </div>
-                                <div class="input-group" >
+                                <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <i class="material-icons">face</i>
+                                            <i class="material-icons">flag</i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Nationality..." (keyup)="addNationality($event)" [value]="selectedNationality">
+                                    <input type="text" class="form-control" placeholder="Nationality..."
+                                        (keyup)="addNationality($event)" [value]="selectedNationality">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-address-book"></i>
+                                        </span>
+                                    </div>
+                                    <select class="form-control selectpicker" data-style="btn btn-link"
+                                        id="exampleFormControlSelect">
+                                        <option *ngFor="let country of countryList" [ngValue]="country.code">
+                                            {{country.emoji}} {{country.name}}
+                                        </option>
+                                    </select>
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -97,7 +111,8 @@
                                             <i class="material-icons">mail</i>
                                         </span>
                                     </div>
-                                    <input type="email" class="form-control" placeholder="Email..." (keyup)="addEmail($event)" [value]="emailsignup">
+                                    <input type="email" class="form-control" placeholder="Email..."
+                                        (keyup)="addEmail($event)" [value]="emailSignup">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -105,14 +120,35 @@
                                             <i class="material-icons">lock_outline</i>
                                         </span>
                                     </div>
-                                    <input type="password" class="form-control" placeholder="Password..." (keyup)="addPassword($event)" [value]="passwordsignup">
+                                    <input type="password" class="form-control" placeholder="Password..."
+                                        (keyup)="addPassword($event)" [value]="passwordSignup">
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-check"></i>
+                                        </span>
+                                    </div>
+                                    <input type="password" class="form-control" placeholder="Confirm Password..."
+                                        (keyup)="addConfirmPassword($event)" [value]="confirmPasswordSignup">
                                 </div>
                             </div>
-                            <div class="footer text-center ">
-                                <a (click)="onSignup()" class="btn btn-primary btn-link btn-wd btn-lg">Sign Up</a> 
-                                <a (click)="haveAccount()" class="btn btn-primary btn-link btn-wd btn-lg">Already have an Account</a> 
+                            <div class="page-footer text-center">
+                                <div class="d-flex justify-content-center captcha-wrapper">
+                                    <div class="g-recaptcha-wrapper">
+                                        <re-captcha #captchaRef="reCaptcha" (resolved)="resolved($event)"
+                                            (error)="onError($event)" errorMode="handled"
+                                            siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
+                                        </re-captcha>
+                                    </div>
+                                </div>
+                                <a class="link" (click)="onSignup()"
+                                    class="sign-up-button btn btn-primary btn-wd btn-md ">Sign
+                                    Up</a>
+                                <a (click)="haveAccount()" class="btn btn-primary btn-link btn-wd btn-lg">Already have
+                                    an Account</a>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>

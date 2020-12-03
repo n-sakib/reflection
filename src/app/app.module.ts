@@ -30,6 +30,7 @@ import { TosComponent } from './compliance/tos/tos.component';
 import { SharedModule } from "./shared/shared.module";
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service'
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { AuthService } from './services/auth.service'
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, 
     AngularFireStorageModule,
-    AngularFireAuthModule 
+    AngularFireAuthModule,
+    RecaptchaModule,
   ],
   providers: [ 
    {provide: AuthService}
