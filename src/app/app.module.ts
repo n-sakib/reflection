@@ -31,6 +31,8 @@ import { SharedModule } from "./shared/shared.module";
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service'
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -66,6 +68,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     AngularFireStorageModule,
     AngularFireAuthModule,
     RecaptchaModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [ 
    {provide: AuthService}

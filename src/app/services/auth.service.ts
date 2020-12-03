@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from "@angular/router";
 import * as firebase from 'firebase/app';
-
-// These imports load individual services into the firebase namespace.
-import { catchError, take } from 'rxjs/operators';
 import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -21,12 +18,11 @@ export class AuthService {
 
 
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, private route: ActivatedRoute) {
+  constructor(private toastr: ToastrService, public afAuth: AngularFireAuth, private router: Router, private route: ActivatedRoute) {
 
   }
 
   signin(emailSignin, passwordSignin) {
-    console.log("dhukse")
     return this.afAuth.signInWithEmailAndPassword(emailSignin, passwordSignin)
       .then(res => {
         this.isLoggedIn = true
@@ -36,6 +32,8 @@ export class AuthService {
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
+        this.toastr.error('Something is wrong:', err.message);
+        console.log(emailSignin)
       });
   }
 
@@ -68,9 +66,10 @@ export class AuthService {
       provider.addScope('email');
       this.afAuth.signInWithPopup(provider)
         .then(() => {
+          this.isLoggedIn = true;
           this.currentUser.next(firebase.default.auth().currentUser);
           // console.log(this.currentUser.email)
-          this.router.navigate(['./artist/dashboard']);
+          this.router.navigate(['']);
         }, err => {
           console.log(err);
         })

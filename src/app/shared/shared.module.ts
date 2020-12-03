@@ -6,6 +6,7 @@ import { PrimaryHeaderComponent } from './headers/primary-header/primary-header.
 import { PrimaryLayoutComponent } from './layouts/primary-layout/primary-layout.component';
 import { SecondaryLayoutComponent } from './layouts/secondary-layout/secondary-layout.component';
 import { RouterModule } from '@angular/router';
+import { SecondaryHeaderComponent } from './headers/secondary-header/secondary-header.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
     SecondaryFooterComponent,
     PrimaryHeaderComponent,
     PrimaryLayoutComponent,
-    SecondaryLayoutComponent],
+    SecondaryLayoutComponent,
+    SecondaryHeaderComponent],
   imports: [
     CommonModule,
     RouterModule

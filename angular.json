@@ -31,7 +31,8 @@
               "src/assets/css/material-kit/material-kit.min.css",
               "src/styles.scss",
               "src/assets/fonts/icons.css",
-              "src/assets/fonts/font-awesome.min.css"
+              "src/assets/fonts/font-awesome.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/js/core/jquery.min.js",

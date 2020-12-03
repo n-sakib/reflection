@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { countries } from '../../../assets/countries.js';
 import { AbstractControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -39,7 +40,7 @@ export class ArtistAuthenticationComponent implements OnInit {
   
 
 
-  constructor(private authService: AuthService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
+  constructor(private authService: AuthService, private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
    
   }
 
@@ -47,15 +48,7 @@ export class ArtistAuthenticationComponent implements OnInit {
     if (localStorage.getItem('user') !== null)
       this.isSignedIn = true
     else
-      this.isSignedIn = false
-
-    this.authService.getCurrentUser().subscribe((user) => {
-      console.log(user)
-      // console.log("baal")
-      
-    })
-    
-
+      this.isSignedIn = false;
     
   }
 
@@ -67,9 +60,9 @@ export class ArtistAuthenticationComponent implements OnInit {
         userObservable.subscribe(user =>{
           console.log(user)
           localStorage.setItem('user',JSON.stringify(user))
-        })
+        }) 
       })
-  }
+    } 
 
   createAccount() {
     this.isSignUp = true
@@ -107,7 +100,7 @@ export class ArtistAuthenticationComponent implements OnInit {
     }
     else{
       console.log("password error");
-      
+      this.toastr.error('Please correct form error or contact us');
     }
   }
 
@@ -137,6 +130,18 @@ export class ArtistAuthenticationComponent implements OnInit {
     var value = $event.target.value;
     this.passwordSignup = value;
   }
+
+  addEmailSignin($event) {
+    var value = $event.target.value.toString().trim();
+    console.log(value)
+    this.emailSignin = value;
+  }
+
+  addPasswordSignin($event) {
+    var value = $event.target.value;
+    this.passwordSignin = value;
+  }
+
   addConfirmPassword($event) {
     var value = $event.target.value;
     this.confirmPasswordSignup = value;

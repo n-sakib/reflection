@@ -58,66 +58,28 @@
                         <i class="material-icons">shopping_cart</i> Cart
                     </a>
                 </li>
-                <li class="dropdown nav-item">
-                    <a href="#" class="nav-link" data-toggle="dropdown">
-                        <div class="avatar">
-                            <img *ngIf="user" [src]="user.photoURL" alt="Circle Image"
-                                class="img-raised rounded-circle img-fluid">
-                            <i *ngIf="!user" class="material-icons">account_circle</i>
-                        </div>
+                <li class=" dropdown nav-item" *ngIf="false">
+                    <a class="nav-link" href="https://www.creative-tim.com/product/material-kit-pro" target="_blank">
+                        <i class="material-icons">login</i> Login
                     </a>
-                    <div class="dropdown-menu dropdown-with-icons">
-                        <a class="dropdown-item">
-                            Customer
-                        </a>
-                        <a href="cart" class="dropdown-item">
-                            <i class="material-icons">shopping_cart</i> Shopping Cart<span
-                                class="nav-badge badge badge-primary">4</span>
-                        </a>
-                        <a href="user/dashboard" class="dropdown-item">
-                            <i class="material-icons">ballot</i> My Orders
-                        </a>
-                        <a  *ngIf="user" href="user/dashboard" class="dropdown-item">
-                            <i  class="material-icons">account_circle</i> Profile
-                        </a>
-                        <a *ngIf="user" href="/" class="dropdown-item">
-                            <i class="material-icons">subdirectory_arrow_left </i> Logout
-                        </a>
-                        <a *ngIf="!user" href="/" class="dropdown-item">
-                            <i class="material-icons">login</i> Customer Login
-                        </a>
-                        <a class="dropdown-item">
-                            Artist
-                        </a>
-                        <a *ngIf="user"  href="artist/dashboard" class="dropdown-item">
-                            <i class="material-icons">account_circle</i> Profile
-                        </a>
-                        <a *ngIf="user"  href="artists" class="dropdown-item">
-                            <i class="material-icons">people</i> Meet
-                        </a>
-                        <a *ngIf="user"  href="/" class="dropdown-item">
-                            <a (click)="auth.doSignOut()" class="sign-up-button btn btn-primary btn-wd btn-md ">Log
-                                Out</a>
-                        </a>
-                        <a *ngIf="!user" href="/" class="dropdown-item">
-                            <i class="material-icons">login</i> Artist Login
-                        </a>
-                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                        href="" target="_blank"
                         data-original-title="Follow us on Twitter" rel="nofollow">
                         <i class="fa fa-twitter"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                        href="" target="_blank"
                         data-original-title="Like us on Facebook" rel="nofollow">
                         <i class="fa fa-facebook-square"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="" target="_blank"
+                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                        href="" target="_blank"
                         data-original-title="Follow us on Instagram" rel="nofollow">
                         <i class="fa fa-instagram"></i>
                     </a>

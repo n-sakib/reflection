@@ -25,7 +25,7 @@
                                             <i class="material-icons">mail</i>
                                         </span>
                                     </div>
-                                    <input type="email" #email class="form-control" placeholder="Email...">
+                                    <input type="email" [value]="emailSignin" (keyup)="addEmailSignin($event)" class="form-control" placeholder="Email...">
                                 </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -33,12 +33,11 @@
                                             <i class="material-icons">lock_outline</i>
                                         </span>
                                     </div>
-                                    <input type="password" #password class="form-control" placeholder="Password...">
+                                    <input type="password" [value]="passwordSignin" (keyup)="addPasswordSignin($event)" class="form-control" placeholder="Password...">
                                 </div>
                             </div>
                             <div class="footer text-center ">
-                                <a (click)="onSignin()"
-                                    class="btn btn-primary btn-wd btn-md">Login</a>
+                                <a (click)="onSignin()" class="btn btn-primary btn-wd btn-md">Login</a>
                                 <div class="spacer"></div>
                                 <a (click)="createAccount()" class="btn btn-primary btn-link btn-wd btn-lg">Create A
                                     Account</a>
