@@ -38,7 +38,7 @@ export class ArtistDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.afAuth.authState.subscribe(user => {
       this.user = user;
-      console.log(this.user)
+      console.log(this.user.photoURL)
     });
   }
 
@@ -110,8 +110,6 @@ export class ArtistDashboardComponent implements OnInit {
       height:  this.selectedHeight,
       width: this.selectedWidth ,
     };
-
-    console.log(postData)
     // Get a key for a new Post.
     this.database.list(`images/`).push(postData).then(() => {
         this.selectedType = '',

@@ -36,13 +36,7 @@ export class ArtistAuthenticationComponent implements OnInit {
   countryList = countries;
   passwordMatch = false;
 
-
-  
-
-
-  constructor(private authService: AuthService, private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
-   
-  }
+  constructor(private authService: AuthService, private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('user') !== null)
@@ -92,9 +86,6 @@ export class ArtistAuthenticationComponent implements OnInit {
           this.selectedNationality = ''
           this.emailSignup = ''
           this.passwordSignup = ''
-          // this.snackBar.open('Successfully uploaded data', 'OK', {
-          //   duration: 2000,
-          // });
         })
       })
     }
