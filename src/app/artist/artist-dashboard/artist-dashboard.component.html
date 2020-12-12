@@ -8,8 +8,7 @@
                     <div class="col-md-6 ml-auto mr-auto">
                         <div class="profile">
                             <div class="avatar">
-                                <img alt="Circle Image" [src]="user.photoURL"
-                                    class="img-raised rounded-circle img-fluid">
+                                <img alt="Circle Image" class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">
                                 <h3 class="title">{{user.displayName}}</h3>
@@ -322,13 +321,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="exampleModalLabel">Add New Art Work</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="d-flex justify-content-center">
-
                     <ul class="nav nav-pills nav-pills-default">
                         <li class="nav-item progress-pills"><a class="nav-link active" href="#pill1"
                                 data-toggle="tab">1</a></li>
@@ -341,21 +339,26 @@
                         <form>
                             <div class="jumbotron vertical-center text-center">
                                 <div class="container">
-                                    <i class="material-icons upload-wrapper-icon">cloud_upload</i><br>
+                                    <div fxLayout="row" fxLayoutAlign="right">
+                                        <button class="btn btn-primary btn-fab btn-fab-mini btn-round">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </div>
+                                    <i *ngIf="!isImageSubmitted"
+                                        class="material-icons upload-wrapper-icon">cloud_upload</i><br>
                                     <button *ngIf="!isImageSubmitted" type="button" class="btn btn-primary"
                                         (click)="imageInput.click()">Upload</button>
                                     <input hidden (change)="onImageSelected()" #imageInput type="file" id="imageFile">
-                                    <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox" width="400"
-                                        height="400">
+                                    <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox">
                                 </div>
                             </div>
                             <div class="p-2">
                                 <h5>Art Work Type</h5>
                                 <div class="form-check form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"  name="exampleRadios" id="exampleRadios1"
-                                        value="Drawing & Painting"
-                                         (change)="addType($event)" >
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            name="exampleRadios" id="exampleRadios1" value="Drawing & Painting"
+                                            (change)="addType($event)">
                                         Drawing & Painting
                                         <span class="circle">
                                             <span class="check"></span>
@@ -364,9 +367,9 @@
                                 </div>
                                 <div class="form-check form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" 
-                                         (change)="addType($event)" name="exampleRadios" id="exampleRadios2"
-                                        value="Print Making" checked>
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            (change)="addType($event)" name="exampleRadios" id="exampleRadios2"
+                                            value="Print Making" checked>
                                         Print Making
                                         <span class="circle">
                                             <span class="check"></span>
@@ -377,14 +380,15 @@
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             <div class="p-2">
                                 <h5>Art Work Title</h5>
-                                <input type="text" class="form-control"  aria-describedby="emailHelp" id="exampleInputEmail1"
-                                    placeholder="Enter title" (keyup)="addTitle($event)" [value]="selectedTitle">
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitle($event)"
+                                    [value]="selectedTitle">
                                 <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             </div>
                             <div class="p-2">
                                 <h5>Art Work Media</h5>
-                                <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1"  
-                                     (selectionChange)="addCategory($event)">
+                                <select class="form-control selectpicker" data-style="btn btn-link"
+                                    id="exampleFormControlSelect1" (selectionChange)="addCategory($event)">
                                     <option value="Oil Paint on Canvas">Oil Paint on Canvas</option>
                                     <option value="Oil Paint on Board">Oil Paint on Board</option>
                                     <option value="Acrylic Paint on Canvas">Acrylic Paint on Canvas</option>
@@ -405,15 +409,16 @@
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             <div class="p-2" *ngif="false">
-                                <input type="text" class="form-control" aria-describedby="emailHelp" id="exampleInputEmail1"
-                                    placeholder="Enter media Type">
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter media Type">
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             <div class="p-2">
                                 <h5>Size</h5>
                                 <div class="form-row">
                                     <div class="col">
-                                      <input type="number" class="form-control"  placeholder="Height" [(value)]="selectedHeight" (keyup)="addHeight($event)" >
+                                        <input type="number" class="form-control" placeholder="Height"
+                                            [(value)]="selectedHeight" (keyup)="addHeight($event)">
                                     </div>
                                     <h5 for="exampleFormControlTextarea1">X</h5>
                                     <div class="col">
@@ -425,8 +430,9 @@
                             <div class="p-2">
                                 <div class="form-group">
                                     <h5 for="exampleFormControlTextarea1">Art Concept</h5>
-                                    <textarea class="form-control" id="exampleInputEmail1" rows="3" [(value)]="selectedConcept" (keyup)="addConcept($event)" ></textarea>
-                                  </div>
+                                    <textarea class="form-control" id="exampleInputEmail1" rows="3"
+                                        [(value)]="selectedConcept" (keyup)="addConcept($event)"></textarea>
+                                </div>
                             </div>
                         </form>
                         <br><br>
@@ -446,8 +452,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                <button type="button" class="btn btn-primary"  (click)="publish()" >Next</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Next</button>
             </div>
         </div>
     </div>
