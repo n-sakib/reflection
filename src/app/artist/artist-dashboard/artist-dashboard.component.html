@@ -80,7 +80,6 @@
                             <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#exampleModal">
                                 <i class="material-icons">add</i> Add Art Work
                             </button>
-
                         </div>
                         <div class="row">
                             <div class="col-md-3 ml-auto">
@@ -118,7 +117,7 @@
                     </div>
                     <div class="tab-pane text-center gallery" id="education">
                         <div class="pb-5">
-                            <button class="btn btn-primary btn-round">
+                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#exampleModal">
                                 <i class="material-icons">add</i> Add Education/Training
                             </button>
                         </div>
@@ -340,17 +339,13 @@
                         <form>
                             <div class="jumbotron vertical-center text-center">
                                 <div class="container">
-                                    <div fxLayout="row" fxLayoutAlign="right">
-                                        <button class="btn btn-primary btn-fab btn-fab-mini btn-round">
-                                            <i class="material-icons">close</i>
-                                        </button>
-                                    </div>
-                                    <i *ngIf="!isImageSubmitted"
-                                        class="material-icons upload-wrapper-icon">cloud_upload</i><br>
-                                    <button *ngIf="!isImageSubmitted" type="button" class="btn btn-primary"
-                                        (click)="imageInput.click()">Upload</button>
-                                    <input hidden (change)="onImageSelected()" #imageInput type="file" id="imageFile">
-                                    <img *ngIf="isImageSubmitted" [src]="selectedImageURL" class="imageBox">
+                                    <i *ngIf="isImageSubmitting" class="material-icons edit-btn" style="color:#9c27b0"
+                                        (click)="imageInput.click()">create</i>
+                                    <i *ngIf="!isImageSubmitting" class="material-icons upload-wrapper-icon"
+                                        style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
+                                    <input hidden (change)="onImageSelected($event)" #imageInput type="file"
+                                        id="imageFile">
+                                    <img [src]="selectedImageURL" class="imageBox">
                                 </div>
                             </div>
                             <div class="p-2">
@@ -378,23 +373,31 @@
                                     </label>
                                 </div>
                             </div>
-                            <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
-                            <div class="p-2">
-                                <h5>Art Work Title</h5>
-                                <input type="text" class="form-control" aria-describedby="emailHelp"
-                                    id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitle($event)"
-                                    [value]="selectedTitle">
+                            <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small>  -->
+                            <div class="row">
+                                <div class="col">
+                                    <h5>Art Work Title</h5>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitle($event)"
+                                        [value]="selectedTitle">
+                                </div>
+                                <div class="col">
+                                    <h5>Add Creation Year</h5>
+                                    <input type="number" class="date-own form-control" style="width: 300px;"
+                                        aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                        min="1000" max="2100" (keyup)="addYear($event)" [value]="selectedYear">
+                                </div>
                                 <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             </div>
                             <div class="p-2">
                                 <h5>Art Work Media</h5>
                                 <select class="form-control selectpicker" data-style="btn btn-link"
                                     id="exampleFormControlSelect1" (selectionChange)="addCategory($event)">
-                                    <option value="Oil Paint on Canvas">Oil Paint on Canvas</option>
-                                    <option value="Oil Paint on Board">Oil Paint on Board</option>
-                                    <option value="Acrylic Paint on Canvas">Acrylic Paint on Canvas</option>
-                                    <option value="Acrylic Paint on Board">Acrylic Paint on Board</option>
-                                    <!-- <option>Acrylic Paint on Paper</option>
+                                    <option>Oil Paint on Canvas</option>
+                                    <option>Oil Paint on Board</option>
+                                    <option>Acrylic Paint on Canvas</option>
+                                    <option>Acrylic Paint on Board</option>
+                                    <option>Acrylic Paint on Paper</option>
                                     <option>Watercolor on Paper</option>
                                     <option>Poster Color on Paper</option>
                                     <option>Graphite Pencil on Paper</option>
@@ -402,10 +405,10 @@
                                     <option>Graphite Pencil on Paper</option>
                                     <option>Color Pencil on Paper</option>
                                     <option>Pastels on Paper</option>
-                                    <option>Woodcut</option>
-                                    <option>Lithography</option>
+                                    <option *ngIf="selectedType === 'Print Making'">Woodcut</option>
+                                    <option *ngIf="selectedType === 'Print Making'">Lithography</option>
                                     <option>Mixed Media</option>
-                                    <option>Other Media</option> -->
+                                    <option>Other Media</option>
                                 </select>
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
@@ -436,19 +439,230 @@
                                 </div>
                             </div>
                         </form>
-                        <br><br>
-                        Dramatically visualize customer directed convergence without revolutionary ROI.
                     </div>
                     <div class="tab-pane" id="pill2">
-                        Efficiently unleash cross-media information without cross-media value. Quickly maximize timely
-                        deliverables for real-time schemas.
-                        <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="container">
+                                <img *ngIf="isImageSubmitting" [src]="selectedImageURL" class="imageBox">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card" style="width: 20rem;">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Art Work Type: {{selectedType}}</li>
+                                        <li class="list-group-item">Title: {{selectedTitle }}</li>
+                                        <li class="list-group-item">Year: {{selectedYear}}</li>
+                                        <li class="list-group-item">Media: {{selectedCategory}}</li>
+                                        <li class="list-group-item">Size: {{selectedHeight}} X {{selectedWidth}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card" style="width: 20rem;">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Art Concept</h4>
+                                        <p *ngIf="selectedConcept" class="card-text">{{selectedConcept}}</p>
+                                        <textarea *ngIf="!selectedConcept" class="form-control" id="exampleInputEmail1"
+                                            rows="3" [(value)]="selectedConcept"
+                                            (keyup)="addConcept($event)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 20rem;">
+                            <div class="card-body">
+                                <h4 class="card-title">Do you want to sell this Art Work ?</h4>
+                                <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios1" value="yes" (click)="addSellOption('yes')">
+                                        Yes
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios2" value="no" (click)="addSellOption('no')">
+                                        No
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-radio disabled">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="exampleRadios1"
+                                            id="exampleRadios3" value="soldout" (click)="addSellOption('soldout')">
+                                        Sold Out
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane" id="pill3">
-                        Completely synergize resource taxing relationships via premier niche markets. Professionally
-                        cultivate one-to-one customer service with robust ideas.
-                        <br><br>Dynamically innovate resource-leveling customer service for state of the art customer
-                        service.
+                        <div *ngIf="selectedSellOption === 'yes'" class="row">
+                            <div class="col-md-6">
+                                <div class="card" style="width: 20rem;">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Terms and Conditions</h4>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 1
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 2
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 3
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 4
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-primary btn-round" style="float: right;"
+                                            data-toggle="modal" data-target="#exampleModal">
+                                            I Agree
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card" style="width: 20rem;">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Add Expected Price</h4>
+                                        <input type="number" class="form-control" placeholder="999999" min="0"
+                                            max="99999999">
+                                        <p class="card-text">Dollars</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-primary btn-round" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    <i class="material-icons" (click)="publish()">save</i> Save Art Work
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card" *ngIf="selectedSellOption === 'no' || selectedSellOption === 'soldout'"
+                            style="width: 20rem;">
+                            <div class="card-body">
+                                <h4 class="card-title">Do you want to make a replica of this Art Work on order ?</h4>
+                                <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios1" (value)="yes" (click)="addReplicaOrder('yes')">
+                                        Yes
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-radio">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios2" (value)="no" (click)="addReplicaOrder('no')">
+                                        No
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="selectedReplica === 'yes'" class="row">
+                            <div class="col-md-6">
+                                <div class="card" style="width: 20rem;">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Terms and Conditions</h4>
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 1
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 2
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 3
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="">
+                                                Term 4
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-primary btn-round" style="float: right;"
+                                            data-toggle="modal" data-target="#exampleModal">
+                                            I Agree
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card" style="width: 20rem;">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Add Demand Price</h4>
+                                        <input type="number" class="form-control" placeholder="999999" min="0"
+                                            max="99999999">
+                                        <p class="card-text">Dollars</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <button class="btn btn-primary btn-round" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    <i class="material-icons" (click)="publish()">save</i> Save Art Work
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -461,3 +675,162 @@
 </div>
 
 <!-- (click)="publish()"  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Education/ Art Training</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                    <ul class="nav nav-pills nav-pills-default">
+                        <li class="nav-item progress-pills"><a class="nav-link active" href="#pill1"
+                                data-toggle="tab">1</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#pill2" data-toggle="tab">2</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#pill3" data-toggle="tab">3</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content tab-space">
+                    <div class="tab-pane active" id="pill1">
+                        <button type="submit" style="float: right;" class="btn btn-primary">Save</button><br>
+                        <!-- <form>
+                            <div class="form-group">
+                                <h5>Name of Academy/School</h5>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Academy" (keyup)="addTitle($event)"
+                                    [value]="selectedTitle">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <h5>Certificate Achieved</h5>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        id="exampleInputEmail1" placeholder="Certificate Name"
+                                        (keyup)="addTitle($event)" [value]="selectedTitle">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <h5>Year</h5>
+                                    <input type="number" class="date-own form-control" style="width: 300px;"
+                                        aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                        min="1000" max="2100" (keyup)="addYear($event)" [value]="selectedYear">
+                                </div>
+                            </div>
+                        </form> -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Art School</h4>
+                                <form>
+                                    <div class="form-group">
+                                        <h6>Name of Academy/School</h6>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Enter Academy"
+                                            (keyup)="addArtSchool($event)" [value]="selectedArtSchool">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <h6>Certificate Achieved</h6>
+                                            <input type="text" class="form-control" aria-describedby="emailHelp"
+                                                id="exampleInputEmail1" placeholder="Certificate Name"
+                                                (keyup)="addArtCertificate($event)" [value]="selectedArtCertificate">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h6>Year</h6>
+                                            <input type="number" class="date-own form-control" style="width: 300px;"
+                                                aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                                min="1000" max="2100" (keyup)="addArtYear($event)"
+                                                [value]="selectedArtYear">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Graduate School</h4>
+                                <form>
+                                    <div class="form-group">
+                                        <h6>Name of College/University/Institution</h6>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Enter University"
+                                            (keyup)="addGradSchool($event)" [value]="selectedGradSchool">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <h6>Degree Achieved</h6>
+                                            <input type="text" class="form-control" aria-describedby="emailHelp"
+                                                id="exampleInputEmail1" placeholder="Degree Name"
+                                                (keyup)="addGradCertificate($event)" [value]="selectedGradCertificate">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h6>Year</h6>
+                                            <input type="number" class="date-own form-control" style="width: 300px;"
+                                                aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                                min="1000" max="2100" (keyup)="addGradYear($event)"
+                                                [value]="selectedGradYear">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Post Graduate School</h4>
+                                <form>
+                                    <div class="form-group">
+                                        <h6>Name of University</h6>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Enter University"
+                                            (keyup)="addPGSchool($event)" [value]="selectedPGSchool">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <h6>Highest Degree Achieved</h6>
+                                            <input type="text" class="form-control" aria-describedby="emailHelp"
+                                                id="exampleInputEmail1" placeholder="Degree Name"
+                                                (keyup)="addPGDegree($event)" [value]="selectedPGDegree">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <h6>Year</h6>
+                                            <input type="number" class="date-own form-control" style="width: 300px;"
+                                                aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                                min="1000" max="2100" (keyup)="addPGYear($event)"
+                                                [value]="selectedPGYear">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="pill2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Studied {{selectedArtCertificate}} at {{selectedArtSchool}} in {{selectedArtYear}}
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Studied {{selectedGradCertificate}} at {{selectedGradSchool}} in {{selectedGradYear}}
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Studied {{selectedPGDegree}} at {{selectedPGSchool}} in {{selectedPGYear}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Next</button>
+        </div>
+    </div>
+</div>
+<!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
