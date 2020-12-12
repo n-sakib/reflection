@@ -11,8 +11,8 @@
                                 <img alt="Circle Image" class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">
-                                <h3 class="title"></h3>
-                                <h6>Nepali Artist</h6>
+                                <h3 class="title">{{user.displayName}}</h3>
+                                <h6>Artist <i class="fa fa-edit edit-icon"></i> </h6>
                                 <button class="btn btn-just-icon btn-link btn-dribbble" href="" data-toggle="popover"
                                     title="Country Of Residence" data-trigger="focus" data-content="Russia"><i
                                         class="material-icons">home</i></button>
@@ -23,7 +23,7 @@
                                     title="Phone Number" data-trigger="focus" data-content="+1234223423"><i
                                         class="material-icons">phone</i></button>
                                 <button class="btn btn-just-icon btn-link btn-dribbble" href="" data-toggle="popover"
-                                    title="Email" data-trigger="focus" data-content="asd@gmail.com"><i
+                                    title="Email" data-trigger="focus" data-content="user.email"><i
                                         class="material-icons">mail</i></button>
                             </div>
                         </div>
@@ -813,7 +813,8 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <h5>Studied {{selectedGradCertificate}} at {{selectedGradSchool}} in {{selectedGradYear}}
+                                <h5>Studied {{selectedGradCertificate}} at {{selectedGradSchool}} in
+                                    {{selectedGradYear}}
                                 </h5>
                             </div>
                         </div>

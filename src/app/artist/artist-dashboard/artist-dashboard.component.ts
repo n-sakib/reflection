@@ -19,7 +19,11 @@ export class ArtistDashboardComponent implements OnInit {
   frameUploadPercentage: Observable<number>;
   isImageSubmitted: boolean = false;
   selectedImageURL = '';
-  user = null;
+  user = {
+    email: '',
+    photoURL: '',
+    displayName: ''
+  };
   selectedTitle = '';
   selectedType  = '';
   selectedCategory = '';
@@ -38,16 +42,15 @@ export class ArtistDashboardComponent implements OnInit {
   selectedPGSchool ='';
   selectedPGDegree = '';
   selectedPGYear = '';
+  imagePreview = ''
   public mediaLists: any[] = [{ value: 'Dual' }, { value: 'Single'}];
 
   constructor(private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase,private afAuth: AngularFireAuth, public auth: AuthService) { }
 
   ngOnInit(): void {
-   
-    this.afAuth.onAuthStateChanged(user => {
-        this.user = user;
-        console.log(this.user.displayName)
-        console.log(this.user.photoURL)
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+      console.log(this.user)
     });
     
 
@@ -89,6 +92,22 @@ export class ArtistDashboardComponent implements OnInit {
     //         downloadURL.subscribe(url => {
     //           this.isImageSubmitted = true;
     //           this.selectedImageURL = url;
+  // async onImageSelected() {
+  //   console.log((<HTMLInputElement>document.getElementById('imageFile')).files[0]);
+  //   // this.imagePreview=
+  //   const file = (<HTMLInputElement>document.getElementById('imageFile')).files[0];
+  //   this.toBase64(file).then(() => {
+  //     const filePath = `${new Date().getTime()}`;
+  //     const fileRef = this.storage.ref(filePath);
+  //     const task = this.storage.upload(filePath, file);
+  //     task
+  //       .snapshotChanges()
+  //       .pipe(
+  //         finalize(() => {
+  //           var downloadURL = fileRef.getDownloadURL();
+  //           downloadURL.subscribe(url => {
+  //             this.isImageSubmitted = true;
+  //             this.selectedImageURL = url;
             
     //         })
     //       })
