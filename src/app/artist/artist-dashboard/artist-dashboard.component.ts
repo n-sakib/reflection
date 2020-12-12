@@ -30,6 +30,7 @@ export class ArtistDashboardComponent implements OnInit {
   selectedHeight = '';
   selectedWidth = '';
   selectedConcept = '';
+  imagePreview = ''
   public mediaLists: any[] = [{ value: 'Dual' }, { value: 'Single'}];
 
   constructor(private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase,private afAuth: AngularFireAuth, public auth: AuthService) { }
@@ -49,7 +50,8 @@ export class ArtistDashboardComponent implements OnInit {
   });
 
   async onImageSelected() {
-    
+    console.log((<HTMLInputElement>document.getElementById('imageFile')).files[0]);
+    // this.imagePreview=
     const file = (<HTMLInputElement>document.getElementById('imageFile')).files[0];
     this.toBase64(file).then(() => {
       const filePath = `${new Date().getTime()}`;

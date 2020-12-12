@@ -353,8 +353,9 @@
                                 <h5>Art Work Type</h5>
                                 <div class="form-check form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            [(value)]="selectedType" (keyup)="addType($event)">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"  name="exampleRadios" id="exampleRadios1"
+                                        value="Drawing & Painting"
+                                         (change)="addType($event)" >
                                         Drawing & Painting
                                         <span class="circle">
                                             <span class="check"></span>
@@ -363,8 +364,9 @@
                                 </div>
                                 <div class="form-check form-check-radio">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            [(value)]="selectedType" (keyup)="addType($event)">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" 
+                                         (change)="addType($event)" name="exampleRadios" id="exampleRadios2"
+                                        value="Print Making" checked>
                                         Print Making
                                         <span class="circle">
                                             <span class="check"></span>
@@ -375,19 +377,19 @@
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             <div class="p-2">
                                 <h5>Art Work Title</h5>
-                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                <input type="text" class="form-control"  aria-describedby="emailHelp" id="exampleInputEmail1"
                                     placeholder="Enter title" (keyup)="addTitle($event)" [value]="selectedTitle">
                                 <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             </div>
                             <div class="p-2">
                                 <h5>Art Work Media</h5>
-                                <select class="form-control selectpicker" data-style="btn btn-link"
-                                    [(value)]="selectedCategory" (keyup)="addCategory($event)">
-                                    <option>Oil Paint on Canvas</option>
-                                    <option>Oil Paint on Board</option>
-                                    <option>Acrylic Paint on Canvas</option>
-                                    <option>Acrylic Paint on Board</option>
-                                    <option>Acrylic Paint on Paper</option>
+                                <select class="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1"  
+                                     (selectionChange)="addCategory($event)">
+                                    <option value="Oil Paint on Canvas">Oil Paint on Canvas</option>
+                                    <option value="Oil Paint on Board">Oil Paint on Board</option>
+                                    <option value="Acrylic Paint on Canvas">Acrylic Paint on Canvas</option>
+                                    <option value="Acrylic Paint on Board">Acrylic Paint on Board</option>
+                                    <!-- <option>Acrylic Paint on Paper</option>
                                     <option>Watercolor on Paper</option>
                                     <option>Poster Color on Paper</option>
                                     <option>Graphite Pencil on Paper</option>
@@ -398,12 +400,12 @@
                                     <option>Woodcut</option>
                                     <option>Lithography</option>
                                     <option>Mixed Media</option>
-                                    <option>Other Media</option>
+                                    <option>Other Media</option> -->
                                 </select>
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
-                            <div class="p-2">
-                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                            <div class="p-2" *ngif="false">
+                                <input type="text" class="form-control" aria-describedby="emailHelp" id="exampleInputEmail1"
                                     placeholder="Enter media Type">
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
@@ -411,8 +413,7 @@
                                 <h5>Size</h5>
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" placeholder="Height"
-                                            [(value)]="selectedHeight" (keyup)="addHeight($event)">
+                                      <input type="number" class="form-control"  placeholder="Height" [(value)]="selectedHeight" (keyup)="addHeight($event)" >
                                     </div>
                                     <h5 for="exampleFormControlTextarea1">X</h5>
                                     <div class="col">
@@ -424,9 +425,8 @@
                             <div class="p-2">
                                 <div class="form-group">
                                     <h5 for="exampleFormControlTextarea1">Art Concept</h5>
-                                    <textarea class="form-control" rows="3" [(value)]="selectedConcept"
-                                        (keyup)="addConcept($event)"></textarea>
-                                </div>
+                                    <textarea class="form-control" id="exampleInputEmail1" rows="3" [(value)]="selectedConcept" (keyup)="addConcept($event)" ></textarea>
+                                  </div>
                             </div>
                         </form>
                         <br><br>
@@ -446,9 +446,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="publish()">Next</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                <button type="button" class="btn btn-primary"  (click)="publish()" >Next</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- (click)="publish()"  -->
