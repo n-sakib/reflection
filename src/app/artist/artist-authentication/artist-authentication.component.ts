@@ -1,19 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from  "@angular/router";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable, from } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { countries } from '../../../assets/countries.js';
-import { AbstractControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
-
-
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-artist-authentication',
@@ -21,7 +14,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./artist-authentication.component.scss']
 })
 export class ArtistAuthenticationComponent implements OnInit {
-
+  signupForm = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
+    dob: new FormControl(''),
+    nationality: new FormControl(''),
+    residency: new FormControl(''),
+    terms: new FormControl('')
+  });
   isSignedIn = false;
   emailSignin = '';
   passwordSignin = '';
@@ -43,7 +45,6 @@ export class ArtistAuthenticationComponent implements OnInit {
       this.isSignedIn = true
     else
       this.isSignedIn = false;
-    
   }
 
   onSignin() {
@@ -58,41 +59,34 @@ export class ArtistAuthenticationComponent implements OnInit {
       })
     } 
 
-  createAccount() {
-    this.isSignUp = true
-  }
-
-  haveAccount() {
-    this.isSignUp = false
-  }
-
-  onSignup() {
-    if(this.passwordSignup === this.confirmPasswordSignup){
-      this.isSignUp = true
-      this.authService.signup(this.emailSignup, this.passwordSignup).then((res) => {
-        this.isSignedIn = true
-        var postData = {
-          name: this.selectedName,
-          nationality: this.selectedNationality,
-          dob: this.selectedDob,
-          emailsignup: this.emailSignup,
-          passwordsignup: this.passwordSignup
-        };
+  signup() {
+    console.warn(this.signupForm.value);
+    // if(this.passwordSignup === this.confirmPasswordSignup){
+    //   this.isSignUp = true
+    //   this.authService.signup(this.emailSignup, this.passwordSignup).then((res) => {
+    //     this.isSignedIn = true
+    //     var postData = {
+    //       name: this.selectedName,
+    //       nationality: this.selectedNationality,
+    //       dob: this.selectedDob,
+    //       emailsignup: this.emailSignup,
+    //       passwordsignup: this.passwordSignup
+    //     };
   
-        // Get a key for a new Post.
-        this.database.list(`users data/`).set(`${res}/`, postData).then(() => {
-          this.selectedName = ''
-          this.selectedDob = ''
-          this.selectedNationality = ''
-          this.emailSignup = ''
-          this.passwordSignup = ''
-        })
-      })
-    }
-    else{
-      console.log("password error");
-      this.toastr.error('Please correct form error or contact us');
-    }
+    //     // Get a key for a new Post.
+    //     this.database.list(`users data/`).set(`${res}/`, postData).then(() => {
+    //       this.selectedName = ''
+    //       this.selectedDob = ''
+    //       this.selectedNationality = ''
+    //       this.emailSignup = ''
+    //       this.passwordSignup = ''
+    //     })
+    //   })
+    // }
+    // else{
+    //   console.log("password error");
+    //   this.toastr.error('Please correct form error or contact us');
+    // }
   }
 
 
@@ -145,6 +139,4 @@ export class ArtistAuthenticationComponent implements OnInit {
   public onError(errorDetails: any[]) {
     console.log(`reCAPTCHA error encountered; details:`, errorDetails);
   }
-
-
 }

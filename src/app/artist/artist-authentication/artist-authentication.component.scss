@@ -14,12 +14,11 @@
 	background-color: #6a359c;
 }
 
-@media only screen and (max-width: 1200px) and (min-width: 992px){
-    .captcha-wrapper {
+.captcha-wrapper {
     transform:scale(0.87);
 	-webkit-transform:scale(0.87);
     }
-  }
+
 .sign-up-button{
     color: white!important;
 }
