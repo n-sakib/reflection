@@ -14,14 +14,33 @@
 	background-color: #6a359c;
 }
 
-.captcha-wrapper {
+
+@media only screen and (max-width: 1200px) and (min-width: 992px){
+    .captcha-wrapper {
     transform:scale(0.87);
 	-webkit-transform:scale(0.87);
     }
-
-.sign-up-button{
+  }
+.sign-up-button, .sign-in-button{
     color: white!important;
 }
 .container{
     padding: 0%!important;
+}
+
+.terms {
+    margin: 0;
+    padding-bottom: 20px;
+    padding-left: 13px;
+}
+
+.form-error {
+    width: 100%;
+    padding-left: 55px;
+    padding-top: 5px; 
+}
+
+.danger {
+    width: 100%;
+    color: #f55145;
 }

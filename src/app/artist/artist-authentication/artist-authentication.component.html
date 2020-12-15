@@ -18,28 +18,42 @@
                                 </div>
                             </div>
                             <p class="description text-center">Or Use Email</p>
-                            <div class="card-body">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="material-icons">mail</i>
-                                        </span>
+                            <form [formGroup]="signinForm">
+                                <div class="card-body">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">mail</i>
+                                            </span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Email"
+                                            formControlName="email">
+                                        <div class="form-error"
+                                            *ngIf="signinForm.controls.email.invalid && (signinForm.controls.email.dirty || signinForm.controls.email.touched)">
+                                            <div *ngIf="signinForm.controls.email.errors.required">
+                                                <small class="danger">Email is required.</small>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input type="email" [value]="emailSignin" (keyup)="addEmailSignin($event)"
-                                        class="form-control" placeholder="Email...">
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="material-icons">lock_outline</i>
-                                        </span>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">lock_outline</i>
+                                            </span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Password"
+                                            formControlName="password">
+                                        <div class="form-error"
+                                            *ngIf="signinForm.controls.password.invalid && (signinForm.controls.password.dirty || signinForm.controls.password.touched)">
+                                            <div *ngIf="signinForm.controls.password.errors.required">
+                                                <small class="danger">Password is required.</small>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <input type="password" [value]="passwordSignin" (keyup)="addPasswordSignin($event)"
-                                        class="form-control" placeholder="Password...">
                                 </div>
-                            </div>
-                            <div class="footer text-center ">
-                                <a (click)="onSignin()" class="btn btn-primary btn-wd btn-md">Login</a>
+                            </form>
+                            <div class="page-footer text-center">
+                                <a (click)="onSignin()" class="sign-in-button btn btn-primary btn-wd btn-md">Login</a>
                                 <div class="spacer"></div>
                                 <a (click)="isSignUp = !isSignUp" class="btn btn-primary btn-link btn-wd btn-lg">Create
                                     A
@@ -75,6 +89,12 @@
                                         </div>
                                         <input type="text" class="form-control" placeholder="Name"
                                             formControlName="name">
+                                        <div class="form-error"
+                                            *ngIf="signupForm.controls.name.invalid && (signupForm.controls.name.dirty || signupForm.controls.name.touched)">
+                                            <div *ngIf="signupForm.controls.name.errors.required">
+                                                <small class="danger">Name is required.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -83,7 +103,16 @@
                                             </span>
                                         </div>
                                         <input type="email" class="form-control" placeholder="Email"
-                                        formControlName="email">
+                                            formControlName="email">
+                                        <div class="form-error"
+                                            *ngIf="signupForm.controls.email.invalid && (signupForm.controls.email.dirty || signupForm.controls.email.touched)">
+                                            <div *ngIf="signupForm.controls.email.errors.required">
+                                                <small class="danger">Email is required.</small>
+                                            </div>
+                                            <div *ngIf="signupForm.controls.email.errors.email">
+                                                <small class="danger">Please provide a valid email address.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -92,7 +121,20 @@
                                             </span>
                                         </div>
                                         <input type="password" class="form-control" placeholder="Password"
-                                        formControlName="password">
+                                            formControlName="password">
+                                        <div class="form-error"
+                                            *ngIf="signupForm.controls.password.invalid && (signupForm.controls.password.dirty || signupForm.controls.password.touched)">
+                                            <div *ngIf="signupForm.controls.password.errors.required">
+                                                <small class="danger">Password is required.</small>
+                                            </div>
+                                            <div *ngIf="signupForm.controls.password.errors.pattern">
+                                                <div>
+                                                    <small class="danger">Password should be at least 8 characters long
+                                                        and should contain one number, one character and one special
+                                                        character.</small>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -101,7 +143,18 @@
                                             </span>
                                         </div>
                                         <input type="password" class="form-control" placeholder="Confirm Password"
-                                        formControlName="confirmPassword">
+                                            formControlName="confirmPassword">
+                                        <div class="form-error"
+                                            *ngIf="signupForm.controls.confirmPassword.invalid && (signupForm.controls.confirmPassword.dirty || signupForm.controls.confirmPassword.touched)">
+                                            <div *ngIf="signupForm.controls.confirmPassword.errors.required">
+                                                <small class="danger">Confirm password is required.</small>
+                                            </div>
+                                            <div
+                                                *ngIf="signupForm.controls.confirmPassword.errors.isMatching === false">
+                                                <small class="danger">Password and confirm password doesn't
+                                                    match.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -111,6 +164,12 @@
                                         </div>
                                         <input placeholder="Date Of Birth" onfocus="(this.type='date')"
                                             onblur="(this.type='text')" class="form-control" formControlName="dob">
+                                        <div class="form-error"
+                                            *ngIf="signupForm.controls.dob.invalid && (signupForm.controls.dob.dirty || signupForm.controls.dob.touched)">
+                                            <div *ngIf="signupForm.controls.dob.errors.required">
+                                                <small class="danger">Date of Birth is required.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -119,7 +178,13 @@
                                             </span>
                                         </div>
                                         <input type="text" class="form-control" placeholder="Nationality"
-                                        formControlName="nationality">
+                                            formControlName="nationality">
+                                        <div class="form-error"
+                                            *ngIf="signupForm.controls.nationality.invalid && (signupForm.controls.nationality.dirty || signupForm.controls.nationality.touched)">
+                                            <div *ngIf="signupForm.controls.nationality.errors.required">
+                                                <small class="danger">Nationality is required.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -128,31 +193,43 @@
                                             </span>
                                         </div>
                                         <select class="form-control selectpicker" data-style="btn btn-link"
-                                             formControlName="residency">
-                                            <option value="undefined" value="" disabled selected hidden>Country of Residence</option>
+                                            formControlName="residency" (change)="submitWithoutSelection = false">
+                                            <option value="undefined" value="" disabled selected hidden>Country of
+                                                Residence</option>
                                             <option *ngFor="let country of countryList" [ngValue]="country.code">
                                                 {{country.emoji}} {{country.name}}
                                             </option>
                                         </select>
+                                        <div class="form-error" *ngIf="submitWithoutSelection === true">
+                                            <small class="danger">Select a country of residence.</small>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="terms form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            formControlName="terms">
+                                        I agree to the Terms & Service
+                                        <span class="form-check-sign">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                    <div class="form-error">
+                                        <div *ngIf="!signupForm.controls.terms.valid && submitted">
+                                            <small class="danger">You must agree to the terms and service.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="page-footer text-center">
+                                    <a class="link" (click)="signup()"
+                                        class="sign-up-button btn btn-primary btn-wd btn-md">Sign
+                                        Up</a>
+                                    <a (click)="isSignUp = !isSignUp"
+                                        class="btn btn-primary btn-link btn-wd btn-lg">Already
+                                        have
+                                        an Account</a>
                                 </div>
                             </form>
-                            <div class="page-footer text-center">
-                                <div class="d-flex justify-content-center captcha-wrapper">
-                                    <div class="g-recaptcha-wrapper">
-                                        <re-captcha #captchaRef="reCaptcha" (resolved)="resolved($event)"
-                                            (error)="onError($event)" errorMode="handled"
-                                            siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
-                                        </re-captcha>
-                                    </div>
-                                </div>
-                                <a class="link" (click)="signup()"
-                                    class="sign-up-button btn btn-primary btn-wd btn-md ">Sign
-                                    Up</a>
-                                <a (click)="isSignUp = !isSignUp" class="btn btn-primary btn-link btn-wd btn-lg">Already
-                                    have
-                                    an Account</a>
-                            </div>
                         </div>
                     </div>
                 </div>

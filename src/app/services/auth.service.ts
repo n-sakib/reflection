@@ -1,51 +1,83 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import * as firebase from 'firebase/app';
-import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { UtilsService } from './utils.service';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
 
   isLoggedIn = false;
   currentUser = new BehaviorSubject<any>(null);;
 
-  constructor(private toastr: ToastrService, public afAuth: AngularFireAuth, private router: Router, private route: ActivatedRoute) { }
+  constructor(private util: UtilsService, public afAuth: AngularFireAuth, private router: Router, private database: AngularFireDatabase) { }
 
-  signin(emailSignin, passwordSignin) {
-    return this.afAuth.signInWithEmailAndPassword(emailSignin, passwordSignin)
-      .then(res => {
-        this.isLoggedIn = true
-        localStorage.setItem('user', JSON.stringify(res.user))
-        console.log('Successfully signed in!');
-        return res.user.uid;
+  signin(data) {
+    return this.afAuth.signInWithEmailAndPassword(data.email, data.password)
+      .then(() => {
+        this.router.navigate(['']);
       })
       .catch(err => {
-        this.toastr.error(err.message);
+        this.util.showError(err.message);
         console.log(err)
       });
   }
 
-  signup(emailSignup, passwordSignup) {
-    return this.afAuth.createUserWithEmailAndPassword(emailSignup, passwordSignup)
-      .then(res => {
-        this.isLoggedIn = true
-        localStorage.setItem('user', JSON.stringify(res.user))
-        return res.user.uid;
+  signup(data) {
+    this.afAuth.createUserWithEmailAndPassword(data.email, data.password)
+      .then((res) => {
+        res.user.updateProfile({
+          displayName: data.name,
+          photoURL: `https://eu.ui-avatars.com/api/?name=${data.name}&size=256`
+        }).then(() => {
+          delete data.password;
+          delete data.confirmPassword;
+          delete data.terms;
+          this.database.list(`users/`).set(`${res.user.uid}/`, data)
+            .catch(err => {
+              this.util.showError(err.message);
+              console.log(err)
+            });
+          this.router.navigate(['']);
+        })
+          .catch(err => {
+            this.util.showError(err.message);
+            console.log(err)
+          });
       })
       .catch(err => {
-        console.log("here")
+        this.util.showError(err.message);
         console.log(err)
       });
   }
 
   doFacebookLogin = () => {
     this.afAuth.signInWithPopup(new firebase.default.auth.FacebookAuthProvider())
-      .then(() => {
-        this.isLoggedIn = true;
+      .then((res) => {
+        if (res.additionalUserInfo.isNewUser) {
+          res.user.updateProfile({
+            photoURL: `${res.user.photoURL}?width=256&height=256`
+          }).then(() => {
+            let data = {
+              name: res.user.displayName,
+              email: res.user.email
+            }
+            this.database.list(`users/`).set(`${res.user.uid}/`, data)
+              .catch(err => {
+                this.util.showError(err.message);
+                console.log(err)
+              });
+            this.router.navigate(['']);
+          })
+            .catch(err => {
+              this.util.showError(err.message);
+              console.log(err)
+            });
+        }
         this.router.navigate(['']);
       }, err => {
         if (err.code === 'auth/account-exists-with-different-credential')
@@ -55,28 +87,42 @@ export class AuthService {
 
   doGoogleLogin = () => {
     this.afAuth.signInWithPopup(new firebase.default.auth.GoogleAuthProvider())
-      .then(() => {
-        this.isLoggedIn = true;
+      .then((res) => {
+        if (res.additionalUserInfo.isNewUser) {
+          res.user.updateProfile({
+            photoURL: res.user.photoURL.replace("=s96-c", "=s256-c")
+          }).then(() => {
+            let data = {
+              name: res.user.displayName,
+              email: res.user.email
+            }
+            this.database.list(`users/`).set(`${res.user.uid}/`, data)
+              .catch(err => {
+                this.util.showError(err.message);
+                console.log(err)
+              });
+            this.router.navigate(['']);
+          })
+            .catch(err => {
+              this.util.showError(err.message);
+              console.log(err)
+            });
+        }
         this.router.navigate(['']);
       }, err => {
         console.log(err)
-        if (err.code ==='auth/account-exists-with-different-credential')
+        if (err.code === 'auth/account-exists-with-different-credential')
           this.addProvider(err)
       })
-  }
-
-  getCurrentUser(): Observable<any> {
-    return this.currentUser.asObservable();
   }
 
   doSignOut() {
     if (firebase.default.auth().currentUser) {
       this.afAuth.signOut();
       this.isLoggedIn = false;
-      console.log("Sign-out successful.")
     }
     else {
-      console.log("Something went wrong!!")
+      this.util.showError('Cannot sign out.');
     }
   }
 
@@ -89,15 +135,33 @@ export class AuthService {
         } else {
           provider = new firebase.default.auth.FacebookAuthProvider();
         }
-
         provider.setCustomParameters({ login_hint: error.email });
         this.afAuth.signInWithPopup(provider)
           .then(res => {
             res.user.linkWithCredential(error.credential);
+            this.router.navigate(['']);
           })
           .catch(error => {
             console.log(error)
           })
+      })
+  }
+
+  // // Send email verfificaiton when new user sign up
+  // SendVerificationMail() {
+  //   return this.afAuth.currentUser.sendEmailVerification()
+  //   .then(() => {
+  //     this.router.navigate(['verify-email-address']);
+  //   })
+  // }
+
+  // Reset Forggot password
+  ForgotPassword(passwordResetEmail) {
+    return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      }).catch((error) => {
+        window.alert(error)
       })
   }
 }

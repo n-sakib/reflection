@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
 
 import { HomeComponent } from './home/home.component';
 import { ArtistAuthenticationComponent } from './artist/artist-authentication/artist-authentication.component';
@@ -24,17 +25,20 @@ import { TosComponent } from './compliance/tos/tos.component';
 import { PrimaryLayoutComponent } from './shared/layouts/primary-layout/primary-layout.component';
 import { SecondaryLayoutComponent } from './shared/layouts/secondary-layout/secondary-layout.component';
 
+const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
+const redirectLoggedInToIHome = () => redirectLoggedInTo(['']);
+
 const routes: Routes = [
   {
     path: '', component: PrimaryLayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'artist/dashboard', component: ArtistDashboardComponent },
-      { path: 'user/dashboard', component: OverviewComponent },
+      { path: 'artist/dashboard', component: ArtistDashboardComponent, ...canActivate(redirectUnauthorizedToHome)},
+      { path: 'user/dashboard', component: OverviewComponent, ...canActivate(redirectUnauthorizedToHome)},
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'reviews', component: ReviewsComponent },
-      { path: 'cart', component: CartComponent },
+      { path: 'cart', component: CartComponent, ...canActivate(redirectUnauthorizedToHome)},
       { path: 'order', component: OrderSequenceComponent },
       { path: 'exhibitions', component: ExhibitionComponent },
       { path: 'paintings', component: PaintingsListComponent },
@@ -51,8 +55,8 @@ const routes: Routes = [
   {
     path: 'login', component: SecondaryLayoutComponent,
     children: [
-      { path: 'artist', component: ArtistAuthenticationComponent },
-      { path: 'user', component: AuthComponent }
+      { path: 'artist', component: ArtistAuthenticationComponent, ...canActivate(redirectLoggedInToIHome)},
+      { path: 'user', component: AuthComponent, ...canActivate(redirectLoggedInToIHome)}
     ]
   }
 ];

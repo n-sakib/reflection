@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -50,11 +48,9 @@ export class ArtistDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.afAuth.authState.subscribe(user => {
       this.user = user;
+      console.log( this.user)
       console.log(this.user.photoURL)
     });
-    
-
-    
   }
 
   toBase64 = file => new Promise((resolve, reject) => {
@@ -250,6 +246,4 @@ export class ArtistDashboardComponent implements OnInit {
     })
     this.toastr.success('Post is Done!');
   }
-
-  
 }
