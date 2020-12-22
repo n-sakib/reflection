@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -52,7 +50,8 @@ export class ArtistDashboardComponent implements OnInit {
 
     this.afAuth.authState.subscribe(user => {
       this.user = user;
-      console.log(this.user)
+      console.log( this.user)
+      console.log(this.user.photoURL)
     });
 
     this.database.list('artistEducation/').snapshotChanges()
@@ -198,8 +197,6 @@ export class ArtistDashboardComponent implements OnInit {
       sellOption: this.selectedSellOption,
       replicaOrder: this.selectedReplica
     };
-
-    console.log(postData)
     // Get a key for a new Post.
     this.database.list(`artWork/`).push(postData).then(() => {
       this.selectedType = '',

@@ -1,159 +1,100 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Router } from  "@angular/router";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable, from } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { countries } from '../../../assets/countries.js';
-import { AbstractControl } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-
-
-
 
 @Component({
   selector: 'app-artist-authentication',
   templateUrl: './artist-authentication.component.html',
   styleUrls: ['./artist-authentication.component.scss']
 })
+
 export class ArtistAuthenticationComponent implements OnInit {
 
-  isSignedIn = false;
-  emailSignin = '';
-  passwordSignin = '';
-  isSignUp = false;
-  selectedName = '';
-  selectedDob = '';
-  selectedNationality = '';
-  emailSignup = '';
-  passwordSignup = '';
-  confirmPasswordSignup  = '';
-  errorMessage: string = '';
   countryList = countries;
-  passwordMatch = false;
-
-
+  submitWithoutSelection = false;
+  submitted = false;
+  isSignUp = false;
   
+  signupForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.pattern("")]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      this.matchValues('password'),
+    ]),
+    dob: new FormControl('', [Validators.required]),
+    nationality: new FormControl('', [Validators.required]),
+    residency: new FormControl('', [Validators.required]),
+    terms: new FormControl('', [Validators.requiredTrue])
+  });
 
+  signinForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.pattern("")])
+  });
 
-  constructor(private authService: AuthService, private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, public router: Router, public store: AngularFirestore) { 
-   
-  }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('user') !== null)
-      this.isSignedIn = true
-    else
-      this.isSignedIn = false;
-    
+    this.signupForm.controls.password.valueChanges.subscribe(() => {
+      this.signupForm.controls.confirmPassword.updateValueAndValidity();
+    });
   }
 
   onSignin() {
-    this.authService.signin(this.emailSignin, this.passwordSignin)
-    .then(res => {
-      this.isSignedIn = true
-        let userObservable = this.database.list(`users data/${res}/`).valueChanges();
-        userObservable.subscribe(user =>{
-          console.log(user)
-          localStorage.setItem('user',JSON.stringify(user))
-        }) 
-      })
-    } 
-
-  createAccount() {
-    this.isSignUp = true
+    this.signinForm.markAllAsTouched();
+    this.signinForm.valid && this.authService.signin(this.signinForm.value)
   }
 
-  haveAccount() {
-    this.isSignUp = false
-  }
+  // haveAccount() {
+  //   this.isSignUp = false
+  // }
 
-  onSignup() {
-    if(this.passwordSignup === this.confirmPasswordSignup){
-      this.isSignUp = true
-      this.authService.signup(this.emailSignup, this.passwordSignup).then((res) => {
-        this.isSignedIn = true
-        var postData = {
-          name: this.selectedName,
-          nationality: this.selectedNationality,
-          dob: this.selectedDob,
-          emailsignup: this.emailSignup,
-          passwordsignup: this.passwordSignup
-        };
+  // onSignup() {
+  //   if(this.passwordSignup === this.confirmPasswordSignup){
+  //     this.isSignUp = true
+  //     this.authService.signup(this.emailSignup, this.passwordSignup).then((res) => {
+  //       this.isSignedIn = true
+  //       var postData = {
+  //         name: this.selectedName,
+  //         nationality: this.selectedNationality,
+  //         dob: this.selectedDob,
+  //         emailsignup: this.emailSignup,
+  //         passwordsignup: this.passwordSignup
+  //       };
   
-        // Get a key for a new Post.
-        this.database.list(`users/`).set(`${res}/`, postData).then(() => {
-          this.selectedName = ''
-          this.selectedDob = ''
-          this.selectedNationality = ''
-          this.emailSignup = ''
-          this.passwordSignup = ''
-          // this.snackBar.open('Successfully uploaded data', 'OK', {
-          //   duration: 2000,
-          // });
-        })
-      })
+  //       // Get a key for a new Post.
+  //       this.database.list(`users/`).set(`${res}/`, postData).then(() => {
+  //         this.selectedName = ''
+  //         this.selectedDob = ''
+  //         this.selectedNationality = ''
+  //         this.emailSignup = ''
+  //         this.passwordSignup = ''
+  //         // this.snackBar.open('Successfully uploaded data', 'OK', {
+  //         //   duration: 2000,
+  //         // });
+  //       })
+  //     })
+  signup() {
+    this.signupForm.markAllAsTouched();
+    if(this.signupForm.value.residency === '') {
+      this.submitWithoutSelection = true;
     }
-    else{
-      console.log("password error");
-      this.toastr.error('Please correct form error or contact us');
-    }
+    this.submitted = true;
+    this.signupForm.valid && this.authService.signup(this.signupForm.value)
   }
 
-
-  addName($event) {
-    var value = $event.target.value;
-    this.selectedName = value;
+  public matchValues(
+    matchTo: string
+  ): (AbstractControl) => ValidationErrors | null {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return !!control.parent &&
+        !!control.parent.value &&
+        control.value === control.parent.controls[matchTo].value
+        ? null
+        : { isMatching: false };
+    };
   }
-
-  addNationality($event) {
-    var value = $event.target.value;
-    this.selectedNationality = value;
-  }
-
-  addDob($event) {
-    var value = $event.target.value;
-    this.selectedDob = value;
-  }
-
-  addEmail($event) {
-    var value = $event.target.value.toString().trim();
-    console.log(value)
-    this.emailSignup = value;
-  }
-
-  addPassword($event) {
-    var value = $event.target.value;
-    this.passwordSignup = value;
-  }
-
-  addEmailSignin($event) {
-    var value = $event.target.value.toString().trim();
-    console.log(value)
-    this.emailSignin = value;
-  }
-
-  addPasswordSignin($event) {
-    var value = $event.target.value;
-    this.passwordSignin = value;
-  }
-
-  addConfirmPassword($event) {
-    var value = $event.target.value;
-    this.confirmPasswordSignup = value;
-  }
-
-  public resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
-  }
-
-  public onError(errorDetails: any[]) {
-    console.log(`reCAPTCHA error encountered; details:`, errorDetails);
-  }
-
-
 }
