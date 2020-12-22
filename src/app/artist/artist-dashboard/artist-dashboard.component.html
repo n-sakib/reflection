@@ -117,19 +117,14 @@
                     </div>
                     <div class="tab-pane text-center gallery" id="education">
                         <div class="pb-5">
-                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#exampleModal">
+                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#educationModal">
                                 <i class="material-icons">add</i> Add Education/Training
                             </button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3 ml-auto">
-                                <img src="../assets/img/examples/olu-eletu.jpg" class="rounded">
-                                <img src="../assets/img/examples/clem-onojeghuo.jpg" class="rounded">
-                                <img src="../assets/img/examples/cynthia-del-rio.jpg" class="rounded">
-                            </div>
-                            <div class="col-md-3 mr-auto">
-                                <img src="../assets/img/examples/mariya-georgieva.jpg" class="rounded">
-                                <img src="../assets/img/examples/clem-onojegaw.jpg" class="rounded">
+                        <div class="p-5" style="justify-content: center;">
+                            <div class="card-body" *ngFor="let education of educations">
+                                <h4 class="card-title">{{education.eduSchoolType}}</h4>
+                                <h5>Studied {{education.certificateName}} at {{education.schoolName}} in {{education.degreeYear}} </h5>
                             </div>
                         </div>
                         <div class="p-5">
@@ -348,68 +343,76 @@
                                     <img [src]="selectedImageURL" class="imageBox">
                                 </div>
                             </div>
-                            <div class="p-2">
-                                <h5>Art Work Type</h5>
-                                <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            name="exampleRadios" id="exampleRadios1" value="Drawing & Painting"
-                                            (change)="addType($event)">
-                                        Drawing & Painting
-                                        <span class="circle">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            (change)="addType($event)" name="exampleRadios" id="exampleRadios2"
-                                            value="Print Making" checked>
-                                        Print Making
-                                        <span class="circle">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Art Work Type</h4>
+                                    <div class="form-check form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                name="exampleRadios" id="exampleRadios1" value="Drawing & Painting"
+                                                (change)="addType($event)">
+                                            Drawing & Painting
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                (change)="addType($event)" name="exampleRadios" id="exampleRadios2"
+                                                value="Print Making" checked>
+                                            Print Making
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small>  -->
-                            <div class="row">
-                                <div class="col">
-                                    <h5>Art Work Title</h5>
-                                    <input type="text" class="form-control" aria-describedby="emailHelp"
-                                        id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitle($event)"
-                                        [value]="selectedTitle">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="p-2">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h4 class="card-title">Art Work Title</h4>
+                                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                                    id="exampleInputEmail1" placeholder="Enter title"
+                                                    (keyup)="addTitle($event)" [value]="selectedTitle">
+                                            </div>
+                                            <div class="col">
+                                                <h4 class="card-title">Add Creation Year</h4>
+                                                <input type="number" class="date-own form-control" style="width: 300px;"
+                                                    aria-describedby="emailHelp" id="exampleInputEmail1"
+                                                    placeholder="YYYY" min="1000" max="2100" (keyup)="addYear($event)"
+                                                    [value]="selectedYear">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-2">
+                                        <h4 class="card-title">Art Work Media</h4>
+                                        <select class="form-control selectpicker" data-style="btn btn-link" 
+                                            id="exampleFormControlSelect1" [(value)]="selectedCategory" >
+                                           <option *ngFor = "let media1List of media1Lists"
+                                           value="media1List.value">{{media1List.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="p-2">
+                                        <h4 class="card-title">Size</h4>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="number" class="form-control" placeholder="Height"
+                                                    [(value)]="selectedHeight" (keyup)="addHeight($event)">
+                                            </div>
+                                            <h5 for="exampleFormControlTextarea1">X</h5>
+                                            <div class="col">
+                                                <input type="number" class="form-control" placeholder="Width"
+                                                    [(value)]="selectedWidth" (keyup)="addWidth($event)">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <h5>Add Creation Year</h5>
-                                    <input type="number" class="date-own form-control" style="width: 300px;"
-                                        aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
-                                        min="1000" max="2100" (keyup)="addYear($event)" [value]="selectedYear">
-                                </div>
-                                <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
-                            </div>
-                            <div class="p-2">
-                                <h5>Art Work Media</h5>
-                                <select class="form-control selectpicker" data-style="btn btn-link"
-                                    id="exampleFormControlSelect1" (selectionChange)="addCategory($event)">
-                                    <option>Oil Paint on Canvas</option>
-                                    <option>Oil Paint on Board</option>
-                                    <option>Acrylic Paint on Canvas</option>
-                                    <option>Acrylic Paint on Board</option>
-                                    <option>Acrylic Paint on Paper</option>
-                                    <option>Watercolor on Paper</option>
-                                    <option>Poster Color on Paper</option>
-                                    <option>Graphite Pencil on Paper</option>
-                                    <option>Charcoal on Paper</option>
-                                    <option>Graphite Pencil on Paper</option>
-                                    <option>Color Pencil on Paper</option>
-                                    <option>Pastels on Paper</option>
-                                    <option *ngIf="selectedType === 'Print Making'">Woodcut</option>
-                                    <option *ngIf="selectedType === 'Print Making'">Lithography</option>
-                                    <option>Mixed Media</option>
-                                    <option>Other Media</option>
-                                </select>
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
                             <div class="p-2" *ngif="false">
@@ -417,25 +420,15 @@
                                     id="exampleInputEmail1" placeholder="Enter media Type">
                             </div>
                             <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
-                            <div class="p-2">
-                                <h5>Size</h5>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <input type="number" class="form-control" placeholder="Height"
-                                            [(value)]="selectedHeight" (keyup)="addHeight($event)">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Art Concept</h4>
+                                    <div class="p-2">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleInputEmail1" rows="3"
+                                                [(value)]="selectedConcept" (keyup)="addConcept($event)"></textarea>
+                                        </div>
                                     </div>
-                                    <h5 for="exampleFormControlTextarea1">X</h5>
-                                    <div class="col">
-                                        <input type="number" class="form-control" placeholder="Width"
-                                            [(value)]="selectedWidth" (keyup)="addWidth($event)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-2">
-                                <div class="form-group">
-                                    <h5 for="exampleFormControlTextarea1">Art Concept</h5>
-                                    <textarea class="form-control" id="exampleInputEmail1" rows="3"
-                                        [(value)]="selectedConcept" (keyup)="addConcept($event)"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -565,10 +558,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-1">
-                                <button class="btn btn-primary btn-round" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                    <i class="material-icons" (click)="publish()">save</i> Save Art Work
+                            <div class="col-md" style=" display: flex; justify-content: center; align-items: center;">
+                                <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                                    <i class="material-icons" >save</i> Save Art Work
                                 </button>
                             </div>
                         </div>
@@ -656,10 +648,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-1">
-                                <button class="btn btn-primary btn-round" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                    <i class="material-icons" (click)="publish()">save</i> Save Art Work
+                            <div class="col-md" style=" display: flex; justify-content: center; align-items: center;">
+                                <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                                    <i class="material-icons" >save</i> Save Art Work
                                 </button>
                             </div>
                         </div>
@@ -668,14 +659,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Next</button>
+                <button type="button" class="btn btn-primary" (click)="publish()">Next</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- (click)="publish()"  -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static" x>
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -686,151 +677,110 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="d-flex justify-content-center">
-                    <ul class="nav nav-pills nav-pills-default">
-                        <li class="nav-item progress-pills"><a class="nav-link active" href="#pill1"
-                                data-toggle="tab">1</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#pill2" data-toggle="tab">2</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#pill3" data-toggle="tab">3</a></li>
-                    </ul>
-                </div>
                 <div class="tab-content tab-space">
-                    <div class="tab-pane active" id="pill1">
-                        <button type="submit" style="float: right;" class="btn btn-primary">Save</button><br>
-                        <!-- <form>
-                            <div class="form-group">
-                                <h5>Name of Academy/School</h5>
-                                <input type="text" class="form-control" aria-describedby="emailHelp"
-                                    id="exampleInputEmail1" placeholder="Enter Academy" (keyup)="addTitle($event)"
-                                    [value]="selectedTitle">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <h5>Certificate Achieved</h5>
-                                    <input type="text" class="form-control" aria-describedby="emailHelp"
-                                        id="exampleInputEmail1" placeholder="Certificate Name"
-                                        (keyup)="addTitle($event)" [value]="selectedTitle">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <h5>Year</h5>
-                                    <input type="number" class="date-own form-control" style="width: 300px;"
-                                        aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
-                                        min="1000" max="2100" (keyup)="addYear($event)" [value]="selectedYear">
-                                </div>
-                            </div>
-                        </form> -->
+                    <!-- <button type="submit" style="float: right;" class="btn btn-primary">Save</button><br> -->
+                    <div class="p-2">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Art School</h4>
+                                <h4 class="card-title">Type of School</h4>
                                 <form>
+                                    <div class="form-check form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                id="exampleRadios1" value="Art School" (click)="addEduOption('Art School')">
+                                            Academy/Art School
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                id="exampleRadios2" value="Grad School" (click)="addEduOption('Grad School')">
+                                            Graduate School
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-radio disabled">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="exampleRadios1"
+                                                id="exampleRadios3" value="PG School" (click)="addEduOption('PG School')">
+                                            Post Graduate School
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
                                     <div class="form-group">
-                                        <h6>Name of Academy/School</h6>
+                                        <h6>Name of Academy/School/University</h6>
                                         <input type="text" class="form-control" aria-describedby="emailHelp"
                                             id="exampleInputEmail1" placeholder="Enter Academy"
-                                            (keyup)="addArtSchool($event)" [value]="selectedArtSchool">
+                                            (keyup)="addSchool($event)" [value]="selectedSchool">
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <h6>Certificate Achieved</h6>
                                             <input type="text" class="form-control" aria-describedby="emailHelp"
                                                 id="exampleInputEmail1" placeholder="Certificate Name"
-                                                (keyup)="addArtCertificate($event)" [value]="selectedArtCertificate">
+                                                (keyup)="addCertificate($event)" [value]="selectedCertificate">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <h6>Year</h6>
                                             <input type="number" class="date-own form-control" style="width: 300px;"
                                                 aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
-                                                min="1000" max="2100" (keyup)="addArtYear($event)"
-                                                [value]="selectedArtYear">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Graduate School</h4>
-                                <form>
-                                    <div class="form-group">
-                                        <h6>Name of College/University/Institution</h6>
-                                        <input type="text" class="form-control" aria-describedby="emailHelp"
-                                            id="exampleInputEmail1" placeholder="Enter University"
-                                            (keyup)="addGradSchool($event)" [value]="selectedGradSchool">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <h6>Degree Achieved</h6>
-                                            <input type="text" class="form-control" aria-describedby="emailHelp"
-                                                id="exampleInputEmail1" placeholder="Degree Name"
-                                                (keyup)="addGradCertificate($event)" [value]="selectedGradCertificate">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <h6>Year</h6>
-                                            <input type="number" class="date-own form-control" style="width: 300px;"
-                                                aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
-                                                min="1000" max="2100" (keyup)="addGradYear($event)"
-                                                [value]="selectedGradYear">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Post Graduate School</h4>
-                                <form>
-                                    <div class="form-group">
-                                        <h6>Name of University</h6>
-                                        <input type="text" class="form-control" aria-describedby="emailHelp"
-                                            id="exampleInputEmail1" placeholder="Enter University"
-                                            (keyup)="addPGSchool($event)" [value]="selectedPGSchool">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <h6>Highest Degree Achieved</h6>
-                                            <input type="text" class="form-control" aria-describedby="emailHelp"
-                                                id="exampleInputEmail1" placeholder="Degree Name"
-                                                (keyup)="addPGDegree($event)" [value]="selectedPGDegree">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <h6>Year</h6>
-                                            <input type="number" class="date-own form-control" style="width: 300px;"
-                                                aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
-                                                min="1000" max="2100" (keyup)="addPGYear($event)"
-                                                [value]="selectedPGYear">
+                                                min="1000" max="2100" (keyup)="addEduYear($event)"
+                                                [value]="selectedEduYear">
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="pill2">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5>Studied {{selectedArtCertificate}} at {{selectedArtSchool}} in {{selectedArtYear}}
-                                </h5>
-                            </div>
+                    <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                        <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                            <i class="material-icons" >save</i> Save Art Work
+                        </button>
+                    </div>
+
+                    <!-- <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Graduate School</h4>
+                            <form>
+                                <div class="form-group">
+                                    <h6>Name of College/University/Institution</h6>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        id="exampleInputEmail1" placeholder="Enter University"
+                                        (keyup)="addGradSchool($event)" [value]="selectedGradSchool">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <h6>Degree Achieved</h6>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Degree Name"
+                                            (keyup)="addGradCertificate($event)" [value]="selectedGradCertificate">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <h6>Year</h6>
+                                        <input type="number" class="date-own form-control" style="width: 300px;"
+                                            aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                            min="1000" max="2100" (keyup)="addGradYear($event)"
+                                            [value]="selectedGradYear">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h5>Studied {{selectedGradCertificate}} at {{selectedGradSchool}} in
-                                    {{selectedGradYear}}
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h5>Studied {{selectedPGDegree}} at {{selectedPGSchool}} in {{selectedPGYear}}
-                                </h5>
-                            </div>
+                    </div> -->
+                    <div class="card">
+                        <div class="card-body" *ngFor="let education of educations">
+                            <h4 class="card-title">{{education.eduSchoolType}}</h4>
+                            <h5>Studied {{education.certificateName}} at {{education.schoolName}} in {{education.degreeYear}} </h5>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Next</button>
         </div>
     </div>
 </div>

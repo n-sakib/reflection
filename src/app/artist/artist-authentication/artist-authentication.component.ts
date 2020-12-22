@@ -86,7 +86,7 @@ export class ArtistAuthenticationComponent implements OnInit {
         };
   
         // Get a key for a new Post.
-        this.database.list(`users data/`).set(`${res}/`, postData).then(() => {
+        this.database.list(`users/`).set(`${res}/`, postData).then(() => {
           this.selectedName = ''
           this.selectedDob = ''
           this.selectedNationality = ''
