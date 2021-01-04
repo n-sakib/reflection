@@ -34,14 +34,27 @@ export class ArtistDashboardComponent implements OnInit {
   selectedSchool = '';
   selectedCertificate = '';
   selectedEduYear = '';
+  selectedTypeNote = '';
   imagePreview = ''
   selectedEduOption = '';
+  selectedTitleWorkshop = '';
+  selectedSubjectWshop = '';
+  selectedSupWshop = '';
+  selectedOrgWshop = '';
+  selectedLocWshop = '';
+  selectedYearWshop = '';
+  selectedWshopImgURL = '';
+  selectedCaptionWshop = '';
+  isWshopImgSubmitting: boolean = false;
+
   public media1Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' },
   { value: 'Acrylic Paint on Board' }, { value: 'Watercolor on Paper' }, { value: 'Poster Color on Paper' }, { value: 'Graphite Pencil on Paper' }, { value: 'Charcoal on Paper' }, { value: 'Other Media' }];
-  public media2Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' },{ value: 'Woodcut' },{value: 'Lithography'},
+  public media2Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' }, { value: 'Woodcut' }, { value: 'Lithography' },
   { value: 'Acrylic Paint on Board' }, { value: 'Watercolor on Paper' }, { value: 'Poster Color on Paper' }, { value: 'Graphite Pencil on Paper' }, { value: 'Charcoal on Paper' }, { value: 'Other Media' }];
 
   educations = [];
+  showEducations = [];
+  workshops =[];
 
 
   constructor(private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, private afAuth: AngularFireAuth, public auth: AuthService) { }
@@ -50,7 +63,7 @@ export class ArtistDashboardComponent implements OnInit {
 
     this.afAuth.authState.subscribe(user => {
       this.user = user;
-      console.log( this.user)
+      console.log(this.user)
       console.log(this.user.photoURL)
     });
 
@@ -61,9 +74,19 @@ export class ArtistDashboardComponent implements OnInit {
             var val = educations.payload.val();
             this.educations.push(val);
           });
-
         }
-      })
+    })
+
+    this.database.list('artistWorkshop/').snapshotChanges()
+      .subscribe({
+        next: workshops => {
+          workshops.forEach(workshops => {
+            var val = workshops.payload.val();
+            this.workshops.push(val);
+            // console.log(this.workshops)
+          });
+        }
+    })
 
   }
 
@@ -81,11 +104,25 @@ export class ArtistDashboardComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
         this.selectedImageURL = event.target.result;
-        // console.log(this.selectedImageURL)
+        console.log(this.selectedImageURL)
         // this.isImageSubmitted = true
       }
     }
   }
+
+  onWshopImgSelected(event) {
+    this.isWshopImgSubmitting = true;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.selectedWshopImgURL= event.target.result;
+        console.log(this.selectedWshopImgURL)
+        // this.isImageSubmitted = true
+      }
+    }
+  }
+
 
 
 
@@ -135,10 +172,11 @@ export class ArtistDashboardComponent implements OnInit {
     var value = $event.target.value;
     this.selectedType = value;
   }
-  // addCategory($event) {
-  //   var value = $event.target.value;
-  //   this.selectedCategory = value;
-  // }
+  addCategory($event) {
+    var value = $event.target.value;
+    this.selectedCategory = value;
+    console.log(this.selectedCategory)
+  }
   addHeight($event) {
     var value = $event.target.value;
     this.selectedHeight = value;
@@ -150,6 +188,10 @@ export class ArtistDashboardComponent implements OnInit {
   addConcept($event) {
     var value = $event.target.value;
     this.selectedConcept = value;
+  }
+  addNote($event) {
+    var value = $event.target.value;
+    this.selectedTypeNote = value;
   }
   addYear($event) {
     var value = $event.target.value;
@@ -182,12 +224,40 @@ export class ArtistDashboardComponent implements OnInit {
     var value = $event.target.value;
     this.selectedEduYear = value;
   }
-
+  addTitleWshop($event){
+    var value = $event.target.value;
+    this.selectedTitleWorkshop = value;
+  }
+  addSubjectWshop($event){
+    var value = $event.target.value;
+    this.selectedSubjectWshop = value;
+  }
+  addSuperviserWshop($event){
+    var value = $event.target.value;
+    this.selectedSupWshop = value;
+  }
+  addOrgWshop($event){
+    var value = $event.target.value;
+    this.selectedOrgWshop = value;
+  }
+  addLocWshop($event){
+    var value = $event.target.value;
+    this.selectedLocWshop = value;
+  }
+  addYearWshop($event){
+    var value = $event.target.value;
+    this.selectedYearWshop = value;
+  }
+  addCaptionWshop($event){
+    var value = $event.target.value;
+    this.selectedCaptionWshop = value;
+  }
 
   publish() {
     // A post entry.
     var postData = {
       artWorkType: this.selectedType,
+      artTypeNote: this.selectedTypeNote,
       imageURL: this.selectedImageURL,
       title: this.selectedTitle,
       category: this.selectedCategory,
@@ -199,7 +269,8 @@ export class ArtistDashboardComponent implements OnInit {
     };
     // Get a key for a new Post.
     this.database.list(`artWork/`).push(postData).then(() => {
-      this.selectedType = '',
+        this.selectedType = '',
+        this.selectedTypeNote = '',
         this.selectedImageURL = '',
         this.selectedTitle = '',
         this.selectedCategory = '',
@@ -210,6 +281,7 @@ export class ArtistDashboardComponent implements OnInit {
         this.selectedReplica = ''
     })
     this.toastr.success('Post is Done!');
+    console.log(postData)
   }
 
   publishEducation() {
@@ -232,5 +304,31 @@ export class ArtistDashboardComponent implements OnInit {
     this.toastr.success('Post is Done!');
   }
 
+  publishWshop() {
+    // A post entry.
+    var postWshopData = {
+      workshopTitle: this.selectedTitleWorkshop,
+      workshopSubject: this.selectedSubjectWshop,
+      workshopSuperviser: this.selectedSupWshop,
+      workshopOrg: this.selectedOrgWshop,
+      workshopLoc: this.selectedLocWshop,
+      workshopYear: this.selectedYearWshop,
+      workshopImgCaption: this.selectedCaptionWshop,
+      workshopImg: this.selectedWshopImgURL
+    };
+
+    // console.log(postEduData)
+    // Get a key for a new Post.
+    this.database.list(`artistWorkshop/`).push(postWshopData).then(() => {
+      this.selectedTitleWorkshop = '',
+        this.selectedSubjectWshop = '',
+        this.selectedSupWshop = '',
+        this.selectedOrgWshop = '',
+        this.selectedLocWshop = '',
+        this.selectedYearWshop = '',
+        this.selectedCaptionWshop = ''
+    })
+    this.toastr.success('Post is Done!');
+  }
 
 }

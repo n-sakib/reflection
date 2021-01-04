@@ -8,7 +8,8 @@
                     <div class="col-md-6 ml-auto mr-auto">
                         <div class="profile">
                             <div class="avatar">
-                                <img alt="Circle Image" [src]='user.photoURL' class="img-raised rounded-circle img-fluid">
+                                <img alt="Circle Image" [src]='user.photoURL'
+                                    class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">
                                 <h3 class="title">{{user.displayName}}</h3>
@@ -124,7 +125,8 @@
                         <div class="p-5" style="justify-content: center;">
                             <div class="card-body" *ngFor="let education of educations">
                                 <h4 class="card-title">{{education.eduSchoolType}}</h4>
-                                <h5>Studied {{education.certificateName}} at {{education.schoolName}} in {{education.degreeYear}} </h5>
+                                <h5>Studied {{education.certificateName}} at {{education.schoolName}} in
+                                    {{education.degreeYear}} </h5>
                             </div>
                         </div>
                         <div class="p-5">
@@ -150,7 +152,7 @@
                     </div>
                     <div class="tab-pane text-center gallery" id="workshops">
                         <div class="pb-5">
-                            <button class="btn btn-primary btn-round">
+                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#workshopModal">
                                 <i class="material-icons">add</i> Add Workshops
                             </button>
                         </div>
@@ -189,7 +191,7 @@
                     </div>
                     <div class="tab-pane text-center gallery" id="artcamps">
                         <div class="pb-5">
-                            <button class="btn btn-primary btn-round">
+                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#artcampModal">
                                 <i class="material-icons">add</i> Add Art Camps
                             </button>
                         </div>
@@ -228,7 +230,7 @@
                     </div>
                     <div class="tab-pane text-center gallery" id="exhibitions">
                         <div class="pb-5">
-                            <button class="btn btn-primary btn-round">
+                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#exhibitionModal">
                                 <i class="material-icons">add</i> Add Exhibitions
                             </button>
                         </div>
@@ -361,7 +363,7 @@
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="exampleRadios"
                                                 (change)="addType($event)" name="exampleRadios" id="exampleRadios2"
-                                                value="Print Making" checked>
+                                                value="Print Making">
                                             Print Making
                                             <span class="circle">
                                                 <span class="check"></span>
@@ -392,11 +394,25 @@
                                     </div>
                                     <div class="p-2">
                                         <h4 class="card-title">Art Work Media</h4>
-                                        <select class="form-control selectpicker" data-style="btn btn-link" 
-                                            id="exampleFormControlSelect1" [(value)]="selectedCategory" >
-                                           <option *ngFor = "let media1List of media1Lists"
-                                           value="media1List.value">{{media1List.value}}</option>
+                                        <select *ngIf="selectedType === 'Drawing & Painting'"
+                                            class="form-control selectpicker" data-style="btn btn-link"
+                                            id="exampleFormControlSelect1" [value]="selectedCategory"
+                                            (change)="addCategory($event)">
+                                            <option *ngFor="let media1List of media1Lists" [value]="media1List.value">
+                                                {{media1List.value}}</option>
                                         </select>
+                                        <select *ngIf="selectedType === 'Print Making'"
+                                            class="form-control selectpicker" data-style="btn btn-link"
+                                            id="exampleFormControlSelect1" [value]="selectedCategory"
+                                            (change)="addCategory($event)">
+                                            <option *ngFor="let media2List of media2Lists" [value]="media2List.value">
+                                                {{media2List.value}}</option>
+                                        </select>
+                                        <div *ngIf="selectedCategory === 'Other Media'">
+                                            <textarea class="form-control" id="exampleInputEmail1" rows="3"
+                                                placeholder="Add Notes" [(value)]="selectedTypeNote"
+                                                (keyup)="addNote($event)"></textarea>
+                                        </div>
                                     </div>
                                     <div class="p-2">
                                         <h4 class="card-title">Size</h4>
@@ -560,7 +576,7 @@
                             </div>
                             <div class="col-md" style=" display: flex; justify-content: center; align-items: center;">
                                 <button class="btn btn-primary btn-round" (click)="publishEducation()">
-                                    <i class="material-icons" >save</i> Save Art Work
+                                    <i class="material-icons">save</i> Save Art Work
                                 </button>
                             </div>
                         </div>
@@ -650,7 +666,7 @@
                             </div>
                             <div class="col-md" style=" display: flex; justify-content: center; align-items: center;">
                                 <button class="btn btn-primary btn-round" (click)="publishEducation()">
-                                    <i class="material-icons" >save</i> Save Art Work
+                                    <i class="material-icons">save</i> Save Art Work
                                 </button>
                             </div>
                         </div>
@@ -687,7 +703,8 @@
                                     <div class="form-check form-check-radio">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="exampleRadios"
-                                                id="exampleRadios1" value="Art School" (click)="addEduOption('Art School')">
+                                                id="exampleRadios1" value="Art School"
+                                                (click)="addEduOption('Art School')">
                                             Academy/Art School
                                             <span class="circle">
                                                 <span class="check"></span>
@@ -697,7 +714,8 @@
                                     <div class="form-check form-check-radio">
                                         <label class="form-check-label">
                                             <input class="form-check-input" type="radio" name="exampleRadios"
-                                                id="exampleRadios2" value="Grad School" (click)="addEduOption('Grad School')">
+                                                id="exampleRadios2" value="Grad School"
+                                                (click)="addEduOption('Grad School')">
                                             Graduate School
                                             <span class="circle">
                                                 <span class="check"></span>
@@ -706,8 +724,9 @@
                                     </div>
                                     <div class="form-check form-check-radio disabled">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="exampleRadios1"
-                                                id="exampleRadios3" value="PG School" (click)="addEduOption('PG School')">
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                id="exampleRadios3" value="PG School"
+                                                (click)="addEduOption('PG School')">
                                             Post Graduate School
                                             <span class="circle">
                                                 <span class="check"></span>
@@ -741,42 +760,14 @@
                     </div>
                     <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
                         <button class="btn btn-primary btn-round" (click)="publishEducation()">
-                            <i class="material-icons" >save</i> Save Art Work
+                            <i class="material-icons">save</i> Save Art Work
                         </button>
                     </div>
-
-                    <!-- <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Graduate School</h4>
-                            <form>
-                                <div class="form-group">
-                                    <h6>Name of College/University/Institution</h6>
-                                    <input type="text" class="form-control" aria-describedby="emailHelp"
-                                        id="exampleInputEmail1" placeholder="Enter University"
-                                        (keyup)="addGradSchool($event)" [value]="selectedGradSchool">
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <h6>Degree Achieved</h6>
-                                        <input type="text" class="form-control" aria-describedby="emailHelp"
-                                            id="exampleInputEmail1" placeholder="Degree Name"
-                                            (keyup)="addGradCertificate($event)" [value]="selectedGradCertificate">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <h6>Year</h6>
-                                        <input type="number" class="date-own form-control" style="width: 300px;"
-                                            aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
-                                            min="1000" max="2100" (keyup)="addGradYear($event)"
-                                            [value]="selectedGradYear">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> -->
                     <div class="card">
                         <div class="card-body" *ngFor="let education of educations">
                             <h4 class="card-title">{{education.eduSchoolType}}</h4>
-                            <h5>Studied {{education.certificateName}} at {{education.schoolName}} in {{education.degreeYear}} </h5>
+                            <h5>Studied {{education.certificateName}} at {{education.schoolName}} in
+                                {{education.degreeYear}} </h5>
                         </div>
                     </div>
                 </div>
@@ -785,3 +776,468 @@
     </div>
 </div>
 <!-- <button type="submit" class="btn btn-primary">Sign in</button> -->
+
+<div class="modal fade" id="workshopModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Art Workshop</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                    <div class="p-2" style="float: right;">
+                        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#workshopAlbumModal">
+                            <i class="material-icons">photo_album</i> Album
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="p-2">
+                                <h4 class="card-title">Add Title of Workshop</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitleWshop($event)"
+                                    [value]="selectedTitleWorkshop">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Add Subjects/Techniques Demonstrated and Practiced</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Techniques" (keyup)="addSubjectWshop($event)"
+                                    [value]="selectedSubjectWshop">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Supervised By</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Superviser Name" (keyup)="addSuperviserWshop($event)" 
+                                    [value]="selectedSupWshop">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Organized By</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Organization Name"
+                                    (keyup)="addOrgWshop($event)" [value]="selectedOrgWshop">
+                            </div>
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="card-title">Add Location</h4>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Enter Location"
+                                            (keyup)="addLocWshop($event)" [value]="selectedLocWshop">
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="card-title">Add Year</h4>
+                                        <input type="number" class="date-own form-control" style="width: 300px;"
+                                            aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                            min="1000" max="2100" (keyup)="addYearWshop($event)" [value]="selectedYearWshop">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#workshopPhotoModal">
+                        <i class="material-icons">add_a_photo</i> Add Photo
+                    </button>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round" (click)="publishWshop()">
+                        <i class="material-icons">save</i> Save Workshop
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="workshopPhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                    <form>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="p-2">
+                                    <h4 class="card-title">Add Caption</h4>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        id="exampleInputEmail1" placeholder="Enter caption" (keyup)="addCaptionWshop($event)"
+                                        [value]="selectedCaptionWshop">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="container">
+                                <i *ngIf="isWshopImgSubmitting" class="material-icons edit-btn" style="color:#9c27b0"
+                                    (click)="imgWshopInput.click()">create</i>
+                                <i *ngIf="!isWshopImgSubmitting" class="material-icons upload-wrapper-icon"
+                                    style="color:#9c27b0" (click)="imgWshopInput.click()">cloud_upload</i>
+                                <input hidden (change)="onWshopImgSelected($event)" #imgWshopInput type="file" id="imageFile">
+                                <img [src]="selectedWshopImgURL" class="imageBox">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" (click)="publishWshop()">
+                                <i class="material-icons">save</i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="workshopAlbumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                        <!-- <div class="card">
+                            <div class="card-body">
+                                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                                    <h4 class="card-title">Workshop Photo</h4>
+                                </div>
+                            </div>
+                        </div> -->
+                    <form>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="p-2" *ngFor="let workshop of workshops">
+                                <img [src]="workshop.workshopImg" class="rounded">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#workshopPhotoModal">
+                                <i class="material-icons">add_a_photo</i> Add More Photos
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="artcampModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Art Camps</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                    <div class="p-2" style="float: right;">
+                        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#artcampAlbumModal">
+                            <i class="material-icons">photo_album</i> Album
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="p-2">
+                                <h4 class="card-title">Add Title of Art Camp</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitle($event)"
+                                    [value]="selectedTitle">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Add Subject Name</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Subject Name" (keyup)="addTitle($event)"
+                                    [value]="selectedTitle">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Organized By</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Organization Name"
+                                    (keyup)="addTitle($event)" [value]="selectedTitle">
+                            </div>
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="card-title">Add Location</h4>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Enter Location"
+                                            (keyup)="addTitle($event)" [value]="selectedTitle">
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="card-title">Add Year</h4>
+                                        <input type="number" class="date-own form-control" style="width: 300px;"
+                                            aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                            min="1000" max="2100" (keyup)="addYear($event)" [value]="selectedYear">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#artcampPhotoModal">
+                        <i class="material-icons">add_a_photo</i> Add Photo
+                    </button>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round">
+                        <i class="material-icons">save</i> Save Workshop
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="artcampPhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                    <form>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="p-2">
+                                    <h4 class="card-title">Add Caption</h4>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        id="exampleInputEmail1" placeholder="Enter caption" (keyup)="addTitle($event)"
+                                        [value]="selectedTitle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="container">
+                                <i *ngIf="isImageSubmitting" class="material-icons edit-btn" style="color:#9c27b0"
+                                    (click)="imageInput.click()">create</i>
+                                <i *ngIf="!isImageSubmitting" class="material-icons upload-wrapper-icon"
+                                    style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
+                                <input hidden (change)="onImageSelected($event)" #imageInput type="file" id="imageFile">
+                                <img [src]="selectedImageURL" class="imageBox">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                                <i class="material-icons">save</i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="artcampAlbumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                                    <h4 class="card-title">Workshop Photo</h4>
+                                </div>
+                            </div>
+                        </div>
+                    <form>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="container">
+                                <img src="../assets/img/examples/olu-eletu.jpg" class="rounded">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                                <i class="material-icons">save</i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exhibitionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Art Exhibitions</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                    <div class="p-2" style="float: right;">
+                        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="exhibitionAlbumModal">
+                            <i class="material-icons">photo_album</i> Album
+                        </button>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="p-2">
+                                <h4 class="card-title">Add Title of Art Exhibition</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitle($event)"
+                                    [value]="selectedTitle">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Add Gallery Name</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Gallery Name" (keyup)="addTitle($event)"
+                                    [value]="selectedTitle">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Organized By</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Organization Name"
+                                    (keyup)="addTitle($event)" [value]="selectedTitle">
+                            </div>
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="card-title">Add Location</h4>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Enter Location"
+                                            (keyup)="addTitle($event)" [value]="selectedTitle">
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="card-title">Add Year</h4>
+                                        <input type="number" class="date-own form-control" style="width: 300px;"
+                                            aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                            min="1000" max="2100" (keyup)="addYear($event)" [value]="selectedYear">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#exhibitionPhotoModal">
+                        <i class="material-icons">add_a_photo</i> Add Photo
+                    </button>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round">
+                        <i class="material-icons">save</i> Save Workshop
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exhibitionPhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                    <form>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="p-2">
+                                    <h4 class="card-title">Add Caption</h4>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        id="exampleInputEmail1" placeholder="Enter caption" (keyup)="addTitle($event)"
+                                        [value]="selectedTitle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="container">
+                                <i *ngIf="isImageSubmitting" class="material-icons edit-btn" style="color:#9c27b0"
+                                    (click)="imageInput.click()">create</i>
+                                <i *ngIf="!isImageSubmitting" class="material-icons upload-wrapper-icon"
+                                    style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
+                                <input hidden (change)="onImageSelected($event)" #imageInput type="file" id="imageFile">
+                                <img [src]="selectedImageURL" class="imageBox">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                                <i class="material-icons">save</i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exhibitionAlbumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                                    <h4 class="card-title">Workshop Photo</h4>
+                                </div>
+                            </div>
+                        </div>
+                    <form>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="container">
+                                <img src="../assets/img/examples/olu-eletu.jpg" class="rounded">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                                <i class="material-icons">save</i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
