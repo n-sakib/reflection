@@ -38,7 +38,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'reviews', component: ReviewsComponent },
-      { path: 'cart', component: CartComponent, ...canActivate(redirectUnauthorizedToHome)},
+      { path: 'cart', component: CartComponent},
       { path: 'order', component: OrderSequenceComponent },
       { path: 'exhibitions', component: ExhibitionComponent },
       { path: 'paintings', component: PaintingsListComponent },

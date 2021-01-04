@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-artist-dashboard',
@@ -20,7 +21,8 @@ export class ArtistDashboardComponent implements OnInit {
   user = {
     email: '',
     photoURL: '',
-    displayName: ''
+    displayName: '',
+    uid: ''
   };
   selectedTitle = '';
   selectedType = '';
@@ -38,7 +40,7 @@ export class ArtistDashboardComponent implements OnInit {
   selectedEduOption = '';
   public media1Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' },
   { value: 'Acrylic Paint on Board' }, { value: 'Watercolor on Paper' }, { value: 'Poster Color on Paper' }, { value: 'Graphite Pencil on Paper' }, { value: 'Charcoal on Paper' }, { value: 'Other Media' }];
-  public media2Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' },{ value: 'Woodcut' },{value: 'Lithography'},
+  public media2Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' }, { value: 'Woodcut' }, { value: 'Lithography' },
   { value: 'Acrylic Paint on Board' }, { value: 'Watercolor on Paper' }, { value: 'Poster Color on Paper' }, { value: 'Graphite Pencil on Paper' }, { value: 'Charcoal on Paper' }, { value: 'Other Media' }];
 
   educations = [];
@@ -50,21 +52,19 @@ export class ArtistDashboardComponent implements OnInit {
 
     this.afAuth.authState.subscribe(user => {
       this.user = user;
-      console.log( this.user)
-      console.log(this.user.photoURL)
-    });
-
-    this.database.list('artistEducation/').snapshotChanges()
-      .subscribe({
-        next: educations => {
-          educations.forEach(educations => {
-            var val = educations.payload.val();
-            this.educations.push(val);
-          });
-
-        }
-      })
-
+      this.database.list(`users/${this.user.uid}/education`).snapshotChanges()
+        .subscribe({
+          next: educations => {
+            this.educations = []
+            educations.forEach(education => {
+              let val = education.payload.val();
+              val['key'] = education.key;
+              this.educations.push(val);
+              console.log(this.educations)
+            });
+          }
+        })
+    })
   }
 
   toBase64 = file => new Promise((resolve, reject) => {
@@ -212,25 +212,37 @@ export class ArtistDashboardComponent implements OnInit {
     this.toastr.success('Post is Done!');
   }
 
-  publishEducation() {
-    // A post entry.
-    var postEduData = {
-      eduSchoolType: this.selectedEduOption,
-      schoolName: this.selectedSchool,
-      certificateName: this.selectedCertificate,
-      degreeYear: this.selectedEduYear
-    };
+  educationForm = new FormGroup({
+    type: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    certificate: new FormControl('', [Validators.required]),
+    year: new FormControl('', [Validators.required])
+  });
 
-    // console.log(postEduData)
-    // Get a key for a new Post.
-    this.database.list(`artistEducation/`).push(postEduData).then(() => {
-      this.selectedEduOption = '',
-        this.selectedCertificate = '',
-        this.selectedEduYear = '',
-        this.selectedSchool = ''
-    })
-    this.toastr.success('Post is Done!');
+  publishEducation() {
+    console.log("baal")
+    this.educationForm.markAllAsTouched();
+    if (this.educationForm.valid) {
+      this.database.list(`users/${this.user.uid}/education`).push(this.educationForm.value).then(() => {
+        this.educationForm.reset()
+        this.toastr.success('Added New Education/ Training Information.');
+      }).catch(() => {
+        this.toastr.error('Cannot add information at this moment. Please try again later.');
+      })
+    } else {
+      this.toastr.error('Please add all the information.');
+    }
   }
 
-
+  editEducation(education, field, newValue) {
+    this.database.list(`users/${this.user.uid}/education`).update(education.key, {[field]: newValue})
+  }
+  
+  deleteEducation(education) {
+    this.database.list(`users/${this.user.uid}/education/${education.key}`).remove().then(() => {
+      this.toastr.success('Successfully removed Education/ Training Information.');
+    }).catch(() => {
+      this.toastr.error('Cannot remove information at this moment. Please try again later.');
+    })
+  }
 }
