@@ -669,8 +669,8 @@
     </div>
 </div>
 
-<!-- workshop modal  -->
-<div class="modal fade" id="workshopModal" tabindex="-1" role="dialog" aria-labelledby="educationModal"
+<!-- education modal -->
+<div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="educationModal"
     aria-hidden="true" data-backdrop="static" x>
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -810,141 +810,162 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="educationModal"
+
+<!-- workshop modal -->
+
+<div class="modal fade" id="workshopModal" tabindex="-1" role="dialog" aria-labelledby="workshopModal"
     aria-hidden="true" data-backdrop="static" x>
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="exampleModalLabel">Education/ Art Training</h3>
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Art Workshop</h3>
                 <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
                     <i class="material-icons">close</i>
                 </button>
             </div>
-            <div class="modal-body bg-primary">
+            <div class="modal-body">
                 <div class="tab-content tab-space">
-                    <div class="p-2">
+                    <div class="p-2" style="float: right;">
+                        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#workshopAlbumModal">
+                            <i class="material-icons">photo_album</i> Album
+                        </button>
+                    </div>
+                    <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-white">Add New Education / Training</h4>
-                            <div class="card p-4">
-                                <form [formGroup]="educationForm">
-                                    <h6>Type of School</h6>
-                                    <div class="form-check form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" value="Academy/Art School"
-                                                formControlName="type">
-                                            Academy/Art School
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
+                            <div class="p-2">
+                                <h4 class="card-title">Add Title of Workshop</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter title" (keyup)="addTitleWshop($event)"
+                                    [value]="selectedTitleWorkshop">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Add Subjects/Techniques Demonstrated and Practiced</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Techniques" (keyup)="addSubjectWshop($event)"
+                                    [value]="selectedSubjectWshop">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Supervised By</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Superviser Name" (keyup)="addSuperviserWshop($event)" 
+                                    [value]="selectedSupWshop">
+                            </div>
+                            <div class="p-2">
+                                <h4 class="card-title">Organized By</h4>
+                                <input type="text" class="form-control" aria-describedby="emailHelp"
+                                    id="exampleInputEmail1" placeholder="Enter Organization Name"
+                                    (keyup)="addOrgWshop($event)" [value]="selectedOrgWshop">
+                            </div>
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="card-title">Add Location</h4>
+                                        <input type="text" class="form-control" aria-describedby="emailHelp"
+                                            id="exampleInputEmail1" placeholder="Enter Location"
+                                            (keyup)="addLocWshop($event)" [value]="selectedLocWshop">
                                     </div>
-                                    <div class="form-check form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" value="Graduate School"
-                                                formControlName="type">
-                                            Graduate School
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
+                                    <div class="col">
+                                        <h4 class="card-title">Add Year</h4>
+                                        <input type="number" class="date-own form-control" style="width: 300px;"
+                                            aria-describedby="emailHelp" id="exampleInputEmail1" placeholder="YYYY"
+                                            min="1000" max="2100" (keyup)="addYearWshop($event)" [value]="selectedYearWshop">
                                     </div>
-                                    <div class="form-check form-check-radio disabled">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" value="Post Graduate School"
-                                                formControlName="type">
-                                            Post Graduate School
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Name of Academy/School/University</h6>
-                                        <input type="text" class="form-control" placeholder="Name of the Institute"
-                                            formControlName="name">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <h6>Certificate Achieved</h6>
-                                            <input type="text" class="form-control" placeholder="Certificate Name"
-                                                formControlName="certificate">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <h6>Year</h6>
-                                            <input type="number" class="date-own form-control" style="width: 300px;"
-                                                placeholder="Certificate Name" formControlName="year"
-                                                placeholder="YYYY">
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="p-2 pt-2"
-                                    style=" display: flex; justify-content: center; align-items: center;">
-                                    <button class="btn btn-primary" (click)="publishEducation()">
-                                        <i class="material-icons">save</i> Save
-                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="p-2">
-                        <div class="card-body">
-                            <h4 class="card-title text-white">Edit Education / Training</h4>
-                            <div class="card p-4" *ngFor="let education of educations">
-                                    <h6>Type of School</h6>
-                                    <div class="form-check form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio"
-                                                [checked]="education.type === 'Academy/Art School'" [name]="education.key" (click)="editEducation(education, 'type', 'Academy/Art School')">
-                                            Academy/Art School
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" value="Graduate School"
-                                            [checked]="education.type === 'Graduate School'" [name]="education.key" (click)="editEducation(education, 'type', 'Graduate School')">
-                                            Graduate School
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-radio disabled">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" value="Post Graduate School"
-                                            [checked]="education.type === 'Post Graduate School'" [name]="education.key" (click)="editEducation(education, 'type', 'Post Graduate School')"> 
-                                            Post Graduate School
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Name of Academy/School/University</h6>
-                                        <input type="text" class="form-control" placeholder="Name of the Institute" [value]="education.name" (blur)="editEducation(education, 'name', $event.currentTarget.value)">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <h6>Certificate Achieved</h6>
-                                            <input type="text" class="form-control" placeholder="Certificate Name" [value]="education.certificate" (blur)="editEducation(education, 'certificate', $event.currentTarget.value)">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <h6>Year</h6>
-                                            <input type="number" class="date-own form-control" [value]="education.year" (blur)="editEducation(education, 'year', $event.currentTarget.value)"
-                                                placeholder="YYYY">
-                                        </div>
-                                    </div>
-                                <div class="p-2 pt-2"
-                                    style=" display: flex; justify-content: center; align-items: center;">
-                                    <button class="btn btn-rose" (click)="deleteEducation(education)">
-                                        <i class="material-icons">delete</i> Delete
-                                    </button>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#workshopPhotoModal">
+                        <i class="material-icons">add_a_photo</i> Add Photo
+                    </button>
+                </div>
+                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                    <button class="btn btn-primary btn-round" (click)="publishWshop()">
+                        <i class="material-icons">save</i> Save Workshop
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="workshopPhotoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                    <form>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="p-2">
+                                    <h4 class="card-title">Add Caption</h4>
+                                    <input type="text" class="form-control" aria-describedby="emailHelp"
+                                        id="exampleInputEmail1" placeholder="Enter caption" (keyup)="addCaptionWshop($event)"
+                                        [value]="selectedCaptionWshop">
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="container">
+                                <i *ngIf="isWshopImgSubmitting" class="material-icons edit-btn" style="color:#9c27b0"
+                                    (click)="imgWshopInput.click()">create</i>
+                                <i *ngIf="!isWshopImgSubmitting" class="material-icons upload-wrapper-icon"
+                                    style="color:#9c27b0" (click)="imgWshopInput.click()">cloud_upload</i>
+                                <input hidden (change)="onWshopImgSelected($event)" #imgWshopInput type="file" id="imageFile">
+                                <img [src]="selectedWshopImgURL" class="imageBox">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" (click)="publishWshop()">
+                                <i class="material-icons">save</i> Save Photo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="workshopAlbumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" x>
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Workshop Photo</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content tab-space">
+                        <!-- <div class="card">
+                            <div class="card-body">
+                                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                                    <h4 class="card-title">Workshop Photo</h4>
+                                </div>
+                            </div>
+                        </div> -->
+                    <form>
+                        <div class="jumbotron vertical-center text-center">
+                            <div class="p-2" *ngFor="let workshop of workshops">
+                                <img [src]="workshop.workshopImg" class="rounded">
+                            </div>
+                        </div>
+                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#workshopPhotoModal">
+                                <i class="material-icons">add_a_photo</i> Add More Photos
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
