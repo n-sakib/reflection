@@ -77,17 +77,20 @@ export class ArtistDashboardComponent implements OnInit {
             });
           }
         })
+        this.database.list(`users/${this.user.uid}/workshop`).snapshotChanges()
+        .subscribe({
+          next: workshops => {
+            this.workshops = []
+            workshops.forEach(workshop => {
+              let val = workshop.payload.val();
+              val['key'] = workshop.key;
+              this.workshops.push(val);
+              console.log(this.workshops)
+            });
+          }
+        })
     })
-    this.database.list('artistWorkshop/').snapshotChanges()
-    .subscribe({
-      next: workshops => {
-        workshops.forEach(workshops => {
-          var val = workshops.payload.val();
-          this.workshops.push(val);
-          // console.log(this.workshops)
-        });
-      }
-  })
+  
   }
 
   toBase64 = file => new Promise((resolve, reject) => {
@@ -207,51 +210,6 @@ export class ArtistDashboardComponent implements OnInit {
     this.selectedReplica = rep;
     console.log(this.selectedReplica)
   }
-  addEduOption(edu) {
-    // var value = $event.target.value;
-    this.selectedEduOption = edu;
-    console.log(this.selectedEduOption)
-  }
-  addSchool($event) {
-    var value = $event.target.value;
-    this.selectedSchool = value;
-  }
-  addCertificate($event) {
-    var value = $event.target.value;
-    this.selectedCertificate = value;
-  }
-  addEduYear($event) {
-    var value = $event.target.value;
-    this.selectedEduYear = value;
-  }
-  addTitleWshop($event){
-    var value = $event.target.value;
-    this.selectedTitleWorkshop = value;
-  }
-  addSubjectWshop($event){
-    var value = $event.target.value;
-    this.selectedSubjectWshop = value;
-  }
-  addSuperviserWshop($event){
-    var value = $event.target.value;
-    this.selectedSupWshop = value;
-  }
-  addOrgWshop($event){
-    var value = $event.target.value;
-    this.selectedOrgWshop = value;
-  }
-  addLocWshop($event){
-    var value = $event.target.value;
-    this.selectedLocWshop = value;
-  }
-  addYearWshop($event){
-    var value = $event.target.value;
-    this.selectedYearWshop = value;
-  }
-  addCaptionWshop($event){
-    var value = $event.target.value;
-    this.selectedCaptionWshop = value;
-  }
 
   publish() {
     // A post entry.
@@ -291,6 +249,18 @@ export class ArtistDashboardComponent implements OnInit {
     year: new FormControl('', [Validators.required])
   });
 
+  workshopForm = new FormGroup({
+    workshopTitle: new FormControl('', [Validators.required]),
+    workshopSubject: new FormControl('', [Validators.required]),
+    workshopSuperviser: new FormControl('', [Validators.required]),
+    workshopOrg: new FormControl('', [Validators.required]),
+    workshopLoc: new FormControl('', [Validators.required]),
+    workshopYear: new FormControl('', [Validators.required]),
+    workshopImgCaption: new FormControl('', [Validators.required]),
+    workshopImg: new FormControl('', [Validators.required]),
+  });
+
+
   publishEducation() {
     console.log("baal")
     this.educationForm.markAllAsTouched();
@@ -306,8 +276,28 @@ export class ArtistDashboardComponent implements OnInit {
     }
   }
 
+  publishWorkshop() {
+    console.log("baal")
+    this.workshopForm.markAllAsTouched();
+    if (this.workshopForm.valid) {
+      this.database.list(`users/${this.user.uid}/workshop`).push(this.workshopForm.value).then(() => {
+        this.workshopForm.reset()
+        this.toastr.success('Added New Workshop Information.');
+      }).catch(() => {
+        this.toastr.error('Cannot add information at this moment. Please try again later.');
+      })
+    } else {
+      this.toastr.error('Please add all the information.');
+    }
+  }
+  
+
   editEducation(education, field, newValue) {
     this.database.list(`users/${this.user.uid}/education`).update(education.key, {[field]: newValue})
+  }
+
+  editWorkshop(workshop, field, newValue) {
+    this.database.list(`users/${this.user.uid}/workshop`).update(workshop.key, {[field]: newValue})
   }
   
   deleteEducation(education) {
@@ -318,31 +308,11 @@ export class ArtistDashboardComponent implements OnInit {
     })
   }
 
-  publishWshop() {
-    // A post entry.
-    var postWshopData = {
-      workshopTitle: this.selectedTitleWorkshop,
-      workshopSubject: this.selectedSubjectWshop,
-      workshopSuperviser: this.selectedSupWshop,
-      workshopOrg: this.selectedOrgWshop,
-      workshopLoc: this.selectedLocWshop,
-      workshopYear: this.selectedYearWshop,
-      workshopImgCaption: this.selectedCaptionWshop,
-      workshopImg: this.selectedWshopImgURL
-    };
-
-    // console.log(postEduData)
-    // Get a key for a new Post.
-    this.database.list(`artistWorkshop/`).push(postWshopData).then(() => {
-      this.selectedTitleWorkshop = '',
-        this.selectedSubjectWshop = '',
-        this.selectedSupWshop = '',
-        this.selectedOrgWshop = '',
-        this.selectedLocWshop = '',
-        this.selectedYearWshop = '',
-        this.selectedCaptionWshop = ''
+  deleteWorkshop(workshop) {
+    this.database.list(`users/${this.user.uid}/workshop/${workshop.key}`).remove().then(() => {
+      this.toastr.success('Successfully removed Workshop Information.');
+    }).catch(() => {
+      this.toastr.error('Cannot remove information at this moment. Please try again later.');
     })
-    this.toastr.success('Post is Done!');
   }
-
 }
