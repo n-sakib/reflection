@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-artist-dashboard',
@@ -47,7 +48,11 @@ export class ArtistDashboardComponent implements OnInit {
   selectedYearWshop = '';
   selectedWshopImgURL = '';
   selectedCaptionWshop = '';
+  imageUploadPercentage: Observable<number>;
   isWshopImgSubmitting: boolean = false;
+  file = {
+    type: ''
+  };
 
   public media1Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' },
   { value: 'Acrylic Paint on Board' }, { value: 'Watercolor on Paper' }, { value: 'Poster Color on Paper' }, { value: 'Graphite Pencil on Paper' }, { value: 'Charcoal on Paper' }, { value: 'Other Media' }];
@@ -56,7 +61,7 @@ export class ArtistDashboardComponent implements OnInit {
 
   educations = [];
   showEducations = [];
-  workshops =[];
+  workshops = [];
 
 
   constructor(private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, private afAuth: AngularFireAuth, public auth: AuthService) { }
@@ -73,11 +78,10 @@ export class ArtistDashboardComponent implements OnInit {
               let val = education.payload.val();
               val['key'] = education.key;
               this.educations.push(val);
-              console.log(this.educations)
             });
           }
         })
-        this.database.list(`users/${this.user.uid}/workshop`).snapshotChanges()
+      this.database.list(`users/${this.user.uid}/workshop`).snapshotChanges()
         .subscribe({
           next: workshops => {
             this.workshops = []
@@ -85,12 +89,11 @@ export class ArtistDashboardComponent implements OnInit {
               let val = workshop.payload.val();
               val['key'] = workshop.key;
               this.workshops.push(val);
-              console.log(this.workshops)
             });
           }
         })
     })
-  
+
   }
 
   toBase64 = file => new Promise((resolve, reject) => {
@@ -117,54 +120,14 @@ export class ArtistDashboardComponent implements OnInit {
     this.isWshopImgSubmitting = true;
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]); //64
+      this.file = event.target.files[0];
+      console.log(this.file)
       reader.onload = (event: any) => {
-        this.selectedWshopImgURL= event.target.result;
-        console.log(this.selectedWshopImgURL)
-        // this.isImageSubmitted = true
+        this.selectedWshopImgURL = event.target.result;
       }
     }
   }
-
-
-
-
-  // const file = (<HTMLInputElement>document.getElementById('imageFile')).files[0];
-  // this.toBase64(file).then(() => {
-  //   const filePath = `${new Date().getTime()}`;
-  //   const fileRef = this.storage.ref(filePath);
-  //   const task = this.storage.upload(filePath, file);
-  //   task
-  //     .snapshotChanges()
-  //     .pipe(
-  //       finalize(() => {
-  //         var downloadURL = fileRef.getDownloadURL();
-  //         downloadURL.subscribe(url => {
-  //           this.isImageSubmitted = true;
-  //           this.selectedImageURL = url;
-  // async onImageSelected() {
-  //   console.log((<HTMLInputElement>document.getElementById('imageFile')).files[0]);
-  //   // this.imagePreview=
-  //   const file = (<HTMLInputElement>document.getElementById('imageFile')).files[0];
-  //   this.toBase64(file).then(() => {
-  //     const filePath = `${new Date().getTime()}`;
-  //     const fileRef = this.storage.ref(filePath);
-  //     const task = this.storage.upload(filePath, file);
-  //     task
-  //       .snapshotChanges()
-  //       .pipe(
-  //         finalize(() => {
-  //           var downloadURL = fileRef.getDownloadURL();
-  //           downloadURL.subscribe(url => {
-  //             this.isImageSubmitted = true;
-  //             this.selectedImageURL = url;
-
-  //         })
-  //       })
-  //     )
-  //     .subscribe();
-  // })
-
 
   addTitle($event) {
     var value = $event.target.value;
@@ -227,7 +190,7 @@ export class ArtistDashboardComponent implements OnInit {
     };
     // Get a key for a new Post.
     this.database.list(`artWork/`).push(postData).then(() => {
-        this.selectedType = '',
+      this.selectedType = '',
         this.selectedTypeNote = '',
         this.selectedImageURL = '',
         this.selectedTitle = '',
@@ -249,8 +212,6 @@ export class ArtistDashboardComponent implements OnInit {
     year: new FormControl('', [Validators.required])
   });
 
-  
-
 
   publishEducation() {
     console.log("baal")
@@ -267,6 +228,18 @@ export class ArtistDashboardComponent implements OnInit {
     }
   }
 
+  editEducation(education, field, newValue) {
+    this.database.list(`users/${this.user.uid}/education`).update(education.key, { [field]: newValue })
+  }
+
+  deleteEducation(education) {
+    this.database.list(`users/${this.user.uid}/education/${education.key}`).remove().then(() => {
+      this.toastr.success('Successfully removed Education/ Training Information.');
+    }).catch(() => {
+      this.toastr.error('Cannot remove information at this moment. Please try again later.');
+    })
+  }
+
   workshopForm = new FormGroup({
     workshopTitle: new FormControl('', [Validators.required]),
     workshopSubject: new FormControl('', [Validators.required]),
@@ -281,39 +254,43 @@ export class ArtistDashboardComponent implements OnInit {
   publishWorkshop() {
     console.log("baal")
     this.workshopForm.markAllAsTouched();
-
     if (this.workshopForm.valid) {
-      // workshop image ase
-      //storage bucket e save korbi
-      // storage bucket theke download url ber korbi
-      // db te download url ta shoho nicher data gula save korbi
-      //this.workshopForm.controls['workshopImg'].setValue(selected.id);
-      this.database.list(`users/${this.user.uid}/workshop`).push(this.workshopForm.value).then(() => {
+      this.database.list(`users/${this.user.uid}/workshop`).push(this.workshopForm.value).then((workshop) => {
+        if (this.selectedWshopImgURL !== null) {
+          const filePath = `${new Date().getTime()}`;
+          const fileRef = this.storage.ref(filePath);
+          const task = this.storage.upload(`users/${this.user.uid}/workshops/${workshop.key}/main`, this.file, {'contentType': this.file.type});
+          task.percentageChanges().subscribe((res) => {
+          })
+          var downloadURL = fileRef.getDownloadURL();
+          console.log(downloadURL)
+          // downloadURL.getDownloadURL().then(url =>{
+          //   // Insert url into an <img> tag to "download"
+          //   this.workshopForm.controls['workshopImg'].setValue(url);
+          //   console.log(url)
+          // })
+          // console.log(downloadURL)
+          // this.workshopForm.controls['workshopImg'].setValue(downloadURL);
+        }
         this.workshopForm.reset()
         this.toastr.success('Added New Workshop Information.');
       }).catch(() => {
         this.toastr.error('Cannot add information at this moment. Please try again later.');
       })
+
+      //storage bucket e save korbi
+      // storage bucket theke download url ber korbi
+      // db te download url ta shoho nicher data gula save korbi
+      //this.workshopForm.controls['workshopImg'].setValue(selected.id);
+
+
     } else {
       this.toastr.error('Please add all the information.');
     }
   }
-  
-
-  editEducation(education, field, newValue) {
-    this.database.list(`users/${this.user.uid}/education`).update(education.key, {[field]: newValue})
-  }
 
   editWorkshop(workshop, field, newValue) {
-    this.database.list(`users/${this.user.uid}/workshop`).update(workshop.key, {[field]: newValue})
-  }
-  
-  deleteEducation(education) {
-    this.database.list(`users/${this.user.uid}/education/${education.key}`).remove().then(() => {
-      this.toastr.success('Successfully removed Education/ Training Information.');
-    }).catch(() => {
-      this.toastr.error('Cannot remove information at this moment. Please try again later.');
-    })
+    this.database.list(`users/${this.user.uid}/workshop`).update(workshop.key, { [field]: newValue })
   }
 
   deleteWorkshop(workshop) {
