@@ -84,12 +84,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 ml-auto">
-                                <img src="../assets/img/examples/studio-1.jpg" class="rounded">
-                                <img src="../assets/img/examples/studio-2.jpg" class="rounded">
+                                <div *ngFor="let artwork of artworks; let even=even;">
+                                    <img *ngIf="even" (click)="openArtwork(artwork)" [src]="artwork.artWorkImage" class="artwork rounded">
+                                </div>
                             </div>
                             <div class="col-md-3 mr-auto">
-                                <img src="../assets/img/examples/studio-5.jpg" class="rounded">
-                                <img src="../assets/img/examples/studio-4.jpg" class="rounded">
+                                <div *ngFor="let artwork of artworks; let odd=odd;">
+                                    <img *ngIf="odd" [src]="artwork.artWorkImage" class="artwork rounded">
+                                </div>
                             </div>
                         </div>
 
@@ -314,370 +316,482 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
+<!-- ArtWork Modal -->
 <div class="modal fade" id="artworkModal" tabindex="-1" role="dialog" aria-labelledby="artworkModalLabel"
     aria-hidden="true" data-backdrop="static" x>
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="artworkModalLabel">Add New Art Work</h3>
+                <h3 class="modal-title text-white" id="artworkModalLabel">Art Works</h3>
                 <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
                     <i class="material-icons">close</i>
                 </button>
             </div>
-            <div class="modal-body">
-                <nav aria-label="...">
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#pill1" data-toggle="tab">1</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#pill2" data-toggle="tab">2 <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#pill3" data-toggle="tab">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="tab-content tab-space">
-                    <div class="tab-pane active" id="pill1">
-                        <form>
-                            <div class="jumbotron vertical-center text-center">
-                                <div class="container">
-                                    <i *ngIf="isImageSubmitting" class="material-icons edit-btn" style="color:#9c27b0"
-                                        (click)="imageInput.click()">create</i>
-                                    <i *ngIf="!isImageSubmitting" class="material-icons upload-wrapper-icon"
-                                        style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
-                                    <input hidden (change)="onImageSelected($event)" #imageInput type="file"
-                                        id="imageFile">
-                                    <img [src]="selectedImageURL" class="imageBox">
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Art Work Type</h4>
-                                    <div class="form-check form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="exampleRadios"
-                                                name="exampleRadios" id="exampleRadios1" value="Drawing & Painting"
-                                                (change)="addType($event)">
-                                            Drawing & Painting
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
+            <div class="modal-body bg-primary">
+                <div class="card-body">
+                    <h4 class="card-title text-white">Add New Artwork</h4>
+                    <div class="card p-4">
+                        <form [formGroup]="artworkForm">
+                            <div class="modal-body">
+                                <div *ngIf="artworkFormPage === 1">
+                                    <h6>Art work Photo</h6>
+                                    <div class=" vertical-center text-center"
+                                        [ngClass]="{'image-uploader': !isImageUploaded }">
+                                        <div class="container">
+                                            <i *ngIf="isImageUploaded" class="material-icons edit-btn"
+                                                style="color:#9c27b0" (click)="imageInput.click()">create</i>
+                                            <i *ngIf="!isImageUploaded" class="material-icons upload-wrapper-icon"
+                                                style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
+                                            <input hidden (change)="onArtworkImageSelected($event)" #imageInput
+                                                type="file" id="imageFile" formControlName="artWorkImage">
+                                            <img [src]="artworkImagePreview" class="imageBox">
+                                        </div>
                                     </div>
-                                    <div class="form-check form-check-radio">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="exampleRadios"
-                                                (change)="addType($event)" name="exampleRadios" id="exampleRadios"
-                                                value="Print Making" checked>
-                                            Print Making
-                                            <span class="circle">
-                                                <span class="check"></span>
-                                            </span>
-                                        </label>
+                                    <div class="pt-3">
+                                        <h6>Art Work Type</h6>
+                                        <div class="form-check form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" value="Drawing & Painting"
+                                                    formControlName="type"
+                                                    (change)="fetchMedia('drawing-and-painting')">
+                                                Drawing & Painting
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" value="Print Making"
+                                                    formControlName="type" (change)="fetchMedia('print-making')">
+                                                Print Making
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small>  -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="p-2">
+                                    <div class="pt-1">
                                         <div class="row">
                                             <div class="col">
-                                                <h4 class="card-title">Art Work Title</h4>
-                                                <input type="text" class="form-control" aria-describedby="emailHelp"
-                                                    id="exampleInputEmail1" placeholder="Enter title"
-                                                    (keyup)="addTitle($event)" [value]="selectedTitle">
+                                                <h6>Art Work Title</h6>
+                                                <input type="text" class="form-control" placeholder="Enter title"
+                                                    formControlName="title">
                                             </div>
                                             <div class="col">
-                                                <h4 class="card-title">Add Creation Year</h4>
-                                                <input type="number" class="date-own form-control" style="width: 300px;"
-                                                    aria-describedby="emailHelp" id="exampleInputEmail1"
-                                                    placeholder="YYYY" min="1000" max="2100" (keyup)="addYear($event)"
-                                                    [value]="selectedYear">
+                                                <h6>Creation Year</h6>
+                                                <input type="number" class="date-own form-control"
+                                                    formControlName="year" placeholder="YYYY" min="1000" max="2100">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="p-2">
-                                        <h4 class="card-title">Art Work Media</h4>
-                                        <select class="form-control selectpicker" data-style="btn btn-link"
-                                            id="exampleFormControlSelect1" [(value)]="selectedCategory">
-                                            <option *ngFor="let media1List of media1Lists" value="media1List.value">
-                                                {{media1List.value}}</option>
+                                    <div class="pt-2">
+                                        <h6>Art Work Media</h6>
+                                        <select class="form-control selectpicker" formControlName="media">
+                                            <option value="" disabled selected>Select Artwork Type to Populate</option>
+                                            <option *ngFor="let media of medias" [value]="media">
+                                                {{media}}</option>
                                         </select>
-                                    </div>
-                                    <div class="p-2">
-                                        <h4 class="card-title">Size</h4>
+                                        <div class="pt-2"
+                                            *ngIf="artworkForm.controls.media.value === 'Other Media' || artworkForm.controls.media.value === 'Mixed Media'">
+                                            <h6>Media Details</h6>
+                                            <input type="text" class="form-control"
+                                                placeholder="Paint/ Color/ Ink/ Pigment on Base/ Ground"
+                                                formControlName="mediaDetails">
+                                        </div>
+                                        <h6>Size</h6>
                                         <div class="form-row">
                                             <div class="col">
                                                 <input type="number" class="form-control" placeholder="Height"
-                                                    [(value)]="selectedHeight" (keyup)="addHeight($event)">
+                                                    formControlName="height">
                                             </div>
                                             <h5 for="exampleFormControlTextarea1">X</h5>
                                             <div class="col">
                                                 <input type="number" class="form-control" placeholder="Width"
-                                                    [(value)]="selectedWidth" (keyup)="addWidth($event)">
+                                                    formControlName="width">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
-                            <div class="p-2" *ngif="false">
-                                <input type="text" class="form-control" aria-describedby="emailHelp"
-                                    id="exampleInputEmail1" placeholder="Enter media Type">
-                            </div>
-                            <!-- <small id="emailHelp" class="form-text text-danger">This field is mandatory</small> -->
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Art Concept</h4>
-                                    <div class="p-2">
+                                    <div class="pt-1">
+                                        <h6>Art Concept</h6>
                                         <div class="form-group">
-                                            <textarea class="form-control" id="exampleInputEmail1" rows="3"
-                                                [(value)]="selectedConcept" (keyup)="addConcept($event)"></textarea>
+                                            <textarea class="form-control" rows="2"
+                                                formControlName="concept"></textarea>
                                         </div>
+                                    </div>
+                                    <nav aria-label="..."
+                                        style=" display: flex; justify-content: center; align-items: center;">
+                                        <ul class="pagination pt-5 pb-3">
+                                            <li class="page-item active"><a class="page-link"
+                                                    (click)="changeFormPage(1)">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" (click)="changeFormPage(2)">2</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" (click)="changeFormPage(3)">3</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <div class="p-2 pt-2"
+                                        style=" display: flex; justify-content: center; align-items: center;">
+                                        <button class="btn btn-default disabled">
+                                            <i class="material-icons">keyboard_arrow_left
+                                            </i> Previous
+                                        </button>
+                                        <button class="btn btn-primary" (click)="changeFormPage(2)">
+                                            Next
+                                            <i class="material-icons">keyboard_arrow_right
+                                            </i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div *ngIf="artworkFormPage === 2">
+                                    <div class="vertical-center text-center">
+                                        <div class="container">
+                                            <img *ngIf="isImageUploaded" [src]="artworkImagePreview" class="imageBox">
+                                        </div>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <div class="col-md-6">
+                                            <h6>Art Work Information</h6>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Art Work Type: {{
+                                                    artworkForm.controls.type.value }}</li>
+                                                <li class="list-group-item">Title: {{ artworkForm.controls.title.value
+                                                    }}</li>
+                                                <li class="list-group-item">Year: {{ artworkForm.controls.year.value}}
+                                                </li>
+                                                <li class="list-group-item">Media: {{artworkForm.controls.media.value}}
+                                                </li>
+                                                <li class="list-group-item">Size:
+                                                    {{artworkForm.controls.height.value}} X
+                                                    {{artworkForm.controls.width.value}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Art Concept</h6>
+                                            <textarea class="form-control" rows="3"
+                                                [(value)]="artworkForm.controls.type.value "
+                                                formControlName="concept"></textarea>
+                                        </div>
+                                    </div>
+                                    <h6>Do you want to sell this Art Work ?</h6>
+                                    <div class="form-check form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" value="yes"
+                                                formControlName="isForSell">
+                                            Yes
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-radio">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" value="no"
+                                                formControlName="isForSell">
+                                            No
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-radio disabled">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" value="soldout"
+                                                formControlName="isForSell">
+                                            Sold Out
+                                            <span class="circle">
+                                                <span class="check"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <nav style=" display: flex; justify-content: center; align-items: center;">
+                                        <ul class="pagination pt-5 pb-3">
+                                            <li class="page-item"><a class="page-link" (click)="changeFormPage(1)">1</a>
+                                            </li>
+                                            <li class="page-item active">
+                                                <a class="page-link" (click)="changeFormPage(2)">2</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" (click)="changeFormPage(3)">3</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <div class="p-2 pt-2"
+                                        style=" display: flex; justify-content: center; align-items: center;">
+                                        <button class="btn btn-default" (click)="changeFormPage(1)">
+                                            <i class="material-icons">keyboard_arrow_left
+                                            </i> Previous
+                                        </button>
+                                        <button class="btn btn-primary" (click)="changeFormPage(3)">
+                                            Next
+                                            <i class="material-icons">keyboard_arrow_right
+                                            </i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div *ngIf="artworkFormPage === 3">
+                                    <div class="row" *ngIf="artworkForm.controls.isForSell.value === 'yes'">
+                                        <div class="col-md-6">
+                                            <h6>Terms and Conditions</h6>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value="">
+                                                    Term 1
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check disabled">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value="">
+                                                    Term 2
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check disabled">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value="">
+                                                    Term 3
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="form-check disabled">
+                                                <label class="form-check-label">
+                                                    <input class="form-check-input" type="checkbox" value="">
+                                                    Term 4
+                                                    <span class="form-check-sign">
+                                                        <span class="check"></span>
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Add Expected Price</h6>
+                                            <input type="number" class="form-control" placeholder="999999" min="0"
+                                                max="99999999" formControlName="price">
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="artworkForm.controls.isForSell.value === 'no' || artworkForm.controls.isForSell.value === 'soldout'">
+                                        <h6>Do you want to make a replica of this Art Work on order?</h6>
+                                        <div class="form-check form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" formControlName="replica" value="yes">
+                                                Yes
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" formControlName="replica" value="no">>
+                                                No
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6>Terms and Conditions</h6>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        Term 1
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check disabled">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        Term 2
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check disabled">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        Term 3
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check disabled">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="">
+                                                        Term 4
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6>Add Demand Price</h6>
+                                                <input type="number" class="form-control" placeholder="Enter Desired Price" min="0"
+                                                    max="99999999">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <nav aria-label="..."
+                                        style=" display: flex; justify-content: center; align-items: center;">
+                                        <ul class="pagination pt-5 pb-3">
+                                            <li class="page-item"><a class="page-link" (click)="changeFormPage(1)">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" (click)="changeFormPage(2)">2</a>
+                                            </li>
+                                            <li class="page-item active"><a class="page-link"
+                                                    (click)="changeFormPage(3)">3</a></li>
+                                        </ul>
+                                    </nav>
+                                    <div class="p-2 pt-2"
+                                        style=" display: flex; justify-content: center; align-items: center;">
+                                        <button class="btn btn-default" (click)="changeFormPage(2)">
+                                            <i class="material-icons">keyboard_arrow_left
+                                            </i> Previous
+                                        </button>
+                                        <button class="btn btn-primary" (click)="publishArtwork()">
+                                            <i class="material-icons">save</i> Save Art Work
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane" id="pill2">
-                        <div class="jumbotron vertical-center text-center">
-                            <div class="container">
-                                <img *ngIf="isImageSubmitting" [src]="selectedImageURL" class="imageBox">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card" style="width: 20rem;">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Art Work Type: {{selectedType}}</li>
-                                        <li class="list-group-item">Title: {{selectedTitle }}</li>
-                                        <li class="list-group-item">Year: {{selectedYear}}</li>
-                                        <li class="list-group-item">Media: {{selectedCategory}}</li>
-                                        <li class="list-group-item">Size: {{selectedHeight}} X {{selectedWidth}}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card" style="width: 20rem;">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Art Concept</h4>
-                                        <p *ngIf="selectedConcept" class="card-text">{{selectedConcept}}</p>
-                                        <textarea *ngIf="!selectedConcept" class="form-control" id="exampleInputEmail1"
-                                            rows="3" [(value)]="selectedConcept"
-                                            (keyup)="addConcept($event)"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 20rem;">
-                            <div class="card-body">
-                                <h4 class="card-title">Do you want to sell this Art Work ?</h4>
-                                <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios1" value="yes" (click)="addSellOption('yes')">
-                                        Yes
-                                        <span class="circle">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios2" value="no" (click)="addSellOption('no')">
-                                        No
-                                        <span class="circle">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio disabled">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios1"
-                                            id="exampleRadios3" value="soldout" (click)="addSellOption('soldout')">
-                                        Sold Out
-                                        <span class="circle">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="pill3">
-                        <div *ngIf="selectedSellOption === 'yes'" class="row">
-                            <div class="col-md-6">
-                                <div class="card" style="width: 20rem;">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Terms and Conditions</h4>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 1
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 2
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 3
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 4
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <button class="btn btn-primary btn-round" style="float: right;"
-                                            data-toggle="modal" data-target="#exampleModal">
-                                            I Agree
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card" style="width: 20rem;">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Add Expected Price</h4>
-                                        <input type="number" class="form-control" placeholder="999999" min="0"
-                                            max="99999999">
-                                        <p class="card-text">Dollars</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md" style=" display: flex; justify-content: center; align-items: center;">
-                                <button class="btn btn-primary btn-round" (click)="publishEducation()">
-                                    <i class="material-icons">save</i> Save Art Work
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card" *ngIf="selectedSellOption === 'no' || selectedSellOption === 'soldout'"
-                            style="width: 20rem;">
-                            <div class="card-body">
-                                <h4 class="card-title">Do you want to make a replica of this Art Work on order ?</h4>
-                                <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios1" (value)="yes" (click)="addReplicaOrder('yes')">
-                                        Yes
-                                        <span class="circle">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-radio">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios2" (value)="no" (click)="addReplicaOrder('no')">
-                                        No
-                                        <span class="circle">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div *ngIf="selectedReplica === 'yes'" class="row">
-                            <div class="col-md-6">
-                                <div class="card" style="width: 20rem;">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Terms and Conditions</h4>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 1
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 2
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 3
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="checkbox" value="">
-                                                Term 4
-                                                <span class="form-check-sign">
-                                                    <span class="check"></span>
-                                                </span>
-                                            </label>
-                                        </div>
-                                        <button class="btn btn-primary btn-round" style="float: right;"
-                                            data-toggle="modal" data-target="#exampleModal">
-                                            I Agree
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card" style="width: 20rem;">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Add Demand Price</h4>
-                                        <input type="number" class="form-control" placeholder="999999" min="0"
-                                            max="99999999">
-                                        <p class="card-text">Dollars</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md" style=" display: flex; justify-content: center; align-items: center;">
-                                <button class="btn btn-primary btn-round" (click)="publishEducation()">
-                                    <i class="material-icons">save</i> Save Art Work
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="publish()">Next</button>
             </div>
         </div>
     </div>
 </div>
 
+
+<div class="modal fade" id="artworkEditModal" tabindex="-1" role="dialog" aria-labelledby="artworkEditModalLabel"
+    aria-hidden="true" data-backdrop="static" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h3 class="modal-title text-white" id="artworkEditModalLabel">Art Works</h3>
+                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+            <div class="modal-body bg-primary">
+                <div class="card-body">
+                    <h4 class="card-title text-white">Edit Art Work</h4>
+                    <div class="card p-4">
+                        <form [formGroup]="artworkForm">
+                            <div class="modal-body">
+                                <div>
+                                    <h6>Art work Photo</h6>
+                                    <div class=" vertical-center text-center"
+                                        [ngClass]="{'image-uploader': !isImageUploaded }">
+                                        <div class="container">
+                                            <i *ngIf="isImageUploaded" class="material-icons edit-btn"
+                                                style="color:#9c27b0" (click)="imageInput.click()">create</i>
+                                            <i *ngIf="!isImageUploaded" class="material-icons upload-wrapper-icon"
+                                                style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
+                                            <input hidden (change)="onArtworkImageSelected($event)" #imageInput
+                                                type="file" id="imageFile" formControlName="artWorkImage">
+                                            <img [src]="artworkImagePreview" class="imageBox">
+                                        </div>
+                                    </div>
+                                    <div class="pt-3">
+                                        <h6>Art Work Type</h6>
+                                        <div class="form-check form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" value="Drawing & Painting"
+                                                    formControlName="type"
+                                                    (change)="fetchMedia('drawing-and-painting')">
+                                                Drawing & Painting
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-radio">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" value="Print Making"
+                                                    formControlName="type" (change)="fetchMedia('print-making')">
+                                                Print Making
+                                                <span class="circle">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="pt-1">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h6>Art Work Title</h6>
+                                                <input type="text" class="form-control" placeholder="Enter title"
+                                                    formControlName="title">
+                                            </div>
+                                            <div class="col">
+                                                <h6>Creation Year</h6>
+                                                <input type="number" class="date-own form-control"
+                                                    formControlName="year" placeholder="YYYY" min="1000" max="2100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pt-2">
+                                        <h6>Art Work Media</h6>
+                                        <select class="form-control selectpicker" formControlName="media">
+                                            <option value="" disabled selected>Select Artwork Type to Populate</option>
+                                            <option *ngFor="let media of medias" [value]="media">
+                                                {{media}}</option>
+                                        </select>
+                                        <div class="pt-2"
+                                            *ngIf="artworkForm.controls.media.value === 'Other Media' || artworkForm.controls.media.value === 'Mixed Media'">
+                                            <h6>Media Details</h6>
+                                            <input type="text" class="form-control"
+                                                placeholder="Paint/ Color/ Ink/ Pigment on Base/ Ground"
+                                                formControlName="mediaDetails">
+                                        </div>
+                                        <h6>Size</h6>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="number" class="form-control" placeholder="Height"
+                                                    formControlName="height">
+                                            </div>
+                                            <h5 for="exampleFormControlTextarea1">X</h5>
+                                            <div class="col">
+                                                <input type="number" class="form-control" placeholder="Width"
+                                                    formControlName="width">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pt-1">
+                                        <h6>Art Concept</h6>
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="2"
+                                                formControlName="concept"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- education modal -->
 <div class="modal fade" id="educationModal" tabindex="-1" role="dialog" aria-labelledby="educationModal"
     aria-hidden="true" data-backdrop="static" x>
@@ -842,196 +956,152 @@
             </div>
             <div class="modal-body bg-primary">
                 <div class="tab-content tab-space">
-                    <div class="p-2">
-                        <div class="card-body">
-                            <h4 class="card-title text-white">Add New Education / Training</h4>
-                            <div class="card p-4">
-                                <form [formGroup]="workshopForm">
-                                    <div class="form-group pt-1">
-                                        <div class="jumbotron vertical-center text-center">
-                                            <div class="container">
-                                                <i *ngIf="isWshopImgSubmitting" class="material-icons edit-btn"
-                                                    style="color:#9c27b0" (click)="workshopImg.click()">create</i>
-                                                <i *ngIf="!isWshopImgSubmitting"
-                                                    class="material-icons upload-wrapper-icon" style="color:#9c27b0"
-                                                    (click)="workshopImg.click()">cloud_upload</i>
-                                                <input class="form-control" hidden (change)="onWshopImgSelected($event)"
-                                                    id="workshopImg" #workshopImg type="file"
-                                                    formControlName="workshopImg">
-                                                <img [src]="selectedWshopImgURL" class="imageBox">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Add Caption</h6>
-                                        <input type="text" class="form-control" placeholder="Enter caption"
-                                            formControlName="workshopImgCaption">
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Title of Workshop</h6>
-                                        <input type="text" class="form-control" placeholder="Enter title"
-                                            formControlName="workshopTitle">
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Add Subjects/Techniques Demonstrated and Practiced</h6>
-                                        <input type="text" class="form-control" placeholder="Enter Techniques"
-                                            formControlName="workshopSubject">
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Supervised By</h6>
-                                        <input type="text" class="form-control" placeholder="Enter Superviser Name"
-                                            formControlName="workshopSuperviser">
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Organized By</h6>
-                                        <input type="text" class="form-control" placeholder="Enter Organization Name"
-                                            formControlName="workshopOrg">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <h6>Add Location</h6>
-                                            <input type="text" class="form-control" placeholder="Enter Location"
-                                                formControlName="workshopLoc">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <h6>Year</h6>
-                                            <input type="number" class="date-own form-control" style="width: 300px;"
-                                                placeholder="Certificate Name" formControlName="workshopYear"
-                                                placeholder="YYYY">
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="p-2 pt-2"
-                                    style=" display: flex; justify-content: center; align-items: center;">
-                                    <button class="btn btn-primary" (click)="publishWorkshop()">
-                                        <i class="material-icons">save</i> Save
-                                    </button>
-                                </div>
-                                <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
-                                    <button class="btn btn-primary" data-toggle="modal"
-                                        data-target="#workshopPhotoModal">
-                                        <i class="material-icons">add_a_photo</i> Add Photos
-                                    </button>
-                                    <button class="btn btn-primary" data-toggle="modal"
-                                        data-target="#workshopAlbumModal">
-                                        <i class="material-icons">photo_album</i> Album
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title text-white">Add New Workshop</h4>
                         </div>
-                        <div class="p-2">
-                            <div class="card-body">
-                                <h4 class="card-title text-white">Edit Workshop</h4>
-                                <div class="card p-4" *ngFor="let workshop of workshops">
-                                    <div class="form-group pt-1">
-                                        <h6>Title of Workshop</h6>
-                                        <input type="text" class="form-control" placeholder="Enter title"
-                                            [value]="workshop.workshopTitle"
-                                            (blur)="editWorkshop(workshop, 'workshopTitle', $event.currentTarget.value)">
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Subjects/Techniques Demonstrated and Practiced</h6>
-                                        <input type="text" class="form-control" placeholder="Enter Techniques"
-                                            [value]="workshop.workshopSubject"
-                                            (blur)="editWorkshop(workshop, 'workshopSubject', $event.currentTarget.value)">
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Supervised By</h6>
-                                        <input type="text" class="form-control" placeholder="Enter Superviser Name"
-                                            [value]="workshop.workshopSuperviser"
-                                            (blur)="editWorkshop(workshop, 'workshopSuperviser', $event.currentTarget.value)">
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Organized By</h6>
-                                        <input type="text" class="form-control" placeholder="Enter Organization Name"
-                                            [value]="workshop.workshopOrg"
-                                            (blur)="editWorkshop(workshop, 'workshopOrg', $event.currentTarget.value)">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <h6>Add Location</h6>
-                                            <input type="text" class="form-control" placeholder="Enter Location"
-                                                [value]="workshop.workshopLoc"
-                                                (blur)="editWorkshop(workshop, 'workshopLoc', $event.currentTarget.value)">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <h6>Year</h6>
-                                            <input type="text" class="form-control" placeholder="Enter Year"
-                                                [value]="workshop.workshopYear"
-                                                (blur)="editWorkshop(workshop, 'workshopYear', $event.currentTarget.value)">
-                                        </div>
-                                    </div>
-                                    <div class="form-group pt-1">
-                                        <h6>Caption</h6>
-                                        <input type="text" class="form-control" placeholder="Enter Caption"
-                                            [value]="workshop.workshopImgCaption"
-                                            (blur)="editWorkshop(workshop, 'workshopImgCaption', $event.currentTarget.value)">
-                                    </div>
-                                    <!-- <div class="form-group pt-1">
-                                    <input class="form-control" (change)="onWshopImgSelected($event)"
-                                        [value]="workshop.workshopImg" type="file" formControlName="workshopImg"
-                                        (blur)="editWorkshop(workshop, 'workshopImg', $event.currentTarget.value)" )>
-                                    <img [src]="workshop.workshopImg" class="imageBox">
-                            </div> -->
-                                    <div class="p-2 pt-2"
-                                        style=" display: flex; justify-content: center; align-items: center;">
-                                        <button class="btn btn-rose" (click)="deleteWorkshop(workshop)">
-                                            <i class="material-icons">delete</i> Delete
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col">
+                            <button class="btn" style="float: right; background-color: white; color: #000000DE;"
+                                data-toggle="modal" data-target="#workshopAlbumModal">
+                                <i class="material-icons">photo_album</i> Album
+                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="workshopPhotoModal" tabindex="-1" role="dialog" aria-labelledby="educationModal"
-    aria-hidden="true" data-backdrop="static" x>
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-primary">
-            <div class="modal-header">
-                <h3 class="modal-title text-white" id="exampleModalLabel">Add Workshop Photo</h3>
-                <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
-                    <i class="material-icons">close</i>
-                </button>
-            </div>
-            <div class="modal-body bg-primary">
-                <div class="tab-content tab-space">
                     <div class="card">
                         <div class="card-body">
+                            <form [formGroup]="workshopForm">
                                 <div class="form-group pt-1">
-                                    <div class="jumbotron vertical-center text-center">
+                                    <div class="vertical-center text-center">
                                         <div class="container">
-                                            <i *ngIf="isWshopPhotoSubmitting" class="material-icons edit-btn"
-                                                style="color:#9c27b0" (click)="photoWshopInput.click()">create</i>
-                                            <i *ngIf="!isWshopPhotoSubmitting" class="material-icons upload-wrapper-icon"
-                                                style="color:#9c27b0" (click)="photoWshopInput.click()">cloud_upload</i>
-                                            <input class="form-control" hidden (change)="onWshopPhotoSelected($event)"
-                                                #photoWshopInput type="file" name="workshopPhoto">
-                                            <img [src]="selectedWshopPhotoURL" class="imageBox">
-
+                                            <i *ngIf="isWshopImgSubmitting" class="material-icons edit-btn"
+                                                style="color:#9c27b0" (click)="workshopImg.click()">create</i>
+                                            <i *ngIf="!isWshopImgSubmitting" class="material-icons upload-wrapper-icon"
+                                                style="color:#9c27b0" (click)="workshopImg.click()">cloud_upload</i>
+                                            <input class="form-control" hidden (change)="onWshopImgSelected($event)"
+                                                #workshopImg type="file" formControlName="workshopImg">
+                                            <img [src]="selectedWshopImgURL" class="imageBox">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group pt-1">
+                                    <h6>Add Caption</h6>
+                                    <input type="text" class="form-control" placeholder="Enter caption"
+                                        formControlName="workshopImgCaption">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Title of Workshop</h6>
+                                    <input type="text" class="form-control" placeholder="Enter title"
+                                        formControlName="workshopTitle">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Add Subjects/Techniques Demonstrated and Practiced</h6>
+                                    <input type="text" class="form-control" placeholder="Enter Techniques"
+                                        formControlName="workshopSubject">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Supervised By</h6>
+                                    <input type="text" class="form-control" placeholder="Enter Superviser Name"
+                                        formControlName="workshopSuperviser">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Organized By</h6>
+                                    <input type="text" class="form-control" placeholder="Enter Organization Name"
+                                        formControlName="workshopOrg">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <h6>Add Location</h6>
+                                        <input type="text" class="form-control" placeholder="Enter Location"
+                                            formControlName="workshopLoc">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <h6>Year</h6>
+                                        <input type="number" class="date-own form-control" style="width: 300px;"
+                                            placeholder="Certificate Name" formControlName="workshopYear"
+                                            placeholder="YYYY">
+                                    </div>
+                                </div>
+                            </form>
                             <div class="p-2 pt-2" style=" display: flex; justify-content: center; align-items: center;">
-                                <button class="btn btn-primary btn-round">
+                                <button class="btn btn-primary" (click)="publishWorkshop()">
                                     <i class="material-icons">save</i> Save
+                                </button>
+                            </div>
+                            <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#workshopPhotoModal">
+                                    <i class="material-icons">add_a_photo</i> Add Workshop Photo
                                 </button>
                             </div>
                         </div>
                     </div>
+                    <div class="p-2">
+                        <div class="card-body">
+                            <h4 class="card-title text-white">Edit Workshop</h4>
+                            <div class="card p-4" *ngFor="let workshop of workshops">
+                                <div class="form-group pt-1">
+                                    <h6>Title of Workshop</h6>
+                                    <input type="text" class="form-control" placeholder="Enter title"
+                                        [value]="workshop.workshopTitle"
+                                        (blur)="editWorkshop(workshop, 'workshopTitle', $event.currentTarget.value)">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Subjects/Techniques Demonstrated and Practiced</h6>
+                                    <input type="text" class="form-control" placeholder="Enter Techniques"
+                                        [value]="workshop.workshopSubject"
+                                        (blur)="editWorkshop(workshop, 'workshopSubject', $event.currentTarget.value)">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Supervised By</h6>
+                                    <input type="text" class="form-control" placeholder="Enter Superviser Name"
+                                        [value]="workshop.workshopSuperviser"
+                                        (blur)="editWorkshop(workshop, 'workshopSuperviser', $event.currentTarget.value)">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Organized By</h6>
+                                    <input type="text" class="form-control" placeholder="Enter Organization Name"
+                                        [value]="workshop.workshopOrg"
+                                        (blur)="editWorkshop(workshop, 'workshopOrg', $event.currentTarget.value)">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <h6>Add Location</h6>
+                                        <input type="text" class="form-control" placeholder="Enter Location"
+                                            [value]="workshop.workshopLoc"
+                                            (blur)="editWorkshop(workshop, 'workshopLoc', $event.currentTarget.value)">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <h6>Year</h6>
+                                        <input type="text" class="form-control" placeholder="Enter Year"
+                                            [value]="workshop.workshopYear"
+                                            (blur)="editWorkshop(workshop, 'workshopYear', $event.currentTarget.value)">
+                                    </div>
+                                </div>
+                                <div class="form-group pt-1">
+                                    <h6>Caption</h6>
+                                    <input type="text" class="form-control" placeholder="Enter Caption"
+                                        [value]="workshop.workshopImgCaption"
+                                        (blur)="editWorkshop(workshop, 'workshopImgCaption', $event.currentTarget.value)">
+                                </div>
+                                <div class="form-group pt-1">
+                                    <input class="form-control" (change)="onWshopImgSelected($event)"
+                                        [value]="workshop.workshopImg" type="file" formControlName="workshopImg"
+                                        (blur)="editWorkshop(workshop, 'workshopImg', $event.currentTarget.value)" )>
+                                    <img [src]="workshop.selectedWshopImgURL" class="imageBox">
+                                </div>
+                                <div class="p-2 pt-2"
+                                    style=" display: flex; justify-content: center; align-items: center;">
+                                    <button class="btn btn-rose" (click)="deleteWorkshop(workshop)">
+                                        <i class="material-icons">delete</i> Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="workshopAlbumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static" x>
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -1170,7 +1240,8 @@
                                     (click)="imageInput.click()">create</i>
                                 <i *ngIf="!isImageSubmitting" class="material-icons upload-wrapper-icon"
                                     style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
-                                <input hidden (change)="onImageSelected($event)" #imageInput type="file" id="imageFile">
+                                <input hidden (change)="onArtworkImageSelected($event)" #imageInput type="file"
+                                    id="imageFile">
                                 <img [src]="selectedImageURL" class="imageBox">
                             </div>
                         </div>
@@ -1324,7 +1395,8 @@
                                     (click)="imageInput.click()">create</i>
                                 <i *ngIf="!isImageSubmitting" class="material-icons upload-wrapper-icon"
                                     style="color:#9c27b0" (click)="imageInput.click()">cloud_upload</i>
-                                <input hidden (change)="onImageSelected($event)" #imageInput type="file" id="imageFile">
+                                <input hidden (change)="onArtworkImageSelected($event)" #imageInput type="file"
+                                    id="imageFile">
                                 <img [src]="selectedImageURL" class="imageBox">
                             </div>
                         </div>
