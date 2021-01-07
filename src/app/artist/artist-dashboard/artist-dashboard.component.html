@@ -835,7 +835,7 @@
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="exampleModalLabel">Education/ Art Training</h3>
+                <h3 class="modal-title text-white" id="exampleModalLabel">Art Workshop</h3>
                 <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
                     <i class="material-icons">close</i>
                 </button>
@@ -844,7 +844,7 @@
                 <div class="tab-content tab-space">
                     <div class="p-2">
                         <div class="card-body">
-                            <h4 class="card-title text-white">Add New Education / Training</h4>
+                            <h4 class="card-title text-white">Add New Workshop</h4>
                             <div class="card p-4">
                                 <form [formGroup]="workshopForm">
                                     <div class="form-group pt-1">
@@ -856,8 +856,7 @@
                                                     class="material-icons upload-wrapper-icon" style="color:#9c27b0"
                                                     (click)="workshopImg.click()">cloud_upload</i>
                                                 <input class="form-control" hidden (change)="onWshopImgSelected($event)"
-                                                    id="workshopImg" #workshopImg type="file"
-                                                    formControlName="workshopImg">
+                                                    #workshopImg type="file">
                                                 <img [src]="selectedWshopImgURL" class="imageBox">
 
                                             </div>
@@ -866,38 +865,38 @@
                                     <div class="form-group pt-1">
                                         <h6>Add Caption</h6>
                                         <input type="text" class="form-control" placeholder="Enter caption"
-                                            formControlName="workshopImgCaption">
+                                            formControlName="caption">
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Title of Workshop</h6>
                                         <input type="text" class="form-control" placeholder="Enter title"
-                                            formControlName="workshopTitle">
+                                            formControlName="title">
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Add Subjects/Techniques Demonstrated and Practiced</h6>
                                         <input type="text" class="form-control" placeholder="Enter Techniques"
-                                            formControlName="workshopSubject">
+                                            formControlName="subject">
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Supervised By</h6>
                                         <input type="text" class="form-control" placeholder="Enter Superviser Name"
-                                            formControlName="workshopSuperviser">
+                                            formControlName="superviser">
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Organized By</h6>
                                         <input type="text" class="form-control" placeholder="Enter Organization Name"
-                                            formControlName="workshopOrg">
+                                            formControlName="organization">
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <h6>Add Location</h6>
                                             <input type="text" class="form-control" placeholder="Enter Location"
-                                                formControlName="workshopLoc">
+                                                formControlName="location">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <h6>Year</h6>
                                             <input type="number" class="date-own form-control" style="width: 300px;"
-                                                placeholder="Certificate Name" formControlName="workshopYear"
+                                                placeholder="Certificate Name" formControlName="year"
                                                 placeholder="YYYY">
                                         </div>
                                     </div>
@@ -905,7 +904,7 @@
                                 <div class="p-2 pt-2"
                                     style=" display: flex; justify-content: center; align-items: center;">
                                     <button class="btn btn-primary" (click)="publishWorkshop()">
-                                        <i class="material-icons">save</i> Save
+                                        <i class="material-icons">save</i> Save Workshop
                                     </button>
                                 </div>
                                 <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
@@ -927,53 +926,53 @@
                                     <div class="form-group pt-1">
                                         <h6>Title of Workshop</h6>
                                         <input type="text" class="form-control" placeholder="Enter title"
-                                            [value]="workshop.workshopTitle"
-                                            (blur)="editWorkshop(workshop, 'workshopTitle', $event.currentTarget.value)">
+                                            [value]="workshop.title"
+                                            (blur)="editWorkshop(workshop, 'title', $event.currentTarget.value)">
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Subjects/Techniques Demonstrated and Practiced</h6>
                                         <input type="text" class="form-control" placeholder="Enter Techniques"
-                                            [value]="workshop.workshopSubject"
-                                            (blur)="editWorkshop(workshop, 'workshopSubject', $event.currentTarget.value)">
+                                            [value]="workshop.subject"
+                                            (blur)="editWorkshop(workshop, 'subject', $event.currentTarget.value)">
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Supervised By</h6>
                                         <input type="text" class="form-control" placeholder="Enter Superviser Name"
-                                            [value]="workshop.workshopSuperviser"
-                                            (blur)="editWorkshop(workshop, 'workshopSuperviser', $event.currentTarget.value)">
+                                            [value]="workshop.superviser"
+                                            (blur)="editWorkshop(workshop, 'superviser', $event.currentTarget.value)">
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Organized By</h6>
                                         <input type="text" class="form-control" placeholder="Enter Organization Name"
-                                            [value]="workshop.workshopOrg"
-                                            (blur)="editWorkshop(workshop, 'workshopOrg', $event.currentTarget.value)">
+                                            [value]="workshop.organization"
+                                            (blur)="editWorkshop(workshop, 'organization', $event.currentTarget.value)">
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <h6>Add Location</h6>
                                             <input type="text" class="form-control" placeholder="Enter Location"
-                                                [value]="workshop.workshopLoc"
-                                                (blur)="editWorkshop(workshop, 'workshopLoc', $event.currentTarget.value)">
+                                                [value]="workshop.location"
+                                                (blur)="editWorkshop(workshop, 'location', $event.currentTarget.value)">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <h6>Year</h6>
                                             <input type="text" class="form-control" placeholder="Enter Year"
-                                                [value]="workshop.workshopYear"
-                                                (blur)="editWorkshop(workshop, 'workshopYear', $event.currentTarget.value)">
+                                                [value]="workshop.year"
+                                                (blur)="editWorkshop(workshop, 'year', $event.currentTarget.value)">
                                         </div>
                                     </div>
                                     <div class="form-group pt-1">
                                         <h6>Caption</h6>
                                         <input type="text" class="form-control" placeholder="Enter Caption"
-                                            [value]="workshop.workshopImgCaption"
-                                            (blur)="editWorkshop(workshop, 'workshopImgCaption', $event.currentTarget.value)">
+                                            [value]="workshop.caption"
+                                            (blur)="editWorkshop(workshop, 'caption', $event.currentTarget.value)">
                                     </div>
                                     <!-- <div class="form-group pt-1">
                                     <input class="form-control" (change)="onWshopImgSelected($event)"
                                         [value]="workshop.workshopImg" type="file" formControlName="workshopImg"
                                         (blur)="editWorkshop(workshop, 'workshopImg', $event.currentTarget.value)" )>
                                     <img [src]="workshop.workshopImg" class="imageBox">
-                            </div> -->
+                                    </div> -->
                                     <div class="p-2 pt-2"
                                         style=" display: flex; justify-content: center; align-items: center;">
                                         <button class="btn btn-rose" (click)="deleteWorkshop(workshop)">
@@ -987,9 +986,9 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-
 
 <div class="modal fade" id="workshopPhotoModal" tabindex="-1" role="dialog" aria-labelledby="educationModal"
     aria-hidden="true" data-backdrop="static" x>
@@ -1005,23 +1004,25 @@
                 <div class="tab-content tab-space">
                     <div class="card">
                         <div class="card-body">
-                                <div class="form-group pt-1">
-                                    <div class="jumbotron vertical-center text-center">
-                                        <div class="container">
-                                            <i *ngIf="isWshopPhotoSubmitting" class="material-icons edit-btn"
-                                                style="color:#9c27b0" (click)="photoWshopInput.click()">create</i>
-                                            <i *ngIf="!isWshopPhotoSubmitting" class="material-icons upload-wrapper-icon"
-                                                style="color:#9c27b0" (click)="photoWshopInput.click()">cloud_upload</i>
-                                            <input class="form-control" hidden (change)="onWshopPhotoSelected($event)"
-                                                #photoWshopInput type="file" name="workshopPhoto">
-                                            <img [src]="selectedWshopPhotoURL" class="imageBox">
-
-                                        </div>
+                            <form>
+                                <div class="jumbotron vertical-center text-center">
+                                    <div class="container">
+                                        <i *ngIf="isWshopPhotoSubmitting" class="material-icons edit-btn"
+                                            style="color:#9c27b0" (click)="wshopPhoto.click()">create</i>
+                                        <i *ngIf="!isWshopPhotoSubmitting " class="material-icons upload-wrapper-icon"
+                                            style="color:#9c27b0" (click)="wshopPhoto.click()">cloud_upload</i>
+                                        <input hidden (change)="onWshopPhotoSelected($event)"
+                                            #wshopPhoto type="file" id="wshopPhoto">
+                                        <img [src]="wshopPhotoURL" class="imageBox">
                                     </div>
                                 </div>
-                            <div class="p-2 pt-2" style=" display: flex; justify-content: center; align-items: center;">
-                                <button class="btn btn-primary btn-round">
+                            </form>
+                            <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                                <!-- <button class="btn btn-primary" (click)="publishWshopPhoto()">
                                     <i class="material-icons">save</i> Save
+                                </button> -->
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#workshopAlbumModal">
+                                    <i class="material-icons">photo_album</i> Album
                                 </button>
                             </div>
                         </div>
@@ -1035,35 +1036,33 @@
 <div class="modal fade" id="workshopAlbumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-backdrop="static" x>
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content bg-primary">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Workshop Photo</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Workshop Album</h3>
                 <button class="btn btn-primary btn-fab btn-fab-mini btn-round" data-dismiss="modal">
                     <i class="material-icons">close</i>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body bg-primary">
                 <div class="tab-content tab-space">
+                    <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
+                        <h4 class="card-title">Workshop Photo</h4>
+                    </div>
                     <div class="card">
                         <div class="card-body">
+                            <div class="jumbotron vertical-center text-center">
+                                <div class="p-2" *ngFor="let workshop of workshops">
+                                    <img [src]="workshop.workshopImg" class="rounded">
+                                </div>
+                            </div>
                             <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
-                                <h4 class="card-title">Workshop Photo</h4>
+                                <button class="btn btn-primary btn-round" data-toggle="modal"
+                                    data-target="#workshopPhotoModal">
+                                    <i class="material-icons">add_a_photo</i> Add More Photos
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <form>
-                        <div class="jumbotron vertical-center text-center">
-                            <div class="p-2" *ngFor="let workshop of workshops">
-                                <img [src]="workshop.workshopImg" class="rounded">
-                            </div>
-                        </div>
-                        <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-primary btn-round" data-toggle="modal"
-                                data-target="#workshopPhotoModal">
-                                <i class="material-icons">add_a_photo</i> Add More Photos
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -1329,7 +1328,7 @@
                             </div>
                         </div>
                         <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                            <button class="btn btn-primary btn-round" >
                                 <i class="material-icons">save</i> Save Photo
                             </button>
                         </div>
@@ -1366,7 +1365,7 @@
                             </div>
                         </div>
                         <div class="p-2" style=" display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-primary btn-round" (click)="publishEducation()">
+                            <button class="btn btn-primary btn-round" >
                                 <i class="material-icons">save</i> Save Photo
                             </button>
                         </div>

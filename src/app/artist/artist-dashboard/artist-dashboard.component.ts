@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { url } from 'inspector';
+
+
 
 @Component({
   selector: 'app-artist-dashboard',
@@ -40,14 +42,9 @@ export class ArtistDashboardComponent implements OnInit {
   selectedTypeNote = '';
   imagePreview = ''
   selectedEduOption = '';
-  selectedTitleWorkshop = '';
-  selectedSubjectWshop = '';
-  selectedSupWshop = '';
-  selectedOrgWshop = '';
-  selectedLocWshop = '';
-  selectedYearWshop = '';
   selectedWshopImgURL = '';
-  selectedCaptionWshop = '';
+  wshopPhotoURL = '';
+  isWshopPhotoSubmitting: boolean = false;
   imageUploadPercentage: Observable<number>;
   isWshopImgSubmitting: boolean = false;
   file = {
@@ -112,6 +109,7 @@ export class ArtistDashboardComponent implements OnInit {
         this.selectedImageURL = event.target.result;
         console.log(this.selectedImageURL)
         // this.isImageSubmitted = true
+        // (<HTMLInputElement>document.getElementById('frameFile')).files[0]
       }
     }
   }
@@ -125,6 +123,21 @@ export class ArtistDashboardComponent implements OnInit {
       console.log(this.file)
       reader.onload = (event: any) => {
         this.selectedWshopImgURL = event.target.result;
+      }
+    }
+  }
+
+  onWshopPhotoSelected(event) {
+    this.isWshopPhotoSubmitting = true;
+    if (event.target.files) {
+      for (var i = 0; i < event.target.files.length; i++) {
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        this.file = event.target.files[i];
+        console.log(this.file)
+        reader.onload = (event: any) => {
+          this.wshopPhotoURL= event.target.result;
+        }
       }
     }
   }
@@ -241,15 +254,17 @@ export class ArtistDashboardComponent implements OnInit {
   }
 
   workshopForm = new FormGroup({
-    workshopTitle: new FormControl('', [Validators.required]),
-    workshopSubject: new FormControl('', [Validators.required]),
-    workshopSuperviser: new FormControl('', [Validators.required]),
-    workshopOrg: new FormControl('', [Validators.required]),
-    workshopLoc: new FormControl('', [Validators.required]),
-    workshopYear: new FormControl('', [Validators.required]),
-    workshopImgCaption: new FormControl('', [Validators.required]),
+    title: new FormControl('', [Validators.required]),
+    subject: new FormControl('', [Validators.required]),
+    superviser: new FormControl('', [Validators.required]),
+    organization: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    year: new FormControl('', [Validators.required]),
+    caption: new FormControl('', [Validators.required]),
     workshopImg: new FormControl(''),
   });
+
+  // get workshopImg() {return this.workshopForm.get('workshopImg')}; 
 
   publishWorkshop() {
     console.log("baal")
@@ -257,19 +272,24 @@ export class ArtistDashboardComponent implements OnInit {
     if (this.workshopForm.valid) {
       this.database.list(`users/${this.user.uid}/workshop`).push(this.workshopForm.value).then((workshop) => {
         if (this.selectedWshopImgURL !== null) {
-          const filePath = `${new Date().getTime()}`;
+          // var baal =document.getElementById("k").value;
+          const filePath = `users/${this.user.uid}/workshops/${workshop.key}/main`;
           const fileRef = this.storage.ref(filePath);
-          const task = this.storage.upload(`users/${this.user.uid}/workshops/${workshop.key}/main`, this.file, {'contentType': this.file.type});
-          task.percentageChanges().subscribe((res) => {
-          })
-          var downloadURL = fileRef.getDownloadURL();
-          console.log(downloadURL)
-          // downloadURL.getDownloadURL().then(url =>{
-          //   // Insert url into an <img> tag to "download"
-          //   this.workshopForm.controls['workshopImg'].setValue(url);
-          //   console.log(url)
-          // })
-          // console.log(downloadURL)
+          this.storage.upload(filePath, this.file, { 'contentType': this.file.type }).snapshotChanges().pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe((url) => {
+                // this.workshopForm.setValue({workshopImg: url} ,{ onlySelf: true });
+                // this.workshopImg.setValue(url);
+                // this.workshopForm.patchValue({ workshopImg: url})
+                console.log(url);
+                // var gop = url.toString();
+                // this.workshopForm.controls['workshopImg'].setValue(gop);
+                // // const formData: FormData = new FormData();
+                // formData.append(url, this.workshopForm.value.workshopImg);
+              }
+              )
+            })
+          ).subscribe();
           // this.workshopForm.controls['workshopImg'].setValue(downloadURL);
         }
         this.workshopForm.reset()
@@ -277,12 +297,6 @@ export class ArtistDashboardComponent implements OnInit {
       }).catch(() => {
         this.toastr.error('Cannot add information at this moment. Please try again later.');
       })
-
-      //storage bucket e save korbi
-      // storage bucket theke download url ber korbi
-      // db te download url ta shoho nicher data gula save korbi
-      //this.workshopForm.controls['workshopImg'].setValue(selected.id);
-
 
     } else {
       this.toastr.error('Please add all the information.');
@@ -300,4 +314,16 @@ export class ArtistDashboardComponent implements OnInit {
       this.toastr.error('Cannot remove information at this moment. Please try again later.');
     })
   }
+  // publishWshopPhoto(workshop){
+  //   var postData = {
+  //     photo: this.wshopPhotoURL,
+  //   };
+  //   this.database.list(`users/${this.user.uid}/workshops/${workshop.key}/album`).push(postData).then(() => {
+  //     this.wshopPhotoURL = ''
+  //   })
+  //   this.toastr.success('Post is Done!');
+  //   console.log(postData)
+  // }
+  
+
 }
