@@ -259,7 +259,6 @@ export class ArtistDashboardComponent implements OnInit {
 
 
   publishEducation() {
-    console.log("baal")
     this.educationForm.markAllAsTouched();
     if (this.educationForm.valid) {
       this.database.list(`users/${this.user.uid}/education`).push(this.educationForm.value).then(() => {
