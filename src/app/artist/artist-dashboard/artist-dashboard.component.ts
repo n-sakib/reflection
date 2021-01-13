@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { from, Observable } from 'rxjs';
@@ -17,56 +17,70 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ArtistDashboardComponent implements OnInit {
 
-  isImageSubmitting: boolean = false;
+  iswshopImageUploaded: boolean = false;
   frameUploadPercentage: Observable<number>;
-  isImageSubmitted: boolean = false;
-  selectedImageURL = '';
+  isImageUploaded: boolean = false;
+  iswhopAlbumUploaded: boolean = false;
+  isArtcampAlbumUploaded: boolean = false;
+  isartcampImageUploaded: boolean = false;
+  isExhibitionImageUploaded: boolean = false;
+  isExhibitionAlbumUploaded: boolean = false;
   user = {
     email: '',
     photoURL: '',
     displayName: '',
     uid: ''
   };
-  selectedTitle = '';
-  selectedType = '';
-  selectedCategory = '';
-  selectedHeight = '';
-  selectedWidth = '';
-  selectedConcept = '';
-  selectedYear = '';
-  selectedReplica = '';
-  selectedSellOption = '';
-  selectedSchool = '';
-  selectedCertificate = '';
-  selectedEduYear = '';
-  selectedTypeNote = '';
-  imagePreview = ''
-  selectedEduOption = '';
-  selectedWshopImgURL = '';
-  wshopPhotoURL = '';
-  isWshopPhotoSubmitting: boolean = false;
-  imageUploadPercentage: Observable<number>;
   isWshopImgSubmitting: boolean = false;
   file = {
     type: ''
   };
 
-  public media1Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' },
-  { value: 'Acrylic Paint on Board' }, { value: 'Watercolor on Paper' }, { value: 'Poster Color on Paper' }, { value: 'Graphite Pencil on Paper' }, { value: 'Charcoal on Paper' }, { value: 'Other Media' }];
-  public media2Lists: any[] = [{ value: 'Oil Paint on Canvas' }, { value: 'Oil Paint on Board' }, { value: 'Acrylic Paint on Canvas' }, { value: 'Acrylic Paint on Paper' }, { value: 'Woodcut' }, { value: 'Lithography' },
-  { value: 'Acrylic Paint on Board' }, { value: 'Watercolor on Paper' }, { value: 'Poster Color on Paper' }, { value: 'Graphite Pencil on Paper' }, { value: 'Charcoal on Paper' }, { value: 'Other Media' }];
-
+  artworkFormPage = 1;
+  artworks = [];
   educations = [];
   showEducations = [];
   workshops = [];
+  artcamps = [];
+  medias = [];
+  artworkImagePreview = '';
+  artWorkImage;
+  showArtworkEditModal = false;
+  wshopImagePreview = '';
+  wshopImage;
+  wshopAlbum = [];
+  wshopAlbumPreview = '';
+  wshopAlbumImage = '';
+  artcampAlbumPreview = '';
+  artcampImagePreview = '';
+  wshopAlbumPhoto = [];
+  artcampImage;
+  artcampAlbum;
+  exhibitionAlbum;
+  wshopImgAls = [];
+  exhibitionImagePreview = '';
+  exhibitionAlbumPreview = '';
+  exhibitionImage;
+  exhibitions = [];
 
 
   constructor(private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, private afAuth: AngularFireAuth, public auth: AuthService) { }
 
   ngOnInit(): void {
-
     this.afAuth.authState.subscribe(user => {
       this.user = user;
+      this.database.list(`users/${this.user.uid}/artwork`).snapshotChanges()
+        .subscribe({
+          next: artworks => {
+            this.artworks = []
+            artworks.forEach(artworks => {
+              let val = artworks.payload.val();
+              val['key'] = artworks.key;
+              this.artworks.push(val);
+              console.log(this.artworks)
+            });
+          }
+        })
       this.database.list(`users/${this.user.uid}/education`).snapshotChanges()
         .subscribe({
           next: educations => {
@@ -78,6 +92,17 @@ export class ArtistDashboardComponent implements OnInit {
             });
           }
         })
+      // this.database.list(`users/${this.user.uid}/workshop`).snapshotChanges()
+      //   .subscribe({
+      //     next: workshops => {
+      //       this.workshops = []
+      //       workshops.forEach(workshop => {
+      //         let val = workshop.payload.val();
+      //         val['key'] = workshop.key;
+      //         this.workshops.push(val);
+      //       });
+      //     }
+      //   })
       this.database.list(`users/${this.user.uid}/workshop`).snapshotChanges()
         .subscribe({
           next: workshops => {
@@ -86,6 +111,40 @@ export class ArtistDashboardComponent implements OnInit {
               let val = workshop.payload.val();
               val['key'] = workshop.key;
               this.workshops.push(val);
+              this.database.list(`users/${this.user.uid}/workshop/${workshop.key}/album/`).snapshotChanges()
+                .subscribe({
+                  next: wshopImgAls => {
+                    this.wshopImgAls = []
+                    wshopImgAls.forEach(wshopImgAl => {
+                      let val = wshopImgAl.payload.val();
+                      // val['key'] = wshopImgAl.key;
+                      this.wshopImgAls.push(val);
+                      console.log(this.wshopImgAls)
+                    });
+                  }
+                })
+            });
+          }
+        })
+      this.database.list(`users/${this.user.uid}/artcamp`).snapshotChanges()
+        .subscribe({
+          next: artcamps => {
+            this.artcamps = []
+            artcamps.forEach(artcamp => {
+              let val = artcamp.payload.val();
+              val['key'] = artcamp.key;
+              this.artcamps.push(val);
+            });
+          }
+        })
+        this.database.list(`users/${this.user.uid}/exhibition`).snapshotChanges()
+        .subscribe({
+          next: exhibitions => {
+            this.exhibitions = []
+            exhibitions .forEach(exhibition => {
+              let val = exhibition.payload.val();
+              val['key'] = exhibition.key;
+              this.exhibitions.push(val);
             });
           }
         })
@@ -100,122 +159,95 @@ export class ArtistDashboardComponent implements OnInit {
     reader.onerror = error => reject(error);
   });
 
-  onImageSelected(event) {
-    this.isImageSubmitting = true;
+
+  fetchMedia(media) {
+    this.database.list(`admin/forms/artwork/media/${media}`).query.once("value").then((media) => this.medias = media.val())
+  }
+
+  /*
+  Artwork Functions
+  */
+  artworkForm = new FormGroup({
+    artWorkImage: new FormControl('', [Validators.required]),
+    type: new FormControl('', [Validators.required]),
+    title: new FormControl('', [Validators.required]),
+    year: new FormControl('', [Validators.required]),
+    media: new FormControl('', [Validators.required]),
+    mediaDetails: new FormControl(''),
+    height: new FormControl('', [Validators.required]),
+    width: new FormControl('', [Validators.required]),
+    concept: new FormControl(''),
+    isForSell: new FormControl('', [Validators.required]),
+    price: new FormControl(''),
+    replica: new FormControl(''),
+    demandPrice: new FormControl(''),
+    originalTermsAccepted: new FormControl('', [Validators.required]),
+    replicaTermsAccepted: new FormControl('', [Validators.required]),
+  });
+
+  onArtworkImageSelected(event) {
+    this.isImageUploaded = true;
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.selectedImageURL = event.target.result;
-        console.log(this.selectedImageURL)
-        // this.isImageSubmitted = true
-        // (<HTMLInputElement>document.getElementById('frameFile')).files[0]
+        this.artworkImagePreview = event.target.result;
       }
+    }
+    this.artWorkImage = event.target.files[0];
+  }
+
+  changeFormPage(page) {
+    if (page === 2) {
+      if (this.artworkForm.value.artWorkImage &&
+        this.artworkForm.value.type,
+        this.artworkForm.value.title,
+        this.artworkForm.value.year,
+        this.artworkForm.value.media,
+        this.artworkForm.value.height,
+        this.artworkForm.value.width
+      ) {
+        this.artworkFormPage = 2
+      } else {
+        this.toastr.error('Please add all the required Info');
+      }
+    } else if (page === 3) {
+      if (this.artworkForm.value.isForSell) {
+        this.artworkFormPage = 3
+      } else {
+        this.toastr.error('Please add all the required Info');
+      }
+    } else {
+      this.artworkFormPage = 1
     }
   }
 
-  onWshopImgSelected(event) {
-    this.isWshopImgSubmitting = true;
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]); //64
-      this.file = event.target.files[0];
-      console.log(this.file)
-      reader.onload = (event: any) => {
-        this.selectedWshopImgURL = event.target.result;
+  publishArtwork() {
+    this.database.list(`users/${this.user.uid}/artwork`).push(this.artworkForm.value).then((artwork) => {
+      if (this.artworkImagePreview !== null) {
+        const filePath = `users/${this.user.uid}/artwork/${artwork.key}/${this.artWorkImage.name}`
+        const fileRef = this.storage.ref(filePath);
+        const task = this.storage.upload(filePath, this.artWorkImage, { 'contentType': this.artWorkImage.type })
+        task.snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().toPromise().then((url) => {
+              this.database.list(`users/${this.user.uid}/artwork/`).update(artwork.key, { artWorkImage: url })
+              this.educationForm.reset()
+              this.toastr.success('Added New Artwork.');
+            })
+          })
+        )
+          .subscribe()
       }
-    }
-  }
 
-  onWshopPhotoSelected(event) {
-    this.isWshopPhotoSubmitting = true;
-    if (event.target.files) {
-      for (var i = 0; i < event.target.files.length; i++) {
-        var reader = new FileReader();
-        reader.readAsDataURL(event.target.files[i]);
-        this.file = event.target.files[i];
-        console.log(this.file)
-        reader.onload = (event: any) => {
-          this.wshopPhotoURL= event.target.result;
-        }
-      }
-    }
-  }
-
-  addTitle($event) {
-    var value = $event.target.value;
-    this.selectedTitle = value;
-  }
-
-  addType($event) {
-    var value = $event.target.value;
-    this.selectedType = value;
-  }
-  addCategory($event) {
-    var value = $event.target.value;
-    this.selectedCategory = value;
-    console.log(this.selectedCategory)
-  }
-  addHeight($event) {
-    var value = $event.target.value;
-    this.selectedHeight = value;
-  }
-  addWidth($event) {
-    var value = $event.target.value;
-    this.selectedWidth = value;
-  }
-  addConcept($event) {
-    var value = $event.target.value;
-    this.selectedConcept = value;
-  }
-  addNote($event) {
-    var value = $event.target.value;
-    this.selectedTypeNote = value;
-  }
-  addYear($event) {
-    var value = $event.target.value;
-    this.selectedYear = value;
-  }
-  addSellOption(sell) {
-    // var value = $event.target.value;
-    this.selectedSellOption = sell;
-    console.log(this.selectedSellOption)
-  }
-  addReplicaOrder(rep) {
-    // var value = $event.target.value;
-    this.selectedReplica = rep;
-    console.log(this.selectedReplica)
-  }
-
-  publish() {
-    // A post entry.
-    var postData = {
-      artWorkType: this.selectedType,
-      artTypeNote: this.selectedTypeNote,
-      imageURL: this.selectedImageURL,
-      title: this.selectedTitle,
-      category: this.selectedCategory,
-      concept: this.selectedConcept,
-      height: this.selectedHeight,
-      width: this.selectedWidth,
-      sellOption: this.selectedSellOption,
-      replicaOrder: this.selectedReplica
-    };
-    // Get a key for a new Post.
-    this.database.list(`artWork/`).push(postData).then(() => {
-      this.selectedType = '',
-        this.selectedTypeNote = '',
-        this.selectedImageURL = '',
-        this.selectedTitle = '',
-        this.selectedCategory = '',
-        this.selectedConcept = '',
-        this.selectedHeight = '',
-        this.selectedWidth = '',
-        this.selectedSellOption = '',
-        this.selectedReplica = ''
+    }).catch(() => {
+      this.toastr.error('Cannot add information at this moment. Please try again later.');
     })
-    this.toastr.success('Post is Done!');
-    console.log(postData)
+  }
+
+  openArtwork(artwork) {
+    console.log('here')
+    this.showArtworkEditModal = true;
   }
 
   educationForm = new FormGroup({
@@ -261,43 +293,76 @@ export class ArtistDashboardComponent implements OnInit {
     location: new FormControl('', [Validators.required]),
     year: new FormControl('', [Validators.required]),
     caption: new FormControl('', [Validators.required]),
-    workshopImg: new FormControl(''),
+    wshopImage: new FormControl(''),
   });
 
-  // get workshopImg() {return this.workshopForm.get('workshopImg')}; 
+  onWshopImgSelected(event) {
+    this.iswshopImageUploaded = true;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.wshopImagePreview = event.target.result;
+      }
+    }
+    this.wshopImage = event.target.files[0];
+  }
+
+  onWshopAlbumSelected(event) {
+    this.iswhopAlbumUploaded = true;
+    console.log("baal1")
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.wshopAlbumPreview = event.target.result;
+      }
+    }
+    this.wshopAlbumImage = event.target.files[0];
+    // this.wshopAlbum.push(event.target.files[0]);
+  }
 
   publishWorkshop() {
-    console.log("baal")
     this.workshopForm.markAllAsTouched();
     if (this.workshopForm.valid) {
       this.database.list(`users/${this.user.uid}/workshop`).push(this.workshopForm.value).then((workshop) => {
-        if (this.selectedWshopImgURL !== null) {
-          // var baal =document.getElementById("k").value;
-          const filePath = `users/${this.user.uid}/workshops/${workshop.key}/main`;
+        if (this.wshopImagePreview !== null) {
+          const filePath = `users/${this.user.uid}/workshop/${workshop.key}/main`;
           const fileRef = this.storage.ref(filePath);
-          this.storage.upload(filePath, this.file, { 'contentType': this.file.type }).snapshotChanges().pipe(
+          const task = this.storage.upload(`users/${this.user.uid}/workshop/${workshop.key}/main`, this.wshopImage, { 'contentType': this.wshopImage.type });
+          task.snapshotChanges().pipe(
             finalize(() => {
-              fileRef.getDownloadURL().subscribe((url) => {
-                // this.workshopForm.setValue({workshopImg: url} ,{ onlySelf: true });
-                // this.workshopImg.setValue(url);
-                // this.workshopForm.patchValue({ workshopImg: url})
-                console.log(url);
-                // var gop = url.toString();
-                // this.workshopForm.controls['workshopImg'].setValue(gop);
-                // // const formData: FormData = new FormData();
-                // formData.append(url, this.workshopForm.value.workshopImg);
-              }
-              )
+              fileRef.getDownloadURL().toPromise().then((url) => {
+                this.database.list(`users/${this.user.uid}/workshop`).update(workshop.key, { wshopImage: url })
+                this.toastr.success('Added New Workshop.');
+              })
             })
-          ).subscribe();
-          // this.workshopForm.controls['workshopImg'].setValue(downloadURL);
+          )
+            .subscribe()
+        }
+        if (this.wshopAlbumPreview !== null) {
+          
+              this.wshopAlbum.forEach(image => {
+                const filePath = `users/${this.user.uid}/workshop/${workshop.key}/album/`;
+                const fileRef = this.storage.ref(filePath);
+                const task = this.storage.upload(filePath, image, { 'contentType': image.type });
+                task.snapshotChanges().pipe(
+                  finalize(() => {
+                    fileRef.getDownloadURL().toPromise().then((url) => {
+                      this.database.list(`users/${this.user.uid}/workshop/${workshop.key}/album/`).push(url)
+                      this.toastr.success('Added New Workshop.');
+                    })
+                  })
+                ).subscribe()
+              })
+            
+          
         }
         this.workshopForm.reset()
         this.toastr.success('Added New Workshop Information.');
       }).catch(() => {
         this.toastr.error('Cannot add information at this moment. Please try again later.');
       })
-
     } else {
       this.toastr.error('Please add all the information.');
     }
@@ -314,16 +379,177 @@ export class ArtistDashboardComponent implements OnInit {
       this.toastr.error('Cannot remove information at this moment. Please try again later.');
     })
   }
-  // publishWshopPhoto(workshop){
-  //   var postData = {
-  //     photo: this.wshopPhotoURL,
-  //   };
-  //   this.database.list(`users/${this.user.uid}/workshops/${workshop.key}/album`).push(postData).then(() => {
-  //     this.wshopPhotoURL = ''
-  //   })
-  //   this.toastr.success('Post is Done!');
-  //   console.log(postData)
-  // }
-  
+  uploadWshopAlbum() {
+    if (this.wshopAlbumPreview !== null) {
+      this.wshopAlbum.push(this.wshopAlbumImage)
+      console.log(this.wshopAlbum)
+      this.toastr.success('Successfully added Photo.');
+      this.iswhopAlbumUploaded = false;
+    }
+  }
+
+  showAlbum() {
+    this.wshopAlbumPhoto = [];
+    if (this.wshopAlbum !== null) {
+      console.log(this.wshopAlbum)
+      this.wshopAlbum.forEach(image => {
+        var reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = (event: any) => {
+          var val = event.target.result;
+          this.wshopAlbumPhoto.push(val)
+        }
+      })
+    }
+  }
+
+  // artcamp
+
+  artcampForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    gallery: new FormControl('', [Validators.required]),
+    organization: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    year: new FormControl('', [Validators.required]),
+    artcampImage: new FormControl(''),
+  });
+
+  onArtcampImgSelected(event) {
+    this.isartcampImageUploaded = true;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.artcampImagePreview = event.target.result;
+      }
+    }
+    this.artcampImage = event.target.files[0];
+  }
+
+  onArtcampAlbumSelected(event) {
+    this.isArtcampAlbumUploaded = true;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.artcampAlbumPreview = event.target.result;
+      }
+    }
+    this.artcampAlbum = event.target.files[0];
+  }
+
+  publishArtcamp() {
+    this.artcampForm.markAllAsTouched();
+    if (this.artcampForm.valid) {
+      this.database.list(`users/${this.user.uid}/artcamp`).push(this.artcampForm.value).then((artcamp) => {
+        if (this.artcampImagePreview !== null) {
+          const filePath = `users/${this.user.uid}/artcamp/${artcamp.key}/main`;
+          const fileRef = this.storage.ref(filePath);
+          const task = this.storage.upload(filePath, this.artcampImage, { 'contentType': this.artcampImage.type });
+          task.snapshotChanges().pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().toPromise().then((url) => {
+                this.database.list(`users/${this.user.uid}/artcamp`).update(artcamp.key, { artcampImage: url })
+                this.toastr.success('Added New Artcamp.');
+              })
+            })
+          )
+            .subscribe()
+        }
+        this.artcampForm.reset()
+        this.toastr.success('Added New Artcamp Information.');
+      }).catch(() => {
+        this.toastr.error('Cannot add information at this moment. Please try again later.');
+      })
+    } else {
+      this.toastr.error('Please add all the information.');
+    }
+  }
+
+  editArtcamp(artcamp, field, newValue) {
+    this.database.list(`users/${this.user.uid}/artcamp`).update(artcamp.key, { [field]: newValue })
+  }
+
+  deleteArtcamp(artcamp) {
+    this.database.list(`users/${this.user.uid}/artcamp/${artcamp.key}`).remove().then(() => {
+      this.toastr.success('Successfully removed Artcamp Information.');
+    }).catch(() => {
+      this.toastr.error('Cannot remove information at this moment. Please try again later.');
+    })
+  }
+
+  // exhibitionForm
+  exhibitionForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    gallery: new FormControl('', [Validators.required]),
+    organization: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    year: new FormControl('', [Validators.required]),
+    exhibitionImage: new FormControl(''),
+  });
+
+  onExhibitionImgSelected(event) {
+    this.isExhibitionImageUploaded = true;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.exhibitionImagePreview= event.target.result;
+      }
+    }
+    this.exhibitionImage = event.target.files[0];
+  }
+
+  onExhibitionAlbumSelected(event) {
+    this.isExhibitionAlbumUploaded = true;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.exhibitionAlbumPreview = event.target.result;
+      }
+    }
+    this.exhibitionAlbum = event.target.files[0];
+  }
+
+  publishExhibition() {
+    this.exhibitionForm.markAllAsTouched();
+    if (this.exhibitionForm.valid) {
+      this.database.list(`users/${this.user.uid}/exhibition`).push(this.exhibitionForm.value).then((exhibition) => {
+        if (this.exhibitionImagePreview !== null) {
+          const filePath = `users/${this.user.uid}/exhibition/${exhibition.key}/main`;
+          const fileRef = this.storage.ref(filePath);
+          const task = this.storage.upload(filePath, this.exhibitionImage, { 'contentType': this.exhibitionImage.type });
+          task.snapshotChanges().pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().toPromise().then((url) => {
+                this.database.list(`users/${this.user.uid}/artcamp`).update(exhibition.key, { exhibitionImage: url })
+                this.toastr.success('Added New Exhibition.');
+              })
+            })
+          )
+            .subscribe()
+        }
+        this.exhibitionForm.reset()
+        this.toastr.success('Added New Exhibition Information.');
+      }).catch(() => {
+        this.toastr.error('Cannot add information at this moment. Please try again later.');
+      })
+    } else {
+      this.toastr.error('Please add all the information.');
+    }
+  }
+
+  editExhibiton(exhibition, field, newValue) {
+    this.database.list(`users/${this.user.uid}/exhibition`).update(exhibition.key, { [field]: newValue })
+  }
+
+  deleteExhibition(exhibition) {
+    this.database.list(`users/${this.user.uid}/exhibition/${exhibition.key}`).remove().then(() => {
+      this.toastr.success('Successfully removed Exhibition Information.');
+    }).catch(() => {
+      this.toastr.error('Cannot remove information at this moment. Please try again later.');
+    })
+  }
 
 }

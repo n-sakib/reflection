@@ -43,3 +43,33 @@
 .artwork-pill {
     background: #ffffff;
 }
+
+.image-uploader {
+    border: 1px dashed #9c27b0;
+}
+.image-uploader:hover {
+    background: #dddddd;
+}
+.artwork { transition: all .2s ease-in-out; }
+.artwork:hover {
+    transform: scale(1.1);
+}
+
+.row_wshop {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap; 
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+  .column_wshop {
+    -ms-flex: 25%;
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+  }
+  .column_wshop img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+  }

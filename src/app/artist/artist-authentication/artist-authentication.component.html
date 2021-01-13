@@ -204,6 +204,21 @@
                                             <small class="danger">Select a country of residence.</small>
                                         </div>
                                     </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">phone</i>
+                                            </span>
+                                        </div>
+                                        <p>
+                                            
+                                        </p>
+                                        <input placeholder="Phone No." onfocus="(this.type='number')"
+                                            onblur="(this.type='number')" class="form-control" formControlName="phone">
+                                        <div class="form-error" *ngIf="submitWithoutSelection === true">
+                                            <small class="danger">Enter Phone No.</small>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="terms form-check">
                                     <label class="form-check-label">
