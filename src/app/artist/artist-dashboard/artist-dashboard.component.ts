@@ -55,13 +55,19 @@ export class ArtistDashboardComponent implements OnInit {
   artcampImagePreview = '';
   wshopAlbumPhoto = [];
   artcampImage;
-  artcampAlbum;
-  exhibitionAlbum;
+  artcampAlbumImage = '';
+  artcampAlbum = [];
+  artcampAlbumPhoto = [];
+  exhibitionAlbum =[];
   wshopImgAls = [];
+  artcampImgAls = [];
   exhibitionImagePreview = '';
   exhibitionAlbumPreview = '';
+  exhibitionAlbumImage = '';
   exhibitionImage;
   exhibitions = [];
+  exhibitionAlbumPhoto =[];
+  exhibitionImgAls = [];
 
 
   constructor(private toastr: ToastrService, private storage: AngularFireStorage, private database: AngularFireDatabase, private afAuth: AngularFireAuth, public auth: AuthService) { }
@@ -92,17 +98,6 @@ export class ArtistDashboardComponent implements OnInit {
             });
           }
         })
-      // this.database.list(`users/${this.user.uid}/workshop`).snapshotChanges()
-      //   .subscribe({
-      //     next: workshops => {
-      //       this.workshops = []
-      //       workshops.forEach(workshop => {
-      //         let val = workshop.payload.val();
-      //         val['key'] = workshop.key;
-      //         this.workshops.push(val);
-      //       });
-      //     }
-      //   })
       this.database.list(`users/${this.user.uid}/workshop`).snapshotChanges()
         .subscribe({
           next: workshops => {
@@ -117,7 +112,6 @@ export class ArtistDashboardComponent implements OnInit {
                     this.wshopImgAls = []
                     wshopImgAls.forEach(wshopImgAl => {
                       let val = wshopImgAl.payload.val();
-                      // val['key'] = wshopImgAl.key;
                       this.wshopImgAls.push(val);
                       console.log(this.wshopImgAls)
                     });
@@ -134,17 +128,39 @@ export class ArtistDashboardComponent implements OnInit {
               let val = artcamp.payload.val();
               val['key'] = artcamp.key;
               this.artcamps.push(val);
+              this.database.list(`users/${this.user.uid}/artcamp/${artcamp.key}/album/`).snapshotChanges()
+              .subscribe({
+                next: artcampImgAls => {
+                  this.artcampImgAls = []
+                  artcampImgAls .forEach(artcampImgAl => {
+                    let val = artcampImgAl.payload.val();
+                    this.artcampImgAls.push(val);
+                    console.log(this.artcampImgAls )
+                  });
+                }
+              })
             });
           }
         })
-        this.database.list(`users/${this.user.uid}/exhibition`).snapshotChanges()
+      this.database.list(`users/${this.user.uid}/exhibition`).snapshotChanges()
         .subscribe({
           next: exhibitions => {
             this.exhibitions = []
-            exhibitions .forEach(exhibition => {
+            exhibitions.forEach(exhibition => {
               let val = exhibition.payload.val();
               val['key'] = exhibition.key;
               this.exhibitions.push(val);
+              this.database.list(`users/${this.user.uid}/exhibition/${exhibition.key}/album/`).snapshotChanges()
+              .subscribe({
+                next: exhibitionImgAls => {
+                  this.exhibitionImgAls = []
+                  exhibitionImgAls.forEach(exhibitionImgAl => {
+                    let val = exhibitionImgAl.payload.val();
+                    this.exhibitionImgAls.push(val);
+                    console.log(this.exhibitionImgAls)
+                  });
+                }
+              })
             });
           }
         })
@@ -340,22 +356,19 @@ export class ArtistDashboardComponent implements OnInit {
             .subscribe()
         }
         if (this.wshopAlbumPreview !== null) {
-          
-              this.wshopAlbum.forEach(image => {
-                const filePath = `users/${this.user.uid}/workshop/${workshop.key}/album/`;
-                const fileRef = this.storage.ref(filePath);
-                const task = this.storage.upload(filePath, image, { 'contentType': image.type });
-                task.snapshotChanges().pipe(
-                  finalize(() => {
-                    fileRef.getDownloadURL().toPromise().then((url) => {
-                      this.database.list(`users/${this.user.uid}/workshop/${workshop.key}/album/`).push(url)
-                      this.toastr.success('Added New Workshop.');
-                    })
-                  })
-                ).subscribe()
+          this.wshopAlbum.forEach(image => {
+            const filePath = `users/${this.user.uid}/workshop/${workshop.key}/album/`;
+            const fileRef = this.storage.ref(filePath);
+            const task = this.storage.upload(filePath, image, { 'contentType': image.type });
+            task.snapshotChanges().pipe(
+              finalize(() => {
+                fileRef.getDownloadURL().toPromise().then((url) => {
+                  this.database.list(`users/${this.user.uid}/workshop/${workshop.key}/album/`).push(url)
+                  this.toastr.success('Added New Workshop Photo.');
+                })
               })
-            
-          
+            ).subscribe()
+          })
         }
         this.workshopForm.reset()
         this.toastr.success('Added New Workshop Information.');
@@ -434,7 +447,7 @@ export class ArtistDashboardComponent implements OnInit {
         this.artcampAlbumPreview = event.target.result;
       }
     }
-    this.artcampAlbum = event.target.files[0];
+    this.artcampAlbumImage = event.target.files[0];
   }
 
   publishArtcamp() {
@@ -449,11 +462,25 @@ export class ArtistDashboardComponent implements OnInit {
             finalize(() => {
               fileRef.getDownloadURL().toPromise().then((url) => {
                 this.database.list(`users/${this.user.uid}/artcamp`).update(artcamp.key, { artcampImage: url })
-                this.toastr.success('Added New Artcamp.');
               })
             })
           )
             .subscribe()
+        }
+        if (this.artcampAlbumPreview !== null) {
+          this.artcampAlbum.forEach(image => {
+            const filePath = `users/${this.user.uid}/artcamp/${artcamp.key}/album/`;
+            const fileRef = this.storage.ref(filePath);
+            const task = this.storage.upload(filePath, image, { 'contentType': image.type });
+            task.snapshotChanges().pipe(
+              finalize(() => {
+                fileRef.getDownloadURL().toPromise().then((url) => {
+                  this.database.list(`users/${this.user.uid}/artcamp/${artcamp.key}/album/`).push(url)
+                  this.toastr.success('Added New Photo.');
+                })
+              })
+            ).subscribe()
+          })
         }
         this.artcampForm.reset()
         this.toastr.success('Added New Artcamp Information.');
@@ -477,6 +504,30 @@ export class ArtistDashboardComponent implements OnInit {
     })
   }
 
+  uploadArtcampAlbum() {
+    if (this.artcampAlbumPreview !== null) {
+      this.artcampAlbum.push(this.artcampAlbumImage)
+      console.log(this.artcampAlbum)
+      this.toastr.success('Successfully added Photo.');
+      this.isArtcampAlbumUploaded = false;
+    }
+  }
+
+  showArtcampAlbum() {
+    this.artcampAlbumPhoto = [];
+    if (this.artcampAlbum !== null) {
+      console.log(this.artcampAlbum)
+      this.artcampAlbum.forEach(image => {
+        var reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = (event: any) => {
+          var val = event.target.result;
+          this.artcampAlbumPhoto.push(val)
+        }
+      })
+    }
+  }
+
   // exhibitionForm
   exhibitionForm = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -493,7 +544,7 @@ export class ArtistDashboardComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.exhibitionImagePreview= event.target.result;
+        this.exhibitionImagePreview = event.target.result;
       }
     }
     this.exhibitionImage = event.target.files[0];
@@ -508,7 +559,7 @@ export class ArtistDashboardComponent implements OnInit {
         this.exhibitionAlbumPreview = event.target.result;
       }
     }
-    this.exhibitionAlbum = event.target.files[0];
+    this.exhibitionAlbumImage = event.target.files[0];
   }
 
   publishExhibition() {
@@ -522,12 +573,27 @@ export class ArtistDashboardComponent implements OnInit {
           task.snapshotChanges().pipe(
             finalize(() => {
               fileRef.getDownloadURL().toPromise().then((url) => {
-                this.database.list(`users/${this.user.uid}/artcamp`).update(exhibition.key, { exhibitionImage: url })
+                this.database.list(`users/${this.user.uid}/exhibition`).update(exhibition.key, { exhibitionImage: url })
                 this.toastr.success('Added New Exhibition.');
               })
             })
           )
             .subscribe()
+        }
+        if (this.exhibitionAlbumPreview !== null) {
+          this.exhibitionAlbum.forEach(image => {
+            const filePath = `users/${this.user.uid}/exhibition/${exhibition.key}/album/`;
+            const fileRef = this.storage.ref(filePath);
+            const task = this.storage.upload(filePath, image, { 'contentType': image.type });
+            task.snapshotChanges().pipe(
+              finalize(() => {
+                fileRef.getDownloadURL().toPromise().then((url) => {
+                  this.database.list(`users/${this.user.uid}/exhibition/${exhibition.key}/album/`).push(url)
+                  this.toastr.success('Added New Photo.');
+                })
+              })
+            ).subscribe()
+          })
         }
         this.exhibitionForm.reset()
         this.toastr.success('Added New Exhibition Information.');
@@ -551,4 +617,27 @@ export class ArtistDashboardComponent implements OnInit {
     })
   }
 
+  uploadExhibitionAlbum() {
+    if (this.exhibitionAlbumPreview !== null) {
+      this.exhibitionAlbum.push(this.exhibitionAlbumImage)
+      console.log(this.exhibitionAlbum)
+      this.toastr.success('Successfully added Photo.');
+      this.isExhibitionAlbumUploaded = false;
+    }
+  }
+
+  showExhibitionAlbum() {
+    this.exhibitionAlbumPhoto = [];
+    if (this.exhibitionAlbum !== null) {
+      console.log(this.exhibitionAlbum)
+      this.exhibitionAlbum.forEach(image => {
+        var reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = (event: any) => {
+          var val = event.target.result;
+          this.exhibitionAlbumPhoto.push(val)
+        }
+      })
+    }
+  }
 }

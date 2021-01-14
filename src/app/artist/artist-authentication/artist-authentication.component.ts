@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { countries } from '../../../assets/countries.js';
-import { phoneCodes } from  '../../../assets/phoneCodes.js';
 
 @Component({
   selector: 'app-artist-authentication',
@@ -13,7 +12,6 @@ import { phoneCodes } from  '../../../assets/phoneCodes.js';
 export class ArtistAuthenticationComponent implements OnInit {
 
   countryList = countries;
-  phoneCodeList = phoneCodes;
   submitWithoutSelection = false;
   submitted = false;
   isSignUp = false;
